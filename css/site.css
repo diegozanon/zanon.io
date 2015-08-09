@@ -1,0 +1,205 @@
+body {
+	background-color: #222;
+	font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+}
+
+/* Header */
+
+.site-name>a {
+	text-decoration: none;
+	color: white;
+}
+
+.header-img {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.header-img img {
+	width: 39px;
+	height: 39px;
+}
+
+#nav {
+	background-color: #333;
+}
+
+#nav .active>a {
+	background-color: #4472B9;
+}
+
+/* Modal */
+
+.btn {
+	color: white;
+	background-color: #4472B9;
+	border-color: #2e6da4;
+}
+
+.btn:hover {
+	color: white;
+}
+
+/* Main page */
+
+.center {
+	text-align: center;
+}
+
+.content {
+	background-color: #eee;	
+	min-height: calc(100vh - 119px); /* 119px is title + nav*/
+}
+
+.content .row:before {
+	height: 40px;
+}
+
+.content h1, .content h3 {
+	margin: 0px;
+}
+
+.content {
+	padding: 0px 15px;
+}
+
+article {
+	background-color: white;
+	padding: 40px;
+	box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+article a {
+	text-decoration: none;
+	color: black;
+}
+
+article a:hover { 
+	text-decoration: none;
+    color: #4472B9;
+}
+
+article > h2 {
+	margin: 10px 0px;
+}
+
+article > p {
+	font-size: 16px;
+}
+
+.date {
+	color: #999;
+}
+
+.tag, .tag:hover, .tag:focus {
+	background-color: #4472B9;
+	color: white;	
+	margin-left: 10px;
+	width: 77px;
+	padding: 0px;
+}
+
+/* Posts style */
+
+.post > h1 { /* post title */
+	padding-bottom: 20px;
+}
+
+.post > div { /* post content */
+	background-color: white;
+	padding: 30px;
+	font-size: 18px;
+	line-height: 1.7;
+	color: #333;
+}
+
+.post p, .post pre, .post li:last-child {
+	margin-bottom: 30px;
+}
+
+.post h2 {
+	margin: 30px 0px;	
+	font-weight: bold;
+}
+
+pre {
+	padding: 0px;	
+	font-size: 18px;
+}
+
+code {
+	background-color: #222;
+	color: white;
+}
+
+iframe {
+    border: 0px;
+    width: 100%;
+}
+
+/* 404 page style */
+
+.game-ctn {
+	width: 60%;
+	position: relative;
+	display: block;
+    margin: 0 auto;	
+}
+
+#splash {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left:0;
+	background-image: url('../images/fernetjs-invaders.png');
+	background-size: 100% 100%;
+	opacity: 0;
+	display:none;
+	z-index: 2;
+	text-align: right;
+	float: right;	
+}
+
+#splash a {
+	font-size: 3vw;
+	text-decoration: none;
+	color: #323330;
+	margin-right: 5%;
+}
+
+#game-canvas {
+	width: 100%;
+	margin-top: 10px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border: 1px solid silver;
+	background-color:#222;
+}
+
+/* media queries */
+
+@media all and (max-width: 767px) {
+  h1 {
+  	font-size: 26px;
+  }
+
+  h2 {
+  	font-size: 24px;
+  }
+  
+  pre, .post > div, article > p {
+	font-size: 13px;
+  }
+  
+  article > p {
+	font-size: 13px;
+  }
+}
+
+@media print {
+  header {
+    display: none;
+  }
+}

@@ -1,0 +1,31 @@
+<html ng-app="myApp"> 
+  <head>  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<style>
+	.hidden {display: none;}
+	accordion, div {margin: 10px;}
+	accordion {border: 2px groove threedface; width: 300px; display: block;}
+	legend:hover {cursor: pointer;}	
+	</style>
+  </head> 
+  <body> 
+    <accordion>
+		<div>My collapsable content</div>
+	</accordion>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+	<script>
+	angular.module('myApp', [])
+		.directive('accordion', function() {
+			return {
+				transclude: true,
+				template: '<fieldset><legend>Toggle</legend><ng-transclude/></fieldset>',
+				link: function(scope, elem, attrs) {
+					elem.find('legend').bind('click', function() {
+						elem.find('ng-transclude').toggleClass('hidden');
+					});
+				}
+			};
+		});	
+	</script>   
+  </body> 
+</html>
