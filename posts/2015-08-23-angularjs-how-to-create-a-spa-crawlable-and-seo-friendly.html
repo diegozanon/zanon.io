@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-offset-1 col-md-10 post">
+  	<h1>AngularJS: How to create a SPA crawlable and SEO friendly?</h1>
+  	<p class="date">AUG 23, 2015</p>
+
+  	<div>
+
+  		<h2 id="what-is-spa-">What is SPA?</h2>
+<p>SPA stands for <em>Single-Page Application</em>. Its usage is growing in a fast pace since it enables the website to provide a more fluid user experience. When a page is loaded, you can browse other links and load new content without the need of a full page reload. Only one piece of the page is discarded and replaced by the content of the next page. You can get a much lower page load time avoiding loading all JavaScript and CSS dependencies.</p>
+<p>For example, this blog was created using the Angular ngRoute directive. If you try to change to another blog post, you can see that the header content will not flash and the post will load very fast.</p>
+<p>However, this approach have some <a href="http://stackoverflow.com/q/21862054/1476885">drawbacks</a>. All of them can be handled in some way. What I&#39;m focusing in this post is how to help the search engine, like Google, to properly index your content and make it searchable.</p>
+<h2 id="seo-and-crawlable-pages">SEO and Crawlable Pages</h2>
+<p>SEO stands for <em>Search Engine Optimization</em>. What we are trying to achieve here is a way to help search engines to render your page and understand your content. </p>
+<p>Search engines uses web crawlers to systematically browse web pages to collect information and to index them based on its contents. The main issue here is that most of the web crawlers don&#39;t execute JavaScript code and can&#39;t see what your SPA retrieves with each link. I&#39;ve said <strong>most</strong> web crawlers. Fortunately, <a href="http://googlewebmastercentral.blogspot.com.br/2014/05/understanding-web-pages-better.html">Google is currently prepared</a> to execute JavaScript code. This make your task much easier, as you can see in the following sections.</p>
+<h2 id="crawlable-pages-for-google">Crawlable Pages for Google</h2>
+<p>If you believe that being googleable is enough for your website, then all you need is to add a <a href="http://www.sitemaps.org/protocol.html">Sitemap</a> file named sitemap.xml at your web server root directory to tell the Google robots what links do you have in your website. Note that you can also include &quot;invisible links&quot;, like the ones that just appears after you fill a form.</p>
+<p>In this blog, I&#39;ve added the following sitemap.xml file:</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;urlset xmlns=&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://zanon.io/&lt;/loc&gt;
+    &lt;lastmod&gt;2015-08-23&lt;/lastmod&gt;
+    &lt;changefreq&gt;weekly&lt;/changefreq&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://zanon.io/angular-how-to-create-a-spa-crawlable-and-seo-friendly&lt;/loc&gt;
+    &lt;lastmod&gt;2015-08-23&lt;/lastmod&gt;
+    &lt;changefreq&gt;monthly&lt;/changefreq&gt;
+  &lt;/url&gt;  
+&lt;/urlset&gt;
+</code></pre>
+<h2 id="crawlable-pages-for-bing-and-others">Crawlable Pages for Bing and Others</h2>
+<p>For crawlers that aren&#39;t able to execute JavaScript code, you need to prerender the page and make it available for them. Also, the Sitemap should reference those prerendered pages.</p>
+<p>The first step is to identify your URL design and <a href="https://developers.google.com/webmasters/ajax-crawling/docs/learn-more">follow some conventions</a>. If you use the hash <code>#</code> sign in your URLs, you will need to change it to the hashbang <code>#!</code> sign using the following code:</p>
+<pre><code class="lang-javascript">angular.module(&#39;myApp&#39;).config(function($locationProvider) {
+        $locationProvider.hashPrefix(&#39;!&#39;);
+    }
+);
+</code></pre>
+<p>Using this approach you&#39;ll get links like the following: <code>www.example.com/#!contact</code></p>
+<p>When the crawler sees this link, it will rewrite the URL and send a GET to the server using the following URL: <code>www.example.com/?_escaped_fragment_=contact</code></p>
+<p>If instead of using those ugly URLs you have already adopted the HTML5 push state, you will have the URL <code>www.example.com/contact</code> replaced to <code>www.example.com/contact?_escaped_fragment_=</code> but only if you add this meta tag to the page <code>&lt;head&gt;</code>:</p>
+<pre><code class="lang-html">&lt;meta name=&quot;fragment&quot; content=&quot;!&quot;&gt;
+</code></pre>
+<p>If you are not using these pretty URLs with HTML5 push state, you can take a look in <a href="http://zanon.io/angularjs-with-pretty-urls-removing-the-in-amazon-s3">my previous post</a>. Just pay attention that HTML5 push state <a href="http://caniuse.com/#search=history">is available to only 90%</a> of the users.</p>
+<p>In you Sitemap you can use the normal user links or you can use the parsed links (<code>?_escaped_fragment_=</code>), but prefer the former because <a href="https://developers.google.com/webmasters/ajax-crawling/docs/faq?hl=en#question-what-url-should-i-put-in-my-sitemap">which kind you choose in your Sitemap is what the search engine will show as result</a>.</p>
+<p>At last, you need to prepare your server to handle those modified requests. For this, there are two solutions that are widely used:</p>
+<ol>
+<li><p><a href="https://prerender.io/">Prerender.io</a>: this framework acts like a middleware checking each request to see if it&#39;s a request from a crawler. If it is, Prerender.io will generate a static HTML version of the page and send it as the result. You can read more about how to use it <a href="https://prerender.io/documentation">here</a> and <a href="https://scotch.io/tutorials/angularjs-seo-with-prerender-io">here</a>.</p>
+</li>
+<li><p><a href="http://phantomjs.org/">PhantomJS</a>: is a headless browser that can be used to GET a page URL and output its rendered HTML result. The solution here would be to automate this task so every time you make a new commit, a PhantomJS task would be called to render the HTML pages and store it to be available to crawlers. You can read more about how to use it <a href="http://phantomjs.org/documentation/">here</a> and <a href="http://lawsonry.com/2014/05/diy-angularjs-seo-with-phantomjs-the-easy-way/">here</a>.</p>
+</li>
+</ol>

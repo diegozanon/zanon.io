@@ -16,6 +16,9 @@ angular.module('zanonApp').config(['$routeProvider', '$locationProvider',
       .when('/angularjs-with-pretty-urls-removing-the-in-amazon-s3', {
         templateUrl: 'posts/2015-08-09-angularjs-with-pretty-urls-removing-the-in-amazon-s3.html'
       })      
+      .when('/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly', {
+        templateUrl: 'posts/2015-08-23-angularjs-how-to-create-a-spa-crawlable-and-seo-friendly.html'
+      }) 
 
       // 404
       .otherwise({
