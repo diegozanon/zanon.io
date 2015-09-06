@@ -19,6 +19,9 @@ ctrls.controller('MainController', function($scope) {
 
 		$scope.active[filter] = true;
 	};
+
+	// Just for fun:
+	console.meme("What are you looking for?", "That's my meme spot", "Not Sure Fry", 400, 300); // reload the site with Chrome's DevTools open
 });
 
 ctrls.controller('404Controller', function() {
