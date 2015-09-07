@@ -1,14 +1,28 @@
 <div ng-controller="PostsController">
 
-  <div ng-show="active.all || active.angular" class="row">
+  <div ng-show="active.all || active.aws" class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <article>
+        <div class="date">
+          SEP 06, 2015
+        </div>
+        <h2><a href="/posts/serving-gzipped-files-in-amazon-s3-cloudfront">Serving gzipped files in Amazon S3 / CloudFront</a></h2>
+        <p>If you want to serve web content in the cloud, you need to gzip it first to reduce the download size and get a faster website. This guide shows how you can do it using AWS.</p>             
+        <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
+      </article>
+    </div>                       
+  </div> 
+
+  <div ng-show="active.all || active.angular || active.aws" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
         <div class="date">
           AUG 23, 2015
         </div>
-        <h2><a href="/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly">AngularJS: How to create a SPA crawlable and SEO friendly?</a></h2>
-        <p>If you're using Angular, probably you already know about ngRoute and the amazing benefit of avoiding full page reloads and requesting just what you need when you click to change to another page. If so, you need to be aware about how search engines will see your website and how you can help them to properly index your content.</p>
-        <button ng-click="filter('angular');" type="button" class="btn tag pull-right">Angular</button>             
+        <h2><a href="/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly">AngularJS: How to create a SPA crawlable and SEO friendly?</a></h2>
+        <p>If you&#39;re using Angular, probably you already know about ngRoute and the amazing benefit of avoiding full page reloads and requesting just what you need when you click to change to another page. If so, you need to be aware about how search engines will see your website and how you can help them to properly index your content.</p>
+        <button ng-click="filter('angular');" type="button" class="btn tag pull-right">Angular</button>
+        <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>             
       </article>
     </div>                       
   </div> 
@@ -19,7 +33,7 @@
         <div class="date">
           AUG 09, 2015
         </div>
-        <h2><a href="/angularjs-with-pretty-urls-removing-the-in-amazon-s3">AngularJS with Pretty URLs: Removing the # in Amazon S3</a></h2>
+        <h2><a href="/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3">AngularJS with Pretty URLs: Removing the # in Amazon S3</a></h2>
         <p>Angular uses the # (hashtag) by default when routing pages because it requires no server side configuration. If you want to get rid of it, you need to configure a server rewrite rule.</p>
         <button ng-click="filter('angular');" type="button" class="btn tag pull-right">Angular</button>             
         <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>

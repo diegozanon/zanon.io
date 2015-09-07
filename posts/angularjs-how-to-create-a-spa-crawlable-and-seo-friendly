@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="en" ng-app="zanonApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Angular, Node, MongoDB, AWS, Android, iOS">
+    <meta name="author" content="Diego Zanon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <title>zanon.io</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/monokai_sublime.min.css">
+    <link rel="stylesheet" href="/css/site.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <base href="/">
+  </head>
+  <body ng-controller="MainController" class="ng-scope">
+
+    <header>
+      <div ng-controller="HeaderController" class="ng-scope">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-8 col-sm-2 col-md-2">
+              <h1 class="site-name">
+                <a href="/">zanon.io</a>
+              </h1>
+            </div>
+            <div class="hidden-xs col-sm-8 col-md-8">
+              <!-- empty -->
+            </div>         
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="" ng-click="about()">
+                <img src="/images/about.png">
+              </a>
+            </div>      
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="/">
+                <img src="/images/rss.png">
+              </a>
+            </div> 
+          </div>         
+        </div>  
+
+        <script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/ng-template" id="modal.html">
+          <div class="modal-header">
+            <h3 class="modal-title">You can find more about me on:</h3>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-4 col-sm-3 col-md-2 center">
+                <h4>Stack Overflow</h4>
+                <a href="http://stackoverflow.com/users/1476885/zanon?tab=profile">
+                  <img 
+                    src="http://stackexchange.com/users/flair/1594304.png?theme=clean" 
+                    width="208" height="58" alt="Stack Overflow" title="Stack Overflow">
+                </a>
+              </div>
+              <div class="col-xs-4 col-sm-3 col-md-2 center">
+                <h4>GitHub</h4>
+                <a href="https://github.com/zanon-io">
+                  <img src="/images/octocat.png" alt="GitHub" title="GitHub">
+                </a>  
+              </div>
+              <div class="col-xs-4 col-sm-3 col-md-2 center">
+                <h4>Twitter</h4>
+                <a href="https://twitter.com/zanon_io">
+                  <img src="/images/twitter.png" alt="Twitter" title="Twitter">
+                </a>  
+              </div>
+            </div>
+            <br>
+          </div>
+          <div class="modal-footer">
+            <p><button type="form" class="btn" ng-click="close()">Close</button></p>         
+          </div>
+        </script>   
+      </div>
+
+      <div class="container">
+        <nav id="nav" class="navbar-inverse navbar-static-top">      
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li ng-class="{ 'active': active.all }" class="active">    <a ng-click="filter('all');" href="/">All posts</a></li>
+              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');" href="/">Angular</a></li>
+              <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');" href="/">Node</a></li>
+              <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');" href="/">MongoDB</a></li>
+              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');" href="/">AWS</a></li>         
+              <li ng-class="{ 'active': active.android }"><a ng-click="filter('android');" href="/">Android</a></li>         
+              <li ng-class="{ 'active': active.ios }">	  <a ng-click="filter('ios');" href="/">iOS</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->      
+        </nav>   
+      </div>
+    </header>
+
+    <div class="container">   
+      <div class="content">
+        <!-- ngView:  --><div class="ng-view-background ng-scope" ng-view="" highlight-code=""><div class="row ng-scope">
+  <div class="col-md-offset-1 col-md-10 post">
+  	<h1>AngularJS: How to create a SPA crawlable and SEO friendly?</h1>
+  	<p class="date">AUG 23, 2015</p>
+
+  	<div>
+
+
+<h1 id="angular-how-to-create-a-spa-crawlable-and-seo-friendly-">Angular: How to create a SPA crawlable and SEO friendly?</h1>
+<p>If you're using Angular, probably you already know about ngRoute and the amazing benefit of avoiding full page reloads and requesting just what you need when you click to change to another page. If so, you need to be aware about how search engines will see your website and how you can help them to properly index your content.</p>
+<h2 id="what-is-spa-">What is SPA?</h2>
+<p>SPA stands for <em>Single-Page Application</em>. Its usage is growing in a fast pace since it enables the website to provide a more fluid user experience. When a page is loaded, you can browse other links and load new content without the need of a full page reload. Only one piece of the page is discarded and replaced by the content of the next page. With this, you will avoid requesting all JavaScript and CSS files again and rendering your header and footer HTML.</p>
+<p>For example, this blog was created using the Angular ngRoute directive. If you try to change to another blog post, you can see that the header content will not flash and the post will load very fast.</p>
+<p>However, this approach have some <a href="http://stackoverflow.com/q/21862054/1476885">drawbacks</a>, but all of them can be handled in some way. What I'm focusing in this post is how to help the search engines, like Google, to properly index your content and make it searchable.</p>
+<h2 id="seo-and-crawlable-pages">SEO and Crawlable Pages</h2>
+<p>SEO stands for <em>Search Engine Optimization</em>. What we are trying to achieve here is a way to help search engines to render your page and understand your content. </p>
+<p>Search engines uses web crawlers to systematically browse web pages to collect information and to index them based on its contents. The main issue here is that most of the web crawlers don't execute JavaScript code and can't see what your SPA retrieves with each link. I've said <strong>most</strong> web crawlers. Fortunately, <a href="http://googlewebmastercentral.blogspot.com.br/2014/05/understanding-web-pages-better.html">Google is currently prepared</a> to execute JavaScript code. This make your task much easier, as you can see in the following section, but it have some drawbacks.</p>
+<h2 id="crawlable-pages-for-google">Crawlable Pages for Google</h2>
+<p>If you believe that being googleable is enough for your website, then you don't need to modify anything. Since Googlebots will execute your JavaScript, your page contents and links will be available for them. </p>
+<p>However, Google <a href="http://googlewebmastercentral.blogspot.com.br/2014/05/understanding-web-pages-better.html">admits</a> that some JavaScript code may not be executed if its too complex or arcane.  So, what you can do to help Google (and every crawler), is to add a <a href="http://www.sitemaps.org/protocol.html">Sitemap</a> file named <strong>sitemap.xml</strong> at your web server root directory to tell crawlers what links do you have in your website. 
+Also, note that you can include "invisible links", like the ones that just appears after you fill a form.</p>
+<p>In this blog, I've added the following <strong>sitemap.xml</strong> file:</p>
+<pre><code class="lang-xml hljs"><span class="hljs-pi">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">urlset</span> <span class="hljs-attribute">xmlns</span>=<span class="hljs-value">"http://www.sitemaps.org/schemas/sitemap/0.9"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">url</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">loc</span>&gt;</span>http://zanon.io/<span class="hljs-tag">&lt;/<span class="hljs-title">loc</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">lastmod</span>&gt;</span>2015-08-23<span class="hljs-tag">&lt;/<span class="hljs-title">lastmod</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">changefreq</span>&gt;</span>weekly<span class="hljs-tag">&lt;/<span class="hljs-title">changefreq</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">url</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">url</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">loc</span>&gt;</span>http://zanon.io/posts/angular-how-to-create-a-spa-crawlable-and-seo-friendly<span class="hljs-tag">&lt;/<span class="hljs-title">loc</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">lastmod</span>&gt;</span>2015-08-23<span class="hljs-tag">&lt;/<span class="hljs-title">lastmod</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">changefreq</span>&gt;</span>monthly<span class="hljs-tag">&lt;/<span class="hljs-title">changefreq</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">url</span>&gt;</span>  
+<span class="hljs-tag">&lt;/<span class="hljs-title">urlset</span>&gt;</span>
+</code></pre>
+<p>Note: if you want your site to be correctly rendered in Facebook's preview or Twitter's cards, then you need to pre-render your pages. In this case, been just googleable is not enough. Another problem is that Google may index your content without parsing variables. For example, you can see things like <code ng-non-bindable="">{{ myVar }}</code> in search results instead of the actual content.</p>
+<h2 id="crawlable-pages-for-bing-and-others">Crawlable Pages for Bing and Others</h2>
+<p>For crawlers that aren't able to execute JavaScript code, you need to pre-render the page and make it available for them. Also, the Sitemap should be referencing those pre-rendered pages for an extra help.</p>
+<p>The first step is to choose: do you want to pre-render all pages upfront or on the fly?</p>
+<h3 id="pre-rendering-on-the-fly">Pre-rendering on the fly</h3>
+<p>Some frameworks, like <a href="http://prerender.io">Prerender</a>, acts like a middleware checking each request to see if it's a request from a crawler. If it is, a static HTML version of the page will be generated and send as the answer.</p>
+<p>It is a nice solution and widely used, but in Amazon S3, you don't have a CPU server to process those requests on the fly, so I'll give more details using the following approach.</p>
+<h3 id="pre-rendering-at-deployment-time">Pre-rendering at deployment time</h3>
+<p>Google <a href="https://developers.google.com/webmasters/ajax-crawling/docs/learn-more">has defined years ago some conventions</a> about how his crawlers should handle SPA websites. Those conventions were accepted and followed by Bing and others. What this article describes is some guidelines that you need to follow to offer the crawler a static and pre-rendered version of your site. If you follow the guidelines and have a link like <code>www.example.com/#!contact</code>, the crawler will send a <code>GET</code> request to <code>www.example.com/?_escaped_fragment_=contact</code>. If you have a pretty URL design without the hashbang, like <code>www.example.com/contact</code>, and adds a meta tag to inform that your page is a fragment, the <code>GET</code> request will target the <code>www.example.com/contact?_escaped_fragment_=</code> address.</p>
+<p>With this approach, what you need to do is write a server rewrite rule to treat all requests with this <code>?_escaped_fragment_=</code> code and point those requests to another address like <code>snapshots/contact.html</code> that contains your pre-rendered page.</p>
+<p>However, if you're using Angular, you don't need to follow those guidelines and prepare a server rewrite rule. Furthermore, if your app is hosted in Amazon S3, <a href="http://stackoverflow.com/q/32429488/1476885">you'll not be able to make it work</a> since Amazon S3 (and Amazon CloudFront) does not offer a URL rewrite option and their URL redirects options are limited.</p>
+<p>To make your site crawlable, the <strong>easiest solution</strong>, and the only available for static websites, is to pre-render all of your webpages, even your <strong>index.html</strong>, and upload them following your website paths.</p>
+<p>Since a user browsing the webpage has JavaScript enabled, Angular will be triggered and will take control over the page which results into a re-rendering of the template. With this, all Angular functionalities will be available for this user.</p>
+<p>Regarding the crawler, the pre-rendered page will be enough.</p>
+<h3 id="example">Example</h3>
+<p>If you have a website named <strong>www.myblog.com</strong> and a link to another page with the URL <strong>www.myblog.com/posts/my-first-post</strong>. Probably, your Angular app has the following structure: an <strong>index.html</strong> file that is in your root directory and is responsible for everything. The page <strong>my-first-post</strong> is a partial HTML file located in <strong>/partials/my-first-post.html</strong>.</p>
+<p>The solution in this case is to use a pre-rendering tool at deploy time. You can use <a href="http://phantomjs.org">Phantomjs</a> for this and I'll tell how later.</p>
+<p>You need to use this pre-render tool to create two files: <strong>index.html</strong> and <strong>my-first-post</strong>. Note that <strong>my-first-post</strong> will be an HTML file without the <strong>.html</strong> extension, but you will need to set its Content-Type to <strong>text/html</strong> when you upload to Amazon S3.</p>
+<p>You will place the <strong>index.html</strong> file in your root directory and <strong>my-first-post</strong> inside a folder named <strong>posts</strong> to match your URL path <strong>/posts/my-first-post</strong>.</p>
+<p>With this approach, the crawler will be able to retrieve your HTML file and the user will be happy to use all Angular functionalities.</p>
+<p><strong>Note:</strong> this solution requires that all files be referenced using the root path. Relative paths will not work if you visit the link <strong>www.myblog.com/posts/my-first-post</strong>.</p>
+<p>By root path, I mean:</p>
+<pre><code class="lang-html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"/js/myfile.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+</code></pre>
+<p>The wrong way, using relative paths, would be:</p>
+<pre><code class="lang-html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"js/myfile.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+</code></pre>
+<h3 id="pre-rendering-with-phantomjs">Pre-rendering with Phantomjs</h3>
+<p><a href="http://phantomjs.org/">PhantomJS</a> is a headless browser that can be used to GET a page URL and output its rendered HTML result. The solution here would be to automate this task so every time you need to make a new deploy, a PhantomJS task would be called to render the HTML pages and output the results in the expected path.</p>
+<p>After installing this tool, create a JavaScript file named <strong>prerender.js</strong> with the following content:</p>
+<pre><code class="lang-js hljs javascript"><span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
+<span class="hljs-keyword">var</span> webPage = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpage'</span>);
+<span class="hljs-keyword">var</span> page = webPage.create();
+
+<span class="hljs-comment">// since this tool will run before your production deploy, your target URL will be your dev/staging environment (localhost, in this example)</span>
+<span class="hljs-keyword">var</span> pageName = <span class="hljs-string">'angularjs-how-to-create-a-spa-crawlable-and-seo-friendly'</span>;
+<span class="hljs-keyword">var</span> path = <span class="hljs-string">'posts/'</span> + pageName;
+<span class="hljs-keyword">var</span> url = <span class="hljs-string">'http://localhost/'</span> + path;
+
+page.open(url, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">status</span>) </span>{
+
+  <span class="hljs-keyword">var</span> content = page.content;
+  fs.write(path, content, <span class="hljs-string">'w'</span>);
+
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"The file was saved."</span>);
+  phantom.exit();
+});
+</code></pre>
+<p>To execute this test, execute the following:</p>
+<pre><code class="lang-xml hljs">&gt; phantomjs prerender.js
+</code></pre><p>The output file will be ready for deployment.</p>
+<h2 id="update-sep-06-2015">UPDATE: Sep 06, 2015</h2>
+<blockquote>
+<p>Updated this post adding more info about Amazon S3 and the example with Phantomjs.</p>
+</blockquote>
+
+
+
+    </div>
+  </div>
+</div></div>        
+      </div>    
+    </div>      
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>    
+
+    <script src="/js/app.js"></script>
+    <script src="/js/controllers.js"></script>
+    <script src="/js/directives.js"></script>
+    <script src="/js/routes.js"></script>
+    <script src="/js/modals.js"></script>
+
+    <script src="/js/assets/404game.min.js"></script>
+    <script src="/js/assets/console.image.min.js"></script>
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-63834414-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+</body></html>
