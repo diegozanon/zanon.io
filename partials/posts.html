@@ -1,5 +1,18 @@
 <div ng-controller="PostsController">
 
+  <div ng-show="active.all || active.node" class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <article>
+        <div class="date">
+          SEP 20, 2015
+        </div>
+        <h2><a href="/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs">Creating Desktop Apps using HTML/CSS/JS + Node.js with NW.js</a></h2>
+        <p>If you like web development and need to build a desktop app, why don't you try NW.js (former node-webkit)? It runs on Node.js and you will freely use HTML/CSS/JS + Node.js to build multi-platform apps.</p>             
+        <button ng-click="filter('node');" type="button" class="btn tag pull-right">Node</button>
+      </article>
+    </div>                       
+  </div> 
+
   <div ng-show="active.all || active.aws" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>

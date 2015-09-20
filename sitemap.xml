@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://zanon.io/</loc>
-    <lastmod>2015-08-23</lastmod>
+    <lastmod>2015-09-20</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -19,5 +19,10 @@
     <loc>http://zanon.io/posts/serving-gzipped-files-in-amazon-s3-cloudfront</loc>
     <lastmod>2015-09-06</lastmod>
     <changefreq>monthly</changefreq>
-  </url>    
+  </url>
+  <url>
+    <loc>http://zanon.io/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs</loc>
+    <lastmod>2015-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+  </url>   
 </urlset>
