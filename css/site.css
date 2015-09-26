@@ -49,6 +49,8 @@ body {
 .content {
 	background-color: #eee;	
 	min-height: calc(100vh - 119px); /* 119px is title + nav*/
+	padding: 0px 15px;
+	margin-bottom: 30px;
 }
 
 .content .row:before {
@@ -57,10 +59,6 @@ body {
 
 .content h1, .content h3 {
 	margin: 0px;
-}
-
-.content {
-	padding: 0px 15px;
 }
 
 article {
@@ -188,6 +186,12 @@ img {
 	-webkit-border-radius: 10px;
 	border: 1px solid silver;
 	background-color:#222;
+}
+
+/* Disqus */ 
+
+#disqus_thread {
+	margin: 30px 5px 0px 5px;
 }
 
 /* media queries */
