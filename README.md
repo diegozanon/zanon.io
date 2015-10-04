@@ -1,7 +1,7 @@
 # zanon.io
 This repository was created to store my blog data: http://zanon.io
 
-# License
+## License
 
 Consider the MIT license for code and CC BY for content.
 
