@@ -13,6 +13,9 @@ angular.module('zanonApp').config(['$routeProvider', '$locationProvider',
       })		  
 
       // posts
+      .when('/posts/how-to-distribute-your-enterprise-mobile-app', {
+        templateUrl: '/partials/posts/2015-10-04-how-to-distribute-your-enterprise-mobile-app.html'
+      }) 
       .when('/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs', {
         templateUrl: '/partials/posts/2015-09-20-creating-desktop-apps-using-html-css-js-nodejs-with-nwjs.html'
       }) 

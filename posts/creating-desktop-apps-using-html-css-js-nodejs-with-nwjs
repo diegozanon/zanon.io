@@ -289,14 +289,14 @@ tray.menu = menu;
 <h3 id="usage-create-a-deploy-js-file-with-the-following-content">Usage: create a <strong>deploy.js</strong> file with the following content</h3>
 <pre><code class="lang-javascript hljs"><span class="hljs-keyword">var</span> NwBuilder = <span class="hljs-built_in">require</span>(<span class="hljs-string">'nw-builder'</span>);
 <span class="hljs-keyword">var</span> nw = <span class="hljs-keyword">new</span> NwBuilder({
-    files: [<span class="hljs-string">'./**'</span>], <span class="hljs-comment">// simple-glob format</span>
-    platforms: [<span class="hljs-string">'osx32'</span>, <span class="hljs-string">'osx64'</span>, <span class="hljs-string">'win32'</span>, <span class="hljs-string">'win64'</span>]
+  files: [<span class="hljs-string">'./**'</span>], <span class="hljs-comment">// simple-glob format</span>
+  platforms: [<span class="hljs-string">'osx32'</span>, <span class="hljs-string">'osx64'</span>, <span class="hljs-string">'win32'</span>, <span class="hljs-string">'win64'</span>, <span class="hljs-string">'linux32'</span>, <span class="hljs-string">'linux64'</span>]
 });
 
 nw.build().then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'all done!'</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'all done!'</span>);
 }).catch(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error</span>) </span>{
-    <span class="hljs-built_in">console</span>.error(error);
+  <span class="hljs-built_in">console</span>.error(error);
 });
 </code></pre>
 <h3 id="deploying-">Deploying:</h3>

@@ -1,5 +1,19 @@
 <div ng-controller="PostsController">
 
+  <div ng-show="active.all || active.android || active.ios" class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <article>
+        <div class="date">
+          SEP 20, 2015
+        </div>
+        <h2><a href="/posts/how-to-distribute-your-enterprise-mobile-app">How to distribute your enterprise mobile app?</a></h2>
+        <p>if you have developed an enterprise mobile app, for example, an app that connects with the company database and show some reports, how can you safely distribute it?</p>             
+        <button ng-click="filter('ios');" type="button" class="btn tag pull-right">iOS</button>
+        <button ng-click="filter('android');" type="button" class="btn tag pull-right">Android</button>        
+      </article>
+    </div>                       
+  </div> 
+
   <div ng-show="active.all || active.node" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>

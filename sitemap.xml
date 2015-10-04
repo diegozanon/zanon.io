@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://zanon.io/</loc>
-    <lastmod>2015-09-20</lastmod>
+    <lastmod>2015-10-04</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -25,4 +25,9 @@
     <lastmod>2015-09-20</lastmod>
     <changefreq>monthly</changefreq>
   </url>   
+  <url>
+    <loc>http://zanon.io/posts/how-to-distribute-your-enterprise-mobile-app</loc>
+    <lastmod>2015-10-04</lastmod>
+    <changefreq>monthly</changefreq>
+  </url>  
 </urlset>

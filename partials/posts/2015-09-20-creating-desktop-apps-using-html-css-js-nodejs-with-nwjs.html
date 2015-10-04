@@ -178,14 +178,14 @@ tray.menu = menu;
 <h3 id="usage-create-a-deploy-js-file-with-the-following-content">Usage: create a <strong>deploy.js</strong> file with the following content</h3>
 <pre><code class="lang-javascript">var NwBuilder = require(&#39;nw-builder&#39;);
 var nw = new NwBuilder({
-    files: [&#39;./**&#39;], // simple-glob format
-    platforms: [&#39;osx32&#39;, &#39;osx64&#39;, &#39;win32&#39;, &#39;win64&#39;]
+  files: [&#39;./**&#39;], // simple-glob format
+  platforms: [&#39;osx32&#39;, &#39;osx64&#39;, &#39;win32&#39;, &#39;win64&#39;, &#39;linux32&#39;, &#39;linux64&#39;]
 });
 
 nw.build().then(function () {
-   console.log(&#39;all done!&#39;);
+  console.log(&#39;all done!&#39;);
 }).catch(function (error) {
-    console.error(error);
+  console.error(error);
 });
 </code></pre>
 <h3 id="deploying-">Deploying:</h3>
