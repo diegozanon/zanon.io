@@ -48,7 +48,7 @@ body {
 
 .content {
 	background-color: #eee;	
-	min-height: calc(100vh - 119px); /* 119px is title + nav*/
+	min-height: calc(100vh - 149px); /* 149px is title + nav + 30px of the bottom*/
 	padding: 0px 15px;
 	margin-bottom: 30px;
 }

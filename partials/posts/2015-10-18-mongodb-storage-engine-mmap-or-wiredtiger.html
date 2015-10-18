@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-offset-1 col-md-10 post">
+  	<h1>How to distribute your enterprise mobile app?</h1>
+  	<p class="date">OCT 04, 2015</p>
+
+  	<div>
+
+
+
+<h2 id="pluggable-storage-engines">Pluggable Storage Engines</h2>
+<p>As MongoDB grows in popularity, developers are building new and awesome things in many different use cases. With this, a <em>one size fits all</em> solution is becoming even more difficult to adapt for all possibilites. To allow new kinds of optimizations, MongoDB 3.0 was shipped with the concept of <strong>pluggable storage engines</strong>. This allows the community to create new engines to solve and optmize specific problems.</p>
+<p>A storage engine is the component that handles how memory is controlled and how data is persisted and retrieved from the storage device. You can change this component without needing to change your application code since this layer is well separated. It doesn&#39;t affect how data is distributed between different Mongo servers and doesn&#39;t affect which methods the Mongo API exposes.</p>
+<p>So far, we have two stable engines: MMAPv1 (the old one) and WiredTiger (the shinning new one). MongoDB 3.0 ships with MMAPv1 as the default engine to avoid impacts in current solutions, but WiredTiger has many new interesting things that you need to know.</p>
+<p>Besides those two, <a href="https://www.mongodb.com/blog/post/mongodb-pluggable-storage-engines-state-of-the-union-storage-engine-summit">there are many other engines</a> that are under development, in an experimental phase or done but simply not yet popular. I&#39;m writting this post in 2015. If you are really willing to change your storage engine, you may search more about your options. Below follows a brief intro about the current options:</p>
+<ul>
+<li><p>In-memory: it&#39;s <a href="https://jira.mongodb.org/browse/DOCS-5011">not ready yet</a>, but may be used in the future for cache services. It&#39;s also interesting for unit testing.</p>
+</li>
+<li><p><a href="https://github.com/mongodb-partners/mongo-rocks">mongo-rocks</a>: is a key-value engine created as a integration layer for Facebook&#39;s <a href="http://rocksdb.org/">RocksDB</a>.</p>
+</li>
+<li><p><a href="https://www.mongodb.com/partners/fusionio">Fusion-io</a>: this storage engine was created by SanDisk and makes it possible to bypass the operating system file system layer and write directly to the storage device.</p>
+</li>
+<li><p><a href="https://www.percona.com/software/mongo-database/percona-tokumx">TokuMX</a>: a storage engine created by <a href="www.percona.com">Percona</a> that uses <a href="https://en.wikipedia.org/wiki/Fractal_tree_index">fractal tree indexes</a> instead of B-tree indexes. </p>
+</li>
+<li><p>/dev/null: Is a storage engine where everything that you write is discarded and all your reads return empty results. It sounds stupid, but can be useful in some scenarios. For example, when you want to find performance bottlenecks in your app that are not related with your DB.</p>
+</li>
+</ul>
+<h2 id="mmap">MMAP</h2>
+<p><img class="img-responsive" src="/images/posts/2015-10-18-mmap.jpg" alt="mmap"></p>
+<p>MMAPv1 is named after the <code>mmap()</code> Linux command that maps files to the virtual memory and allows page optimization for some use cases. For example, when you have a large file but you need to read just specific parts of it, <code>mmap()</code> is much faster then a <code>read()</code> call that would bring the entire file to memory.</p>
+<p>MMAPv1 has <em>collection-level locking</em> but hasn&#39;t  <em>document-level locking</em>. The problem is that you can&#39;t have two write calls being processed in parallel for the same collection. So, one writer must wait for the other to finish. This <em>collection-locking</em> is necessary because one MMAP index can reference multiples documents and if those docs could be updated simultaneously, the index would be inconsistent.</p>
+<h2 id="wiredtiger">WiredTiger</h2>
+<p><img class="img-responsive" src="/images/posts/2015-10-18-lsm.png" alt="lsm"></p>
+<p>MMAP uses B-trees to store indexes and WiredTiger uses B-trees by default but also supports <a href="https://en.wikipedia.org/wiki/Log-structured_merge-tree">LSM trees</a> (image above was adapted from <a href="http://www.slideshare.net/Couchbase/whats-new-in-couchbase-40-couchbase-connect-2015">here</a>).</p>
+<p>LSM trees provides an advantage when you need to write huge workloads of random inserts, when data is much larger then the cache and when background maintenance overhead is acceptable. </p>
+<p>In WiredTiger, there is no inplace updates. If an element of a document needs to be updated, a entire new document will be written to disk while the old document will be removed.</p>
+<p>WiredTiger offers document-level concurrency. That means that it assumes that two write operations will not affect the same document at the same time and, it if does affect, one operation will rewind and will be executed again later. That&#39;s a great performance boost if rewinds are rare.</p>
+<p>Another characteristic is that WiredTiger offers compression of data and indexes in the file system. It supports Snappy and zLib algorithms where Snappy, the default, is less CPU-intensive but have a lower compression rate than zLib.</p>
+<h2 id="benchmarks">Benchmarks</h2>
+<p>When WiredTiger for MongoDB was launched, it was advertised as able to perform 7-10x in write operations and to compress up to 80% of the file system. Yeah, that&#39;s a huge gain. Bellow follows more benchmark data collected from <a href="https://www.mongodb.com/blog/post/performance-testing-mongodb-30-part-1-throughput-improvements-measured-ycsb">here</a>, <a href="https://github.com/wiredtiger/wiredtiger/wiki/Btree-vs-LSM">here</a> and <a href="https://dzone.com/articles/mongodb-30-first-look-faster">here</a>.</p>
+<p><img class="img-responsive" src="/images/posts/2015-10-18-throughput.png" alt="throughput"></p>
+<p><img class="img-responsive" src="/images/posts/2015-10-18-lsm-benchmark.png" alt="lsm-benchmark"></p>
+<p><img class="img-responsive" src="/images/posts/2015-10-18-storage.jpg" alt="storage"></p>
+<h2 id="conclusion">Conclusion</h2>
+<p><strong>TL;DR</strong>: if your app is read-heavy, use MMAP. If its write-heavy, use WiredTiger.</p>
+<p>An intereting side note is that your solution may have a mixed replica set members where you can have one node configured with WiredTiger to receive a massive load of data and another node with MMAP to be used by analytical tools. As replication automatically migrates data between primary and secondary replica set members, independent of their underlying storage formats, you can avoid using complex ETL tools.</p>
+<p>Just one note: if your DB file was created with MMAP, you&#39;ll need to create a new database if you want the node to run with WiredTiger, since it can&#39;t open a MMAP DB file. The inverse is also true. Since they use different ways to store the data, you can&#39;t reuse the same files, but in a replica set, data is exchanged without problems.</p>
+
+
+  	</div>
+  </div>
+</div>
+
+<dir-disqus></dir-disqus>
