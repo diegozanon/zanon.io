@@ -19,7 +19,7 @@
     <![endif]-->
     
     <base href="/">
-  </head>
+  <script type="text/javascript" async="" src="//zanon.disqus.com/embed.js"></script></head>
   <body ng-controller="MainController" class="ng-scope">
 
     <header>
@@ -117,7 +117,6 @@
   	<div>
 
 
-<h1 id="angular-how-to-create-a-spa-crawlable-and-seo-friendly-">Angular: How to create a SPA crawlable and SEO friendly?</h1>
 <p>If you're using Angular, probably you already know about ngRoute and the amazing benefit of avoiding full page reloads and requesting just what you need when you click to change to another page. If so, you need to be aware about how search engines will see your website and how you can help them to properly index your content.</p>
 <h2 id="what-is-spa-">What is SPA?</h2>
 <p>SPA stands for <em>Single-Page Application</em>. Its usage is growing in a fast pace since it enables the website to provide a more fluid user experience. When a page is loaded, you can browse other links and load new content without the need of a full page reload. Only one piece of the page is discarded and replaced by the content of the next page. With this, you will avoid requesting all JavaScript and CSS files again and rendering your header and footer HTML.</p>
@@ -186,6 +185,9 @@ Also, note that you can include "invisible links", like the ones that just appea
 
 page.open(url, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">status</span>) </span>{
 
+  <span class="hljs-keyword">if</span> (status != <span class="hljs-string">'success'</span>)
+    <span class="hljs-keyword">throw</span> <span class="hljs-string">'Error trying to prerender '</span> + url;
+	
   <span class="hljs-keyword">var</span> content = page.content;
   fs.write(path, content, <span class="hljs-string">'w'</span>);
 
@@ -205,7 +207,9 @@ page.open(url, <span class="hljs-function"><span class="hljs-keyword">function</
 
     </div>
   </div>
-</div></div>        
+</div>
+
+<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=c076e2fd246f9ba98c3823384a31f4fe&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Fangularjs-how-to-create-a-spa-crawlable-and-seo-friendly&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 0px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div></dir-disqus></div>        
       </div>    
     </div>      
 
@@ -226,7 +230,7 @@ page.open(url, <span class="hljs-function"><span class="hljs-keyword">function</
     <script src="/js/modals.js"></script>
 
     <script src="/js/assets/404game.min.js"></script>
-    <script src="/js/assets/console.image.min.js"></script>
+    <script src="/js/assets/dir-disqus.min.js"></script>
     
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

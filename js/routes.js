@@ -12,7 +12,10 @@ angular.module('zanonApp').config(['$routeProvider', '$locationProvider',
         controller: '404Controller'
       })		  
 
-      // posts
+      // posts      
+      .when('/posts/mongodb-storage-engine-mmap-or-wiredtiger', {
+        templateUrl: '/partials/posts/2015-10-18-mongodb-storage-engine-mmap-or-wiredtiger.html'
+      }) 
       .when('/posts/how-to-distribute-your-enterprise-mobile-app', {
         templateUrl: '/partials/posts/2015-10-04-how-to-distribute-your-enterprise-mobile-app.html'
       }) 

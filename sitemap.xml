@@ -30,4 +30,9 @@
     <lastmod>2015-10-04</lastmod>
     <changefreq>monthly</changefreq>
   </url>  
+  <url>
+    <loc>http://zanon.io/posts/mongodb-storage-engine-mmap-or-wiredtiger</loc>
+    <lastmod>2015-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+  </url>  
 </urlset>
