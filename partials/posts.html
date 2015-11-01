@@ -1,5 +1,18 @@
 <div ng-controller="PostsController">
 
+  <div ng-show="active.all || active.android" class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <article>
+        <div class="date">
+          NOV 01, 2015
+        </div>
+        <h2><a href="/posts/realm-io-an-incredible-fast-mobile-db-with-some-drawbacks">Realm.io: an incredible fast mobile DB with some drawbacks</a></h2>
+        <p>Realm.io is a really nice database created to run as a local storage for Android and iOS apps with an incredible speed. However, it has some nasty characteristics and limitations that you need to know before using it.</p>             
+        <button ng-click="filter('android');" type="button" class="btn tag pull-right">Android</button>
+      </article>
+    </div>                       
+  </div>
+
   <div ng-show="active.all || active.mongodb" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
