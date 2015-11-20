@@ -147,7 +147,7 @@
 <pre><code class="lang-xml hljs">&gt; C:\path\to\nwjs\nw.exe C:\path\to\your\project
 </code></pre>
 <p>On Linux:</p>
-<pre><code class="lang-xml hljs">&gt; /path/to/nwjs/path/to/your/project
+<pre><code class="lang-xml hljs">&gt; /path/to/nwjs /path/to/your/project
 </code></pre>
 <p>On OSX, the executable binary is in a hidden directory within the .app file. You can call it as:</p>
 <pre><code class="lang-xml hljs">&gt; /path/to/nwjs/Contents/MacOS/nwjs /path/to/your/project

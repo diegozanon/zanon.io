@@ -14,22 +14,22 @@ angular.module('zanonApp').config(['$routeProvider', '$locationProvider',
 
       // posts      
       .when('/posts/mongodb-storage-engine-mmap-or-wiredtiger', {
-        templateUrl: '/partials/posts/2015-10-18-mongodb-storage-engine-mmap-or-wiredtiger.html'
+        templateUrl: '/partials/2015-10-18-mongodb-storage-engine-mmap-or-wiredtiger.html'
       }) 
       .when('/posts/how-to-distribute-your-enterprise-mobile-app', {
-        templateUrl: '/partials/posts/2015-10-04-how-to-distribute-your-enterprise-mobile-app.html'
+        templateUrl: '/partials/2015-10-04-how-to-distribute-your-enterprise-mobile-app.html'
       }) 
       .when('/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs', {
-        templateUrl: '/partials/posts/2015-09-20-creating-desktop-apps-using-html-css-js-nodejs-with-nwjs.html'
+        templateUrl: '/partials/2015-09-20-creating-desktop-apps-using-html-css-js-nodejs-with-nwjs.html'
       }) 
       .when('/posts/serving-gzipped-files-in-amazon-s3-cloudfront', {
-        templateUrl: '/partials/posts/2015-09-06-serving-gzipped-files-in-amazon-s3-cloudfront.html'
+        templateUrl: '/partials/2015-09-06-serving-gzipped-files-in-amazon-s3-cloudfront.html'
       }) 
       .when('/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly', {
-        templateUrl: '/partials/posts/2015-08-23-angularjs-how-to-create-a-spa-crawlable-and-seo-friendly.html'
+        templateUrl: '/partials/2015-08-23-angularjs-how-to-create-a-spa-crawlable-and-seo-friendly.html'
       }) 
       .when('/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3', {
-        templateUrl: '/partials/posts/2015-08-09-angularjs-with-pretty-urls-removing-the-in-amazon-s3.html'
+        templateUrl: '/partials/2015-08-09-angularjs-with-pretty-urls-removing-the-in-amazon-s3.html'
       })            
 
       // 404

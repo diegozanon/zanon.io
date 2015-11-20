@@ -36,7 +36,7 @@
 <pre><code class="lang-xml">&gt; C:\path\to\nwjs\nw.exe C:\path\to\your\project
 </code></pre>
 <p>On Linux:</p>
-<pre><code class="lang-xml">&gt; /path/to/nwjs/path/to/your/project
+<pre><code class="lang-xml">&gt; /path/to/nwjs /path/to/your/project
 </code></pre>
 <p>On OSX, the executable binary is in a hidden directory within the .app file. You can call it as:</p>
 <pre><code class="lang-xml">&gt; /path/to/nwjs/Contents/MacOS/nwjs /path/to/your/project
@@ -109,9 +109,9 @@ request.get(&#39;http://nwjs.io/images/nw.png&#39;, function (err, response, bod
   &lt;/head&gt;
   &lt;body&gt;
     &lt;h1&gt;Hello World!&lt;/h1&gt;
-  &lt;div id=&quot;img&quot;&gt;&lt;/div&gt;  
-  &lt;script src=&quot;./js/jquery.min.js&quot;&gt;&lt;/script&gt;
-  &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
+    &lt;div id=&quot;img&quot;&gt;&lt;/div&gt;  
+    &lt;script src=&quot;./js/jquery.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
   &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
