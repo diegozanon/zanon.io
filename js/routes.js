@@ -12,7 +12,13 @@ angular.module('zanonApp').config(['$routeProvider', '$locationProvider',
         controller: '404Controller'
       })		  
 
-      // posts      
+      // posts 
+      .when('/posts/jaws-the-monstrously-scalable-serverless-framework', {
+        templateUrl: '/partials/2015-11-15-jaws-the-monstrously-scalable-serverless-framework.html'
+      }) 
+      .when('/posts/realm-an-incredible-fast-mobile-db', {
+        templateUrl: '/partials/2015-11-01-realm-an-incredible-fast-mobile-db.html'
+      })      
       .when('/posts/mongodb-storage-engine-mmap-or-wiredtiger', {
         templateUrl: '/partials/2015-10-18-mongodb-storage-engine-mmap-or-wiredtiger.html'
       }) 
@@ -30,7 +36,10 @@ angular.module('zanonApp').config(['$routeProvider', '$locationProvider',
       }) 
       .when('/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3', {
         templateUrl: '/partials/2015-08-09-angularjs-with-pretty-urls-removing-the-in-amazon-s3.html'
-      })            
+      })     
+      .when('/posts/getting-started', {
+        templateUrl: '/partials/2015-07-26-getting-started.html'
+      })        
 
       // 404
       .otherwise({

@@ -1,14 +1,29 @@
 <div ng-controller="PostsController">
 
-  <div ng-show="active.all || active.android" class="row">
+  <div ng-show="active.all || active.aws || active.node" class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <article>
+        <div class="date">
+          NOV 15, 2015
+        </div>
+        <h2><a href="/posts/jaws-the-monstrously-scalable-serverless-framework">JAWS: The Monstrously Scalable Serverless Framework</a></h2>
+        <p>AWS Lambda and API Gateway are really game changers and JAWS is the framework that helps you to use them. You can embed all of your server-side business rules into simple RESTful services to achieve infinite scalability with really low costs.</p>             
+        <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
+        <button ng-click="filter('node');" type="button" class="btn tag pull-right">Node</button>
+      </article>
+    </div>                       
+  </div>
+
+  <div ng-show="active.all || active.android || active.ios" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
         <div class="date">
           NOV 01, 2015
         </div>
-        <h2><a href="/posts/realm-io-an-incredible-fast-mobile-db-with-some-drawbacks">Realm.io: an incredible fast mobile DB with some drawbacks</a></h2>
-        <p>Realm.io is a really nice database created to run as a local storage for Android and iOS apps with an incredible speed. However, it has some nasty characteristics and limitations that you need to know before using it.</p>             
+        <h2><a href="/posts/realm-an-incredible-fast-mobile-db">Realm: an incredible fast mobile DB</a></h2>
+        <p>Realm is a really nice database created to run as a local storage for Android and iOS apps with an incredible speed. However, it has some limitations that you need to know before using it.</p>
         <button ng-click="filter('android');" type="button" class="btn tag pull-right">Android</button>
+        <button ng-click="filter('ios');" type="button" class="btn tag pull-right">iOS</button>
       </article>
     </div>                       
   </div>
@@ -33,7 +48,7 @@
           OCT 04, 2015
         </div>
         <h2><a href="/posts/how-to-distribute-your-enterprise-mobile-app">How to distribute your enterprise mobile app?</a></h2>
-        <p>if you have developed an enterprise mobile app, for example, an app that connects with the company database and show some reports, how can you safely distribute it?</p>             
+        <p>If you have developed an enterprise mobile app, for example, an app that connects with the company database and show some reports, how can you safely distribute it?</p>             
         <button ng-click="filter('ios');" type="button" class="btn tag pull-right">iOS</button>
         <button ng-click="filter('android');" type="button" class="btn tag pull-right">Android</button>        
       </article>
@@ -93,6 +108,18 @@
       </article>
     </div>                       
   </div> 
+
+  <div ng-show="active.all" class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <article>
+        <div class="date">
+          JUL 26, 2015
+        </div>
+        <h2><a href="/posts/getting-started">Getting Started!</a></h2>
+        <p>Yay! Now my blog is open to the world and this first post is to present myself and what will be posted here.</p>
+      </article>
+    </div>                       
+  </div>   
 
   <div class="row">
   </div>
