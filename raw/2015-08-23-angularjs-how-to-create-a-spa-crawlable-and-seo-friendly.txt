@@ -44,7 +44,7 @@ In this blog, I've added the following **sitemap.xml** file:
   </url>  
 </urlset> 
 ```
-Note: if you want your site to be correctly rendered in Facebook's preview or Twitter's cards, then you need to pre-render your pages. In this case, been just googleable is not enough. Another problem is that Google may index your content without parsing variables. For example, you can see things like `{{ myVar }}`  in search results instead of the actual content.
+**Note**: if you want your site to be correctly rendered in Facebook's preview or Twitter's cards, then you need to pre-render your pages. In this case, being just googleable is not enough. Another problem is that Google may index your content without parsing variables. For example, you can see things like <code ng-non-bindable>{{ myVar }}</code> in search results instead of the actual content.
 
 ## Crawlable Pages for Bing and Others
 
