@@ -1,5 +1,5 @@
 ﻿Title: MongoDB storage engine: MMAP or WiredTiger?
-Summary: MongoDB 3.0 has added a new storage engine named WiredTiger but still uses MMAP by default. This post shows the pros and cons of each one. As there is no <i>silver bullet</i>, you have to choose depending on your use case.
+Summary: MongoDB 3.0 has added a new storage engine named WiredTiger but still uses MMAP by default. This post shows the pros and cons of each one. As there is no <em>silver bullet</em>, you have to choose depending on your use case.
 Tags: MongoDB
 Date: OCT 18, 2015
 URL: mongodb-storage-engine-mmap-or-wiredtiger

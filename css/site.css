@@ -145,6 +145,9 @@ blockquote {
 img {
 	margin-left: auto;
     margin-right: auto;
+    display: block;
+    max-width: 100%;
+    height: auto;
 }
 
 /* 404 page style */

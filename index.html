@@ -25,7 +25,7 @@
   <body ng-controller="MainController">
 
     <header>
-      <div ng-controller="HeaderController">
+      <div>
         <div class="container">
           <div class="row">
             <div class="col-xs-8 col-sm-2 col-md-2">
@@ -37,7 +37,7 @@
               <!-- empty -->
             </div>         
             <div class="col-xs-2 col-sm-1 col-md-1 header-img">
-              <a href="" ng-click="about()">
+              <a href="http://diego.zanon.io">
                 <img src="/images/about.png" alt="about"/>
               </a>
             </div>      
@@ -48,40 +48,7 @@
             </div> 
           </div>         
         </div>  
-
-        <script type="text/ng-template" id="modal.html">
-          <div class="modal-header">
-            <h3 class="modal-title">You can find more about me on:</h3>
-          </div>
-          <div class="container">
-            <div class="row">
-              <div class="col-xs-4 col-sm-3 col-md-2 center">
-                <h4>Stack Overflow</h4>
-                <a href="http://stackoverflow.com/users/1476885/zanon?tab=profile">
-                  <img 
-                    src="http://stackexchange.com/users/flair/1594304.png?theme=clean" 
-                    width="208" height="58" alt="Stack Overflow" title="Stack Overflow">
-                </a>
-              </div>
-              <div class="col-xs-4 col-sm-3 col-md-2 center">
-                <h4>GitHub</h4>
-                <a href="https://github.com/zanon-io">
-                  <img src="/images/octocat.png" alt="GitHub" title="GitHub">
-                </a>  
-              </div>
-              <div class="col-xs-4 col-sm-3 col-md-2 center">
-                <h4>Twitter</h4>
-                <a href="https://twitter.com/zanon_io">
-                  <img src="/images/twitter.png" alt="Twitter" title="Twitter">
-                </a>  
-              </div>
-            </div>
-            <br>
-          </div>
-          <div class="modal-footer">
-            <p><button type="form" class="btn" ng-click="close()">Close</button></p>         
-          </div>
-        </script>   
+  
       </div>
 
       <div class="container">
@@ -111,7 +78,7 @@
 
     <div class="container">   
       <div class="content">
-        <div class="ng-view-background" ng-view highlight-code></div>        
+        <div class="ng-view-background" autoscroll="true" ng-view highlight-code></div>        
       </div>    
     </div>      
 
@@ -129,7 +96,6 @@
     <script src="/js/controllers.js"></script>
     <script src="/js/directives.js"></script>
     <script src="/js/routes.js"></script>
-    <script src="/js/modals.js"></script>
 
     <script src="/js/assets/404game.min.js"></script>
     <script src="/js/assets/dir-disqus.min.js"></script>

@@ -1,0 +1,141 @@
+<!DOCTYPE html><html lang="en" ng-app="zanonApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Angular, Node, MongoDB, AWS, Android, iOS">
+    <meta name="author" content="Diego Zanon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <title>zanon.io</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/monokai_sublime.min.css">
+    <link rel="stylesheet" href="/css/site.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <base href="/">
+  <script type="text/javascript" async="" src="//zanon.disqus.com/embed.js"></script></head>
+  <body ng-controller="MainController" class="ng-scope">
+
+    <header>
+      <div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-8 col-sm-2 col-md-2">
+              <h1 class="site-name">
+                <a href="/">zanon.io</a>
+              </h1>
+            </div>
+            <div class="hidden-xs col-sm-8 col-md-8">
+              <!-- empty -->
+            </div>         
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="http://diego.zanon.io">
+                <img src="/images/about.png" alt="about">
+              </a>
+            </div>      
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="/feed.xml">
+                <img src="/images/rss.png" alt="rss">
+              </a>
+            </div> 
+          </div>         
+        </div>  
+  
+      </div>
+
+      <div class="container">
+        <nav id="nav" class="navbar-inverse navbar-static-top">      
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li ng-class="{ 'active': active.all }" class="active">    <a ng-click="filter('all');" href="/">All posts</a></li>
+              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');" href="/">Angular</a></li>
+              <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');" href="/">Node</a></li>
+              <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');" href="/">MongoDB</a></li>
+              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');" href="/">AWS</a></li>         
+              <li ng-class="{ 'active': active.android }"><a ng-click="filter('android');" href="/">Android</a></li>         
+              <li ng-class="{ 'active': active.ios }">	  <a ng-click="filter('ios');" href="/">iOS</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->      
+        </nav>   
+      </div>
+    </header>
+
+    <div class="container">   
+      <div class="content">
+        <!-- ngView:  --><div class="ng-view-background ng-scope" autoscroll="true" ng-view="" highlight-code=""><div class="row ng-scope">
+  <div class="col-md-offset-1 col-md-10 post">
+  	<h1>Getting Started!</h1>
+  	<p class="date">JUL 26, 2015</p>
+
+  	<div>
+
+
+<h2 id="about-me">About Me</h2>
+<p>Hello there! My name is Diego Zanon and I'm a computer engineer. If you want to know more about what I've done and what I like, you can visit my profile page at <a href="http://diego.zanon.io">diego.zanon.io</a>.</p>
+<h2 id="what-will-i-blog-">What will I blog?</h2>
+<p>I like to consider myself a Full-Stack developer. So, you can expect to read about anything needed to build a system :) Ok, I'm lying. There'll be a bit of focus here. As I'm currently in love with the MEAN stack, that's what I'll start blogging. Also, I'm a big fan of AWS and mobile apps (ok, no focus!).</p>
+<p>I intend to follow 3 rules while blogging here:</p>
+<ol>
+<li>Never blog about something that is trivial or widely known, otherwise I'll not be contributing to add new info to the internet.</li>
+<li>Prefer to blog about things that I don't know and where I must pretend to be an expert. That's the best way to learn more :) Please, correct me in comments (Disqus) if you see something wrong (even grammar errors) and I'll be grateful.</li>
+<li>Blog frequently: for me, it means 2 times per month :)</li>
+</ol>
+<h2 id="why-am-i-blogging-">Why am I blogging?</h2>
+<p>In the last few years, I became addicted to learn new things. I've transformed it in a hobby as some things keeps me motivated and excited to keep on. But in a few moments, it's something that may stress me because I feel like running against time. Its something that happens with everyone: if you learn a new thing, but don't use it frequently, you will forget it. It feels like the more that I learn, the more I forget.</p>
+<p>What I do to reduce this loss of knowledge is to write tutorials or summaries for myself. I write a lot. I really write <em>a lot</em>. This extra time writing is what helps me to consolidate what I've learned and to reduce the speed of forgetting. I also do some periodic read and revisions to make sure that it's all safe in my mind.</p>
+<p>But, why do I need to share what I'm learning? I'm shy and don't like public exposition. The reason is: I've read a post some months ago and that changed my vision: <a href="https://www.quora.com/What-do-the-top-1-of-software-engineers-do-that-the-other-99-do-not">What do the top 1% of software engineers do that the other 99% do not?</a> (specially Michael O. Church's answer).</p>
+<p>Michael's post tries to quantify the knowledge in software engineering and the conclusion is that smart people shares. There are "Adders", who only "add" new code to the world and the "Multipliers", people who share and that can make a difference in a larger scale.</p>
+<p>Also, most of the tools that I use are free and open-source and the places where I use to learn (blogs, Stack Overflow, etc) offers everything for free. Its the good will of people that keeps me learning for free so my way to give it back is to share what I learn and build.</p>
+
+
+    </div>
+  </div>
+</div>
+
+<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=8c9bfb339115aba61f6f24e2a0d10141&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Fgetting-started&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 0px !important;"></iframe></div><a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></dir-disqus></div>        
+      </div>    
+    </div>      
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script async="" src="//www.google-analytics.com/analytics.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>    
+
+    <script src="/js/app.js"></script>
+    <script src="/js/controllers.js"></script>
+    <script src="/js/directives.js"></script>
+    <script src="/js/routes.js"></script>
+
+    <script src="/js/assets/404game.min.js"></script>
+    <script src="/js/assets/dir-disqus.min.js"></script>
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-63834414-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+</body></html>

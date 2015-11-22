@@ -54,9 +54,9 @@
       <pubDate>Sun, 01 Nov 2015 00:00:00 UTC</pubDate>
     </item> 
     <item>
-      <title>JAWS: The Monstrously Scalable Serverless Framework</title>
-      <link>http://zanon.io/posts/jaws-the-monstrously-scalable-serverless-framework</link>
-      <guid>http://zanon.io/posts/jaws-the-monstrously-scalable-serverless-framework</guid>
+      <title>Building Serverless Websites in AWS - Intro</title>
+      <link>http://zanon.io/posts/building-serverless-websites-in-aws-intro</link>
+      <guid>http://zanon.io/posts/building-serverless-websites-in-aws-intro</guid>
       <pubDate>Sun, 15 Nov 2015 00:00:00 UTC</pubDate>
     </item>           
   </channel>

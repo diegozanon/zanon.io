@@ -1,0 +1,31 @@
+Title: Getting Started!
+Summary: Yay! Now my blog is open to the world and this first post is to present myself and what will be posted here.
+Tags:
+Date: JUL 26, 2015
+URL: getting-started
+
+## About Me
+
+Hello there! My name is Diego Zanon and I'm a computer engineer. If you want to know more about what I've done and what I like, you can visit my profile page at [diego.zanon.io](http://diego.zanon.io).
+
+## What will I blog?
+
+I like to consider myself a Full-Stack developer. So, you can expect to read about anything needed to build a system :) Ok, I'm lying. There'll be a bit of focus here. As I'm currently in love with the MEAN stack, that's what I'll start blogging. Also, I'm a big fan of AWS and mobile apps (ok, no focus!).
+
+I intend to follow 3 rules while blogging here:
+
+ 1. Never blog about something that is trivial or widely known, otherwise I'll not be contributing to add new info to the internet.
+ 2. Prefer to blog about things that I don't know and where I must pretend to be an expert. That's the best way to learn more :) Please, correct me in comments (Disqus) if you see something wrong (even grammar errors) and I'll be grateful.
+ 3. Blog frequently: for me, it means 2 times per month :)
+
+## Why am I blogging?
+
+In the last few years, I became addicted to learn new things. I've transformed it in a hobby as some things keeps me motivated and excited to keep on. But in a few moments, it's something that may stress me because I feel like running against time. Its something that happens with everyone: if you learn a new thing, but don't use it frequently, you will forget it. It feels like the more that I learn, the more I forget.
+
+What I do to reduce this loss of knowledge is to write tutorials or summaries for myself. I write a lot. I really write *a lot*. This extra time writing is what helps me to consolidate what I've learned and to reduce the speed of forgetting. I also do some periodic read and revisions to make sure that it's all safe in my mind.
+
+But, why do I need to share what I'm learning? I'm shy and don't like public exposition. The reason is: I've read a post some months ago and that changed my vision: [What do the top 1% of software engineers do that the other 99% do not?](https://www.quora.com/What-do-the-top-1-of-software-engineers-do-that-the-other-99-do-not) (specially Michael O. Church's answer).
+
+Michael's post tries to quantify the knowledge in software engineering and the conclusion is that smart people shares. There are "Adders", who only "add" new code to the world and the "Multipliers", people who share and that can make a difference in a larger scale.
+
+Also, most of the tools that I use are free and open-source and the places where I use to learn (blogs, Stack Overflow, etc) offers everything for free. Its the good will of people that keeps me learning for free so my way to give it back is to share what I learn and build.

@@ -13,8 +13,8 @@ angular.module('zanonApp').config(['$routeProvider', '$locationProvider',
       })		  
 
       // posts 
-      .when('/posts/jaws-the-monstrously-scalable-serverless-framework', {
-        templateUrl: '/partials/2015-11-15-jaws-the-monstrously-scalable-serverless-framework.html'
+      .when('/posts/building-serverless-websites-in-aws-intro', {
+        templateUrl: '/partials/2015-11-15-building-serverless-websites-in-aws-intro.html'
       }) 
       .when('/posts/realm-an-incredible-fast-mobile-db', {
         templateUrl: '/partials/2015-11-01-realm-an-incredible-fast-mobile-db.html'
