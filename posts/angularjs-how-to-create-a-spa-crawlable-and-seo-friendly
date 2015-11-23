@@ -8,6 +8,7 @@
     
     <title>zanon.io</title>
 
+    <script src="/js/ng-cloak.js"></script> <!-- workaround to avoid flickering in prerendered content -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/monokai_sublime.min.css">
     <link rel="stylesheet" href="/css/site.css">
@@ -109,7 +110,7 @@
 
     <div class="container">   
       <div class="content">
-        <!-- ngView:  --><div class="ng-view-background ng-scope" ng-view="" highlight-code=""><div class="row ng-scope">
+        <!-- ngView:  --><div class="ng-view-background ng-scope ng-cloak" autoscroll="true" ng-view="" highlight-code=""><div class="row ng-scope">
   <div class="col-md-offset-1 col-md-10 post">
   	<h1>AngularJS: How to create a SPA crawlable and SEO friendly?</h1>
   	<p class="date">AUG 23, 2015</p>
