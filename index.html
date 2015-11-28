@@ -10,9 +10,10 @@
     
     <title>zanon.io</title>
 
+    <script src="/js/ng-cloak.js"></script> <!-- workaround to avoid flickering in prerendered content -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/monokai_sublime.min.css">
-    <link rel="stylesheet" href="/css/site.css">
+    <link rel="stylesheet" href="/css/site.css">    
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -42,7 +43,7 @@
               </a>
             </div>      
             <div class="col-xs-2 col-sm-1 col-md-1 header-img">
-              <a href="/feed.xml">
+              <a href="/feed.xml" target="_blank">
                 <img src="/images/rss.png" alt="rss"/>
               </a>
             </div> 
@@ -78,7 +79,7 @@
 
     <div class="container">   
       <div class="content">
-        <div class="ng-view-background" autoscroll="true" ng-view highlight-code></div>        
+        <div class="ng-view-background ng-cloak" autoscroll="true" ng-view highlight-code></div>        
       </div>    
     </div>      
 
