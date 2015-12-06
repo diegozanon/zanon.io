@@ -5,11 +5,11 @@
     <meta name="keywords" content="Angular, Node, MongoDB, AWS, Android, iOS">
     <meta name="author" content="Diego Zanon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    
+
     <title>zanon.io</title>
 
-    <script src="/js/ng-cloak.js"></script> <!-- workaround to avoid flickering in prerendered content -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">    
+    <script async="" src="//www.google-analytics.com/analytics.js"></script><script src="/js/ng-cloak.js"></script> <!-- workaround to avoid flickering in prerendered content -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/monokai_sublime.min.css">
     <link rel="stylesheet" href="/css/site.css">
 
@@ -18,7 +18,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
+
     <base href="/">
   <script type="text/javascript" async="" src="//zanon.disqus.com/embed.js"></script></head>
   <body ng-controller="MainController" class="ng-scope">
@@ -34,24 +34,24 @@
             </div>
             <div class="hidden-xs col-sm-8 col-md-8">
               <!-- empty -->
-            </div>         
+            </div>
             <div class="col-xs-2 col-sm-1 col-md-1 header-img">
               <a href="http://diego.zanon.io">
                 <img src="/images/about.png" alt="about">
               </a>
-            </div>      
+            </div>
             <div class="col-xs-2 col-sm-1 col-md-1 header-img">
-              <a href="/feed.xml">
+              <a href="/feed.xml" target="_blank">
                 <img src="/images/rss.png" alt="rss">
               </a>
-            </div> 
-          </div>         
-        </div>  
-  
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class="container">
-        <nav id="nav" class="navbar-inverse navbar-static-top">      
+        <nav id="nav" class="navbar-inverse navbar-static-top">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="navbar" aria-expanded="false" aria-controls="navbar">
               <span class="sr-only">Toggle navigation</span>
@@ -66,23 +66,23 @@
               <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');" href="/">Angular</a></li>
               <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');" href="/">Node</a></li>
               <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');" href="/">MongoDB</a></li>
-              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');" href="/">AWS</a></li>         
-              <li ng-class="{ 'active': active.android }"><a ng-click="filter('android');" href="/">Android</a></li>         
+              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');" href="/">AWS</a></li>
+              <li ng-class="{ 'active': active.android }"><a ng-click="filter('android');" href="/">Android</a></li>
               <li ng-class="{ 'active': active.ios }">	  <a ng-click="filter('ios');" href="/">iOS</a></li>
             </ul>
-          </div><!--/.nav-collapse -->      
-        </nav>   
+          </div><!--/.nav-collapse -->
+        </nav>
       </div>
     </header>
 
-    <div class="container">   
+    <div class="container">
       <div class="content">
-        <!-- ngView:  --><div class="ng-view-background ng-scope ng-cloak" autoscroll="true" ng-view="" highlight-code=""><div class="row ng-scope">
+        <!-- ngView:  --><div class="ng-view-background ng-scope" autoscroll="true" ng-view="" highlight-code="">
+<div class="row ng-scope">
   <div class="col-md-offset-1 col-md-10 post">
-  	<h1>Realm: an incredible fast mobile DB</h1>
-  	<p class="date">NOV 01, 2015</p>
-
-  	<div>
+    <h1>Realm: an incredible fast mobile DB</h1>
+    <p class="date">NOV 01, 2015</p>
+    <div>
 
 <h2 id="realm">Realm</h2>
 <p>Realm is a database designed for mobile platforms (Android and iOS). If you want to store just some user data and configurations, skip it. Instead, use simpler solutions like <a href="http://developer.android.com/guide/topics/data/data-storage.html#pref">Shared Preferences</a> (Android) or <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSUserDefaults_Class/index.html">NSUserDefaults</a> (iOS).</p>
@@ -113,20 +113,19 @@
     </div>
   </div>
 </div>
-
-<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=8c9bfb339115aba61f6f24e2a0d10141&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Frealm-an-incredible-fast-mobile-db&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 0px !important;"></iframe></div><a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></dir-disqus></div>        
-      </div>    
-    </div>      
+<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=17f88c4d53dda79f6460db89393a913c&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Frealm-an-incredible-fast-mobile-db&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 0px !important;"></iframe></div><a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></dir-disqus></div>
+      </div>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script async="" src="//www.google-analytics.com/analytics.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>    
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
 
     <script src="/js/app.js"></script>
     <script src="/js/controllers.js"></script>
@@ -135,7 +134,7 @@
 
     <script src="/js/assets/404game.min.js"></script>
     <script src="/js/assets/dir-disqus.min.js"></script>
-    
+
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -146,4 +145,5 @@
       ga('send', 'pageview');
     </script>
   
+
 </body></html>
