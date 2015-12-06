@@ -6,7 +6,7 @@ div(ng-controller="PostsController")
           div(class="date")= post.date
           h2
             a(href="/posts/#{ post.url }")= post.title
-          p= post.summary
+          p!= post.summary
           each filter in post.filters
             button(ng-click="filter('#{ filter.toLowerCase() }');" type="button" class="btn tag pull-right")= filter
 
