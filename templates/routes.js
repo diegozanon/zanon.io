@@ -1,4 +1,4 @@
-angular.module('exampleApp').config(['$routeProvider', '$locationProvider',
+angular.module('zanonApp').config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider
 

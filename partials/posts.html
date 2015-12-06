@@ -1,126 +1,99 @@
-<div ng-controller="PostsController">
 
+<div ng-controller="PostsController">
   <div ng-show="active.all || active.aws || active.node" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
-        <div class="date">
-          NOV 15, 2015
-        </div>
+        <div class="date">Nov 15, 2015</div>
         <h2><a href="/posts/building-serverless-websites-in-aws-intro">Building Serverless Websites in AWS - Intro</a></h2>
-        <p>A serverless website is one that depends entirely on third-party managed services to avoid spinning up full-blown servers. This approach reduces the allocation of unused resources to minimize costs and relies on external services to achieve high availability and <em>infinite</em> scalability.</p>             
+        <p>A serverless website is one that depends entirely on third-party managed services to avoid spinning up full-blown servers. This approach reduces the allocation of unused resources to minimize costs and relies on external services to achieve high availability and &lt;em&gt;infinite&lt;/em&gt; scalability.</p>
         <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
         <button ng-click="filter('node');" type="button" class="btn tag pull-right">Node</button>
       </article>
-    </div>                       
+    </div>
   </div>
-
   <div ng-show="active.all || active.android || active.ios" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
-        <div class="date">
-          NOV 01, 2015
-        </div>
+        <div class="date">NOV 01, 2015</div>
         <h2><a href="/posts/realm-an-incredible-fast-mobile-db">Realm: an incredible fast mobile DB</a></h2>
         <p>Realm is a really nice database created to run as a local storage for Android and iOS apps with an incredible speed. However, it has some limitations that you need to know before using it.</p>
         <button ng-click="filter('android');" type="button" class="btn tag pull-right">Android</button>
         <button ng-click="filter('ios');" type="button" class="btn tag pull-right">iOS</button>
       </article>
-    </div>                       
+    </div>
   </div>
-
   <div ng-show="active.all || active.mongodb" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
-        <div class="date">
-          OCT 18, 2015
-        </div>
+        <div class="date">OCT 18, 2015</div>
         <h2><a href="/posts/mongodb-storage-engine-mmap-or-wiredtiger">MongoDB storage engine: MMAP or WiredTiger?</a></h2>
-        <p>MongoDB 3.0 has added a new storage engine named WiredTiger but still uses MMAP by default. This post shows the pros and cons of each one. As there is no <em>silver bullet</em>, you have to choose depending on your use case.</p>             
+        <p>MongoDB 3.0 has added a new storage engine named WiredTiger but still uses MMAP by default. This post shows the pros and cons of each one. As there is no &lt;em&gt;silver bullet&lt;/em&gt;, you have to choose depending on your use case.</p>
         <button ng-click="filter('mongodb');" type="button" class="btn tag pull-right">MongoDB</button>
       </article>
-    </div>                       
+    </div>
   </div>
-
   <div ng-show="active.all || active.android || active.ios" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
-        <div class="date">
-          OCT 04, 2015
-        </div>
+        <div class="date">OCT 04, 2015</div>
         <h2><a href="/posts/how-to-distribute-your-enterprise-mobile-app">How to distribute your enterprise mobile app?</a></h2>
-        <p>If you have developed an enterprise mobile app, for example, an app that connects with the company database and show some reports, how can you safely distribute it?</p>             
+        <p>If you have developed an enterprise mobile app, for example, an app that connects with the company database and show some reports, how can you safely distribute it?</p>
+        <button ng-click="filter('android');" type="button" class="btn tag pull-right">Android</button>
         <button ng-click="filter('ios');" type="button" class="btn tag pull-right">iOS</button>
-        <button ng-click="filter('android');" type="button" class="btn tag pull-right">Android</button>        
       </article>
-    </div>                       
-  </div> 
-
+    </div>
+  </div>
   <div ng-show="active.all || active.node" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
-        <div class="date">
-          SEP 20, 2015
-        </div>
+        <div class="date">SEP 20, 2015</div>
         <h2><a href="/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs">Creating Desktop Apps using HTML/CSS/JS + Node.js with NW.js</a></h2>
-        <p>If you like web development and need to build a desktop app, why don't you try NW.js (former node-webkit)? It runs on Node.js and you will freely use HTML/CSS/JS + Node.js to build multi-platform apps.</p>             
+        <p>If you like web development and need to build a desktop app, why don't you try NW.js (former node-webkit)? It runs on Node.js and you will freely use HTML/CSS/JS + Node.js to build multi-platform apps.</p>
         <button ng-click="filter('node');" type="button" class="btn tag pull-right">Node</button>
       </article>
-    </div>                       
-  </div> 
-
+    </div>
+  </div>
   <div ng-show="active.all || active.aws" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
-        <div class="date">
-          SEP 06, 2015
-        </div>
+        <div class="date">SEP 06, 2015</div>
         <h2><a href="/posts/serving-gzipped-files-in-amazon-s3-cloudfront">Serving gzipped files in Amazon S3 / CloudFront</a></h2>
-        <p>If you want to serve web content in the cloud, you need to gzip it first to reduce the download size and get a faster website. This guide shows how you can do it using AWS.</p>             
+        <p>If you want to serve web content in the cloud, you need to gzip it first to reduce the download size and get a faster website. This guide shows how you can do it using AWS.</p>
         <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
       </article>
-    </div>                       
-  </div> 
-
-  <div ng-show="active.all || active.angular || active.aws" class="row">
+    </div>
+  </div>
+  <div ng-show="active.all || active.aws || active.angular" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
-        <div class="date">
-          AUG 23, 2015
-        </div>
+        <div class="date">AUG 23, 2015</div>
         <h2><a href="/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly">AngularJS: How to create a SPA crawlable and SEO friendly?</a></h2>
-        <p>If you&#39;re using Angular, probably you already know about ngRoute and the amazing benefit of avoiding full page reloads and requesting just what you need when you click to change to another page. If so, you need to be aware about how search engines will see your website and how you can help them to properly index your content.</p>
-        <button ng-click="filter('angular');" type="button" class="btn tag pull-right">Angular</button>
-        <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>             
-      </article>
-    </div>                       
-  </div> 
-
-  <div ng-show="active.all || active.angular || active.aws" class="row">
-    <div class="col-md-offset-1 col-md-10">
-      <article>
-        <div class="date">
-          AUG 09, 2015
-        </div>
-        <h2><a href="/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3">AngularJS with Pretty URLs: Removing the # in Amazon S3</a></h2>
-        <p>Angular uses the # (hashtag) by default when routing pages because it requires no server side configuration. If you want to get rid of it, you need to configure a server rewrite rule.</p>
-        <button ng-click="filter('angular');" type="button" class="btn tag pull-right">Angular</button>             
+        <p>If you're using Angular, probably you already know about ngRoute and the amazing benefit of avoiding full page reloads and requesting just what you need when you click to change to another page. If so, you need to be aware about how search engines will see your website and how you can help them to properly index your content.</p>
         <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
+        <button ng-click="filter('angular');" type="button" class="btn tag pull-right">Angular</button>
       </article>
-    </div>                       
-  </div> 
-
-  <div ng-show="active.all" class="row">
+    </div>
+  </div>
+  <div ng-show="active.all || active.aws || active.angular" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
-        <div class="date">
-          JUL 26, 2015
-        </div>
+        <div class="date">AUG 09, 2015</div>
+        <h2><a href="/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3">AngularJS with Pretty URLs: Removing the # in Amazon S3</a></h2>
+        <p>Angular uses the # (hashtag) by default when routing pages because it requires no server side configuration. If you want to get rid of it, you need to configure a server rewrite rule or prerender your pages.</p>
+        <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
+        <button ng-click="filter('angular');" type="button" class="btn tag pull-right">Angular</button>
+      </article>
+    </div>
+  </div>
+  <div ng-show="active.all || active." class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <article>
+        <div class="date">JUL 26, 2015</div>
         <h2><a href="/posts/getting-started">Getting Started!</a></h2>
         <p>Yay! Now my blog is open to the world and this first post is to present myself and what will be posted here.</p>
+        <button ng-click="filter('');" type="button" class="btn tag pull-right"></button>
       </article>
-    </div>                       
-  </div>   
-
-  <div class="row">
+    </div>
   </div>
-</div>        
+  <div class="row"></div>
+</div>

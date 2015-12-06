@@ -2,7 +2,7 @@ Title: AngularJS: How to create a SPA crawlable and SEO friendly?
 Summary: If you're using Angular, probably you already know about ngRoute and the amazing benefit of avoiding full page reloads and requesting just what you need when you click to change to another page. If so, you need to be aware about how search engines will see your website and how you can help them to properly index your content.
 Tags: AWS, Angular
 Date: AUG 23, 2015
-URL: angular-how-to-create-a-spa-crawlable-and-seo-friendly
+URL: angularjs-how-to-create-a-spa-crawlable-and-seo-friendly
 
 If you're using Angular, probably you already know about ngRoute and the amazing benefit of avoiding full page reloads and requesting just what you need when you click to change to another page. If so, you need to be aware about how search engines will see your website and how you can help them to properly index your content.
 
@@ -16,15 +16,15 @@ However, this approach have some [drawbacks](http://stackoverflow.com/q/21862054
 
 ## SEO and Crawlable Pages
 
-SEO stands for _Search Engine Optimization_. What we are trying to achieve here is a way to help search engines to render your page and understand your content. 
+SEO stands for _Search Engine Optimization_. What we are trying to achieve here is a way to help search engines to render your page and understand your content.
 
 Search engines uses web crawlers to systematically browse web pages to collect information and to index them based on its contents. The main issue here is that most of the web crawlers don't execute JavaScript code and can't see what your SPA retrieves with each link. I've said **most** web crawlers. Fortunately, [Google is currently prepared](http://googlewebmastercentral.blogspot.com.br/2014/05/understanding-web-pages-better.html) to execute JavaScript code. This make your task much easier, as you can see in the following section, but it have some drawbacks.
 
 ## Crawlable Pages for Google
 
-If you believe that being googleable is enough for your website, then you don't need to modify anything. Since Googlebots will execute your JavaScript, your page contents and links will be available for them. 
+If you believe that being googleable is enough for your website, then you don't need to modify anything. Since Googlebots will execute your JavaScript, your page contents and links will be available for them.
 
-However, Google [recognizes](http://googlewebmastercentral.blogspot.com.br/2014/05/understanding-web-pages-better.html) that some JavaScript code may not be executed if its too complex or arcane.  So, what you can do to help Google (and every crawler), is to add a [Sitemap](http://www.sitemaps.org/protocol.html) file named **sitemap.xml** at your web server root directory to tell crawlers what links do you have in your website. 
+However, Google [recognizes](http://googlewebmastercentral.blogspot.com.br/2014/05/understanding-web-pages-better.html) that some JavaScript code may not be executed if its too complex or arcane.  So, what you can do to help Google (and every crawler), is to add a [Sitemap](http://www.sitemaps.org/protocol.html) file named **sitemap.xml** at your web server root directory to tell crawlers what links do you have in your website.
 Also, note that you can include "invisible links", like the ones that just appears after you fill a form.
 
 In this blog, I've added the following **sitemap.xml** file:
@@ -41,8 +41,8 @@ In this blog, I've added the following **sitemap.xml** file:
     <loc>http://zanon.io/posts/angular-how-to-create-a-spa-crawlable-and-seo-friendly</loc>
     <lastmod>2015-08-23</lastmod>
     <changefreq>monthly</changefreq>
-  </url>  
-</urlset> 
+  </url>
+</urlset>
 ```
 **Note**: if you want your site to be correctly rendered in Facebook's preview or Twitter's cards, then you need to pre-render your pages. In this case, being just googleable is not enough. Another problem is that Google may index your content without parsing variables. For example, you can see things like <code ng-non-bindable>{{ myVar }}</code> in search results instead of the actual content.
 
@@ -115,13 +115,13 @@ var path = 'posts/' + pageName;
 var url = 'http://localhost/' + path;
 
 page.open(url, function (status) {
-  
+
   if (status != 'success')
     throw 'Error trying to prerender ' + url;
 
   var content = page.content;
   fs.write(path, content, 'w');
- 
+
   console.log("The file was saved.");
   phantom.exit();
 });

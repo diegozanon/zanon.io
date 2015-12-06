@@ -1,9 +1,9 @@
+
 <div class="row">
   <div class="col-md-offset-1 col-md-10 post">
-  	<h1>AngularJS with Pretty URLs: Removing the # in Amazon S3</h1>
-  	<p class="date">AUG 09, 2015</p>
-
-  	<div>
+    <h1>AngularJS with Pretty URLs: Removing the # in Amazon S3</h1>
+    <p class="date">AUG 09, 2015</p>
+    <div>
 
 <h2 id="angular-urls">Angular URLs</h2>
 <p>Angular ngRoute uses the # (hashtag) by default when routing pages. For example, if you have an &quot;about&quot; page, your URL will look like <code>http://mywebsite.com/#/about</code>. With this, the # looks misplaced since we are used to see URLs like <code>http://mywebsite.com/about</code>. </p>
@@ -56,7 +56,7 @@
 <p>To configure this, each server has its own guide. You can follow this <a href="https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions#how-to-configure-your-server-to-work-with-html5mode">link</a> to see how this is done for Apache, IIS and others. For Amazon S3, read below.</p>
 <h2 id="amazon-s3-url-rewrite">Amazon S3 URL Rewrite</h2>
 <p>First, open the AWS Management Console and browse to S3. Next, click on your website bucket in the left panel and see its properties in the right panel. Clicking on &quot;Static Website Hosting&quot; gives you the following options:</p>
-<p><img class="img-responsive" src="/images/posts/2015-08-09-s3.png" alt="s3-configuration"></p>
+<p><img src="http://zanon.io/images/posts/2015-08-09-s3.png" alt="s3-configuration"></p>
 <p>You&#39;ll edit the redirection rules using the following XML:</p>
 <pre><code class="lang-xml">&lt;RoutingRules&gt;
   &lt;RoutingRule&gt;
@@ -77,9 +77,7 @@
 <p>This solution works pretty well, but configuring this S3 URL Rewrite is <strong>not</strong> SEO-friendly as I&#39;ve discovered later. You can read why in my Stack Overflow <a href="http://stackoverflow.com/q/32429488/1476885">question/answer</a>. If you want an application SEO-friendly and with pretty URLs in Amazon, you need to avoid this S3 rewrite rule and pre-render all of your pages before uploading them. You can read more about this in my blog post: <a href="http://zanon.io/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly">Angular: How to create a SPA crawlable and SEO friendly?</a></p>
 </blockquote>
 
-
     </div>
   </div>
 </div>
-
 <dir-disqus></dir-disqus>

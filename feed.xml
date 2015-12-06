@@ -1,63 +1,63 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>zanon.io</title>
     <description>Zanon's Blog</description>
     <link>http://zanon.io</link>
-    <atom:link href="http://zanon.io/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://zanon.io/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <item>
       <title>Getting Started!</title>
       <link>http://zanon.io/posts/getting-started</link>
       <guid>http://zanon.io/posts/getting-started</guid>
-      <pubDate>Sun, 26 Jul 2015 00:00:00 UTC</pubDate>
+      <pubDate>Sun, 26 Jul 2015 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>AngularJS with Pretty URLs: Removing the # in Amazon S3</title>
       <link>http://zanon.io/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3</link>
       <guid>http://zanon.io/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3</guid>
-      <pubDate>Sun, 09 Aug 2015 00:00:00 UTC</pubDate>
-    </item>   
+      <pubDate>Sun, 09 Aug 2015 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>AngularJS: How to create a SPA crawlable and SEO friendly?</title>
-      <link>http://zanon.io/posts/angular-how-to-create-a-spa-crawlable-and-seo-friendly</link>
-      <guid>http://zanon.io/posts/angular-how-to-create-a-spa-crawlable-and-seo-friendly</guid>
-      <pubDate>Sun, 23 Aug 2015 00:00:00 UTC</pubDate>
+      <link>http://zanon.io/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly</link>
+      <guid>http://zanon.io/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly</guid>
+      <pubDate>Sun, 23 Aug 2015 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Serving gzipped files in Amazon S3 / CloudFront</title>
       <link>http://zanon.io/posts/serving-gzipped-files-in-amazon-s3-cloudfront</link>
       <guid>http://zanon.io/posts/serving-gzipped-files-in-amazon-s3-cloudfront</guid>
-      <pubDate>Sun, 06 Sep 2015 00:00:00 UTC</pubDate>
-    </item> 
+      <pubDate>Sun, 06 Sep 2015 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Creating Desktop Apps using HTML/CSS/JS + Node.js with NW.js</title>
       <link>http://zanon.io/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs</link>
       <guid>http://zanon.io/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs</guid>
-      <pubDate>Sun, 20 Sep 2015 00:00:00 UTC</pubDate>
+      <pubDate>Sun, 20 Sep 2015 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>How to distribute your enterprise mobile app?</title>
       <link>http://zanon.io/posts/how-to-distribute-your-enterprise-mobile-app</link>
       <guid>http://zanon.io/posts/how-to-distribute-your-enterprise-mobile-app</guid>
-      <pubDate>Sun, 04 Oct 2015 00:00:00 UTC</pubDate>
-    </item> 
+      <pubDate>Sun, 04 Oct 2015 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>MongoDB storage engine: MMAP or WiredTiger?</title>
       <link>http://zanon.io/posts/mongodb-storage-engine-mmap-or-wiredtiger</link>
       <guid>http://zanon.io/posts/mongodb-storage-engine-mmap-or-wiredtiger</guid>
-      <pubDate>Sun, 18 Oct 2015 00:00:00 UTC</pubDate>
+      <pubDate>Sun, 18 Oct 2015 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Realm: an incredible fast mobile DB</title>
       <link>http://zanon.io/posts/realm-an-incredible-fast-mobile-db</link>
       <guid>http://zanon.io/posts/realm-an-incredible-fast-mobile-db</guid>
-      <pubDate>Sun, 01 Nov 2015 00:00:00 UTC</pubDate>
-    </item> 
+      <pubDate>Sun, 01 Nov 2015 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Building Serverless Websites in AWS - Intro</title>
       <link>http://zanon.io/posts/building-serverless-websites-in-aws-intro</link>
       <guid>http://zanon.io/posts/building-serverless-websites-in-aws-intro</guid>
-      <pubDate>Sun, 15 Nov 2015 00:00:00 UTC</pubDate>
-    </item>           
+      <pubDate>Sun, 15 Nov 2015 00:00:00 +0000</pubDate>
+    </item>
   </channel>
 </rss>
