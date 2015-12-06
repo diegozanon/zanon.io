@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" ng-app="zanonApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+<!DOCTYPE html><html lang="en" ng-app="zanonApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[data-ng-cloak],[x-ng-cloak],.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -77,7 +77,7 @@
 
     <div class="container">
       <div class="content">
-        <!-- ngView:  --><div class="ng-view-background ng-scope" autoscroll="true" ng-view="" highlight-code="">
+        <!-- ngView:  --><div class="ng-view-background ng-scope ng-cloak" autoscroll="true" ng-view="" highlight-code="">
 <div class="row ng-scope">
   <div class="col-md-offset-1 col-md-10 post">
     <h1>Creating Desktop Apps using HTML/CSS/JS + Node.js with NW.js</h1>
@@ -188,7 +188,7 @@ request.get(<span class="hljs-string">'http://nwjs.io/images/nw.png'</span>, <sp
   <span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Hello World!<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"img"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>  
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"img"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"./js/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"app.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
@@ -312,6 +312,6 @@ nw.build().then(<span class="hljs-function"><span class="hljs-keyword">function<
       ga('create', 'UA-63834414-1', 'auto');
       ga('send', 'pageview');
     </script>
-  
+
 
 </body></html>

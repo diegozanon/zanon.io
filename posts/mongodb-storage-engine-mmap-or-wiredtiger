@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" ng-app="zanonApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+<!DOCTYPE html><html lang="en" ng-app="zanonApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[data-ng-cloak],[x-ng-cloak],.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -77,7 +77,7 @@
 
     <div class="container">
       <div class="content">
-        <!-- ngView:  --><div class="ng-view-background ng-scope" autoscroll="true" ng-view="" highlight-code="">
+        <!-- ngView:  --><div class="ng-view-background ng-scope ng-cloak" autoscroll="true" ng-view="" highlight-code="">
 <div class="row ng-scope">
   <div class="col-md-offset-1 col-md-10 post">
     <h1>MongoDB storage engine: MMAP or WiredTiger?</h1>
@@ -156,6 +156,6 @@
       ga('create', 'UA-63834414-1', 'auto');
       ga('send', 'pageview');
     </script>
-  
+
 
 </body></html>
