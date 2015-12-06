@@ -1,0 +1,11 @@
+doctype xml
+urlset(xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
+  url
+    loc= 'http://zanon.io'
+    lastmod= lastDate
+    changefreq weekly
+  each post in posts
+    url
+      loc= 'http://zanon.io/posts/' + post.url
+      lastmod= post.isoDate
+      changefreq monthly

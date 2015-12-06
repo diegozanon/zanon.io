@@ -1,0 +1,16 @@
+doctype xml
+rss(version="2.0" xmlns:atom="http://www.w3.org/2005/Atom")
+  channel
+    title
+      | zanon.io
+    description
+      | Zanon's Blog
+    link
+      | http://zanon.io
+    atom:link(href="http://zanon.io/feed.xml" rel="self" type="application/rss+xml")
+    each post in posts
+      item
+        title= post.title
+        link= 'http://zanon.io/posts/' + post.url
+        guid= 'http://zanon.io/posts/' + post.url
+        pubDate= post.longDate
