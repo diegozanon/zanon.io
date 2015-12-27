@@ -20,7 +20,7 @@
     <![endif]-->
 
     <base href="/">
-  <script type="text/javascript" async="" src="//zanon.disqus.com/embed.js"></script></head>
+  </head>
   <body ng-controller="MainController" class="ng-scope">
 
     <header>
@@ -77,34 +77,17 @@
 
     <div class="container">
       <div class="content">
-        <!-- ngView:  --><div class="ng-view-background ng-scope ng-cloak" autoscroll="true" ng-view="" highlight-code="">
-<div class="row ng-scope">
-  <div class="col-md-offset-1 col-md-10 post">
-    <h1>Getting Started!</h1>
-    <p class="date">JUL 26, 2015</p>
-    <div>
-
-<h2 id="about-me">About Me</h2>
-<p>Hello there! My name is Diego Zanon and I'm a computer engineer. If you want to know more about what I've done and what I like, you can visit my profile page at <a href="http://diego.zanon.io">diego.zanon.io</a>.</p>
-<h2 id="what-will-i-blog-">What will I blog?</h2>
-<p>I like to consider myself a Full-Stack developer. So, you can expect to read about anything needed to build a system :) Ok, I'm lying. There'll be a bit of focus here. As I'm currently in love with the MEAN stack, that's what I'll start blogging. Also, I'm a big fan of AWS and mobile apps (ok, no focus!).</p>
-<p>I intend to follow 3 rules while blogging here:</p>
-<ol>
-<li>Never blog about something that is trivial or widely known, otherwise I'll not be contributing to add new info to the internet.</li>
-<li>Prefer to blog about things that I don't know and where I must pretend to be an expert. That's the best way to learn more :) Please, correct me in comments (Disqus) if you see something wrong (even grammar errors) and I'll be grateful.</li>
-<li>Blog frequently: for me, it means 2 times per month :)</li>
-</ol>
-<h2 id="why-am-i-blogging-">Why am I blogging?</h2>
-<p>In the last few years, I became addicted to learn new things. I've transformed it in a hobby as some things keeps me motivated and excited to keep on. But in a few moments, it's something that may stress me because I feel like running against time. Its something that happens with everyone: if you learn a new thing, but don't use it frequently, you will forget it. It feels like the more that I learn, the more I forget.</p>
-<p>What I do to reduce this loss of knowledge is to write tutorials or summaries for myself. I write a lot. I really write <em>a lot</em>. This extra time writing is what helps me to consolidate what I've learned and to reduce the speed of forgetting. I also do some periodic read and revisions to make sure that it's all safe in my mind.</p>
-<p>But, why do I need to share what I'm learning? I'm shy and don't like public exposition. The reason is: I've read a post some months ago and that changed my vision: <a href="https://www.quora.com/What-do-the-top-1-of-software-engineers-do-that-the-other-99-do-not">What do the top 1% of software engineers do that the other 99% do not?</a> (specially Michael O. Church's answer).</p>
-<p>Michael's post tries to quantify the knowledge in software engineering and the conclusion is that smart people shares. There are "Adders", who only "add" new code to the world and the "Multipliers", people who share and that can make a difference in a larger scale.</p>
-<p>Also, most of the tools that I use are free and open-source and the places where I use to learn (blogs, Stack Overflow, etc) offers everything for free. Its the good will of people that keeps me learning for free so my way to give it back is to share what I learn and build.</p>
-
-    </div>
+        <!-- ngView:  --><div class="ng-view-background ng-scope ng-cloak" autoscroll="true" ng-view="" highlight-code=""><div class="game-ctn ng-scope">
+  <canvas id="game-canvas" width="600px" height="400px">
+    404 Not Found (also, your browser do not support canvas)
+  </canvas>
+  <div id="splash">
+    <br>
+    <a href="/404" onclick="play();">Play again!</a>
+    <br>
+    <a href="https://github.com/pjnovas/invaders404" target="_blank">[source code]</a>
   </div>
-</div>
-<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 100% !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; height: 0px !important; " width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=f3e1717b71e7256da258d3a504e56865&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Fgetting-started&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default" horizontalscrolling="no" verticalscrolling="no"></iframe></div></dir-disqus></div>
+</div></div>
       </div>
     </div>
 
