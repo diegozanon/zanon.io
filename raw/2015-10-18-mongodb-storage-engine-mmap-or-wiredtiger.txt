@@ -12,7 +12,7 @@ A storage engine is the component that handles how memory is controlled and how 
 
 So far, we have two stable engines: MMAPv1 (the old one) and WiredTiger (the shinning new one). MongoDB 3.0 ships with MMAPv1 as the default engine to avoid impacts in current solutions, but WiredTiger has many new interesting things that you need to know.
 
-Besides those two, [there are many other engines](https://www.mongodb.com/blog/post/mongodb-pluggable-storage-engines-state-of-the-union-storage-engine-summit) that are under development, in an experimental phase or done but simply not yet popular. I'm writting this post in 2015. If you are really willing to change your storage engine, you may search more about your options. Below follows a brief intro about the current options:
+Besides those two, [there are many other engines](https://www.mongodb.com/blog/post/mongodb-pluggable-storage-engines-state-of-the-union-storage-engine-summit) that are under development, in an experimental phase or done but simply not yet popular. I'm writing this post in 2015. If you are really willing to change your storage engine, you may search more about your options. Below follows a brief intro about the current options:
 
  - In-memory engine: it's [not ready yet](https://jira.mongodb.org/browse/DOCS-5011), but may be used in the future for cache services. It's also interesting for unit testing.
 
@@ -20,7 +20,7 @@ Besides those two, [there are many other engines](https://www.mongodb.com/blog/p
 
  - [Fusion-io](https://www.mongodb.com/partners/fusionio): this storage engine was created by SanDisk and makes it possible to bypass the operating system file system layer and write directly to the storage device.
 
- - [TokuMX](https://www.percona.com/software/mongo-database/percona-tokumx): a storage engine created by [Percona](www.percona.com) that uses [fractal tree indexes](https://en.wikipedia.org/wiki/Fractal_tree_index) instead of B-tree indexes. 
+ - [TokuMX](https://www.percona.com/software/mongo-database/percona-tokumx): a storage engine created by [Percona](www.percona.com) that uses [fractal tree indexes](https://en.wikipedia.org/wiki/Fractal_tree_index) instead of B-tree indexes.
 
  - /dev/null: Is a storage engine where everything that you write is discarded and all your reads return empty results. It sounds stupid, but can be useful in some scenarios. For example, when you want to find performance bottlenecks in your app that are not related with your DB.
 
@@ -38,9 +38,9 @@ MMAPv1 has *collection-level locking* but hasn't  *document-level locking*. The 
 
 MMAP uses B-trees to store indexes and WiredTiger uses B-trees by default but also supports [LSM trees](https://en.wikipedia.org/wiki/Log-structured_merge-tree) (image above was adapted from [here](http://www.slideshare.net/Couchbase/whats-new-in-couchbase-40-couchbase-connect-2015)).
 
-LSM trees provides an advantage when you need to write huge workloads of random inserts, when data is much larger then the cache and when background maintenance overhead is acceptable. 
+LSM trees provides an advantage when you need to write huge workloads of random inserts, when data is much larger then the cache and when background maintenance overhead is acceptable.
 
-In WiredTiger, there is no inplace updates. If an element of a document needs to be updated, a entire new document will be written to disk while the old document will be removed.
+In WiredTiger, there is no in-place updates. If an element of a document needs to be updated, a entire new document will be written to disk while the old document will be removed.
 
 WiredTiger offers document-level concurrency. That means that it assumes that two write operations will not affect the same document at the same time and, if it does affect, one operation will rewind and will be executed again later. That's a great performance boost if rewinds are rare.
 

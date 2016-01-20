@@ -1,14 +1,14 @@
 Title: AngularJS with Pretty URLs: Removing the # in Amazon S3
-Summary: Angular uses the # (hashtag) by default when routing pages because it requires no server side configuration. If you want to get rid of it, you need to configure a server rewrite rule or prerender your pages.
+Summary: Angular uses the # (hashtag) by default when routing pages because it requires no server side configuration. If you want to get rid of it, you need to configure a server rewrite rule or pre-render your pages.
 Tags: AWS, Angular
 Date: AUG 09, 2015
 URL: angularjs-with-pretty-urls-removing-the-in-amazon-s3
 
 ## Angular URLs
 
-Angular ngRoute uses the # (hashtag) by default when routing pages. For example, if you have an "about" page, your URL will look like `http://mywebsite.com/#/about`. With this, the # looks misplaced since we are used to see URLs like `http://mywebsite.com/about`. 
+Angular ngRoute uses the # (hashtag) by default when routing pages. For example, if you have an "about" page, your URL will look like `http://mywebsite.com/#/about`. With this, the # looks misplaced since we are used to see URLs like `http://mywebsite.com/about`.
 
-The reason for this ugly character to be used is to avoid the need of a server-side rewrite rule. With this, learning and using ngRoute is easier. 
+The reason for this ugly character to be used is to avoid the need of a server-side rewrite rule. With this, learning and using ngRoute is easier.
 
 To prettify your URLs, the first step is to prepare your Angular app:
 
@@ -46,16 +46,16 @@ When configuring your ngRoute rules, just inject the `$locationProvider` and con
 angular
   .module('myApp')
   .config([
-    '$routeProvider', 
-    '$locationProvider', 
+    '$routeProvider',
+    '$locationProvider',
     function($routeProvider, $locationProvider) {
       $routeProvider
       .when('/', {
         templateUrl: 'home.html'
-      })	
+      })
       .when('/about', {
         templateUrl: 'about.html'
-      });		  
+      });
 
       // Add HTML5 History API support
       $locationProvider.html5Mode(true);

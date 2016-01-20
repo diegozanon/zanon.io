@@ -7,9 +7,9 @@ URL: creating-desktop-apps-using-html-css-js-nodejs-with-nwjs
 ## What is NW.js?
 Maybe you've already heard about node-webkit. It was [renamed to NW.js](https://groups.google.com/forum/#!msg/nwjs-general/V1FhvfaFIzQ/720xKVd0jNkJ), but keeps the same objective: bring your web development tools and skills to build multi-platform desktop apps.
 
-NW.js is an app runtime for writing *native* apps that uses Chromium to render your interface and allows you to run your Node.js modules desktop-side. 
+NW.js is an app runtime for writing *native* apps that uses Chromium to render your interface and allows you to run your Node.js modules desktop-side.
 
-There are many nice apps using it as you can see in [this link](https://github.com/nwjs/nw.js/wiki/List-of-apps-and-companies-using-nw.js). For example, this nice [unnofficial WhatsApp app for desktop](https://github.com/Aluxian/WhatsApp-Desktop):
+There are many nice apps using it as you can see in [this link](https://github.com/nwjs/nw.js/wiki/List-of-apps-and-companies-using-nw.js). For example, this nice [unofficial WhatsApp app for desktop](https://github.com/Aluxian/WhatsApp-Desktop):
 
 ![whatsapp](http://zanon.io/images/posts/2015-09-20-whatsapp.png)
 
@@ -77,7 +77,7 @@ If you run this hello world demo, you'll get the following:
 
 ![nw-hello-world](http://zanon.io/images/posts/2015-09-20-nw-hello-world.png)
 
-By default, for debugging purposes, NW.js shows the address bar, the developer tools button, navigation arrows and two (?!) refresh buttons. For production code, this toolbar can be easily hidden setting the window.toolbar property to false in the package.json file. 
+By default, for debugging purposes, NW.js shows the address bar, the developer tools button, navigation arrows and two (?!) refresh buttons. For production code, this toolbar can be easily hidden setting the window.toolbar property to false in the package.json file.
 
 ```javascript
 {
@@ -135,14 +135,14 @@ In the example below, I'm also using jQuery to handle the UI. However, for a lar
 For a demo, you can test with the following app.js file:
 ```javascript
 var request = require('request').defaults({ encoding: null });;
-  
+
 request.get('http://nwjs.io/images/nw.png', function (err, response, body) {
 
   if (!err && response.statusCode == 200)
     throw 'Error retrieving image';
-  
+
   var base64Image = "data:image/png;base64," + new Buffer(body).toString('base64');
-  
+
   // using jQuery to write the response to the UI
   $('#img').append('<img src=\"' + base64Image + '\" />');
 });
@@ -157,7 +157,7 @@ index.html
   </head>
   <body>
     <h1>Hello World!</h1>
-    <div id="img"></div>  
+    <div id="img"></div>
     <script src="./js/jquery.min.js"></script>
     <script src="app.js"></script>
   </body>
@@ -186,7 +186,7 @@ var gui = require('nw.gui');
 var menubar = new gui.Menu({
   type: 'menubar'
 });
- 
+
 var fileMenu = new gui.Menu();
 
 fileMenu.append(new gui.MenuItem({
@@ -195,16 +195,16 @@ fileMenu.append(new gui.MenuItem({
     alert('Clicked to create a new file');
   }
 }));
-  
+
 var openRecentMenu = new gui.Menu();
- 
+
 openRecentMenu.append(new gui.MenuItem({
   label: 'Recente File X',
   click: function() {
     alert('Clicked to open a recent file');
   }
 }));
- 
+
 menubar.append(new gui.MenuItem({ label: 'File', submenu: fileMenu}));
 fileMenu.append(new gui.MenuItem({ label: 'Open Recent File', submenu: openRecentMenu}));
 
@@ -226,7 +226,7 @@ var tray = new gui.Tray({
   icon : 'my-app-icon.png',
   title: 'My App Tray'
 });
- 
+
 var menu = new gui.Menu();
 menu.append(new gui.MenuItem({
   label: 'Do something'
@@ -237,7 +237,7 @@ tray.menu = menu;
 
 ## Distributing
 
-You need to package your souce code with the NW.js binaries. For a easy way to do this, try the NPM module [nw-builder](https://github.com/nwjs/nw-builder).
+You need to package your source code with the NW.js binaries. For a easy way to do this, try the NPM module [nw-builder](https://github.com/nwjs/nw-builder).
 
 ### Installation: (prefer a global install with the `-g` argument)
 
@@ -271,13 +271,12 @@ Now is the time to be shocked: wow! 60 MB for a hello world app! So, that's a do
 
 ### Source Code Security
 
-Since you are distributing your app with all of your source code uncompiled, it's pretty easy to find it and clone the app. If you want to protect it, you need to compile it to native code using V8 snapshots. Take a look in this [link](https://github.com/nwjs/nw.js/wiki/Protect-JavaScript-source-code-with-v8-snapshot) for a how-to. Just note that, currently, compiled code runs **30% slower** than normal JS files.
-
+Since you are distributing your app with all of your source code minified, it's possible to find it and clone the app. If you want protection, you need to compile it to native code using V8 snapshots. Take a look in this [link](https://github.com/nwjs/nw.js/wiki/Protect-JavaScript-source-code-with-v8-snapshot) for a how-to. Just note that, currently, compiled code runs **30% slower** than normal JS files.
 
 ## Conclusion
 
 So, that was the basic. If you are interested, you can continue following the [NW.js wiki](https://github.com/nwjs/nw.js/wiki) to learn many more important features. Or you can click in this [link](https://github.com/zcbenz/nw-sample-apps) for nice sample apps or this [link](https://github.com/szwacz/nw-boilerplate) to get a boilerplate app.
 
-Again, just to reforce, the disadvantages is that your user need to download extra 60 MB to run your app and, if you need to protect your source code, your app will be 30% slower.
+Again, just to reinforce, the disadvantages is that your user need to download extra 60 MB to run your app and, if you need to protect your source code, your app will be 30% slower.
 
 However, I do believe that NW.js has a potential and can be useful to create nice multi-platform apps if you, or your team, is already used to work with Node.js and Web Development.
