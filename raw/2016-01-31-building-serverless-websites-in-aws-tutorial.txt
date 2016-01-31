@@ -314,7 +314,7 @@ module.exports.handler = function(event, context) {
 function getWeatherInfo(event) {
 
   return {
-    value: "25",
+    value: "35",
     event: event // input data that I'm ignoring
   }
 }
