@@ -6,8 +6,8 @@
     <div>
 
 <h2 id="angular-urls">Angular URLs</h2>
-<p>Angular ngRoute uses the # (hashtag) by default when routing pages. For example, if you have an &quot;about&quot; page, your URL will look like <code>http://mywebsite.com/#/about</code>. With this, the # looks misplaced since we are used to see URLs like <code>http://mywebsite.com/about</code>. </p>
-<p>The reason for this ugly character to be used is to avoid the need of a server-side rewrite rule. With this, learning and using ngRoute is easier. </p>
+<p>Angular ngRoute uses the # (hashtag) by default when routing pages. For example, if you have an &quot;about&quot; page, your URL will look like <code>http://mywebsite.com/#/about</code>. With this, the # looks misplaced since we are used to see URLs like <code>http://mywebsite.com/about</code>.</p>
+<p>The reason for this ugly character to be used is to avoid the need of a server-side rewrite rule. With this, learning and using ngRoute is easier.</p>
 <p>To prettify your URLs, the first step is to prepare your Angular app:</p>
 <ol>
 <li>Add a <code>base</code> URL</li>
@@ -33,16 +33,16 @@
 <pre><code class="lang-javascript">angular
   .module(&#39;myApp&#39;)
   .config([
-    &#39;$routeProvider&#39;, 
-    &#39;$locationProvider&#39;, 
+    &#39;$routeProvider&#39;,
+    &#39;$locationProvider&#39;,
     function($routeProvider, $locationProvider) {
       $routeProvider
       .when(&#39;/&#39;, {
         templateUrl: &#39;home.html&#39;
-      })    
+      })
       .when(&#39;/about&#39;, {
         templateUrl: &#39;about.html&#39;
-      });          
+      });
 
       // Add HTML5 History API support
       $locationProvider.html5Mode(true);

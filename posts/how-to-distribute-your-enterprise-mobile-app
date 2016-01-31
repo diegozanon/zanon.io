@@ -36,7 +36,7 @@
               <!-- empty -->
             </div>
             <div class="col-xs-2 col-sm-1 col-md-1 header-img">
-              <a href="http://diego.zanon.io">
+              <a href="/"> <!-- <a href="http://diego.zanon.io"> -->
                 <img src="/images/about.png" alt="about">
               </a>
             </div>
@@ -84,7 +84,7 @@
     <p class="date">OCT 04, 2015</p>
     <div>
 
-<p>Publishing Android and iOS apps are quite easy if your app is destinated to the general public. You just need to register in the store, Google Play or App Store, follow some steps and publish it. These stores also handle the distribution of new versions in the confortable automatic update solution.</p>
+<p>Publishing Android and iOS apps are quite easy if your app is designated to the general public. You just need to register in the store, Google Play or App Store, follow some steps and publish it. These stores also handle the distribution of new versions in the comfortable automatic update solution.</p>
 <p>However, if you are deploying a private enterprise app, for example, something the connects with the company database to input some info or show some reports, you don't want to make it public, neither Google or Apple. So, what are your options?</p>
 <h2 id="android">Android</h2>
 <h3 id="distributing-your-app-in-house">Distributing your app in-house</h3>
@@ -92,15 +92,15 @@
 <p>This distribution can be done in the company's intranet, Sharepoint, FTP or something similar. The tricky part is to handle app updates automatically. You'll need to implement, for each app, a listener or pooling mechanism to watch for updates. Otherwise, you'll need to send periodic e-mails requesting employees to grab and update their apps.</p>
 <p>As you can see, this approach looks like <em>free</em>, but actually is not. You'll waste many admins hours to develop/handle this kind of solution. So, usually, a paid solution may be better.</p>
 <h3 id="google-play">Google Play</h3>
-<p>Google offers their store to be used privately by companys. Starting by <a href="https://www.google.com/intx/en/work/apps/business/pricing.html">$5 per user per month</a>, you can create a <a href="https://support.google.com/a/answer/2494992?hl=en">private channel</a> and add your employees accounts. To access the channel, they need to go to Play Store &gt; Apps &gt; Categories &gt; [your organization's name] on their Android device. Automatic updates is obviously supported.</p>
+<p>Google offers their store to be used privately by companies. Starting by <a href="https://www.google.com/intx/en/work/apps/business/pricing.html">$5 per user per month</a>, you can create a <a href="https://support.google.com/a/answer/2494992?hl=en">private channel</a> and add your employees accounts. To access the channel, they need to go to Play Store &gt; Apps &gt; Categories &gt; [your organization's name] on their Android device. Automatic updates is obviously supported.</p>
 <h2 id="ios">iOS</h2>
 <h3 id="distributing-your-app-in-house">Distributing your app in-house</h3>
-<p>As Apple doesn't follow Google's openness nature, you can't simple build and distribute your app. You need to pay to Apple a <a href="https://developer.apple.com/programs/enterprise/">$299 per year</a> fee to enroll for <a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/DistributingEnterpriseProgramApps/DistributingEnterpriseProgramApps.html">Apple Developer Enterprise Program</a>. Furthemore, you need use a MDM (Mobile Device Management) System to distribute your iOS apps (.ipa extension).</p>
+<p>As Apple doesn't follow Google's openness nature, you can't simple build and distribute your app. You need to pay to Apple a <a href="https://developer.apple.com/programs/enterprise/">$299 per year</a> fee to enroll for <a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/DistributingEnterpriseProgramApps/DistributingEnterpriseProgramApps.html">Apple Developer Enterprise Program</a>. Furthermore, you need use a MDM (Mobile Device Management) System to distribute your iOS apps (.ipa extension).</p>
 <h2 id="app-store">App Store</h2>
-<p>Unfortunatelly, you can't have a private channel at App Store. If you deploy your apps there, it'll be public and need to follow Apple's guideline. As it'll probably be of restricted access, it'll not be accepted.</p>
+<p>Unfortunately, you can't have a private channel at App Store. If you deploy your apps there, it'll be public and need to follow Apple's guideline. As it'll probably be of restricted access, it'll not be accepted.</p>
 <h2 id="other-options">Other Options</h2>
 <h3 id="mobile-device-management">Mobile Device Management</h3>
-<p>A MDM solution requires a server to be responsible for storing the apps deploys and a client to be installed in each device. A MDM is the best approach when security is a deep concern since the company can take control of the device and allow only selected programs to be installed. Usually, the device will have full disk encryption and the administrators will have the ability to remote wipe all data in case of loss or theft of the device. Jailbroken (iOS) and rooted (Android) devices can also be detected and their access to the companys services can be revoked since those poses a significant risk.</p>
+<p>A MDM solution requires a server to be responsible for storing the apps deploys and a client to be installed in each device. A MDM is the best approach when security is a deep concern since the company can take control of the device and allow only selected programs to be installed. Usually, the device will have full disk encryption and the administrators will have the ability to remote wipe all data in case of loss or theft of the device. Jailbroken (iOS) and rooted (Android) devices can also be detected and their access to the companies services can be revoked since those poses a significant risk.</p>
 <p>For examples of MDM solutions, you can read more about <a href="http://www.air-watch.com/">AirWatch</a>, <a href="http://www.symantec.com/mobility/implement.jsp">Symantec</a>, <a href="https://www.apperian.com/mam-blog/comparing-ios-android-mdm-protocol-design-philosophies/">Appearian</a> and <a href="http://www.maas360.com/">MasS360</a>.</p>
 <h3 id="virtualization">Virtualization</h3>
 <p>Virtualization is a new kind of distribution that is growing in attention. It offers the worst user experience, since network latencies and connections problems affects the usage, but is used when the security concerns of data leak are too frightening.</p>
@@ -110,7 +110,7 @@
     </div>
   </div>
 </div>
-<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 100% !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; height: 0px !important; " width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=f3e1717b71e7256da258d3a504e56865&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Fhow-to-distribute-your-enterprise-mobile-app&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default" horizontalscrolling="no" verticalscrolling="no"></iframe></div></dir-disqus></div>
+<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app2" name="dsq-app2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; height: 0px !important; " width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=afe1dd72cff7b0c7fecc0f7b3d92eb5e&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Fhow-to-distribute-your-enterprise-mobile-app&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default" horizontalscrolling="no" verticalscrolling="no"></iframe></div></dir-disqus></div>
       </div>
     </div>
 

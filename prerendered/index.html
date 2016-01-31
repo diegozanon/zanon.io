@@ -36,7 +36,7 @@
               <!-- empty -->
             </div>
             <div class="col-xs-2 col-sm-1 col-md-1 header-img">
-              <a href="http://diego.zanon.io">
+              <a href="/"> <!-- <a href="http://diego.zanon.io"> -->
                 <img src="/images/about.png" alt="about">
               </a>
             </div>
@@ -79,6 +79,17 @@
       <div class="content">
         <!-- ngView:  --><div class="ng-view-background ng-scope ng-cloak" autoscroll="true" ng-view="" highlight-code="">
 <div ng-controller="PostsController" class="ng-scope">
+  <div ng-show="active.all || active.aws || active.node" class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <article>
+        <div class="date">Jan 31, 2016</div>
+        <h2><a href="/posts/building-serverless-websites-in-aws-tutorial">Building Serverless Websites in AWS - Tutorial</a></h2>
+        <p>This tutorial uses AWS tools and Node to create a simple serverless application. The objective is to show how powerful this approach can be using minimal efforts.</p>
+        <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
+        <button ng-click="filter('node');" type="button" class="btn tag pull-right">Node</button>
+      </article>
+    </div>
+  </div>
   <div ng-show="active.all || active.aws || active.node" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
@@ -158,7 +169,7 @@
       <article>
         <div class="date">AUG 09, 2015</div>
         <h2><a href="/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3">AngularJS with Pretty URLs: Removing the # in Amazon S3</a></h2>
-        <p>Angular uses the # (hashtag) by default when routing pages because it requires no server side configuration. If you want to get rid of it, you need to configure a server rewrite rule or prerender your pages.</p>
+        <p>Angular uses the # (hashtag) by default when routing pages because it requires no server side configuration. If you want to get rid of it, you need to configure a server rewrite rule or pre-render your pages.</p>
         <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
         <button ng-click="filter('angular');" type="button" class="btn tag pull-right">Angular</button>
       </article>

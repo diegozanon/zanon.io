@@ -36,7 +36,7 @@
               <!-- empty -->
             </div>
             <div class="col-xs-2 col-sm-1 col-md-1 header-img">
-              <a href="http://diego.zanon.io">
+              <a href="/"> <!-- <a href="http://diego.zanon.io"> -->
                 <img src="/images/about.png" alt="about">
               </a>
             </div>
@@ -94,17 +94,17 @@
 </ul>
 <p>So, that's great for a static content. But what can we do for dynamic websites? If my site needs authentication, page routing, server-side business rules and a database, what options do we have? It will need to spend CPU time and you can't escape from that, but if you use AWS Lambda, you can significantly reduce your costs and achieve <em>infinite</em> scalability.</p>
 <p>As an interesting real case of building a serverless website, I recommend you to read this <a href="https://www.reddit.com/r/webdev/comments/3oiilb/our_company_did_a_collab_with_valve_for_some_new/">Reddit</a> post.</p>
-<p>Summary: an e-commerce website built with traditional tools/infra completely broke after being advertised by Valve in a blog post. After some rework using JAWS, AWS Lambda, S3 and DynamoDB, Valve advertised it again and they were able to handle 60k users requests in 2 hours with the cost of only US$ 0.07.</p>
+<p>Summary: an e-commerce website built with traditional tools/infra completely broke after being advertised by Valve in a blog post. After some rework using JAWS (later named as Serverless), AWS Lambda, S3 and DynamoDB, Valve advertised it again and they were able to handle 60k users requests in 2 hours with the cost of only US$ 0.07.</p>
 <p>Quoting <a href="https://www.reddit.com/r/webdev/comments/3oiilb/our_company_did_a_collab_with_valve_for_some_new/cvyf5s5">one of the comments</a>:</p>
 <blockquote>
 <p>It's a cheap cheap setup when you're not doing anything, and it only gets expensive when you're making a lot of money. That's a great thing for a business.</p>
 </blockquote>
-<h2 id="jaws">JAWS</h2>
-<p><img src="http://zanon.io/images/posts/2015-11-15-jaws-logo.png" alt="jaws-logo"></p>
-<p><a href="https://github.com/jaws-framework/JAWS">JAWS</a> is an open-source framework that was created to help developers to build serverless apps using AWS features, mainly AWS Lambda (for code execution) and Amazon API Gateway (for Routing).</p>
-<p>Instead of spinning up a full-blown server, the developer is invited to use a command line tool to deploy code-blocks to Amazon. JAWS also helps to simplify, automate and optimize your serverless app.</p>
-<p>I've created another <a href="http://zanon.io/posts/building-serverless-websites-in-aws-tutorial">blog post</a> to show a simple example of how to use JAWS, but first you need to know what AWS technologies are involved. </p>
-<p>The first thing that you need to be aware is that this solution is highly dependent on AWS. Usually, we would avoid being highly attached to a third-party solution. If AWS breaks forever, you will need some days to change your code to be able to deploy it again in another infra. However, AWS is so reliable and the benefits of serverless apps are so great that I would not be so worried about it.</p>
+<h2 id="serverless-framework-formely-jaws-">Serverless Framework (formely JAWS)</h2>
+<p><img src="http://zanon.io/images/posts/2015-11-15-serverless-logo.png" alt="serverless-logo"></p>
+<p>The <a href="https://github.com/serverless/serverless">Serverless Framework</a> (formely JAWS) is an open-source framework that was created to help developers to build serverless apps using AWS features, mainly AWS Lambda (for code execution) and Amazon API Gateway (for Routing).</p>
+<p>Instead of spinning up a full-blown server, the developer is invited to use a command line tool to deploy code-blocks to Amazon. Since each lambda function acts like a microservice and your app may end up with dozens of them distributed between multiple regions and managed by multi-developer teams in multi-stage environments, the Serverless Framework targets a better setup to avoid a messy solution.</p>
+<p>I've created another <a href="http://zanon.io/posts/building-serverless-websites-in-aws-tutorial">blog post</a> to show a simple example of how to use Serverless, but first you need to know what AWS technologies are involved.</p>
+<p>The first thing that you need to be aware is that this solution is highly dependent on AWS. Usually, we would avoid being highly attached to a third-party solution. If AWS breaks forever, you will need some hours to adapt your code to be able to deploy it again at another host. However, AWS is so reliable and the benefits of serverless apps are so great that I would not be so worried about it.</p>
 <h2 id="aws-lambda-code-execution-">AWS Lambda (Code Execution)</h2>
 <p><img src="http://zanon.io/images/posts/2015-11-15-lambda.png" alt="lambda"></p>
 <p>Lambda is a service where you can host your code and it will be executed when triggered by events. Lambda supports, currently, code written in JavaScript (Node.js), Python or Java.</p>
@@ -112,8 +112,8 @@
 <p>The code you run on AWS Lambda is called a "Lambda function". It needs to be stateless with no affinity to the underlying infrastructure. This prerequisite is what enables Amazon to rapidly launch many copies of the function to serve <em>infinite scalability</em>.</p>
 <p>As everything in AWS, Lambda also have a "Pay Per Use" model. You will only pay for the computer resources that you use, but in this case, its much better than EC2 because your EC2 machines will always have some computer resources that are allocated for you but not necessarily in use and this allocation is charged. Regarding Lambda, you will allocate resources only for the duration of your Lambda function execution. That's why its a much cheaper solution.</p>
 <p>In Lambda, you pay for the number of requests and the amount of memory-time you allocate for your requests. Currently, it <a href="https://aws.amazon.com/lambda/pricing/">costs</a> US$ 0.0000002 per request (or US$ 0.20 per 1 million requests) and US$ 0.00001667 for every GB-second used (billing is metered in increments of 100 milliseconds). Also, the free tier includes 1M free requests and 400,000 GB-seconds of compute time per month and this bonus is given even if you have expired your 12 month AWS Free Tier term.</p>
-<p>For example, if you allocated 512 MB of memory for a function that was executed 10 million times in one month and it ran for 500 milliseconds each time, you would pay only US$ 36.81. </p>
-<p>How many server-side requests your user makes to access your site per visit? I would guess something like 100 requests. It means that US$ 36.81 served 100,000 users and each user has costed only US$ 0.0004 (not including data transfer costs).</p>
+<p>For example, if you allocated 512 MB of memory for a function that was executed 10 million times in one month and it ran for 500 milliseconds each time, you would pay only US$ 36.81.</p>
+<p>How many server-side requests your user makes to access your site per visit? I would guess something like 100 requests. It means that US$ 36.81 served 100,000 users and each user has cost only US$ 0.0004 (not including data transfer costs).</p>
 <h2 id="amazon-api-gateway-routing-">Amazon API Gateway (Routing)</h2>
 <p><img src="http://zanon.io/images/posts/2015-11-15-api-gateway.png" alt="api-gateway"></p>
 <p>API Gateway is a service that lets you build RESTful APIs that acts like the "front door" of your application. It's the service that will receive all incoming requests, check authorization and route them to the underlying system that is responsible to handle it. In our case, it'll be AWS Lambda. API Gateway is also fully managed by AWS what means again high availability and scalability.</p>
@@ -127,7 +127,7 @@
 <p>OAuth 2.0 is an authorization framework that enables your application to authenticate your users based on credentials controlled by third-party applications, like Facebook, Twitter or GitHub.</p>
 <h2 id="serverless-databases">Serverless Databases</h2>
 <p>Amazon offers a service called <a href="https://aws.amazon.com/rds">RDS</a>. It's fully managed and you don't need to worry about availability. However, it does not satisfy our objective to "Pay Per Use" and is not so easy to scale. As you have to allocate a database to run it, you'll pay per hour even if nobody is using your app.</p>
-<p>The remaining options that we have are <a href="https://aws.amazon.com/dynamodb">DynamoDB</a> and <a href="https://aws.amazon.com/simpledb">SimpleDB</a>. </p>
+<p>The remaining options that we have are <a href="https://aws.amazon.com/dynamodb">DynamoDB</a> and <a href="https://aws.amazon.com/simpledb">SimpleDB</a>.</p>
 <p>DynamoDB solves the scalability difficulties that you would have using RDS and is a much more robust solution than SimpleDB. However, its pricing model also requires fixed costs to provision per-hour capacity. No usage means that you will still have some costs to handle.</p>
 <p>SimpleDB have also a fixed cost of how much data you have stored, but the main cost is dependent on your usage. Your usage is measured in how many machine hours you spend to process your queries. Also, scalability is graciously handled by AWS and you can have bursts of increased usage without delays. If your app does not require complex queries and you have a very unpredictable usage, this solution may be best cost-effective.</p>
 <h2 id="to-sum-up">To sum up</h2>
@@ -139,11 +139,15 @@
 <li><strong>Server-Side Code</strong>: Lambda functions handle each request.</li>
 <li><strong>Database</strong>: DynamoDB and SimpleDB are a pretty scalable NoSQL database, where SimpleDB can be more cost-effective for unpredictable usage.</li>
 </ul>
+<h2 id="update-dec-27-2015">UPDATE: Dec 27, 2015</h2>
+<blockquote>
+<p>Replaced the JAWS reference to Serverless since it was rebranded.</p>
+</blockquote>
 
     </div>
   </div>
 </div>
-<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 100% !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; height: 341px !important; " width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=f3e1717b71e7256da258d3a504e56865&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Fbuilding-serverless-websites-in-aws-intro&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default" horizontalscrolling="no" verticalscrolling="no"></iframe></div></dir-disqus></div>
+<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app2" name="dsq-app2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; height: 0px !important; " width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=afe1dd72cff7b0c7fecc0f7b3d92eb5e&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Fbuilding-serverless-websites-in-aws-intro&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default" horizontalscrolling="no" verticalscrolling="no"></iframe></div></dir-disqus></div>
       </div>
     </div>
 

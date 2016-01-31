@@ -9,7 +9,7 @@
 <p>As MongoDB grows in popularity, developers are building new and awesome things in many different use cases. With this, a <em>one size fits all</em> solution is becoming even more difficult to find. To allow new kinds of optimizations, MongoDB 3.0 was shipped with the concept of <strong>pluggable storage engines</strong>. This allows the community to create new engines to solve and optimize specific problems.</p>
 <p>A storage engine is the component that handles how memory is controlled and how data is persisted and retrieved from the storage device. You can change this component without needing to change your application code since this layer is well separated. It doesn&#39;t affect how data is distributed between different Mongo servers and doesn&#39;t affect which methods the Mongo API exposes.</p>
 <p>So far, we have two stable engines: MMAPv1 (the old one) and WiredTiger (the shinning new one). MongoDB 3.0 ships with MMAPv1 as the default engine to avoid impacts in current solutions, but WiredTiger has many new interesting things that you need to know.</p>
-<p>Besides those two, <a href="https://www.mongodb.com/blog/post/mongodb-pluggable-storage-engines-state-of-the-union-storage-engine-summit">there are many other engines</a> that are under development, in an experimental phase or done but simply not yet popular. I&#39;m writting this post in 2015. If you are really willing to change your storage engine, you may search more about your options. Below follows a brief intro about the current options:</p>
+<p>Besides those two, <a href="https://www.mongodb.com/blog/post/mongodb-pluggable-storage-engines-state-of-the-union-storage-engine-summit">there are many other engines</a> that are under development, in an experimental phase or done but simply not yet popular. I&#39;m writing this post in 2015. If you are really willing to change your storage engine, you may search more about your options. Below follows a brief intro about the current options:</p>
 <ul>
 <li><p>In-memory engine: it&#39;s <a href="https://jira.mongodb.org/browse/DOCS-5011">not ready yet</a>, but may be used in the future for cache services. It&#39;s also interesting for unit testing.</p>
 </li>
@@ -17,7 +17,7 @@
 </li>
 <li><p><a href="https://www.mongodb.com/partners/fusionio">Fusion-io</a>: this storage engine was created by SanDisk and makes it possible to bypass the operating system file system layer and write directly to the storage device.</p>
 </li>
-<li><p><a href="https://www.percona.com/software/mongo-database/percona-tokumx">TokuMX</a>: a storage engine created by <a href="www.percona.com">Percona</a> that uses <a href="https://en.wikipedia.org/wiki/Fractal_tree_index">fractal tree indexes</a> instead of B-tree indexes. </p>
+<li><p><a href="https://www.percona.com/software/mongo-database/percona-tokumx">TokuMX</a>: a storage engine created by <a href="www.percona.com">Percona</a> that uses <a href="https://en.wikipedia.org/wiki/Fractal_tree_index">fractal tree indexes</a> instead of B-tree indexes.</p>
 </li>
 <li><p>/dev/null: Is a storage engine where everything that you write is discarded and all your reads return empty results. It sounds stupid, but can be useful in some scenarios. For example, when you want to find performance bottlenecks in your app that are not related with your DB.</p>
 </li>
@@ -29,8 +29,8 @@
 <h2 id="wiredtiger">WiredTiger</h2>
 <p><img src="http://zanon.io/images/posts/2015-10-18-lsm.png" alt="lsm"></p>
 <p>MMAP uses B-trees to store indexes and WiredTiger uses B-trees by default but also supports <a href="https://en.wikipedia.org/wiki/Log-structured_merge-tree">LSM trees</a> (image above was adapted from <a href="http://www.slideshare.net/Couchbase/whats-new-in-couchbase-40-couchbase-connect-2015">here</a>).</p>
-<p>LSM trees provides an advantage when you need to write huge workloads of random inserts, when data is much larger then the cache and when background maintenance overhead is acceptable. </p>
-<p>In WiredTiger, there is no inplace updates. If an element of a document needs to be updated, a entire new document will be written to disk while the old document will be removed.</p>
+<p>LSM trees provides an advantage when you need to write huge workloads of random inserts, when data is much larger then the cache and when background maintenance overhead is acceptable.</p>
+<p>In WiredTiger, there is no in-place updates. If an element of a document needs to be updated, a entire new document will be written to disk while the old document will be removed.</p>
 <p>WiredTiger offers document-level concurrency. That means that it assumes that two write operations will not affect the same document at the same time and, if it does affect, one operation will rewind and will be executed again later. That&#39;s a great performance boost if rewinds are rare.</p>
 <p>Another characteristic is that WiredTiger offers compression of data and indexes in the file system. It supports Snappy and zLib algorithms where Snappy, the default, is less CPU-intensive but have a lower compression rate than zLib.</p>
 <h2 id="benchmarks">Benchmarks</h2>

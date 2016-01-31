@@ -7,8 +7,8 @@
 
 <h2 id="what-is-nw-js-">What is NW.js?</h2>
 <p>Maybe you&#39;ve already heard about node-webkit. It was <a href="https://groups.google.com/forum/#!msg/nwjs-general/V1FhvfaFIzQ/720xKVd0jNkJ">renamed to NW.js</a>, but keeps the same objective: bring your web development tools and skills to build multi-platform desktop apps.</p>
-<p>NW.js is an app runtime for writing <em>native</em> apps that uses Chromium to render your interface and allows you to run your Node.js modules desktop-side. </p>
-<p>There are many nice apps using it as you can see in <a href="https://github.com/nwjs/nw.js/wiki/List-of-apps-and-companies-using-nw.js">this link</a>. For example, this nice <a href="https://github.com/Aluxian/WhatsApp-Desktop">unnofficial WhatsApp app for desktop</a>:</p>
+<p>NW.js is an app runtime for writing <em>native</em> apps that uses Chromium to render your interface and allows you to run your Node.js modules desktop-side.</p>
+<p>There are many nice apps using it as you can see in <a href="https://github.com/nwjs/nw.js/wiki/List-of-apps-and-companies-using-nw.js">this link</a>. For example, this nice <a href="https://github.com/Aluxian/WhatsApp-Desktop">unofficial WhatsApp app for desktop</a>:</p>
 <p><img src="http://zanon.io/images/posts/2015-09-20-whatsapp.png" alt="whatsapp"></p>
 <h2 id="setting-it-up">Setting it up</h2>
 <p>The first step is to download the executable built for your operating system from the <a href="https://github.com/nwjs/nw.js#user-content-downloads">project page</a>.</p>
@@ -49,7 +49,7 @@
 <h3 id="window-properties">Window Properties</h3>
 <p>If you run this hello world demo, you&#39;ll get the following:</p>
 <p><img src="http://zanon.io/images/posts/2015-09-20-nw-hello-world.png" alt="nw-hello-world"></p>
-<p>By default, for debugging purposes, NW.js shows the address bar, the developer tools button, navigation arrows and two (?!) refresh buttons. For production code, this toolbar can be easily hidden setting the window.toolbar property to false in the package.json file. </p>
+<p>By default, for debugging purposes, NW.js shows the address bar, the developer tools button, navigation arrows and two (?!) refresh buttons. For production code, this toolbar can be easily hidden setting the window.toolbar property to false in the package.json file.</p>
 <pre><code class="lang-javascript">{
   &quot;name&quot;: &quot;nw-hello-world&quot;,
   &quot;version&quot;: &quot;1.0.0&quot;,
@@ -109,7 +109,7 @@ request.get(&#39;http://nwjs.io/images/nw.png&#39;, function (err, response, bod
   &lt;/head&gt;
   &lt;body&gt;
     &lt;h1&gt;Hello World!&lt;/h1&gt;
-    &lt;div id=&quot;img&quot;&gt;&lt;/div&gt;  
+    &lt;div id=&quot;img&quot;&gt;&lt;/div&gt;
     &lt;script src=&quot;./js/jquery.min.js&quot;&gt;&lt;/script&gt;
     &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
   &lt;/body&gt;
@@ -171,7 +171,7 @@ menu.append(new gui.MenuItem({
 tray.menu = menu;
 </code></pre>
 <h2 id="distributing">Distributing</h2>
-<p>You need to package your souce code with the NW.js binaries. For a easy way to do this, try the NPM module <a href="https://github.com/nwjs/nw-builder">nw-builder</a>.</p>
+<p>You need to package your source code with the NW.js binaries. For a easy way to do this, try the NPM module <a href="https://github.com/nwjs/nw-builder">nw-builder</a>.</p>
 <h3 id="installation-prefer-a-global-install-with-the-g-argument-">Installation: (prefer a global install with the <code>-g</code> argument)</h3>
 <pre><code class="lang-xml">&gt; npm install nw-builder -g
 </code></pre>
@@ -193,10 +193,10 @@ nw.build().then(function () {
 </code></pre>
 <p>Now is the time to be shocked: wow! 60 MB for a hello world app! So, that&#39;s a downside of using NW.js. It requires the user to download at least 60 MB for the webkit browser and Node.js dependencies.</p>
 <h3 id="source-code-security">Source Code Security</h3>
-<p>Since you are distributing your app with all of your source code uncompiled, it&#39;s pretty easy to find it and clone the app. If you want to protect it, you need to compile it to native code using V8 snapshots. Take a look in this <a href="https://github.com/nwjs/nw.js/wiki/Protect-JavaScript-source-code-with-v8-snapshot">link</a> for a how-to. Just note that, currently, compiled code runs <strong>30% slower</strong> than normal JS files.</p>
+<p>Since you are distributing your app with all of your source code minified, it&#39;s possible to find it and clone the app. If you want protection, you need to compile it to native code using V8 snapshots. Take a look in this <a href="https://github.com/nwjs/nw.js/wiki/Protect-JavaScript-source-code-with-v8-snapshot">link</a> for a how-to. Just note that, currently, compiled code runs <strong>30% slower</strong> than normal JS files.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>So, that was the basic. If you are interested, you can continue following the <a href="https://github.com/nwjs/nw.js/wiki">NW.js wiki</a> to learn many more important features. Or you can click in this <a href="https://github.com/zcbenz/nw-sample-apps">link</a> for nice sample apps or this <a href="https://github.com/szwacz/nw-boilerplate">link</a> to get a boilerplate app.</p>
-<p>Again, just to reforce, the disadvantages is that your user need to download extra 60 MB to run your app and, if you need to protect your source code, your app will be 30% slower.</p>
+<p>Again, just to reinforce, the disadvantages is that your user need to download extra 60 MB to run your app and, if you need to protect your source code, your app will be 30% slower.</p>
 <p>However, I do believe that NW.js has a potential and can be useful to create nice multi-platform apps if you, or your team, is already used to work with Node.js and Web Development.</p>
 
     </div>

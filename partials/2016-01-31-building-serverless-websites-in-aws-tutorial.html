@@ -1,0 +1,262 @@
+
+<div class="row">
+  <div class="col-md-offset-1 col-md-10 post">
+    <h1>Building Serverless Websites in AWS - Tutorial</h1>
+    <p class="date">Jan 31, 2016</p>
+    <div>
+
+<h2 id="objective">Objective</h2>
+<p>This tutorial shows how to create a simple serverless application. If you don&#39;t know yet what this concept is and its benefits, you can read my previous blog post <a href="http://zanon.io/posts/building-serverless-websites-in-aws-intro">here</a>. I also explain a little more about each technology that will be used in this example.</p>
+<p>The demo app (<a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a>) just shows a fake weather information when a button is clicked. To achieve this, we are using the following AWS tools:</p>
+<p><img src="http://zanon.io/images/posts/2016-01-31-lambda-web-apps.png" alt="lambda-web-apps"></p>
+<p>This image was extracted from <a href="https://aws.amazon.com/lambda/">here</a> and most Serverless demos uses DynamoDB as the database. However, for the sake of respecting the &quot;pay only for what you use&quot;, I&#39;ve decided to use the SimpleDB database. DynamoDB allows you to build more complex apps, but you need to provision capacity and you will pay for it even if no one is using your app. A true serverless aims for <em>infinite scalability</em>, <em>high availability</em> <strong>and</strong> <em>pay only for what you use</em>.</p>
+<h2 id="summary">Summary</h2>
+<p>This tutorial tries to cover everything to build a serverless site, including how to configure your domain and host your data. If you want to skip this part, just jump for the section that you are interested.</p>
+<ol>
+<li><a href="#host-your-website">Host your Website</a></li>
+<li><a href="#front-end">Front-End</a></li>
+<li><a href="#serverless-framework">Serverless Framework</a></li>
+<li><a href="#simpledb">SimpleDB</a></li>
+</ol>
+<h2 id="host-your-website">Host your Website</h2>
+<h3 id="register-a-domain">Register a Domain</h3>
+<p>Buying a domain name is not required for this demo to work. If you browse the Serverless Framework official docs, they say that a domain name is required, but if you type a fake one, it will work the same way for your localhost testing app.</p>
+<p>If you want to go beyond testing to make something useful, the first step is to buy a domain with a nice name. As you can see, this is hard! The best ones are already taken.</p>
+<h3 id="create-amazon-s3-buckets">Create Amazon S3 buckets</h3>
+<p><a href="https://console.aws.amazon.com/s3">Amazon S3 buckets</a> is the service where you will manually host your front-end code (HTML/CSS/JavaScript and images) and also where the Serverless Framework will automatically host (in a different bucket) the back-end code.</p>
+<p>If you&#39;ve bought a domain named as <strong>example.com</strong>, you need to create a bucket with the same <strong>example.com</strong> name and configure it to enable website hosting.</p>
+<p><img src="http://zanon.io/images/posts/2016-01-31-s3-hosting.png" alt="s3-hosting"></p>
+<p>If you want to support old people that still like to type <strong>www</strong> for every site, you can also create a bucket with the name <strong>www.example.com</strong>. For that one, configure it to redirect all requests for the main address.</p>
+<p><img src="http://zanon.io/images/posts/2016-01-31-s3-www.png" alt="s3-www"></p>
+<h3 id="configure-amazon-route-53-hosted-zone">Configure Amazon Route 53 Hosted Zone</h3>
+<p>After buying your domain, you need to change the default Name Servers. The Name Servers are a set of server addresses (more than one for redundancy) that helps the DNS queries to translate the domain name to the correspondent address of the machine that is hosting your site. Since we want to host our app at Amazon, we need to give them this control. So, the name server will be changed from your domain registrar to Amazon&#39;s addresses. The Amazon service that is responsible for this kind of control is the Route 53.</p>
+<p>Go to <a href="https://console.aws.amazon.com/route53">Amazon Route 53</a> and click to create a Hosted Zone for your domain. After creating it, click at your hosted zone and write down the given Name Server (NS).</p>
+<p><img src="http://zanon.io/images/posts/2016-01-31-route53-nameservers.png" alt="route53-nameservers"></p>
+<h3 id="create-amazon-route-53-aliases">Create Amazon Route 53 Aliases</h3>
+<p>You need to create some aliases to map the incoming Amazon Route 53 requests to your S3 buckets. These aliases are created clicking to Create a Record Set.</p>
+<p>You need to create a record set of the A-type for your <strong>example.com</strong> domain and CNAME-type for your <strong>www.example.com</strong> domain.</p>
+<p>For the A-type record set, just select the S3 bucket within the available options.</p>
+<p><img src="http://zanon.io/images/posts/2016-01-31-route53-a-recordset.png" alt="route53-a-recordset"></p>
+<p>Regarding the CNAME-type, you need to provide an address. It should be the bucket endpoint address available at the bucket properties tab.</p>
+<p><img src="http://zanon.io/images/posts/2016-01-31-route53-cname-recordset.png" alt="route53-cname-recordset"></p>
+<h3 id="changing-the-name-servers">Changing the Name Servers</h3>
+<p>After preparing your Amazon Host, you need to give them the domain control accessing your registrar website and changing the name servers configuration.</p>
+<p>I&#39;ve bought my zanon.io domain at GoDaddy.com, so this tutorial uses their control panel to show how to configure your domain. However, since all domain sellers let you change your name server values, the control panels are different, but you need to make the same configuration.</p>
+<ol>
+<li>Log into your domain registrar&#39;s control panel and click to manage your domains.</li>
+</ol>
+<p><img src="http://zanon.io/images/posts/2016-01-31-godaddy-control-panel.png" alt="godaddy-control-panel"></p>
+<ol>
+<li>Click at your domain name settings and select the Manage DNS option.</li>
+</ol>
+<p><img src="http://zanon.io/images/posts/2016-01-31-godaddy-manage-dns.png" alt="godaddy-manage-dns"></p>
+<ol>
+<li>View your configured name servers options and edit them with the addresses that are provided by AWS.</li>
+</ol>
+<p><img src="http://zanon.io/images/posts/2016-01-31-godaddy-nameservers.png" alt="godaddy-nameservers"></p>
+<h3 id="testing">Testing</h3>
+<p>Due to cache, you need to wait some hours until this name server changing takes effect. While you wait, create a simple web page in a file named as index.html and upload it to your <strong>example.com</strong> bucket. When the cache is refreshed, you can see your webpage up and running typing your domain name.</p>
+<h2 id="front-end">Front-End</h2>
+<p>For our demo, we&#39;ll create just one file, named as index.html, with a simple button to retrieve the weather info. Nothing fancy. For a real-world website, you would upload all HTML/CSS/JavaScript and images to your S3 bucket and would consider on configuring an Amazon CloudFront instance to serve your files using a CDN (Content Delivery Network) to provide a low latency connection for users throughout the world.</p>
+<p><strong>index.html</strong> contents:</p>
+<pre><code class="lang-html">&lt;div class=&quot;container&quot;&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-md-offset-5 col-md-2 text-center&quot;&gt;
+      &lt;h3&gt;Daily Weather&lt;/h3&gt;
+      &lt;input id=&quot;btn-show&quot; type=&quot;button&quot; class=&quot;btn btn-primary&quot; value=&#39;Show Current&#39;&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-md-offset-5 col-md-2&quot;&gt;
+      &lt;p&gt;Value: &lt;span id=&quot;weather-value&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+      &lt;a href=&quot;http://zanon.io/posts/building-serverless-websites-in-aws-tutorial&quot;&gt;&lt;p&gt;source&lt;/p&gt;&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>JavaScript code:</p>
+<pre><code class="lang-javascript">$(document).ready(function() {
+
+  $(&#39;#btn-show&#39;).on(&#39;click&#39;, function() {
+
+      $.ajax({
+        url: &quot;https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local/5&quot;,
+        success: function(json) {
+          $(&quot;#weather-value&quot;).append(json.value);
+        }
+      });
+  });
+});
+</code></pre>
+<p>Our Ajax call is using &quot;<a href="https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local/5">https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local/5</a>&quot; as the URL parameter. This is the address that we&#39;ll get later, after deploying our app.</p>
+<p>Result:</p>
+<p><img src="http://zanon.io/images/posts/2016-01-31-demo.png" alt="demo"></p>
+<h2 id="serverless-framework">Serverless Framework</h2>
+<p>The Serverless Framework is a tool that helps you managing and deploying projects with API Gateway and Lambda Functions. You can do everything manually using Amazon&#39;s console, but it&#39;ll be hard to manage in big projects.</p>
+<p>The Serverless Framework is a Node.js module. So, install it using NPM:</p>
+<pre><code class="lang-xml">&gt; npm install serverless -g
+</code></pre>
+<h3 id="creating-an-iam-user">Creating an IAM User</h3>
+<p>Serverless needs an AWS user account to execute a CloudFormation script. Since it requires high privileges, you can&#39;t simply create an Admin key, with production access, and share it with every developer of your organization. For security measures, for production deployment, you need to generate the Serverless scripts using the flag <code>--noExeCf</code> and execute the output using the CloudFormation UI with a user with secure password (where just a few people have access) and a multi-factor authentication. Read more at the official <a href="http://docs.serverless.com/docs/best-practices#section-don-t-give-administratoraccess-to-aws-api-keys">best practices guide</a>.</p>
+<p>However, for a development environment, you can create an Admin account to get it up and running quickly.</p>
+<p>To create an user, browse the <a href="https://console.aws.amazon.com/iam">IAM console</a> and create a group first:</p>
+<p><img src="http://zanon.io/images/posts/2016-01-31-iam-group.png" alt="iam-group"></p>
+<p>Name it as <strong>serverless-group</strong> and attach the <strong>AdministratorAccess</strong> policy.</p>
+<p><img src="http://zanon.io/images/posts/2016-01-31-iam-group-admin.png" alt="iam-group-admin"></p>
+<p>After that, create a new user named as <strong>serverless-admin</strong>, write down its <strong>Access Key ID</strong> and <strong>Secret Access Key</strong>, and add it to the group that you have created.</p>
+<p><img src="http://zanon.io/images/posts/2016-01-31-iam-user.png" alt="iam-user"></p>
+<p><img src="http://zanon.io/images/posts/2016-01-31-iam-user-group.png" alt="iam-user-group"></p>
+<h3 id="configuring-the-serverless-user">Configuring the Serverless User</h3>
+<p>As Serverless uses the AWS Node.js SDK, it looks for a <strong>credentials</strong> file to load the access keys. It must be located at <strong>~/.aws/credentials</strong> on Mac/Linux or <strong>C:\Users\USERNAME.aws\credentials</strong> on Windows.</p>
+<p>Contents:</p>
+<pre><code class="lang-xml">[default]
+aws_access_key_id = your_access_key
+aws_secret_access_key = your_secret_key
+</code></pre>
+<p>Also, you can specify what is your default region with a <strong>config</strong> file created in the same folder.</p>
+<p>Contents:</p>
+<pre><code class="lang-xml">[default]
+region = us-east-1
+</code></pre>
+<p><strong>Note:</strong> [default] means the profile name. It must exist, but you can create more profiles with different access keys for different applications.</p>
+<h3 id="creating-a-project">Creating a Project</h3>
+<p>Change to the directory where you want to create your project folder and execute:</p>
+<pre><code class="lang-xml">&gt; serverless project create
+</code></pre>
+<p>It&#39;ll ask the following questions:</p>
+<ul>
+<li>Project Name: since they use CloudFormation for deployment and they tokenize resources with <code>-</code> (dashs), use camelCase to avoid issues. For example, I&#39;ve named my project as serverlessDemo.</li>
+<li>Domain Name: an existing domain is not required. In fact, even if you provide a domain that you own, it&#39;ll not make any difference. This name is just what will be used to create a S3 bucket. In my demo, I&#39;ve selected the name serverless-demo.zanon.io</li>
+<li>E-mail: set the e-mail address where you want to receive CloudFormation alarms.</li>
+<li>Region: the region where your app will be deployed.</li>
+<li>Profile: this profile must exist at your <strong>credentials</strong> file.</li>
+</ul>
+<p>This stage creates a CloudFormation template and a S3 bucket (in my case, named as serverless.us-east-1.serverless-demo.zanon.io) to store the necessary files.</p>
+<h3 id="serverless-architecture">Serverless Architecture</h3>
+<p>With Serverless, you have the following:</p>
+<pre><code class="lang-xml">Project
+  |__Component
+       |__Module
+            |__Function
+</code></pre>
+<ul>
+<li><p>A Component is an element that stores all Modules of a given runtime and code that can be shared between them. Since Lambda supports Node.js, Python and Java, you could create one component for each runtime. Since this example is based on Node.js-only, we&#39;ll create just one component named as <strong>nodejsComponent</strong>.</p>
+</li>
+<li><p>A Module has the purpose to create a logical <a href="http://martinfowler.com/articles/microservices.html">Microservice</a>. Every function for a given behavior must be grouped inside the same Module. In our example, it will be named as <strong>weather</strong>.</p>
+</li>
+<li><p>A Function is the element where you&#39;ll write your code to accomplish a very specific task. In this demo, it was named as <strong>local</strong> (to get the local weather with an localId).</p>
+</li>
+</ul>
+<h3 id="creating-a-component">Creating a Component</h3>
+<p>Before creating it, change the directory to your project folder:</p>
+<pre><code class="lang-xml">&gt; cd serverlessDemo
+</code></pre>
+<p>When you execute the command to create a command, it&#39;ll ask you to create at least one Module and one Function.</p>
+<p>Execute:</p>
+<pre><code class="lang-xml">&gt; serverless component create
+</code></pre>
+<p>I&#39;ve named my elements as:</p>
+<ul>
+<li>Component: nodejsComponent</li>
+<li>Module: weather</li>
+<li>Function: local</li>
+</ul>
+<h3 id="implement-your-function">Implement your Function</h3>
+<p>To implement your code, open the files <strong>handler.js</strong> and <strong>s-function.json</strong> localized at:</p>
+<pre><code class="lang-xml">Project
+  |__nodejsComponent
+       |__weather (Module)
+            |__local (Function)
+                 |__handler.js
+                 |__s-function.json
+</code></pre>
+<p>In <strong>s-function.json</strong>, we have something like:</p>
+<pre><code class="lang-json">{
+  &quot;name&quot;: &quot;local&quot;,
+  &quot;handler&quot;: &quot;weather/local/handler.handler&quot;,
+  &quot;runtime&quot;: &quot;nodejs&quot;,
+  (...),
+  &quot;endpoints&quot;: [
+    {
+      &quot;path&quot;: &quot;weather/local/{id}&quot;,
+      &quot;method&quot;: &quot;GET&quot;,
+      &quot;authorizationType&quot;: &quot;none&quot;,
+      &quot;apiKeyRequired&quot;: false,
+      &quot;requestParameters&quot;: {},
+      &quot;requestTemplates&quot;: {
+        &quot;application/json&quot;: &quot;{\&quot;id\&quot;: \&quot;$input.params(&#39;id&#39;) \&quot;}&quot;
+      }
+      (...)
+    }
+  ]
+}
+</code></pre>
+<p>Change the &quot;path&quot; to:</p>
+<pre><code class="lang-javascript">&quot;path&quot;: &quot;weather/local/{id}&quot;
+</code></pre>
+<p>and the &quot;requestTemplates&quot; to:</p>
+<pre><code class="lang-javascript">&quot;requestTemplates&quot;: {
+  &quot;application/json&quot;: &quot;{\&quot;id\&quot;: \&quot;$input.params(&#39;id&#39;) \&quot;}&quot;
+}
+</code></pre>
+<p>With this change, we&#39;ll be able to retrieve the &quot;id&quot; input parameter.</p>
+<p>In <strong>handler.js</strong>, we have by default:</p>
+<pre><code class="lang-javascript">module.exports.handler = function(event, context) {
+
+  lib.respond(event, function(error, response) {
+    return context.done(error, response);
+  });
+};
+</code></pre>
+<p>Change it to:</p>
+<pre><code class="lang-javascript">module.exports.handler = function(event, context) {
+
+  var result = getWeatherInfo(event);
+
+  lib.respond(event, function(error, response) {
+    return context.done(error, result);
+  });
+};
+
+// that&#39;s where you place your Lambda code
+function getWeatherInfo(event) {
+
+  return {
+    value: &quot;25 ºC&quot;,
+    event: event // input data that I&#39;m ignoring
+  }
+}
+</code></pre>
+<h3 id="enable-cross-origin-resource-sharing-cors-">Enable Cross-Origin Resource Sharing (CORS)</h3>
+<p>Since our API is deployed at the AWS domain and not inside our app domain, the browsers won&#39;t process AJAX requests due to security issues. To workaround this, you can use <a href="http://json-p.org/">JSONP</a> at the clients-side or <a href="http://enable-cors.org/">enable CORS</a> at Amazon&#39;s side. I prefer to enable CORS.</p>
+<p>To enable, install the serverless-core-plugin:</p>
+<pre><code class="lang-xml">&gt; npm install serverless-cors-plugin --save
+</code></pre>
+<p>In <strong>s-project.json</strong>, replace &quot;plugins&quot; by:</p>
+<pre><code class="lang-javascript">&quot;plugins&quot;: [
+  &quot;serverless-cors-plugin&quot;
+],
+</code></pre>
+<p>In <strong>s-function.json</strong>, add the cors property to &quot;custom&quot;:</p>
+<pre><code class="lang-javascript">&quot;custom&quot;: {
+  &quot;cors&quot;: {
+    &quot;allowOrigin&quot;: &quot;*&quot;,
+    &quot;allowHeaders&quot;: [&quot;Content-Type&quot;, &quot;X-Amz-Date&quot;, &quot;Authorization&quot;, &quot;X-Api-Key&quot;]
+  }
+}
+</code></pre>
+<h3 id="deploy">Deploy</h3>
+<p>First, change the directory to your component.</p>
+<pre><code class="lang-xml">&gt; cd nodejsComponent
+</code></pre>
+<p>Execute the <strong>dash deploy</strong> command:</p>
+<pre><code class="lang-xml">&gt; serverless dash deploy
+</code></pre>
+<p>It will show, like in a dashboard, all assets that you have (functions and endpoints). Choose all (pressing ENTER) and hit the <strong>deploy</strong> option.</p>
+<p>After deploying, you&#39;ll get a list of URLs where you functions were hosted. For example, mine is available at: <a href="https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local">https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local</a></p>
+<h2 id="simpledb">SimpleDB</h2>
+
+    </div>
+  </div>
+</div>
+<dir-disqus></dir-disqus>
