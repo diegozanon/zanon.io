@@ -122,17 +122,11 @@
 <h3 id="changing-the-name-servers">Changing the Name Servers</h3>
 <p>After preparing your Amazon Host, you need to give them the domain control accessing your registrar website and changing the name servers configuration.</p>
 <p>I've bought my zanon.io domain at GoDaddy.com, so this tutorial uses their control panel to show how to configure your domain. However, since all domain sellers let you change your name server values, the control panels are different, but you need to make the same configuration.</p>
-<ol>
-<li>Log into your domain registrar's control panel and click to manage your domains.</li>
-</ol>
+<p>1) Log into your domain registrar's control panel and click to manage your domains.</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-godaddy-control-panel.png" alt="godaddy-control-panel"></p>
-<ol>
-<li>Click at your domain name settings and select the Manage DNS option.</li>
-</ol>
+<p>2) Click at your domain name settings and select the Manage DNS option.</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-godaddy-manage-dns.png" alt="godaddy-manage-dns"></p>
-<ol>
-<li>View your configured name servers options and edit them with the addresses that are provided by AWS.</li>
-</ol>
+<p>3) View your configured name servers options and edit them with the addresses that are provided by AWS.</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-godaddy-nameservers.png" alt="godaddy-nameservers"></p>
 <h3 id="testing">Testing</h3>
 <p>Due to cache, you need to wait some hours until this name server changing takes effect. While you wait, create a simple web page in a file named as index.html and upload it to your <strong>example.com</strong> bucket. When the cache is refreshed, you can see your webpage up and running typing your domain name.</p>
@@ -400,7 +394,7 @@ AWS.config.update({accessKeyId: <span class="hljs-string">'accessKeyId'</span>, 
     </div>
   </div>
 </div>
-<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app2" name="dsq-app2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; height: 0px !important; " width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=afe1dd72cff7b0c7fecc0f7b3d92eb5e&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Fbuilding-serverless-websites-in-aws-tutorial&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default" horizontalscrolling="no" verticalscrolling="no"></iframe></div></dir-disqus></div>
+<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app2" name="dsq-app2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; height: 341px !important; " width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=afe1dd72cff7b0c7fecc0f7b3d92eb5e&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Fbuilding-serverless-websites-in-aws-tutorial&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default" horizontalscrolling="no" verticalscrolling="no"></iframe><iframe id="indicator-north" name="indicator-north" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 330px !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; top: 0px !important; min-width: 330px !important; max-width: 330px !important; position: fixed !important; z-index: 2147483646 !important; height: 29px !important; min-height: 29px !important; max-height: 29px !important; display: none !important; "></iframe><iframe id="indicator-south" name="indicator-south" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 330px !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; bottom: 0px !important; min-width: 330px !important; max-width: 330px !important; position: fixed !important; z-index: 2147483646 !important; height: 29px !important; min-height: 29px !important; max-height: 29px !important; display: none !important; "></iframe></div></dir-disqus></div>
       </div>
     </div>
 

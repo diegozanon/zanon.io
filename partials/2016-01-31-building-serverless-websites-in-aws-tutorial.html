@@ -43,17 +43,11 @@
 <h3 id="changing-the-name-servers">Changing the Name Servers</h3>
 <p>After preparing your Amazon Host, you need to give them the domain control accessing your registrar website and changing the name servers configuration.</p>
 <p>I&#39;ve bought my zanon.io domain at GoDaddy.com, so this tutorial uses their control panel to show how to configure your domain. However, since all domain sellers let you change your name server values, the control panels are different, but you need to make the same configuration.</p>
-<ol>
-<li>Log into your domain registrar&#39;s control panel and click to manage your domains.</li>
-</ol>
+<p>1) Log into your domain registrar&#39;s control panel and click to manage your domains.</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-godaddy-control-panel.png" alt="godaddy-control-panel"></p>
-<ol>
-<li>Click at your domain name settings and select the Manage DNS option.</li>
-</ol>
+<p>2) Click at your domain name settings and select the Manage DNS option.</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-godaddy-manage-dns.png" alt="godaddy-manage-dns"></p>
-<ol>
-<li>View your configured name servers options and edit them with the addresses that are provided by AWS.</li>
-</ol>
+<p>3) View your configured name servers options and edit them with the addresses that are provided by AWS.</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-godaddy-nameservers.png" alt="godaddy-nameservers"></p>
 <h3 id="testing">Testing</h3>
 <p>Due to cache, you need to wait some hours until this name server changing takes effect. While you wait, create a simple web page in a file named as index.html and upload it to your <strong>example.com</strong> bucket. When the cache is refreshed, you can see your webpage up and running typing your domain name.</p>

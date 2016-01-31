@@ -73,15 +73,15 @@ After preparing your Amazon Host, you need to give them the domain control acces
 
 I've bought my zanon.io domain at GoDaddy.com, so this tutorial uses their control panel to show how to configure your domain. However, since all domain sellers let you change your name server values, the control panels are different, but you need to make the same configuration.
 
-1. Log into your domain registrar's control panel and click to manage your domains.
+1) Log into your domain registrar's control panel and click to manage your domains.
 
 ![godaddy-control-panel](http://zanon.io/images/posts/2016-01-31-godaddy-control-panel.png)
 
-2. Click at your domain name settings and select the Manage DNS option.
+2) Click at your domain name settings and select the Manage DNS option.
 
 ![godaddy-manage-dns](http://zanon.io/images/posts/2016-01-31-godaddy-manage-dns.png)
 
-3. View your configured name servers options and edit them with the addresses that are provided by AWS.
+3) View your configured name servers options and edit them with the addresses that are provided by AWS.
 
 ![godaddy-nameservers](http://zanon.io/images/posts/2016-01-31-godaddy-nameservers.png)
 
