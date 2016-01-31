@@ -103,7 +103,7 @@ article > p {
 	padding-bottom: 20px;
 }
 
-.post > div { /* post content */
+.post { /* post content */
 	background-color: white;
 	padding: 30px;
 	font-size: 18px;

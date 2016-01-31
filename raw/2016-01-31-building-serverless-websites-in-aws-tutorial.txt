@@ -318,7 +318,6 @@ function getWeatherInfo(event) {
 }
 ```
 
-
 ### Enable Cross-Origin Resource Sharing (CORS)
 
 Since our API is deployed at the AWS domain and not inside our app domain, the browsers won't process AJAX requests due to security issues. To workaround this, you can use [JSONP](http://json-p.org/) at the clients-side or [enable CORS](http://enable-cors.org/) at Amazon's side. I prefer to enable CORS.
