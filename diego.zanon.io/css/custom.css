@@ -7,10 +7,28 @@
 	color: #F06000;
 }
 
-.skill-title {
+#about p {
+	color: white;
+	margin-bottom: 10px;
+}
+
+.inverted-selection p::selection {
+    background: white;
+}
+
+.skill-title h5 {
 	color: #F06000;
 }
 
-.skill .block {
+.skill-item h5 {
+	font-family: 'opensans', sans-serif;
+}
+
+.skill .block-one {
 	margin-bottom: 30px;
 }
+
+.skill .block-two {
+	margin-bottom: 60px;
+}
+
