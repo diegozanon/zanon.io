@@ -36,7 +36,7 @@
               <!-- empty -->
             </div>
             <div class="col-xs-2 col-sm-1 col-md-1 header-img">
-              <a href="/"> <!-- <a href="http://diego.zanon.io"> -->
+              <a href="http://diego.zanon.io">
                 <img src="/images/about.png" alt="about">
               </a>
             </div>
