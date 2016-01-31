@@ -1,0 +1,16 @@
+#home h3 {
+	color: white;
+	font-weight: bold;
+}
+
+#home h3 > span {
+	color: #F06000;
+}
+
+.skill-title {
+	color: #F06000;
+}
+
+.skill .block {
+	margin-bottom: 30px;
+}
