@@ -86,7 +86,8 @@
 
 <h2 id="objective">Objective</h2>
 <p>This tutorial shows how to create a simple serverless application. If you don't know yet what this concept is and its benefits, you can read my previous blog post <a href="http://zanon.io/posts/building-serverless-websites-in-aws-intro">here</a>. I also explain a little more about each technology that will be used in this example.</p>
-<p>The demo app (<a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a>) just shows a fake weather information when a button is clicked. To achieve this, we are using the following AWS tools:</p>
+<p>The demo app is hosted at <a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a> and the source code is available at <a href="https://github.com/zanon-io/aws-serverless-demo">https://github.com/zanon-io/aws-serverless-demo</a></p>
+<p>This demo just shows a fake weather information when a button is clicked. To achieve this, we are using the following AWS tools:</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-lambda-web-apps.png" alt="lambda-web-apps"></p>
 <p>This image was extracted from <a href="https://aws.amazon.com/lambda/">here</a> and most Serverless demos uses DynamoDB as the database. However, for the sake of respecting the "pay only for what you use", I've decided to use the SimpleDB database. DynamoDB allows you to build more complex apps, but you need to provision capacity and you will pay for it even if no one is using your app. A true serverless aims for <em>infinite scalability</em>, <em>high availability</em> <strong>and</strong> <em>pay only for what you use</em>.</p>
 <h2 id="summary">Summary</h2>
@@ -161,7 +162,7 @@
       $.ajax({
         url: <span class="hljs-string">"https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local/5"</span>,
         success: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">json</span>) </span>{
-          $(<span class="hljs-string">"#weather-value"</span>).append(json.value);
+          $(<span class="hljs-string">"#weather-value"</span>).append(json.value + <span class="hljs-string">' ºC'</span>);
         }
       });
   });
@@ -301,7 +302,7 @@ region = us-east-1
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getWeatherInfo</span>(<span class="hljs-params">event</span>) </span>{
 
   <span class="hljs-keyword">return</span> {
-    value: <span class="hljs-string">"25 ºC"</span>,
+    value: <span class="hljs-string">"25"</span>,
     event: event <span class="hljs-comment">// input data that I'm ignoring</span>
   }
 }
@@ -334,11 +335,72 @@ region = us-east-1
 <p>It will show, like in a dashboard, all assets that you have (functions and endpoints). Choose all (pressing ENTER) and hit the <strong>deploy</strong> option.</p>
 <p>After deploying, you'll get a list of URLs where you functions were hosted. For example, mine is available at: <a href="https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local">https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local</a></p>
 <h2 id="simpledb">SimpleDB</h2>
+<h3 id="initialize-your-data">Initialize your Data</h3>
+<p>Since there is no AWS Console for SimpleDB, you need to create your model using third-party tools or the AWS SDK. For this demo, I'll simplify and use the <a href="https://aws.amazon.com/code/JavaScript/1137">Scratchpad</a> web app. To run, download, unzip and host the app in a web server like IIS or Apache Tomcat.</p>
+<p>After adding the IAM credentials, call the CreatDomain method to create the equivalent of a table for the relational world and the PutAttributes to add a new record for your domain.</p>
+<p>Create Domain:
+<img src="http://zanon.io/images/posts/2016-01-31-simpledb-domain.png" alt="simpledb-domain"></p>
+<p>Put Attributes:
+<img src="http://zanon.io/images/posts/2016-01-31-simpledb-attr.png" alt="simpledb-attr"></p>
+<p>Test:
+<img src="http://zanon.io/images/posts/2016-01-31-simpledb-select.png" alt="simpledb-select"></p>
+<h3 id="retrieve-the-data-using-a-lambda-functions">Retrieve the Data using a Lambda functions</h3>
+<p>As we are using JavaScript, we need to add the Node aws-sdk to our app. Since the code to retrieve data from the database should be reused in many Lambda Functions, we are going to add the aws-sdk reference to our nodejsComponent.</p>
+<p>Change the cmd directory to your nodejsComponent folder and execute:</p>
+<pre><code class="lang-xml hljs">&gt; npm install aws-sdk --save
+</code></pre>
+<p>The module where every Lambda function has access is the Lib file. To modify it, browse the nodejsComponent/lib/index.js</p>
+<p>Add the following code:</p>
+<pre><code class="lang-javascript hljs"><span class="hljs-keyword">var</span> AWS = <span class="hljs-built_in">require</span>(<span class="hljs-string">'aws-sdk'</span>);
+
+<span class="hljs-comment">// Need to add the AWS IAM here, since the Lambda function will need access to connect to the SimpleDB</span>
+<span class="hljs-comment">// Attention to avoid committing this sensitive data by accident</span>
+AWS.config.update({accessKeyId: <span class="hljs-string">'accessKeyId'</span>, secretAccessKey: <span class="hljs-string">'secretAccessKey'</span>});
+
+<span class="hljs-built_in">module</span>.exports.queryData = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">query, cb</span>) </span>{
+
+  <span class="hljs-keyword">var</span> simpledb = <span class="hljs-keyword">new</span> AWS.SimpleDB();
+
+  <span class="hljs-keyword">var</span> params = {
+    SelectExpression: query,
+    ConsistentRead: <span class="hljs-literal">false</span>,
+    NextToken: <span class="hljs-string">''</span>
+  };
+
+  simpledb.select(params, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, data</span>) </span>{
+      <span class="hljs-keyword">return</span> cb(err, data);
+  });
+};
+</code></pre>
+<p>Modify your handler.js with the following:</p>
+<pre><code class="lang-javascript hljs"><span class="hljs-built_in">module</span>.exports.handler = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event, context</span>) </span>{
+
+  <span class="hljs-keyword">var</span> query = getWeatherQuery(event);
+
+  lib.queryData(query, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error, response</span>) </span>{
+
+    <span class="hljs-keyword">var</span> result = {
+      value: response.Items[<span class="hljs-number">0</span>].Attributes[<span class="hljs-number">0</span>].Value
+    }
+
+    <span class="hljs-keyword">return</span> context.done(error, result);
+  });
+};
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getWeatherQuery</span>(<span class="hljs-params">event</span>) </span>{
+
+  <span class="hljs-comment">// I'm ignoring the event input since I want to simplify this demo</span>
+  <span class="hljs-comment">// and avoid the need of sanitizing the input to protect from sql injection</span>
+
+  <span class="hljs-keyword">return</span> <span class="hljs-string">"select Value from Weather where ID = '5'"</span>;
+}
+</code></pre>
+<p>And... that's it! The app is working at <a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a>, where the HTML/CSS/JS is hosted on S3, the back-end code is a service that runs only on demand at AWS Lambda and the data is stored in SimpleDB, which generate costs only while processing queries.</p>
 
     </div>
   </div>
 </div>
-<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app2" name="dsq-app2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; height: 0px !important; " width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=afe1dd72cff7b0c7fecc0f7b3d92eb5e&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Fbuilding-serverless-websites-in-aws-tutorial&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default"></iframe></div><a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></dir-disqus></div>
+<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app2" name="dsq-app2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; height: 0px !important; " width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=afe1dd72cff7b0c7fecc0f7b3d92eb5e&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Fbuilding-serverless-websites-in-aws-tutorial&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default" horizontalscrolling="no" verticalscrolling="no"></iframe></div></dir-disqus></div>
       </div>
     </div>
 

@@ -7,7 +7,8 @@
 
 <h2 id="objective">Objective</h2>
 <p>This tutorial shows how to create a simple serverless application. If you don&#39;t know yet what this concept is and its benefits, you can read my previous blog post <a href="http://zanon.io/posts/building-serverless-websites-in-aws-intro">here</a>. I also explain a little more about each technology that will be used in this example.</p>
-<p>The demo app (<a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a>) just shows a fake weather information when a button is clicked. To achieve this, we are using the following AWS tools:</p>
+<p>The demo app is hosted at <a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a> and the source code is available at <a href="https://github.com/zanon-io/aws-serverless-demo">https://github.com/zanon-io/aws-serverless-demo</a></p>
+<p>This demo just shows a fake weather information when a button is clicked. To achieve this, we are using the following AWS tools:</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-lambda-web-apps.png" alt="lambda-web-apps"></p>
 <p>This image was extracted from <a href="https://aws.amazon.com/lambda/">here</a> and most Serverless demos uses DynamoDB as the database. However, for the sake of respecting the &quot;pay only for what you use&quot;, I&#39;ve decided to use the SimpleDB database. DynamoDB allows you to build more complex apps, but you need to provision capacity and you will pay for it even if no one is using your app. A true serverless aims for <em>infinite scalability</em>, <em>high availability</em> <strong>and</strong> <em>pay only for what you use</em>.</p>
 <h2 id="summary">Summary</h2>
@@ -82,7 +83,7 @@
       $.ajax({
         url: &quot;https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local/5&quot;,
         success: function(json) {
-          $(&quot;#weather-value&quot;).append(json.value);
+          $(&quot;#weather-value&quot;).append(json.value + &#39; ºC&#39;);
         }
       });
   });
@@ -222,7 +223,7 @@ region = us-east-1
 function getWeatherInfo(event) {
 
   return {
-    value: &quot;25 ºC&quot;,
+    value: &quot;25&quot;,
     event: event // input data that I&#39;m ignoring
   }
 }
@@ -255,6 +256,67 @@ function getWeatherInfo(event) {
 <p>It will show, like in a dashboard, all assets that you have (functions and endpoints). Choose all (pressing ENTER) and hit the <strong>deploy</strong> option.</p>
 <p>After deploying, you&#39;ll get a list of URLs where you functions were hosted. For example, mine is available at: <a href="https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local">https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local</a></p>
 <h2 id="simpledb">SimpleDB</h2>
+<h3 id="initialize-your-data">Initialize your Data</h3>
+<p>Since there is no AWS Console for SimpleDB, you need to create your model using third-party tools or the AWS SDK. For this demo, I&#39;ll simplify and use the <a href="https://aws.amazon.com/code/JavaScript/1137">Scratchpad</a> web app. To run, download, unzip and host the app in a web server like IIS or Apache Tomcat.</p>
+<p>After adding the IAM credentials, call the CreatDomain method to create the equivalent of a table for the relational world and the PutAttributes to add a new record for your domain.</p>
+<p>Create Domain:
+<img src="http://zanon.io/images/posts/2016-01-31-simpledb-domain.png" alt="simpledb-domain"></p>
+<p>Put Attributes:
+<img src="http://zanon.io/images/posts/2016-01-31-simpledb-attr.png" alt="simpledb-attr"></p>
+<p>Test:
+<img src="http://zanon.io/images/posts/2016-01-31-simpledb-select.png" alt="simpledb-select"></p>
+<h3 id="retrieve-the-data-using-a-lambda-functions">Retrieve the Data using a Lambda functions</h3>
+<p>As we are using JavaScript, we need to add the Node aws-sdk to our app. Since the code to retrieve data from the database should be reused in many Lambda Functions, we are going to add the aws-sdk reference to our nodejsComponent.</p>
+<p>Change the cmd directory to your nodejsComponent folder and execute:</p>
+<pre><code class="lang-xml">&gt; npm install aws-sdk --save
+</code></pre>
+<p>The module where every Lambda function has access is the Lib file. To modify it, browse the nodejsComponent/lib/index.js</p>
+<p>Add the following code:</p>
+<pre><code class="lang-javascript">var AWS = require(&#39;aws-sdk&#39;);
+
+// Need to add the AWS IAM here, since the Lambda function will need access to connect to the SimpleDB
+// Attention to avoid committing this sensitive data by accident
+AWS.config.update({accessKeyId: &#39;accessKeyId&#39;, secretAccessKey: &#39;secretAccessKey&#39;});
+
+module.exports.queryData = function(query, cb) {
+
+  var simpledb = new AWS.SimpleDB();
+
+  var params = {
+    SelectExpression: query,
+    ConsistentRead: false,
+    NextToken: &#39;&#39;
+  };
+
+  simpledb.select(params, function(err, data) {
+      return cb(err, data);
+  });
+};
+</code></pre>
+<p>Modify your handler.js with the following:</p>
+<pre><code class="lang-javascript">module.exports.handler = function(event, context) {
+
+  var query = getWeatherQuery(event);
+
+  lib.queryData(query, function(error, response) {
+
+    var result = {
+      value: response.Items[0].Attributes[0].Value
+    }
+
+    return context.done(error, result);
+  });
+};
+
+function getWeatherQuery(event) {
+
+  // I&#39;m ignoring the event input since I want to simplify this demo
+  // and avoid the need of sanitizing the input to protect from sql injection
+
+  return &quot;select Value from Weather where ID = &#39;5&#39;&quot;;
+}
+</code></pre>
+<p>And... that&#39;s it! The app is working at <a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a>, where the HTML/CSS/JS is hosted on S3, the back-end code is a service that runs only on demand at AWS Lambda and the data is stored in SimpleDB, which generate costs only while processing queries.</p>
 
     </div>
   </div>
