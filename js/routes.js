@@ -13,11 +13,11 @@ angular.module('zanonApp').config(['$routeProvider', '$locationProvider',
       })
 
       // posts
-      .when('/posts/building-serverless-websites-in-aws-tutorial', {
-        templateUrl: '/partials/2016-01-31-building-serverless-websites-in-aws-tutorial.html'
+      .when('/posts/building-serverless-websites-on-aws-tutorial', {
+        templateUrl: '/partials/2016-01-31-building-serverless-websites-on-aws-tutorial.html'
       })
-      .when('/posts/building-serverless-websites-in-aws-intro', {
-        templateUrl: '/partials/2015-11-15-building-serverless-websites-in-aws-intro.html'
+      .when('/posts/building-serverless-websites-on-aws-intro', {
+        templateUrl: '/partials/2015-11-15-building-serverless-websites-on-aws-intro.html'
       })
       .when('/posts/realm-an-incredible-fast-mobile-db', {
         templateUrl: '/partials/2015-11-01-realm-an-incredible-fast-mobile-db.html'

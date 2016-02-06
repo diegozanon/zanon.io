@@ -1,12 +1,12 @@
-Title: Building Serverless Websites in AWS - Tutorial
+Title: Building Serverless Websites on AWS - Tutorial
 Summary: This tutorial uses AWS tools and Node to create a simple serverless application. The objective is to show how powerful this approach can be using minimal efforts.
 Tags: AWS, Node
 Date: Jan 31, 2016
-URL: building-serverless-websites-in-aws-tutorial
+URL: building-serverless-websites-on-aws-tutorial
 
 ## Objective
 
-This tutorial shows how to create a simple serverless application. If you don't know yet what this concept is and its benefits, you can read my previous blog post [here](http://zanon.io/posts/building-serverless-websites-in-aws-intro). I also explain a little more about each technology that will be used in this example.
+This tutorial shows how to create a simple serverless application. If you don't know yet what this concept is and its benefits, you can read my previous blog post [here](http://zanon.io/posts/building-serverless-websites-on-aws-intro). I also explain a little more about each technology that will be used in this example.
 
 The demo app is hosted at http://serverless-demo.zanon.io and the source code is available at https://github.com/zanon-io/aws-serverless-demo
 
@@ -106,7 +106,7 @@ For our demo, we'll create just one file, named as index.html, with a simple but
   <div class="row">
     <div class="col-md-offset-5 col-md-2">
       <p>Value: <span id="weather-value"></span></p>
-      <a href="http://zanon.io/posts/building-serverless-websites-in-aws-tutorial"><p>source</p></a>
+      <a href="http://zanon.io/posts/building-serverless-websites-on-aws-tutorial"><p>source</p></a>
     </div>
   </div>
 </div>

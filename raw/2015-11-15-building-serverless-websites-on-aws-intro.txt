@@ -1,8 +1,8 @@
-Title: Building Serverless Websites in AWS - Intro
+Title: Building Serverless Websites on AWS - Intro
 Summary: A serverless website is one that depends entirely on third-party managed services to avoid spinning up full-blown servers. This approach reduces the allocation of unused resources to minimize costs and relies on external services to achieve high availability and <em>infinite</em> scalability.
 Tags: AWS, Node
 Date: Nov 15, 2015
-URL: building-serverless-websites-in-aws-intro
+URL: building-serverless-websites-on-aws-intro
 
 ## Serverless Websites
 
@@ -31,7 +31,7 @@ The [Serverless Framework](https://github.com/serverless/serverless) (formely JA
 
 Instead of spinning up a full-blown server, the developer is invited to use a command line tool to deploy code-blocks to Amazon. Since each lambda function acts like a microservice and your app may end up with dozens of them distributed between multiple regions and managed by multi-developer teams in multi-stage environments, the Serverless Framework targets a better setup to avoid a messy solution.
 
-I've created another [blog post](http://zanon.io/posts/building-serverless-websites-in-aws-tutorial) to show a simple example of how to use Serverless, but first you need to know what AWS technologies are involved.
+I've created another [blog post](http://zanon.io/posts/building-serverless-websites-on-aws-tutorial) to show a simple example of how to use Serverless, but first you need to know what AWS technologies are involved.
 
 The first thing that you need to be aware is that this solution is highly dependent on AWS. Usually, we would avoid being highly attached to a third-party solution. If AWS breaks forever, you will need some hours to adapt your code to be able to deploy it again at another host. However, AWS is so reliable and the benefits of serverless apps are so great that I would not be so worried about it.
 
@@ -45,7 +45,7 @@ Lambda is a managed service. It means that AWS is responsible for allocating mac
 
 The code you run on AWS Lambda is called a "Lambda function". It needs to be stateless with no affinity to the underlying infrastructure. This prerequisite is what enables Amazon to rapidly launch many copies of the function to serve *infinite scalability*.
 
-As everything in AWS, Lambda also have a "Pay Per Use" model. You will only pay for the computer resources that you use, but in this case, its much better than EC2 because your EC2 machines will always have some computer resources that are allocated for you but not necessarily in use and this allocation is charged. Regarding Lambda, you will allocate resources only for the duration of your Lambda function execution. That's why its a much cheaper solution.
+As everything on AWS, Lambda also have a "Pay Per Use" model. You will only pay for the computer resources that you use, but in this case, its much better than EC2 because your EC2 machines will always have some computer resources that are allocated for you but not necessarily in use and this allocation is charged. Regarding Lambda, you will allocate resources only for the duration of your Lambda function execution. That's why its a much cheaper solution.
 
 In Lambda, you pay for the number of requests and the amount of memory-time you allocate for your requests. Currently, it [costs](https://aws.amazon.com/lambda/pricing/) US$ 0.0000002 per request (or US$ 0.20 per 1 million requests) and US$ 0.00001667 for every GB-second used (billing is metered in increments of 100 milliseconds). Also, the free tier includes 1M free requests and 400,000 GB-seconds of compute time per month and this bonus is given even if you have expired your 12 month AWS Free Tier term.
 

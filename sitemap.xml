@@ -46,12 +46,12 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>http://zanon.io/posts/building-serverless-websites-in-aws-intro</loc>
+    <loc>http://zanon.io/posts/building-serverless-websites-on-aws-intro</loc>
     <lastmod>2015-11-15</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>http://zanon.io/posts/building-serverless-websites-in-aws-tutorial</loc>
+    <loc>http://zanon.io/posts/building-serverless-websites-on-aws-tutorial</loc>
     <lastmod>2016-01-31</lastmod>
     <changefreq>monthly</changefreq>
   </url>
