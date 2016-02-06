@@ -11,6 +11,7 @@
   <title>Diego Zanon</title>
 	<meta name="author" content="Diego Zanon">
 
+  <link rel="stylesheet" href="css/bootstrap-tooltip.min.css">
   <link rel="stylesheet" href="css/default.css">
 	<link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/media-queries.css">
@@ -35,8 +36,6 @@
             <li class="current"><a class="smoothscroll" href="#home">Home</a></li>
             <li><a class="smoothscroll" href="#about">About</a></li>
 	          <li><a class="smoothscroll" href="#resume">Resume</a></li>
-            <li><a class="smoothscroll" href="#portfolio">Works</a></li>
-            <li><a class="smoothscroll" href="#contact">Contact</a></li>
          </ul>
 
       </nav>
@@ -48,11 +47,12 @@
             <h3>trying <span>everyday</span> to become <span>a better one</span></h3>
             <hr />
             <ul class="social">
-               <li><a href="http://zanon.io"><i class="fa fa-file-text-o"></i></a></li>
-               <li><a href="http://stackoverflow.com/users/1476885/zanon"><i class="fa fa-stack-overflow"></i></a></li>
-               <li><a href="https://github.com/zanon-io"><i class="fa fa-github"></i></a></li>
-               <li><a href="https://br.linkedin.com/in/dzanon"><i class="fa fa-linkedin"></i></a></li>
-               <li><a href="https://twitter.com/zanon_io"><i class="fa fa-twitter"></i></a></li>
+               <li><a data-toggle="tooltip" title="E-mail" href="mailto:diego@zanon.io"><i class="fa fa-envelope-o"></i></a></li> 
+               <li><a data-toggle="tooltip" title="Blog" href="http://zanon.io"><i class="fa fa-file-text-o"></i></a></li>
+               <li><a data-toggle="tooltip" title="Stack Overflow" href="http://stackoverflow.com/users/1476885/zanon"><i class="fa fa-stack-overflow"></i></a></li>
+               <li><a data-toggle="tooltip" title="GitHub" href="https://github.com/zanon-io"><i class="fa fa-github"></i></a></li>
+               <li><a data-toggle="tooltip" title="LinkedIn" href="https://br.linkedin.com/in/dzanon"><i class="fa fa-linkedin"></i></a></li>
+               <li><a data-toggle="tooltip" title="Twitter" href="https://twitter.com/zanon_io"><i class="fa fa-twitter"></i></a></li>
             </ul>
          </div>
       </div>
@@ -71,7 +71,7 @@
       <div class="row">
 
          <div class="three columns profile-pic-div">
-            <img class="profile-pic"  src="images/profilepic.png" alt="" />
+            <img class="profile-pic" src="images/profilepic.png" alt="" />
          </div>
 
          <div class="nine columns main-col">
@@ -194,201 +194,189 @@
                     </div>
                 </div>
 
-                <div class="row item skill-title">
+                <div class="row item">
                     <div class="four columns">
-                        <h5>Mastered</h5>
+                        <div class="skill-title">
+                            <h5>Mastered</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>C#</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>JavaScript</h5>
+                        </div>
                     </div>
                     <div class="four columns">
-                        <h5>Experienced</h5>
+                        <div class="skill-title">
+                            <h5>Experienced</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>Java</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>Python</h5>
+                        </div>
                     </div>
+
                     <div class="four columns">
-                        <h5>Basic</h5>
+                        <div class="skill-title">
+                            <h5>Basic</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>C/C++</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>Ruby</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>PHP</h5>
+                        </div>
                     </div>
                 </div>
-
-                <div class="row item skill-item">
-                    <div class="four columns">
-                        <h5>C#</h5>
-                    </div>
-                    <div class="four columns">
-                        <h5>Java</h5>
-                    </div>
-                    <div class="four columns">
-                        <h5>C/C++</h5>
-                    </div>
-                </div>
-
-                <div class="row item skill-item">
-                    <div class="four columns">
-                        <h5>JavaScript</h5>
-                    </div>
-                    <div class="four columns">
-                        <h5>Python</h5>
-                    </div>
-                    <div class="four columns">
-                        <h5>Ruby</h5>
-                    </div>
-                </div>
-
-                <div class="row item skill-item">
-                    <div class="four columns">
-                    </div>
-                    <div class="four columns">
-                    </div>
-                    <div class="four columns">
-                        <h5>PHP</h5>
-                    </div>
-                </div>
-
-                <!-- Markup languages: HTML5, CSS3, Android, tirar Zend, C++ é basic-->
-
             </div>
 
             <div class="block-two">
-
                 <div class="row item">
                     <div class="twelve columns">
                         <h3>Databases</h3>
                     </div>
                 </div>
 
-                <div class="row item skill-title">
+                <div class="row item">
                     <div class="four columns">
-                        <h5>Mastered</h5>
+                        <div class="skill-title">
+                            <h5>Mastered</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>SQL Server</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>MongoDB</h5>
+                        </div>
                     </div>
                     <div class="four columns">
-                        <h5>Experienced</h5>
+                        <div class="skill-title">
+                            <h5>Experienced</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>Oracle</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>Informix</h5>
+                        </div>
                     </div>
+
                     <div class="four columns">
-                        <h5>Basic</h5>
+                        <div class="skill-title">
+                            <h5>Basic</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>MySQL</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>PostgreSQL</h5>
+                        </div>
                     </div>
                 </div>
-
-                <div class="row item skill-item">
-                    <div class="four columns">
-                        <h5>SQL Server</h5>
-                    </div>
-                    <div class="four columns">
-                        <h5>Oracle</h5>
-                    </div>
-                    <div class="four columns">
-                        <h5>MySQL</h5>
-                    </div>
-                </div>
-
-                <div class="row item skill-item">
-                    <div class="four columns">
-                        <h5>MongoDB</h5>
-                    </div>
-                    <div class="four columns">
-                    </div>
-                    <div class="four columns">
-                        <h5>PostgreSQL</h5>
-                    </div>
-                </div>
-
             </div>
 
             <div class="block-two">
-
                 <div class="row item">
                     <div class="twelve columns">
                         <h3>Frameworks</h3>
                     </div>
                 </div>
 
-                <div class="row item skill-title">
+                <div class="row item">
                     <div class="four columns">
-                        <h5>Mastered</h5>
+                        <div class="skill-title">
+                            <h5>Mastered</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>ASP.NET MVC</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>WCF</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>Angular</h5>
+                        </div>
                     </div>
                     <div class="four columns">
-                        <h5>Experienced</h5>
+                        <div class="skill-title">
+                            <h5>Experienced</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>Node / Express</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>Django</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>Android SDK</h5>
+                        </div>
                     </div>
+
                     <div class="four columns">
-                        <h5>Basic</h5>
+                        <div class="skill-title">
+                            <h5>Basic</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>Spring</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>Rails</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>Serverless</h5>
+                        </div>
                     </div>
                 </div>
-
-                <div class="row item skill-item">
-                    <div class="four columns">
-                        <h5>ASP.NET MVC</h5>
-                    </div>
-                    <div class="four columns">
-                        <h5>Django</h5>
-                    </div>
-                    <div class="four columns">
-                        <h5>Spring</h5>
-                    </div>
-                </div>
-
-                <div class="row item skill-item">
-                    <div class="four columns">
-                        <h5>Node / Express</h5>
-                    </div>
-                    <div class="four columns">
-                        <h5>Android SDK</h5>
-                    </div>
-                    <div class="four columns">
-                        <h5>Rails</h5>
-                    </div>
-                </div>
-
-                <div class="row item skill-item">
-                    <div class="four columns">
-                        <h5>Angular</h5>
-                    </div>
-                    <div class="four columns">
-                        <h5>Serverless</h5>
-                    </div>
-                    <div class="four columns">
-                    </div>
-                </div>
-
             </div>
 
             <div class="block-one">
-
                 <div class="row item">
                     <div class="twelve columns">
                         <h3>Miscellaneous</h3>
                     </div>
                 </div>
 
-                <div class="row item skill-title">
+                <div class="row item">
                     <div class="four columns">
-                        <h5>Mastered</h5>
+                        <div class="skill-title">
+                            <h5>Mastered</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>HTML5/CSS3</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>jQuery</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>AWS</h5>
+                        </div>
                     </div>
                     <div class="four columns">
-                        <h5>Experienced</h5>
+                        <div class="skill-title">
+                            <h5>Experienced</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>SSIS</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>TDD</h5>
+                        </div>
                     </div>
+
                     <div class="four columns">
-                        <h5>Basic</h5>
+                        <div class="skill-title">
+                            <h5>Basic</h5>
+                        </div>
+                        <div class="skill-item">
+                            <h5>ReactiveX</h5>
+                        </div>
                     </div>
                 </div>
-
-                <div class="row item skill-item">
-                    <div class="four columns">
-                        <h5>HTML5/CSS3</h5>
-                    </div>
-                    <div class="four columns">
-                        <h5>AWS</h5>
-                    </div>
-                    <div class="four columns">
-                        <h5>ReactiveX</h5>
-                    </div>
-                </div>
-
-                <div class="row item skill-item">
-                    <div class="four columns">
-                        <h5>jQuery</h5>
-                    </div>
-                    <div class="four columns">
-                        <h5>TDD</h5>
-                    </div>
-                    <div class="four columns">
-                    </div>
-                </div>
-
             </div>
 
         </div> <!-- main-col end -->
@@ -409,14 +397,44 @@
 
                <div class="twelve columns">
 
-                  <h3>Chemtech - A Siemens Business COLOCAR LOGO</h3>
-                  <p class="info">Senior UX Designer <span>&bull;</span> <em class="date">March 2010 - Present</em></p>
+                  <h3>Chemtech - A Siemens Business</h3>
+                  <p class="info">Software Engineer <span>&bull;</span> <em class="date">May 2010 – Present</em></p>
 
                   <p>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-                  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-                  ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                  Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. Nullam dictum felis eu pede mollis pretium.
+                  In <span class="orange-text">6 years</span>, I've worked on <span class="orange-text">21 projects</span> for <span class="orange-text">9 customers</span>. I'm very proud of the opportunity that I had to work with so many different people and requirements (from <span class="orange-text">Oil & Gas</span> to <span class="orange-text">Food & Beverage</span>).
+                  </p>
+
+                  <dl>
+                    <dt><b>I've worked on</b></dt>
+                    <ul class="disc">
+                      <li>Developing websites and services</li>
+                      <li>Modeling and administering databases</li>
+                      <li>Managing deployment, security and cloud infrastructure</li>
+                      <li>Software requirements and documentation</li>
+                      <li>Analyzing and solving performance issues</li>
+                      <li>Managing tasks of interns and of an outsourced company</li>
+                    </ul>
+                  </dl>
+
+                  <dl>
+                    <dt><b>Titles</b></dt>
+                    <dd>Intern from May 2010 to October 2011.</dd>
+                    <dd>Software Engineer from November 2011 up to now.</dd>
+                  </dl>                  
+
+               </div>
+
+            </div> <!-- item end -->
+
+            <div class="row item">
+
+               <div class="twelve columns">
+
+                  <h3>Inovax Engenharia de Sistemas</h3>
+                  <p class="info">Intern <span>&bull;</span> <em class="date">January 2010 - April 2010</em></p>
+
+                  <p>
+                  Worked on PCB design for circuits with high frequency requirements.
                   </p>
 
                </div>
@@ -427,14 +445,26 @@
 
                <div class="twelve columns">
 
-                  <h3>Super Cool Studio</h3>
-                  <p class="info">UX Designer <span>&bull;</span> <em class="date">March 2007 - February 2010</em></p>
+                  <h3>Universidade Federal do Rio de Janeiro</h3>
+                  <p class="info">Scientific Initiation <span>&bull;</span> <em class="date">August 2008 - January 2010</em></p>
 
                   <p>
-                  This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
-                  Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem
-                  nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan
-                  ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat
+                  Built some nice C++ programs to run on ad-hoc networks to optimize some algorithms. Hacked and learned a lot about of Linux, sockets and networking protocols.
+                  </p>
+
+               </div>
+
+            </div> <!-- item end -->
+
+            <div class="row item">
+
+               <div class="twelve columns">
+
+                  <h3>Fluxo Consultoria</h3>
+                  <p class="info">Member <span>&bull;</span> <em class="date">December 2006 - December 2007</em></p>
+
+                  <p>
+                  My first job: worked with the quality management group and later helping with software requirements.
                   </p>
 
                </div>
@@ -448,7 +478,7 @@
 
       <!-- Projects
       ================================================== -->
-      <div class="row projects">
+      <div class="row projects big-block">
 
          <div class="three columns header-col">
             <h1><span>Projects</span></h1>
@@ -457,100 +487,195 @@
          <div class="nine columns main-col">
 
             <div class="row item">
-
                <div class="twelve columns">
-
-                  <h3>Awesome Design Studio</h3>
-                  <p class="info">Senior UX Designer <span>&bull;</span> <em class="date">March 2010 - Present</em></p>
-
-                  <p>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-                  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-                  ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                  Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. Nullam dictum felis eu pede mollis pretium.
-                  </p>
-
+                  <h3>E-commerce Website</h3>
+                  <dl>
+                    <dt><b>Responsabilities</b></dt>
+                    <dd>Responsible for requirements, development, database administration, support, deployment, security, cloud infrastructure optimization, multi-language and mobile support. I was one person in a large team, but I've participated for a long time and worked on every role possible.</dd>
+                  </dl>
+                  <dl>
+                    <dt><b>Stack</b></dt>
+                    <ul class="disc">
+                      <li>Angular</li>
+                      <li>ASP.NET MVC</li>
+                      <li>C#</li>
+                      <li>Entity Framework</li>
+                      <li>SQL Server</li>
+                      <li>AWS</li>
+                    </ul>
+                  </dl>
                </div>
-
-            </div> <!-- item end -->
+            </div>
 
             <div class="row item">
-
                <div class="twelve columns">
-
-                  <h3>Super Cool Studio</h3>
-                  <p class="info">UX Designer <span>&bull;</span> <em class="date">March 2007 - February 2010</em></p>
-
-                  <p>
-                  This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
-                  Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem
-                  nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan
-                  ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat
-                  </p>
-
+                  <h3>International Projects</h3>
+                  <dl>
+                    <dt><b>Responsabilities</b></dt>
+                    <dd>Worked for Siemens (USA) and related projects for Shell (Netherlands), BASF (Germany), Chevron (Kazakhstan) and DOW (Canada). I had a nice experience working on remote projects with many different people, usually with weekly meetings (audio conferences).</dd>
+                  </dl>
+                  <dl>
+                    <dt><b>Stack</b></dt>
+                    <ul class="disc">
+                      <li>C#</li>
+                      <li>Oracle</li>
+                      <li>OPC UA (Industrial Protocol)</li>
+                      <li>Historical Databases (PI, IP21, PHD)</li>
+                    </ul>
+                  </dl>
                </div>
+            </div>
 
-            </div> <!-- item end -->
+            <div class="row item">
+               <div class="twelve columns">
+                  <h3>Batch Connectors</h3>
+                  <dl>
+                    <dt><b>Responsabilities</b></dt>
+                    <dd>Development of WCF Web Services that connected with external industrial systems to provide batch production data.</dd>
+                  </dl>
+                  <dl>
+                    <dt><b>Stack</b></dt>
+                    <ul class="disc">
+                      <li>C#</li>
+                      <li>WCF</li>
+                      <li>ISA-88</li>
+                    </ul>
+                  </dl>
+               </div>
+            </div>
+
+            <div class="row item">
+               <div class="twelve columns">
+                  <h3>Energy Field</h3>
+                  <dl>
+                    <dt><b>Responsabilities</b></dt>
+                    <dd>Developed an ETL to migrate data from an old MS Access database to a newer system with an Informix database (and very different model and business rules).</dd>
+                  </dl>
+                  <dl>
+                    <dt><b>Stack</b></dt>
+                    <ul class="disc">
+                      <li>SQL Server Integration Services</li>
+                      <li>MS Access</li>
+                      <li>Informix</li>
+                    </ul>
+                  </dl>
+               </div>
+            </div>
+
+            <div class="row item">
+               <div class="twelve columns">
+                  <h3>TV Globo</h3>
+                  <dl>
+                    <dt><b>Responsabilities</b></dt>
+                    <dd>Worked on the development of internal management systems and maintenance of legacy ones.</dd>
+                  </dl>
+                  <dl>
+                    <dt><b>Stack</b></dt>
+                    <ul class="disc">
+                      <li>ASP.NET</li>
+                      <li>C#</li>
+                      <li>VB.NET</li>
+                      <li>Oracle</li>
+                    </ul>
+                  </dl>
+               </div>
+            </div>
+
+            <div class="row item">
+               <div class="twelve columns">
+                  <h3>Side Projects</h3>
+                  <dl>
+                    <dt><b>Current Interests</b></dt>
+                    <dd>Studying and building open-source apps related with asynchronous programming, NoSQL, JavaScript frameworks and hosting Serverless apps.</dd>
+                  </dl>
+                  <dl>
+                    <dt><b>Stack</b></dt>
+                    <ul class="disc">
+                      <li>Angular</li>
+                      <li>Node</li>
+                      <li>MongoDB</li>
+                      <li>Serverless Framework</li>
+                    </ul>
+                  </dl>
+               </div>
+            </div>
 
          </div> <!-- main-col end -->
 
       </div> <!-- End Projects -->
 
+      <!-- Certifications
+      ================================================== -->
+      <div class="row certifications">
+
+         <div class="three columns header-col">
+            <h1><span>Certifications</span></h1>
+         </div>
+
+         <div class="nine columns main-col">
+
+            <div class="row item">
+               <div class="twelve columns">
+                  <h3>Microsoft Certified System Administrator</h3>
+                  <h3>SQL Server 2012</h3>
+                  <p><em class="date">May 2015</em></p>
+               </div>
+            </div>
+
+            <div class="row item">
+               <div class="twelve columns">
+                  <div class="img-certification img-microsoft">
+                      <a href="https://s3-sa-east-1.amazonaws.com/zanoncert/microsoft-sql-server.pdf">
+                        <img src="images/microsoft.png" alt="microsoft" />
+                        Download
+                      </a>
+                  </div>
+               </div>
+            </div>
+
+            <div class="row item">
+               <div class="twelve columns">
+                  <h3>C100DEV: MongoDB Certified Developer Associate Exam</h3>
+                  <h3>MongoDB, Inc.</h3>
+                  <p><em class="date">October 2015</em></p>
+               </div>
+            </div>
+
+            <div class="row item">
+               <div class="twelve columns">
+                  <div class="img-certification img-mongodb">
+                    <a href="https://university.mongodb.com/exams/display_certificate?license1=166&license2=519&license3=056">
+                      <img src="images/mongodb.png" alt="mongodb" />
+                      Download
+                    </a>
+                  </div>
+               </div>
+            </div>
+
+            <div class="row item">
+               <div class="twelve columns">
+                  <h3>AWS Certified Solutions Architect</h3>
+                  <h3>Amazon Web Services</h3>
+                  <p><em class="date">April 2014</em></p>
+               </div>
+            </div>
+
+            <div class="row item">
+               <div class="twelve columns">
+                  <div class="img-certification img-amazon">
+                      <a href="https://s3-sa-east-1.amazonaws.com/zanoncert/aws.pdf">
+                        <img src="images/amazon.png" alt="amazon" />
+                        Download
+                      </a>
+                  </div>                  
+               </div>
+            </div>
+
+         </div> <!-- main-col end -->
+
+      </div> <!-- End Certifications -->
+
    </section> <!-- Resume Section End-->
-
-   <!-- Contact Section
-   ================================================== -->
-   <section id="contact">
-
-     <div class="row projects">
-
-        <div class="three columns header-col">
-           <h1><span>Projects</span></h1>
-        </div>
-
-        <div class="nine columns main-col">
-
-           <div class="row item">
-
-              <div class="twelve columns">
-
-                 <h3>Awesome Design Studio</h3>
-                 <p class="info">Senior UX Designer <span>&bull;</span> <em class="date">March 2010 - Present</em></p>
-
-                 <p>
-                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-                 Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-                 ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                 Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. Nullam dictum felis eu pede mollis pretium.
-                 </p>
-
-              </div>
-
-           </div> <!-- item end -->
-
-           <div class="row item">
-
-              <div class="twelve columns">
-
-                 <h3>Super Cool Studio</h3>
-                 <p class="info">UX Designer <span>&bull;</span> <em class="date">March 2007 - February 2010</em></p>
-
-                 <p>
-                 This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
-                 Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem
-                 nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan
-                 ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat
-                 </p>
-
-              </div>
-
-           </div> <!-- item end -->
-
-        </div> <!-- main-col end -->
-
-     </div> <!-- End Projects -->
-
-   </section> <!-- Contact Section End-->
 
 
    <!-- footer
@@ -562,11 +687,12 @@
          <div class="twelve columns">
 
             <ul class="social-links">
-              <li><a href="http://zanon.io"><i class="fa fa-file-text-o"></i></a></li>
-              <li><a href="http://stackoverflow.com/users/1476885/zanon"><i class="fa fa-stack-overflow"></i></a></li>
-              <li><a href="https://github.com/zanon-io"><i class="fa fa-github"></i></a></li>
-              <li><a href="https://br.linkedin.com/in/dzanon"><i class="fa fa-linkedin"></i></a></li>
-              <li><a href="https://twitter.com/zanon_io"><i class="fa fa-twitter"></i></a></li>
+              <li><a data-toggle="tooltip" title="E-mail" href="mailto:diego@zanon.io"><i class="fa fa-envelope-o"></i></a></li> 
+              <li><a data-toggle="tooltip" title="Blog" href="http://zanon.io"><i class="fa fa-file-text-o"></i></a></li>
+              <li><a data-toggle="tooltip" title="Stack Overflow" href="http://stackoverflow.com/users/1476885/zanon"><i class="fa fa-stack-overflow"></i></a></li>
+              <li><a data-toggle="tooltip" title="GitHub" href="https://github.com/zanon-io"><i class="fa fa-github"></i></a></li>
+              <li><a data-toggle="tooltip" title="LinkedIn" href="https://br.linkedin.com/in/dzanon"><i class="fa fa-linkedin"></i></a></li>
+              <li><a data-toggle="tooltip" title="Twitter" href="https://twitter.com/zanon_io"><i class="fa fa-twitter"></i></a></li>
             </ul>
 
             <ul class="copyright">
@@ -587,11 +713,18 @@
    <script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
    <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
 
+   <script src="js/bootstrap.min.js"></script>
    <script src="js/jquery.flexslider.js"></script>
    <script src="js/waypoints.js"></script>
    <script src="js/jquery.fittext.js"></script>
    <script src="js/magnific-popup.js"></script>
    <script src="js/init.js"></script>
+
+   <script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
 
 </body>
 
