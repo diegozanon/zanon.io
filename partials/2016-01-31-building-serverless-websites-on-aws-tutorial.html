@@ -102,7 +102,7 @@
 <p><img src="http://zanon.io/images/posts/2016-01-31-iam-user.png" alt="iam-user"></p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-iam-user-group.png" alt="iam-user-group"></p>
 <h3 id="configuring-the-serverless-user">Configuring the Serverless User</h3>
-<p>As Serverless uses the AWS Node.js SDK, it looks for a <strong>credentials</strong> file to load the access keys. It must be located at <strong>~/.aws/credentials</strong> on Mac/Linux or <strong>C:\Users\USERNAME.aws\credentials</strong> on Windows.</p>
+<p>As Serverless uses the AWS Node.js SDK, it looks for a <strong>credentials</strong> file to load the access keys. It must be located at <strong>~/.aws/credentials</strong> on Mac/Linux or <strong>C:\Users\USERNAME\.aws\credentials</strong> on Windows.</p>
 <p>Contents:</p>
 <pre><code class="lang-xml">[default]
 aws_access_key_id = your_access_key
@@ -268,10 +268,6 @@ function getWeatherInfo(event) {
 <p>Add the following code:</p>
 <pre><code class="lang-javascript">var AWS = require(&#39;aws-sdk&#39;);
 
-// Need to add the AWS IAM here, since the Lambda function will need access to connect to the SimpleDB
-// Attention to avoid committing this sensitive data by accident
-AWS.config.update({accessKeyId: &#39;accessKeyId&#39;, secretAccessKey: &#39;secretAccessKey&#39;});
-
 module.exports.queryData = function(query, cb) {
 
   var simpledb = new AWS.SimpleDB();
@@ -309,6 +305,51 @@ function getWeatherQuery(event) {
 
   return &quot;select Value from Weather where ID = &#39;5&#39;&quot;;
 }
+</code></pre>
+<h3 id="add-permissions-to-your-lambda-functions-to-read-simpledb-data">Add permissions to your Lambda functions to read SimpleDB data</h3>
+<p>The Lambda functions that you have just deployed will not have access to your AWS Resources. If you want them to have this access, you have to give them explicitly.</p>
+<p>Modify your <strong>s-project.json</strong> file with the following:</p>
+<pre><code class="lang-json">&quot;IamPolicyLambda&quot;: {
+  &quot;Type&quot;: &quot;AWS::IAM::Policy&quot;,
+  &quot;Properties&quot;: {
+    &quot;PolicyName&quot;: &quot;${stage}-${project}-lambda&quot;,
+    &quot;PolicyDocument&quot;: {
+      &quot;Version&quot;: &quot;2012-10-17&quot;,
+      &quot;Statement&quot;: [
+        {
+          &quot;Effect&quot;: &quot;Allow&quot;,
+          &quot;Action&quot;: [
+            &quot;logs:CreateLogGroup&quot;,
+            &quot;logs:CreateLogStream&quot;,
+            &quot;logs:PutLogEvents&quot;
+          ],
+          &quot;Resource&quot;: &quot;arn:aws:logs:${region}:*:*&quot;
+        },
+
+        // ================
+        // Added this block
+        {
+          &quot;Effect&quot;: &quot;Allow&quot;,
+          &quot;Action&quot;: [
+            &quot;*&quot;
+          ],
+          &quot;Resource&quot;: &quot;arn:aws:dynamodb:us-east-1:[ACCOUNT_ID]:table/*&quot;
+        }
+        // End
+        // ================
+
+      ]
+    },
+    &quot;Roles&quot;: [
+      {
+         &quot;Ref&quot;: &quot;IamRoleLambda&quot;
+       }
+    ]
+  }
+}
+</code></pre>
+<p>To deploy the changes, run the command below at the project level:</p>
+<pre><code class="lang-xml">&gt; serverless resources deploy
 </code></pre>
 <p>And... that&#39;s it! The app is working at <a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a>, where the HTML/CSS/JS is hosted on S3, the back-end code is a service that runs only on demand at AWS Lambda and the data is stored in SimpleDB, which generate costs only while processing queries.</p>
 

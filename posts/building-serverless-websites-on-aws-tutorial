@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="Angular, Node, MongoDB, AWS, Android, iOS">
     <meta name="author" content="Diego Zanon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="http://zanon.io/favicon.ico" type="image/x-icon">
 
     <title>zanon.io</title>
 
@@ -181,7 +181,7 @@
 <p><img src="http://zanon.io/images/posts/2016-01-31-iam-user.png" alt="iam-user"></p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-iam-user-group.png" alt="iam-user-group"></p>
 <h3 id="configuring-the-serverless-user">Configuring the Serverless User</h3>
-<p>As Serverless uses the AWS Node.js SDK, it looks for a <strong>credentials</strong> file to load the access keys. It must be located at <strong>~/.aws/credentials</strong> on Mac/Linux or <strong>C:\Users\USERNAME.aws\credentials</strong> on Windows.</p>
+<p>As Serverless uses the AWS Node.js SDK, it looks for a <strong>credentials</strong> file to load the access keys. It must be located at <strong>~/.aws/credentials</strong> on Mac/Linux or <strong>C:\Users\USERNAME\.aws\credentials</strong> on Windows.</p>
 <p>Contents:</p>
 <pre><code class="lang-xml hljs">[default]
 aws_access_key_id = your_access_key
@@ -347,10 +347,6 @@ region = us-east-1
 <p>Add the following code:</p>
 <pre><code class="lang-javascript hljs"><span class="hljs-keyword">var</span> AWS = <span class="hljs-built_in">require</span>(<span class="hljs-string">'aws-sdk'</span>);
 
-<span class="hljs-comment">// Need to add the AWS IAM here, since the Lambda function will need access to connect to the SimpleDB</span>
-<span class="hljs-comment">// Attention to avoid committing this sensitive data by accident</span>
-AWS.config.update({accessKeyId: <span class="hljs-string">'accessKeyId'</span>, secretAccessKey: <span class="hljs-string">'secretAccessKey'</span>});
-
 <span class="hljs-built_in">module</span>.exports.queryData = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">query, cb</span>) </span>{
 
   <span class="hljs-keyword">var</span> simpledb = <span class="hljs-keyword">new</span> AWS.SimpleDB();
@@ -389,12 +385,57 @@ AWS.config.update({accessKeyId: <span class="hljs-string">'accessKeyId'</span>, 
   <span class="hljs-keyword">return</span> <span class="hljs-string">"select Value from Weather where ID = '5'"</span>;
 }
 </code></pre>
+<h3 id="add-permissions-to-your-lambda-functions-to-read-simpledb-data">Add permissions to your Lambda functions to read SimpleDB data</h3>
+<p>The Lambda functions that you have just deployed will not have access to your AWS Resources. If you want them to have this access, you have to give them explicitly.</p>
+<p>Modify your <strong>s-project.json</strong> file with the following:</p>
+<pre><code class="lang-json hljs"><span class="hljs-string">"IamPolicyLambda"</span>: {
+  "<span class="hljs-attribute">Type</span>": <span class="hljs-value"><span class="hljs-string">"AWS::IAM::Policy"</span></span>,
+  "<span class="hljs-attribute">Properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">PolicyName</span>": <span class="hljs-value"><span class="hljs-string">"${stage}-${project}-lambda"</span></span>,
+    "<span class="hljs-attribute">PolicyDocument</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">Version</span>": <span class="hljs-value"><span class="hljs-string">"2012-10-17"</span></span>,
+      "<span class="hljs-attribute">Statement</span>": <span class="hljs-value">[
+        {
+          "<span class="hljs-attribute">Effect</span>": <span class="hljs-value"><span class="hljs-string">"Allow"</span></span>,
+          "<span class="hljs-attribute">Action</span>": <span class="hljs-value">[
+            <span class="hljs-string">"logs:CreateLogGroup"</span>,
+            <span class="hljs-string">"logs:CreateLogStream"</span>,
+            <span class="hljs-string">"logs:PutLogEvents"</span>
+          ]</span>,
+          "<span class="hljs-attribute">Resource</span>": <span class="hljs-value"><span class="hljs-string">"arn:aws:logs:${region}:*:*"</span>
+        </span>},
+
+        // ================
+        // Added this block
+        {
+          "<span class="hljs-attribute">Effect</span>": <span class="hljs-value"><span class="hljs-string">"Allow"</span></span>,
+          "<span class="hljs-attribute">Action</span>": <span class="hljs-value">[
+            <span class="hljs-string">"*"</span>
+          ]</span>,
+          "<span class="hljs-attribute">Resource</span>": <span class="hljs-value"><span class="hljs-string">"arn:aws:dynamodb:us-east-1:[ACCOUNT_ID]:table/*"</span>
+        </span>}
+        // End
+        // ================
+
+      ]
+    </span>}</span>,
+    "<span class="hljs-attribute">Roles</span>": <span class="hljs-value">[
+      {
+         "<span class="hljs-attribute">Ref</span>": <span class="hljs-value"><span class="hljs-string">"IamRoleLambda"</span>
+       </span>}
+    ]
+  </span>}
+</span>}
+</code></pre>
+<p>To deploy the changes, run the command below at the project level:</p>
+<pre><code class="lang-xml hljs">&gt; serverless resources deploy
+</code></pre>
 <p>And... that's it! The app is working at <a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a>, where the HTML/CSS/JS is hosted on S3, the back-end code is a service that runs only on demand at AWS Lambda and the data is stored in SimpleDB, which generate costs only while processing queries.</p>
 
     </div>
   </div>
 </div>
-<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app2" name="dsq-app2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; height: 0px !important; " width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=5e251367ffb39af07c2a292e9e45a454&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Fbuilding-serverless-websites-on-aws-tutorial&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default"></iframe></div><a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></dir-disqus></div>
+<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app2" name="dsq-app2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; height: 0px !important; " width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=5e251367ffb39af07c2a292e9e45a454&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Fbuilding-serverless-websites-on-aws-tutorial&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default" horizontalscrolling="no" verticalscrolling="no"></iframe></div></dir-disqus></div>
       </div>
     </div>
 

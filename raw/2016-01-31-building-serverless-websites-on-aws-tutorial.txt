@@ -166,7 +166,7 @@ After that, create a new user named as **serverless-admin**, write down its **Ac
 
 ### Configuring the Serverless User
 
-As Serverless uses the AWS Node.js SDK, it looks for a **credentials** file to load the access keys. It must be located at **~/.aws/credentials** on Mac/Linux or **C:\Users\USERNAME\.aws\credentials** on Windows.
+As Serverless uses the AWS Node.js SDK, it looks for a **credentials** file to load the access keys. It must be located at **~/.aws/credentials** on Mac/Linux or **C:\Users\USERNAME\\.aws\credentials** on Windows.
 
 Contents:
 ```xml
@@ -396,10 +396,6 @@ Add the following code:
 ```javascript
 var AWS = require('aws-sdk');
 
-// Need to add the AWS IAM here, since the Lambda function will need access to connect to the SimpleDB
-// Attention to avoid committing this sensitive data by accident
-AWS.config.update({accessKeyId: 'accessKeyId', secretAccessKey: 'secretAccessKey'});
-
 module.exports.queryData = function(query, cb) {
 
   var simpledb = new AWS.SimpleDB();
@@ -440,6 +436,59 @@ function getWeatherQuery(event) {
 
   return "select Value from Weather where ID = '5'";
 }
+```
+
+### Add permissions to your Lambda functions to read SimpleDB data
+
+The Lambda functions that you have just deployed will not have access to your AWS Resources. If you want them to have this access, you have to give them explicitly.
+
+Modify your **s-project.json** file with the following:
+
+```json
+"IamPolicyLambda": {
+  "Type": "AWS::IAM::Policy",
+  "Properties": {
+    "PolicyName": "${stage}-${project}-lambda",
+    "PolicyDocument": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "arn:aws:logs:${region}:*:*"
+        },
+
+        // ================
+        // Added this block
+        {
+          "Effect": "Allow",
+          "Action": [
+            "*"
+          ],
+          "Resource": "arn:aws:dynamodb:us-east-1:[ACCOUNT_ID]:table/*"
+        }
+        // End
+        // ================
+
+      ]
+    },
+    "Roles": [
+      {
+         "Ref": "IamRoleLambda"
+       }
+    ]
+  }
+}
+```
+
+To deploy the changes, run the command below at the project level:
+
+```xml
+> serverless resources deploy
 ```
 
 And... that's it! The app is working at http://serverless-demo.zanon.io, where the HTML/CSS/JS is hosted on S3, the back-end code is a service that runs only on demand at AWS Lambda and the data is stored in SimpleDB, which generate costs only while processing queries.
