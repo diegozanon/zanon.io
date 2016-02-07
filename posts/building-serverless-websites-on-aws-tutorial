@@ -412,7 +412,7 @@ region = us-east-1
           "<span class="hljs-attribute">Action</span>": <span class="hljs-value">[
             <span class="hljs-string">"*"</span>
           ]</span>,
-          "<span class="hljs-attribute">Resource</span>": <span class="hljs-value"><span class="hljs-string">"arn:aws:dynamodb:us-east-1:[ACCOUNT_ID]:table/*"</span>
+          "<span class="hljs-attribute">Resource</span>": <span class="hljs-value"><span class="hljs-string">"arn:aws:sdb:us-east-1:[ACCOUNT_ID]:domain/Weather"</span>          
         </span>}
         // End
         // ================

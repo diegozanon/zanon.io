@@ -469,7 +469,7 @@ Modify your **s-project.json** file with the following:
           "Action": [
             "*"
           ],
-          "Resource": "arn:aws:dynamodb:us-east-1:[ACCOUNT_ID]:table/*"
+          "Resource": "arn:aws:sdb:us-east-1:[ACCOUNT_ID]:domain/Weather"          
         }
         // End
         // ================
