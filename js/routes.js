@@ -13,6 +13,9 @@ angular.module('zanonApp').config(['$routeProvider', '$locationProvider',
       })
 
       // posts
+      .when('/posts/please-try-again-retry-pattern-in-node', {
+        templateUrl: '/partials/2016-04-09-please-try-again-retry-pattern-in-node.html'
+      })
       .when('/posts/building-serverless-websites-on-aws-tutorial', {
         templateUrl: '/partials/2016-01-31-building-serverless-websites-on-aws-tutorial.html'
       })

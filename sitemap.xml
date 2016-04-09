@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://zanon.io</loc>
-    <lastmod>2016-01-31</lastmod>
+    <lastmod>2016-04-09</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -53,6 +53,11 @@
   <url>
     <loc>http://zanon.io/posts/building-serverless-websites-on-aws-tutorial</loc>
     <lastmod>2016-01-31</lastmod>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>http://zanon.io/posts/please-try-again-retry-pattern-in-node</loc>
+    <lastmod>2016-04-09</lastmod>
     <changefreq>monthly</changefreq>
   </url>
 </urlset>

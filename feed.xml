@@ -65,5 +65,11 @@
       <guid>http://zanon.io/posts/building-serverless-websites-on-aws-tutorial</guid>
       <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
     </item>
+    <item>
+      <title>&quot;Please, try again...&quot; (Retry Pattern in Node)</title>
+      <link>http://zanon.io/posts/please-try-again-retry-pattern-in-node</link>
+      <guid>http://zanon.io/posts/please-try-again-retry-pattern-in-node</guid>
+      <pubDate>Sat, 09 Apr 2016 00:00:00 +0000</pubDate>
+    </item>
   </channel>
 </rss>

@@ -1,5 +1,15 @@
 
 <div ng-controller="PostsController">
+  <div ng-show="active.all || active.node" class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <article>
+        <div class="date">Apr 09, 2016</div>
+        <h2><a href="/posts/please-try-again-retry-pattern-in-node">&quot;Please, try again...&quot; (Retry Pattern in Node)</a></h2>
+        <p>When building a service, you should anticipate that some transient failures may occur due to network issues or query timeouts. In such cases, the Retry Pattern is very useful.</p>
+        <button ng-click="filter('node');" type="button" class="btn tag pull-right">Node</button>
+      </article>
+    </div>
+  </div>
   <div ng-show="active.all || active.aws || active.node" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>

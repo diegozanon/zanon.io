@@ -1,0 +1,110 @@
+
+<div class="row">
+  <div class="col-md-offset-1 col-md-10 post">
+    <h1>&quot;Please, try again...&quot; (Retry Pattern in Node)</h1>
+    <p class="date">Apr 09, 2016</p>
+    <div>
+
+<h2 id="retry-pattern">Retry Pattern</h2>
+<h3 id="problem-what-are-we-trying-to-solve-">Problem - what are we trying to solve?</h3>
+<p>Networks are unreliable, connections may be dropped or timeout, databases can be overloaded and become unable to process your request. There are many reasons where a valid request is discarded due to external factors. In those cases, we may try sending the same request again. The question is <strong>when</strong> we have to <em>retry</em> and <strong>when</strong> we have to accept the failure. The objective here is to achieve fault-tolerance whenever possible to build resilient applications.</p>
+<p>This approach is specially important when we are developing windows services, jobs, scheduled events, daemons, etc. If the background process runs one time per day and it is not fault tolerant, it may create bad side effects.</p>
+<h3 id="context-when-should-we-retry-">Context - when should we <em>Retry</em>?</h3>
+<p>Retrying is a good approach when you know that the error is transient. Retrying blindly may only yield the same error and be a waste of computer resources.</p>
+<p>When we should retry:</p>
+<ul>
+<li>When the external service returns the following HTTP error codes: HTTP 408 (Request Timeout), HTTP 429 (Too Many Requests - try after a longer period), HTTP 503 (Service Unavailable) or HTTP 504 (Gateway Timeout).</li>
+<li>When the external service returns the HTTP 500 error code but we have a pretty good guess that it could be caused by a unhandled exception created by a transient problem: if the service relies on other services and may not be so fault-tolerant as ours.</li>
+<li>When the database or another backend resource reports timeouts or other known error type that suggests a transient failure.</li>
+</ul>
+<p>When we shouldn&#39;t retry:</p>
+<ul>
+<li>When the request was done by an user: simply return an error message like &quot;An error has occurred, please try again later&quot;. We can avoid dead retries asking for the user to decide what is the best way to handle the problem. Usually, the user will prefer to see a fast response saying that an error has occurred than having to wait a few minutes with the risk of seeing the same error message.</li>
+<li>When we don&#39;t have any idea about what caused the error: if the error is caused by a programming bug, you shouldn&#39;t try repeatedly.</li>
+<li>When the request is not <strong>idempotent*</strong>: if the request is &quot;select something from tableX&quot; or &quot;update X to Y&quot;, we can try again without worrying about side effects. However, if the request is &quot;delete the first report&quot; or &quot;insert a new order&quot;, we <strong>should not</strong> retry to avoid deleting wrong things or duplicating content.</li>
+</ul>
+<p>* <strong>Idempotency</strong>: an idempotent method is the one that can be called many times without different outcomes. More <a href="http://restcookbook.com/HTTP%20Methods/idempotency/">here</a>.</p>
+<h3 id="issues-and-considerations">Issues and Considerations</h3>
+<p>Regarding how many times you need to retry is a question answerable only knowing the specific case. Usually, we would retry only three times waiting between 30 or 60 seconds per request, but this number can be increased if the execution of the request is critical for the operation. Just avoid retrying infinitely because it will be probably just a waste of resources.</p>
+<p>Other things to consider:</p>
+<ul>
+<li>It may be better for some noncritical operations to fail fast rather than retry several times and impact the throughput of the application.</li>
+<li>A highly aggressive retry policy with minimal delay between attempts, and a large number of retries, could further degrade a busy service that is running close to or at capacity.</li>
+<li>Test the retry code! You should avoid infinite loops and non-idempotent retries.</li>
+<li>Log all retry actions. If it is frequently used, probably there is another hidden problem yet to me identified.</li>
+</ul>
+<h3 id="solution-how-can-i-retry-">Solution - how can I <em>Retry</em>?</h3>
+<p><a href="https://msdn.microsoft.com/en-us/library/dn589788.aspx"><img src="http://zanon.io/images/posts/2016-04-09-retry.png" alt="retry"></a></p>
+<p>The retry logic is quite simple: you just need to loop X times, waiting a few seconds between each loop and retry if you know that the error is transient. If you succeed or the limit is achieved, you abort the loop.</p>
+<pre><code class="lang-javascript">while (true) {
+
+  try {
+
+    // execute the task and break the loop if it succeeds
+
+  } catch (e)  {
+
+    // if (e instanceof CommunicationError &amp;&amp; attempts &lt; limit)
+    // try again after a few seconds
+  }
+}
+</code></pre>
+<p>However, implementing this in Node considering async operations is a little bit more complex. So, why don&#39;t we use a well tested module? I suggest <a href="https://www.npmjs.com/package/retry">retry</a> that is specialized in this task or the almighty <a href="https://www.npmjs.com/package/async">async</a> module that has also <a href="https://github.com/caolan/async#retry">a retry feature</a>.</p>
+<p>For this example, I&#39;ll pick the <a href="https://www.npmjs.com/package/retry">retry</a> module.</p>
+<h3 id="installation">Installation</h3>
+<pre><code class="lang-xml">&gt; npm install retry
+</code></pre>
+<h3 id="testing">Testing</h3>
+<p>retry uses an <a href="http://dthain.blogspot.com.br/2009/02/exponential-backoff-in-distributed.html">exponential backoff</a> strategy to calculate how much time each retry attempt must wait. It&#39;s a very clever solution. You can read more about in the <a href="https://github.com/tim-kos/node-retry#retrytimeoutsoptions">official docs</a>.</p>
+<p>Below follows an example using this module:</p>
+<pre><code class="lang-javascript">var retry = require(&#39;retry&#39;);
+
+// configuration
+var operation = retry.operation({
+  retries: 2,            // try 1 time and retry 2 times if needed, total = 3
+  minTimeout: 10 * 1000, // the number of milliseconds before starting the first retry
+  maxTimeout: 30 * 1000, // the maximum number of milliseconds between two retries
+});
+
+// define a custom error
+function CommunicationError() {}
+
+// define a function that represents our unreliable task
+var task = function(input, callback) {
+
+  Math.random() &gt; 0.7
+    ? callback(null, &#39;ok&#39;)                // success in 30% of the cases
+    : callback(new CommunicationError()); // error in 70% of the cases
+}
+
+// define a function that wraps our unreliable task into one fault tolerant task
+function faultTolerantTask(input, callback) {
+
+  operation.attempt(function(currentAttempt) {
+
+    task(input, function(err, result) {
+
+      console.log(&#39;Current attempt: &#39; + currentAttempt);
+
+      if (err instanceof CommunicationError // test if is a transient error - optional
+          &amp;&amp; operation.retry(err)) {        // test if is retriable
+          return;
+      }
+
+      callback(err ? operation.mainError() : null, result);
+    });
+  });
+}
+
+// test
+faultTolerantTask(&#39;some input&#39;, function(err, result) {
+  console.log(err, result);
+});
+</code></pre>
+<h2 id="read-more">Read more</h2>
+<p>This post was inspired by <a href="https://msdn.microsoft.com/en-us/library/dn589788.aspx">this</a> MSDN article (with C# examples).</p>
+
+    </div>
+  </div>
+</div>
+<dir-disqus></dir-disqus>
