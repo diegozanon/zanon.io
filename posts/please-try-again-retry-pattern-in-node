@@ -86,19 +86,19 @@
 
 <h2 id="retry-pattern">Retry Pattern</h2>
 <h3 id="problem-what-are-we-trying-to-solve-">Problem - what are we trying to solve?</h3>
-<p>Networks are unreliable, connections may be dropped or timeout, databases can be overloaded and become unable to process your request. There are many reasons where a valid request is discarded due to external factors. In those cases, we may try sending the same request again. The question is <strong>when</strong> we have to <em>retry</em> and <strong>when</strong> we have to accept the failure. The objective here is to achieve fault-tolerance whenever possible to build resilient applications.</p>
+<p>Networks are unreliable, connections may be dropped or timeout, databases can be overloaded and become unable to process your request. There are many reasons for a valid request to be discarded due to external factors. In those cases, we may try sending the same request again. The question is <strong>when</strong> we have to <em>retry</em> and <strong>when</strong> we have to accept the failure. The objective here is to achieve fault-tolerance whenever possible to build resilient applications.</p>
 <p>This approach is specially important when we are developing windows services, jobs, scheduled events, daemons, etc. If the background process runs one time per day and it is not fault tolerant, it may create bad side effects.</p>
 <h3 id="context-when-should-we-retry-">Context - when should we <em>Retry</em>?</h3>
 <p>Retrying is a good approach when you know that the error is transient. Retrying blindly may only yield the same error and be a waste of computer resources.</p>
-<p>When we should retry:</p>
+<p>We should retry when:</p>
 <ul>
 <li>When the external service returns the following HTTP error codes: HTTP 408 (Request Timeout), HTTP 429 (Too Many Requests - try after a longer period), HTTP 503 (Service Unavailable) or HTTP 504 (Gateway Timeout).</li>
 <li>When the external service returns the HTTP 500 error code but we have a pretty good guess that it could be caused by a unhandled exception created by a transient problem: if the service relies on other services and may not be so fault-tolerant as ours.</li>
 <li>When the database or another backend resource reports timeouts or other known error type that suggests a transient failure.</li>
 </ul>
-<p>When we shouldn't retry:</p>
+<p>We shouldn't retry when:</p>
 <ul>
-<li>When the request was done by an user: simply return an error message like "An error has occurred, please try again later". We can avoid dead retries asking for the user to decide what is the best way to handle the problem. Usually, the user will prefer to see a fast response saying that an error has occurred than having to wait a few minutes with the risk of seeing the same error message.</li>
+<li>When the request was done by an user: simply return an error message like "An error has occurred, please try again later". We can avoid dead retries by asking for the user to decide what is the best way to handle the problem. Usually, the user will prefer to see a fast response saying that an error has occurred than having to wait a few minutes with the risk of seeing the same error message.</li>
 <li>When we don't have any idea about what caused the error: if the error is caused by a programming bug, you shouldn't try repeatedly.</li>
 <li>When the request is not <strong>idempotent*</strong>: if the request is "select something from tableX" or "update X to Y", we can try again without worrying about side effects. However, if the request is "delete the first report" or "insert a new order", we <strong>should not</strong> retry to avoid deleting wrong things or duplicating content.</li>
 </ul>
@@ -129,7 +129,7 @@
 }
 </code></pre>
 <p>However, implementing this in Node considering async operations is a little bit more complex. So, why don't we use a well tested module? I suggest <a href="https://www.npmjs.com/package/retry">retry</a> that is specialized in this task or the almighty <a href="https://www.npmjs.com/package/async">async</a> module that has also <a href="https://github.com/caolan/async#retry">a retry feature</a>.</p>
-<p>For this example, I'll pick the <a href="https://www.npmjs.com/package/retry">retry</a> module.</p>
+<p>For this example, I'll pick the retry module.</p>
 <h3 id="installation">Installation</h3>
 <pre><code class="lang-xml hljs">&gt; npm install retry
 </code></pre>
@@ -142,7 +142,7 @@
 <span class="hljs-keyword">var</span> operation = retry.operation({
   retries: <span class="hljs-number">2</span>,            <span class="hljs-comment">// try 1 time and retry 2 times if needed, total = 3</span>
   minTimeout: <span class="hljs-number">10</span> * <span class="hljs-number">1000</span>, <span class="hljs-comment">// the number of milliseconds before starting the first retry</span>
-  maxTimeout: <span class="hljs-number">30</span> * <span class="hljs-number">1000</span>, <span class="hljs-comment">// the maximum number of milliseconds between two retries</span>
+  maxTimeout: <span class="hljs-number">30</span> * <span class="hljs-number">1000</span>  <span class="hljs-comment">// the maximum number of milliseconds between two retries</span>
 });
 
 <span class="hljs-comment">// define a custom error</span>
@@ -156,7 +156,7 @@
     : callback(<span class="hljs-keyword">new</span> CommunicationError()); <span class="hljs-comment">// error in 70% of the cases</span>
 }
 
-<span class="hljs-comment">// define a function that wraps our unreliable task into one fault tolerant task</span>
+<span class="hljs-comment">// define a function that wraps our unreliable task into a fault tolerant task</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">faultTolerantTask</span>(<span class="hljs-params">input, callback</span>) </span>{
 
   operation.attempt(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">currentAttempt</span>) </span>{
@@ -166,7 +166,7 @@
       <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Current attempt: '</span> + currentAttempt);
 
       <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> CommunicationError <span class="hljs-comment">// test if is a transient error - optional</span>
-          &amp;&amp; operation.retry(err)) {        <span class="hljs-comment">// test if is retriable</span>
+          &amp;&amp; operation.retry(err)) {        <span class="hljs-comment">// test if is retriable and retry if needed</span>
           <span class="hljs-keyword">return</span>;
       }
 
@@ -180,7 +180,7 @@ faultTolerantTask(<span class="hljs-string">'some input'</span>, <span class="hl
   <span class="hljs-built_in">console</span>.log(err, result);
 });
 </code></pre>
-<h2 id="read-more">Read more</h2>
+<h3 id="read-more">Read more</h3>
 <p>This post was inspired by <a href="https://msdn.microsoft.com/en-us/library/dn589788.aspx">this</a> MSDN article (with C# examples).</p>
 
     </div>
