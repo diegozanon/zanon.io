@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en" ng-app="zanonApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak-invalid,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+<!DOCTYPE html>
+<html lang="en" ng-app="zanonApp">
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +10,7 @@
 
     <title>zanon.io</title>
 
-    <script async="" src="//www.google-analytics.com/analytics.js"></script><script src="/js/ng-cloak.js"></script><style type="text/css">.ng-cloak-invalid { display: none !important; }</style> <!-- workaround to avoid flickering in prerendered content -->
+    <script src="/js/ng-cloak.js"></script> <!-- workaround to avoid flickering in prerendered content -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/monokai_sublime.min.css">
     <link rel="stylesheet" href="/css/site.css">
@@ -20,8 +22,8 @@
     <![endif]-->
 
     <base href="/">
-  <script type="text/javascript" async="" src="//zanon.disqus.com/embed.js"></script></head>
-  <body ng-controller="MainController" class="ng-scope">
+  </head>
+  <body ng-controller="MainController">
 
     <header>
       <div>
@@ -62,13 +64,13 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li ng-class="{ 'active': active.all }" class="active">    <a ng-click="filter('all');" href="/">All posts</a></li>
-              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');" href="/">Angular</a></li>
-              <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');" href="/">Node</a></li>
-              <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');" href="/">MongoDB</a></li>
-              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');" href="/">AWS</a></li>
-              <li ng-class="{ 'active': active.android }"><a ng-click="filter('android');" href="/">Android</a></li>
-              <li ng-class="{ 'active': active.ios }">	  <a ng-click="filter('ios');" href="/">iOS</a></li>
+              <li ng-class="{ 'active': active.all }">    <a ng-click="filter('all');"      href="/">All posts</a></li>
+              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');"  href="/">Angular</a></li>
+              <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');"     href="/">Node</a></li>
+              <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');"  href="/">MongoDB</a></li>
+              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');"      href="/">AWS</a></li>
+              <li ng-class="{ 'active': active.android }"><a ng-click="filter('android');"  href="/">Android</a></li>
+              <li ng-class="{ 'active': active.ios }">	  <a ng-click="filter('ios');"      href="/">iOS</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </nav>
@@ -77,15 +79,16 @@
 
     <div class="container">
       <div class="content">
-        <!-- ngView:  --><div class="ng-view-background ng-scope ng-cloak" autoscroll="true" ng-view="" highlight-code="">
-<div class="row ng-scope">
+        <div class="ng-view-background ng-cloak" autoscroll="true" ng-view highlight-code>
+          
+<div class="row">
   <div class="col-md-offset-1 col-md-10 post">
     <h1>Creating Desktop Apps using HTML/CSS/JS + Node.js with NW.js</h1>
     <p class="date">SEP 20, 2015</p>
     <div>
 
 <h2 id="what-is-nw-js-">What is NW.js?</h2>
-<p>Maybe you've already heard about node-webkit. It was <a href="https://groups.google.com/forum/#!msg/nwjs-general/V1FhvfaFIzQ/720xKVd0jNkJ">renamed to NW.js</a>, but keeps the same objective: bring your web development tools and skills to build multi-platform desktop apps.</p>
+<p>Maybe you&#39;ve already heard about node-webkit. It was <a href="https://groups.google.com/forum/#!msg/nwjs-general/V1FhvfaFIzQ/720xKVd0jNkJ">renamed to NW.js</a>, but keeps the same objective: bring your web development tools and skills to build multi-platform desktop apps.</p>
 <p>NW.js is an app runtime for writing <em>native</em> apps that uses Chromium to render your interface and allows you to run your Node.js modules desktop-side.</p>
 <p>There are many nice apps using it as you can see in <a href="https://github.com/nwjs/nw.js/wiki/List-of-apps-and-companies-using-nw.js">this link</a>. For example, this nice <a href="https://github.com/Aluxian/WhatsApp-Desktop">unofficial WhatsApp app for desktop</a>:</p>
 <p><img src="http://zanon.io/images/posts/2015-09-20-whatsapp.png" alt="whatsapp"></p>
@@ -93,158 +96,158 @@
 <p>The first step is to download the executable built for your operating system from the <a href="https://github.com/nwjs/nw.js#user-content-downloads">project page</a>.</p>
 <p>When running NW.js, it will search for a package.json file to know what should be loaded and some extra configuration, like the default window size.</p>
 <p>For a simple test, create the package.json file with the following content:</p>
-<pre><code class="lang-javascript hljs">{
-  <span class="hljs-string">"name"</span>: <span class="hljs-string">"nw-hello-world"</span>,
-  <span class="hljs-string">"version"</span>: <span class="hljs-string">"1.0.0"</span>,
-  <span class="hljs-string">"main"</span>: <span class="hljs-string">"index.html"</span>
+<pre><code class="lang-javascript">{
+  &quot;name&quot;: &quot;nw-hello-world&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;main&quot;: &quot;index.html&quot;
 }
 </code></pre>
 <p>And the index.html with the following:</p>
-<pre><code class="lang-html hljs xml"><span class="hljs-doctype">&lt;!DOCTYPE html&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>Hello World!<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Hello World!<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span>
+<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Hello World!&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello World!&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 </code></pre>
-<p>After unpacking the NW.js file that you've just downloaded, you'll run your application calling the NW.js program and passing as an argument the path to your project.</p>
+<p>After unpacking the NW.js file that you&#39;ve just downloaded, you&#39;ll run your application calling the NW.js program and passing as an argument the path to your project.</p>
 <p>On Windows:</p>
-<pre><code class="lang-xml hljs">&gt; C:\path\to\nwjs\nw.exe C:\path\to\your\project
+<pre><code class="lang-xml">&gt; C:\path\to\nwjs\nw.exe C:\path\to\your\project
 </code></pre>
 <p>On Linux:</p>
-<pre><code class="lang-xml hljs">&gt; /path/to/nwjs /path/to/your/project
+<pre><code class="lang-xml">&gt; /path/to/nwjs /path/to/your/project
 </code></pre>
 <p>On OSX, the executable binary is in a hidden directory within the .app file. You can call it as:</p>
-<pre><code class="lang-xml hljs">&gt; /path/to/nwjs/Contents/MacOS/nwjs /path/to/your/project
+<pre><code class="lang-xml">&gt; /path/to/nwjs/Contents/MacOS/nwjs /path/to/your/project
 </code></pre>
 <p>or</p>
-<pre><code class="lang-xml hljs">&gt; open -n -a nwjs --args "/path/to/your/project"
+<pre><code class="lang-xml">&gt; open -n -a nwjs --args &quot;/path/to/your/project&quot;
 </code></pre>
 <p>A better way to run is adding the NW command to PATH (Windows) or bash shell (OSX).</p>
 <h2 id="developing-apps">Developing Apps</h2>
 <h3 id="window-properties">Window Properties</h3>
-<p>If you run this hello world demo, you'll get the following:</p>
+<p>If you run this hello world demo, you&#39;ll get the following:</p>
 <p><img src="http://zanon.io/images/posts/2015-09-20-nw-hello-world.png" alt="nw-hello-world"></p>
 <p>By default, for debugging purposes, NW.js shows the address bar, the developer tools button, navigation arrows and two (?!) refresh buttons. For production code, this toolbar can be easily hidden setting the window.toolbar property to false in the package.json file.</p>
-<pre><code class="lang-javascript hljs">{
-  <span class="hljs-string">"name"</span>: <span class="hljs-string">"nw-hello-world"</span>,
-  <span class="hljs-string">"version"</span>: <span class="hljs-string">"1.0.0"</span>,
-  <span class="hljs-string">"main"</span>: <span class="hljs-string">"index.html"</span>,
-  <span class="hljs-string">"window"</span>: {
-    <span class="hljs-string">"toolbar"</span>: <span class="hljs-literal">false</span>
+<pre><code class="lang-javascript">{
+  &quot;name&quot;: &quot;nw-hello-world&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;main&quot;: &quot;index.html&quot;,
+  &quot;window&quot;: {
+    &quot;toolbar&quot;: false
   }
 }
 </code></pre>
 <p>Another main configuration for deployment is to link your application icon. This is done setting the path in the window.icon property. With the window property, you can also set a default window size for your app and max-min ranges.</p>
-<pre><code class="lang-javascript hljs">{
-  <span class="hljs-string">"name"</span>: <span class="hljs-string">"nw-hello-world"</span>,
-  <span class="hljs-string">"version"</span>: <span class="hljs-string">"1.0.0"</span>,
-  <span class="hljs-string">"main"</span>: <span class="hljs-string">"index.html"</span>,
-  <span class="hljs-string">"window"</span>: {
-    <span class="hljs-string">"toolbar"</span>: <span class="hljs-literal">false</span>,
-    <span class="hljs-string">"icon"</span>: <span class="hljs-string">"my-app-icon.png"</span>,
-    <span class="hljs-string">"fullscreen"</span>: <span class="hljs-literal">false</span>,
-    <span class="hljs-string">"resizable"</span> : <span class="hljs-literal">true</span>,
-    <span class="hljs-string">"width"</span>: <span class="hljs-number">800</span>,
-    <span class="hljs-string">"height"</span>: <span class="hljs-number">600</span>,
-    <span class="hljs-string">"min_width"</span>: <span class="hljs-number">400</span>,
-    <span class="hljs-string">"min_height"</span>: <span class="hljs-number">300</span>
+<pre><code class="lang-javascript">{
+  &quot;name&quot;: &quot;nw-hello-world&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;main&quot;: &quot;index.html&quot;,
+  &quot;window&quot;: {
+    &quot;toolbar&quot;: false,
+    &quot;icon&quot;: &quot;my-app-icon.png&quot;,
+    &quot;fullscreen&quot;: false,
+    &quot;resizable&quot; : true,
+    &quot;width&quot;: 800,
+    &quot;height&quot;: 600,
+    &quot;min_width&quot;: 400,
+    &quot;min_height&quot;: 300
   }
 }
 </code></pre>
 <p>You can take a look in this <a href="https://github.com/nwjs/nw.js/wiki/Manifest-format">link</a> for a full list of configuration properties.</p>
 <h3 id="using-node-modules">Using Node Modules</h3>
 <p>Using node modules is pretty straightforward. For example, if you want to use Node module <strong>request</strong>, you need to download the module and save its path to your package.json file. It can be done automatically with the NPM command:</p>
-<pre><code class="lang-xml hljs">npm install request --save
+<pre><code class="lang-xml">npm install request --save
 </code></pre>
 <p>Next, reference you JavaScript file inside your index.html:</p>
-<pre><code class="lang-html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"app.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<pre><code class="lang-html">&lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
 </code></pre>
-<p>In the example below, I'm also using jQuery to handle the UI. However, for a larger application, mixing UI and app's logic in the same file is very hard to maintain. You'll likely need a JavaScript framework, like Angular or Ember, to have a better separation of concerns. If the jQuery lib is in a subdirectory, you can reference it using:</p>
-<pre><code class="lang-html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"./js/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<p>In the example below, I&#39;m also using jQuery to handle the UI. However, for a larger application, mixing UI and app&#39;s logic in the same file is very hard to maintain. You&#39;ll likely need a JavaScript framework, like Angular or Ember, to have a better separation of concerns. If the jQuery lib is in a subdirectory, you can reference it using:</p>
+<pre><code class="lang-html">&lt;script src=&quot;./js/jquery.min.js&quot;&gt;&lt;/script&gt;
 </code></pre>
 <p>For a demo, you can test with the following app.js file:</p>
-<pre><code class="lang-javascript hljs"><span class="hljs-keyword">var</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">'request'</span>).defaults({ encoding: <span class="hljs-literal">null</span> });;
+<pre><code class="lang-javascript">var request = require(&#39;request&#39;).defaults({ encoding: null });;
 
-request.get(<span class="hljs-string">'http://nwjs.io/images/nw.png'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, response, body</span>) </span>{
+request.get(&#39;http://nwjs.io/images/nw.png&#39;, function (err, response, body) {
 
-  <span class="hljs-keyword">if</span> (!err &amp;&amp; response.statusCode == <span class="hljs-number">200</span>)
-    <span class="hljs-keyword">throw</span> <span class="hljs-string">'Error retrieving image'</span>;
+  if (!err &amp;&amp; response.statusCode == 200)
+    throw &#39;Error retrieving image&#39;;
 
-  <span class="hljs-keyword">var</span> base64Image = <span class="hljs-string">"data:image/png;base64,"</span> + <span class="hljs-keyword">new</span> Buffer(body).toString(<span class="hljs-string">'base64'</span>);
+  var base64Image = &quot;data:image/png;base64,&quot; + new Buffer(body).toString(&#39;base64&#39;);
 
-  <span class="hljs-comment">// using jQuery to write the response to the UI</span>
-  $(<span class="hljs-string">'#img'</span>).append(<span class="hljs-string">'&lt;img src=\"'</span> + base64Image + <span class="hljs-string">'\" /&gt;'</span>);
+  // using jQuery to write the response to the UI
+  $(&#39;#img&#39;).append(&#39;&lt;img src=\&quot;&#39; + base64Image + &#39;\&quot; /&gt;&#39;);
 });
 </code></pre>
 <p>index.html</p>
-<pre><code class="lang-html hljs xml"><span class="hljs-doctype">&lt;!DOCTYPE html&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>Hello World!<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Hello World!<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"img"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"./js/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"app.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span>
+<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Hello World!&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello World!&lt;/h1&gt;
+    &lt;div id=&quot;img&quot;&gt;&lt;/div&gt;
+    &lt;script src=&quot;./js/jquery.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 </code></pre>
-<p>With this demo, you'll get the following result:</p>
+<p>With this demo, you&#39;ll get the following result:</p>
 <p><img src="http://zanon.io/images/posts/2015-09-20-nw-image.png" alt="nw-image"></p>
 <h3 id="native-features">Native Features</h3>
 <p>To make the app a truly desktop app, some features are necessary like a menu bar and a tray icon.</p>
-<p>The code for a tray icon is the same for all platforms. However, the menu bar may have a different behavior between platforms. That's because Windows and Linux allows one menu bar for each window that your app opens and OSX just allows one menu bar per application. So, best practice here is to set a menu bar only for your main window.</p>
+<p>The code for a tray icon is the same for all platforms. However, the menu bar may have a different behavior between platforms. That&#39;s because Windows and Linux allows one menu bar for each window that your app opens and OSX just allows one menu bar per application. So, best practice here is to set a menu bar only for your main window.</p>
 <h3 id="menu-bar">Menu Bar</h3>
 <p><img src="http://zanon.io/images/posts/2015-09-20-menu.png" alt="menu"></p>
 <p>To get this result, just edit your app.js file to the following:</p>
-<pre><code class="lang-javascript hljs"><span class="hljs-keyword">var</span> gui = <span class="hljs-built_in">require</span>(<span class="hljs-string">'nw.gui'</span>);
+<pre><code class="lang-javascript">var gui = require(&#39;nw.gui&#39;);
 
-<span class="hljs-keyword">var</span> menubar = <span class="hljs-keyword">new</span> gui.Menu({
-  type: <span class="hljs-string">'menubar'</span>
+var menubar = new gui.Menu({
+  type: &#39;menubar&#39;
 });
 
-<span class="hljs-keyword">var</span> fileMenu = <span class="hljs-keyword">new</span> gui.Menu();
+var fileMenu = new gui.Menu();
 
-fileMenu.append(<span class="hljs-keyword">new</span> gui.MenuItem({
-  label: <span class="hljs-string">'New File'</span>,
-  click: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-    alert(<span class="hljs-string">'Clicked to create a new file'</span>);
+fileMenu.append(new gui.MenuItem({
+  label: &#39;New File&#39;,
+  click: function() {
+    alert(&#39;Clicked to create a new file&#39;);
   }
 }));
 
-<span class="hljs-keyword">var</span> openRecentMenu = <span class="hljs-keyword">new</span> gui.Menu();
+var openRecentMenu = new gui.Menu();
 
-openRecentMenu.append(<span class="hljs-keyword">new</span> gui.MenuItem({
-  label: <span class="hljs-string">'Recente File X'</span>,
-  click: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-    alert(<span class="hljs-string">'Clicked to open a recent file'</span>);
+openRecentMenu.append(new gui.MenuItem({
+  label: &#39;Recente File X&#39;,
+  click: function() {
+    alert(&#39;Clicked to open a recent file&#39;);
   }
 }));
 
-menubar.append(<span class="hljs-keyword">new</span> gui.MenuItem({ label: <span class="hljs-string">'File'</span>, submenu: fileMenu}));
-fileMenu.append(<span class="hljs-keyword">new</span> gui.MenuItem({ label: <span class="hljs-string">'Open Recent File'</span>, submenu: openRecentMenu}));
+menubar.append(new gui.MenuItem({ label: &#39;File&#39;, submenu: fileMenu}));
+fileMenu.append(new gui.MenuItem({ label: &#39;Open Recent File&#39;, submenu: openRecentMenu}));
 
-<span class="hljs-keyword">var</span> win = gui.Window.get();
+var win = gui.Window.get();
 win.menu = menubar;
 </code></pre>
 <h3 id="tray-icons">Tray Icons</h3>
 <p><img src="http://zanon.io/images/posts/2015-09-20-tray.png" alt="tray"></p>
 <p>This simple tray was created with the following code:</p>
-<pre><code class="lang-javascript hljs"><span class="hljs-keyword">var</span> gui = <span class="hljs-built_in">require</span>(<span class="hljs-string">'nw.gui'</span>);
+<pre><code class="lang-javascript">var gui = require(&#39;nw.gui&#39;);
 
-<span class="hljs-keyword">var</span> tray = <span class="hljs-keyword">new</span> gui.Tray({
-  icon : <span class="hljs-string">'my-app-icon.png'</span>,
-  title: <span class="hljs-string">'My App Tray'</span>
+var tray = new gui.Tray({
+  icon : &#39;my-app-icon.png&#39;,
+  title: &#39;My App Tray&#39;
 });
 
-<span class="hljs-keyword">var</span> menu = <span class="hljs-keyword">new</span> gui.Menu();
-menu.append(<span class="hljs-keyword">new</span> gui.MenuItem({
-  label: <span class="hljs-string">'Do something'</span>
+var menu = new gui.Menu();
+menu.append(new gui.MenuItem({
+  label: &#39;Do something&#39;
 }));
 
 tray.menu = menu;
@@ -252,27 +255,27 @@ tray.menu = menu;
 <h2 id="distributing">Distributing</h2>
 <p>You need to package your source code with the NW.js binaries. For a easy way to do this, try the NPM module <a href="https://github.com/nwjs/nw-builder">nw-builder</a>.</p>
 <h3 id="installation-prefer-a-global-install-with-the-g-argument-">Installation: (prefer a global install with the <code>-g</code> argument)</h3>
-<pre><code class="lang-xml hljs">&gt; npm install nw-builder -g
+<pre><code class="lang-xml">&gt; npm install nw-builder -g
 </code></pre>
 <h3 id="usage-create-a-deploy-js-file-with-the-following-content">Usage: create a <strong>deploy.js</strong> file with the following content</h3>
-<pre><code class="lang-javascript hljs"><span class="hljs-keyword">var</span> NwBuilder = <span class="hljs-built_in">require</span>(<span class="hljs-string">'nw-builder'</span>);
-<span class="hljs-keyword">var</span> nw = <span class="hljs-keyword">new</span> NwBuilder({
-  files: [<span class="hljs-string">'./**'</span>], <span class="hljs-comment">// simple-glob format</span>
-  platforms: [<span class="hljs-string">'osx32'</span>, <span class="hljs-string">'osx64'</span>, <span class="hljs-string">'win32'</span>, <span class="hljs-string">'win64'</span>, <span class="hljs-string">'linux32'</span>, <span class="hljs-string">'linux64'</span>]
+<pre><code class="lang-javascript">var NwBuilder = require(&#39;nw-builder&#39;);
+var nw = new NwBuilder({
+  files: [&#39;./**&#39;], // simple-glob format
+  platforms: [&#39;osx32&#39;, &#39;osx64&#39;, &#39;win32&#39;, &#39;win64&#39;, &#39;linux32&#39;, &#39;linux64&#39;]
 });
 
-nw.build().then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'all done!'</span>);
-}).catch(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error</span>) </span>{
-  <span class="hljs-built_in">console</span>.error(error);
+nw.build().then(function () {
+  console.log(&#39;all done!&#39;);
+}).catch(function (error) {
+  console.error(error);
 });
 </code></pre>
 <h3 id="deploying-">Deploying:</h3>
-<pre><code class="lang-xml hljs">&gt; node deploy.js
+<pre><code class="lang-xml">&gt; node deploy.js
 </code></pre>
-<p>Now is the time to be shocked: wow! 60 MB for a hello world app! So, that's a downside of using NW.js. It requires the user to download at least 60 MB for the webkit browser and Node.js dependencies.</p>
+<p>Now is the time to be shocked: wow! 60 MB for a hello world app! So, that&#39;s a downside of using NW.js. It requires the user to download at least 60 MB for the webkit browser and Node.js dependencies.</p>
 <h3 id="source-code-security">Source Code Security</h3>
-<p>Since you are distributing your app with all of your source code minified, it's possible to find it and clone the app. If you want protection, you need to compile it to native code using V8 snapshots. Take a look in this <a href="https://github.com/nwjs/nw.js/wiki/Protect-JavaScript-source-code-with-v8-snapshot">link</a> for a how-to. Just note that, currently, compiled code runs <strong>30% slower</strong> than normal JS files.</p>
+<p>Since you are distributing your app with all of your source code minified, it&#39;s possible to find it and clone the app. If you want protection, you need to compile it to native code using V8 snapshots. Take a look in this <a href="https://github.com/nwjs/nw.js/wiki/Protect-JavaScript-source-code-with-v8-snapshot">link</a> for a how-to. Just note that, currently, compiled code runs <strong>30% slower</strong> than normal JS files.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>So, that was the basic. If you are interested, you can continue following the <a href="https://github.com/nwjs/nw.js/wiki">NW.js wiki</a> to learn many more important features. Or you can click in this <a href="https://github.com/zcbenz/nw-sample-apps">link</a> for nice sample apps or this <a href="https://github.com/szwacz/nw-boilerplate">link</a> to get a boilerplate app.</p>
 <p>Again, just to reinforce, the disadvantages is that your user need to download extra 60 MB to run your app and, if you need to protect your source code, your app will be 30% slower.</p>
@@ -281,7 +284,8 @@ nw.build().then(<span class="hljs-function"><span class="hljs-keyword">function<
     </div>
   </div>
 </div>
-<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app2" name="dsq-app2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; height: 341px !important; " width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=5e251367ffb39af07c2a292e9e45a454&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Fcreating-desktop-apps-using-html-css-js-nodejs-with-nwjs&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default" horizontalscrolling="no" verticalscrolling="no"></iframe></div></dir-disqus></div>
+<dir-disqus></dir-disqus>
+        </div>
       </div>
     </div>
 
@@ -312,6 +316,5 @@ nw.build().then(<span class="hljs-function"><span class="hljs-keyword">function<
       ga('create', 'UA-63834414-1', 'auto');
       ga('send', 'pageview');
     </script>
-  
-
-</body></html>
+  </body>
+</html>

@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en" ng-app="zanonApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak-invalid,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+<!DOCTYPE html>
+<html lang="en" ng-app="zanonApp">
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +10,7 @@
 
     <title>zanon.io</title>
 
-    <script async="" src="//www.google-analytics.com/analytics.js"></script><script src="/js/ng-cloak.js"></script><style type="text/css">.ng-cloak-invalid { display: none !important; }</style> <!-- workaround to avoid flickering in prerendered content -->
+    <script src="/js/ng-cloak.js"></script> <!-- workaround to avoid flickering in prerendered content -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/monokai_sublime.min.css">
     <link rel="stylesheet" href="/css/site.css">
@@ -21,7 +23,7 @@
 
     <base href="/">
   </head>
-  <body ng-controller="MainController" class="ng-scope">
+  <body ng-controller="MainController">
 
     <header>
       <div>
@@ -62,13 +64,13 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li ng-class="{ 'active': active.all }" class="active">    <a ng-click="filter('all');" href="/">All posts</a></li>
-              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');" href="/">Angular</a></li>
-              <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');" href="/">Node</a></li>
-              <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');" href="/">MongoDB</a></li>
-              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');" href="/">AWS</a></li>
-              <li ng-class="{ 'active': active.android }"><a ng-click="filter('android');" href="/">Android</a></li>
-              <li ng-class="{ 'active': active.ios }">	  <a ng-click="filter('ios');" href="/">iOS</a></li>
+              <li ng-class="{ 'active': active.all }">    <a ng-click="filter('all');"      href="/">All posts</a></li>
+              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');"  href="/">Angular</a></li>
+              <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');"     href="/">Node</a></li>
+              <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');"  href="/">MongoDB</a></li>
+              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');"      href="/">AWS</a></li>
+              <li ng-class="{ 'active': active.android }"><a ng-click="filter('android');"  href="/">Android</a></li>
+              <li ng-class="{ 'active': active.ios }">	  <a ng-click="filter('ios');"      href="/">iOS</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </nav>
@@ -77,13 +79,14 @@
 
     <div class="container">
       <div class="content">
-        <!-- ngView:  --><div class="ng-view-background ng-scope ng-cloak" autoscroll="true" ng-view="" highlight-code="">
-<div ng-controller="PostsController" class="ng-scope">
+        <div class="ng-view-background ng-cloak" autoscroll="true" ng-view highlight-code>
+          
+<div ng-controller="PostsController">
   <div ng-show="active.all || active.node" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
         <div class="date">Apr 09, 2016</div>
-        <h2><a href="/posts/please-try-again-retry-pattern-in-node">"Please, try again..." (Retry Pattern in Node)</a></h2>
+        <h2><a href="/posts/please-try-again-retry-pattern-in-node">&quot;Please, try again...&quot; (Retry Pattern in Node)</a></h2>
         <p>When building a service, you should anticipate that some transient failures may occur due to network issues or query timeouts. In such cases, the Retry Pattern is very useful.</p>
         <button ng-click="filter('node');" type="button" class="btn tag pull-right">Node</button>
       </article>
@@ -195,7 +198,8 @@
     </div>
   </div>
   <div class="row"></div>
-</div></div>
+</div>
+        </div>
       </div>
     </div>
 
@@ -226,6 +230,5 @@
       ga('create', 'UA-63834414-1', 'auto');
       ga('send', 'pageview');
     </script>
-  
-
-</body></html>
+  </body>
+</html>

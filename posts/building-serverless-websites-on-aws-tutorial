@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en" ng-app="zanonApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak-invalid,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+<!DOCTYPE html>
+<html lang="en" ng-app="zanonApp">
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +10,7 @@
 
     <title>zanon.io</title>
 
-    <script async="" src="//www.google-analytics.com/analytics.js"></script><script src="/js/ng-cloak.js"></script><style type="text/css">.ng-cloak-invalid { display: none !important; }</style> <!-- workaround to avoid flickering in prerendered content -->
+    <script src="/js/ng-cloak.js"></script> <!-- workaround to avoid flickering in prerendered content -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/monokai_sublime.min.css">
     <link rel="stylesheet" href="/css/site.css">
@@ -20,8 +22,8 @@
     <![endif]-->
 
     <base href="/">
-  <script type="text/javascript" async="" src="//zanon.disqus.com/embed.js"></script></head>
-  <body ng-controller="MainController" class="ng-scope">
+  </head>
+  <body ng-controller="MainController">
 
     <header>
       <div>
@@ -62,13 +64,13 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li ng-class="{ 'active': active.all }" class="active">    <a ng-click="filter('all');" href="/">All posts</a></li>
-              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');" href="/">Angular</a></li>
-              <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');" href="/">Node</a></li>
-              <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');" href="/">MongoDB</a></li>
-              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');" href="/">AWS</a></li>
-              <li ng-class="{ 'active': active.android }"><a ng-click="filter('android');" href="/">Android</a></li>
-              <li ng-class="{ 'active': active.ios }">	  <a ng-click="filter('ios');" href="/">iOS</a></li>
+              <li ng-class="{ 'active': active.all }">    <a ng-click="filter('all');"      href="/">All posts</a></li>
+              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');"  href="/">Angular</a></li>
+              <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');"     href="/">Node</a></li>
+              <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');"  href="/">MongoDB</a></li>
+              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');"      href="/">AWS</a></li>
+              <li ng-class="{ 'active': active.android }"><a ng-click="filter('android');"  href="/">Android</a></li>
+              <li ng-class="{ 'active': active.ios }">	  <a ng-click="filter('ios');"      href="/">iOS</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </nav>
@@ -77,19 +79,20 @@
 
     <div class="container">
       <div class="content">
-        <!-- ngView:  --><div class="ng-view-background ng-scope ng-cloak" autoscroll="true" ng-view="" highlight-code="">
-<div class="row ng-scope">
+        <div class="ng-view-background ng-cloak" autoscroll="true" ng-view highlight-code>
+          
+<div class="row">
   <div class="col-md-offset-1 col-md-10 post">
     <h1>Building Serverless Websites on AWS - Tutorial</h1>
     <p class="date">Jan 31, 2016</p>
     <div>
 
 <h2 id="objective">Objective</h2>
-<p>This tutorial shows how to create a simple serverless application. If you don't know yet what this concept is and its benefits, you can read my previous blog post <a href="http://zanon.io/posts/building-serverless-websites-on-aws-intro">here</a>. I also explain a little more about each technology that will be used in this example.</p>
+<p>This tutorial shows how to create a simple serverless application. If you don&#39;t know yet what this concept is and its benefits, you can read my previous blog post <a href="http://zanon.io/posts/building-serverless-websites-on-aws-intro">here</a>. I also explain a little more about each technology that will be used in this example.</p>
 <p>The demo app is hosted at <a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a> and the source code is available at <a href="https://github.com/zanon-io/aws-serverless-demo">https://github.com/zanon-io/aws-serverless-demo</a></p>
 <p>This demo just shows a fake weather information when a button is clicked. To achieve this, we are using the following AWS tools:</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-lambda-web-apps.png" alt="lambda-web-apps"></p>
-<p>This image was extracted from <a href="https://aws.amazon.com/lambda/">here</a> and most Serverless demos uses DynamoDB as the database. However, for the sake of respecting the "pay only for what you use", I've decided to use the SimpleDB database. DynamoDB allows you to build more complex apps, but you need to provision capacity and you will pay for it even if no one is using your app. A true serverless aims for <em>infinite scalability</em>, <em>high availability</em> <strong>and</strong> <em>pay only for what you use</em>.</p>
+<p>This image was extracted from <a href="https://aws.amazon.com/lambda/">here</a> and most Serverless demos uses DynamoDB as the database. However, for the sake of respecting the &quot;pay only for what you use&quot;, I&#39;ve decided to use the SimpleDB database. DynamoDB allows you to build more complex apps, but you need to provision capacity and you will pay for it even if no one is using your app. A true serverless aims for <em>infinite scalability</em>, <em>high availability</em> <strong>and</strong> <em>pay only for what you use</em>.</p>
 <h2 id="summary">Summary</h2>
 <p>This tutorial tries to cover everything to build a serverless site, including how to configure your domain and host your data. If you want to skip this part, just jump for the section that you are interested.</p>
 <ol>
@@ -104,12 +107,12 @@
 <p>If you want to go beyond testing to make something useful, the first step is to buy a domain with a nice name. As you can see, this is hard! The best ones are already taken.</p>
 <h3 id="create-amazon-s3-buckets">Create Amazon S3 buckets</h3>
 <p><a href="https://console.aws.amazon.com/s3">Amazon S3 buckets</a> is the service where you will manually host your front-end code (HTML/CSS/JavaScript and images) and also where the Serverless Framework will automatically host (in a different bucket) the back-end code.</p>
-<p>If you've bought a domain named as <strong>example.com</strong>, you need to create a bucket with the same <strong>example.com</strong> name and configure it to enable website hosting.</p>
+<p>If you&#39;ve bought a domain named as <strong>example.com</strong>, you need to create a bucket with the same <strong>example.com</strong> name and configure it to enable website hosting.</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-s3-hosting.png" alt="s3-hosting"></p>
 <p>If you want to support old people that still like to type <strong>www</strong> for every site, you can also create a bucket with the name <strong>www.example.com</strong>. For that one, configure it to redirect all requests for the main address.</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-s3-www.png" alt="s3-www"></p>
 <h3 id="configure-amazon-route-53-hosted-zone">Configure Amazon Route 53 Hosted Zone</h3>
-<p>After buying your domain, you need to change the default Name Servers. The Name Servers are a set of server addresses (more than one for redundancy) that helps the DNS queries to translate the domain name to the correspondent address of the machine that is hosting your site. Since we want to host our app at Amazon, we need to give them this control. So, the name server will be changed from your domain registrar to Amazon's addresses. The Amazon service that is responsible for this kind of control is the Route 53.</p>
+<p>After buying your domain, you need to change the default Name Servers. The Name Servers are a set of server addresses (more than one for redundancy) that helps the DNS queries to translate the domain name to the correspondent address of the machine that is hosting your site. Since we want to host our app at Amazon, we need to give them this control. So, the name server will be changed from your domain registrar to Amazon&#39;s addresses. The Amazon service that is responsible for this kind of control is the Route 53.</p>
 <p>Go to <a href="https://console.aws.amazon.com/route53">Amazon Route 53</a> and click to create a Hosted Zone for your domain. After creating it, click at your hosted zone and write down the given Name Server (NS).</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-route53-nameservers.png" alt="route53-nameservers"></p>
 <h3 id="create-amazon-route-53-aliases">Create Amazon Route 53 Aliases</h3>
@@ -121,8 +124,8 @@
 <p><img src="http://zanon.io/images/posts/2016-01-31-route53-cname-recordset.png" alt="route53-cname-recordset"></p>
 <h3 id="changing-the-name-servers">Changing the Name Servers</h3>
 <p>After preparing your Amazon Host, you need to give them the domain control accessing your registrar website and changing the name servers configuration.</p>
-<p>I've bought my zanon.io domain at GoDaddy.com, so this tutorial uses their control panel to show how to configure your domain. However, since all domain sellers let you change your name server values, the control panels are different, but you need to make the same configuration.</p>
-<p>1) Log into your domain registrar's control panel and click to manage your domains.</p>
+<p>I&#39;ve bought my zanon.io domain at GoDaddy.com, so this tutorial uses their control panel to show how to configure your domain. However, since all domain sellers let you change your name server values, the control panels are different, but you need to make the same configuration.</p>
+<p>1) Log into your domain registrar&#39;s control panel and click to manage your domains.</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-godaddy-control-panel.png" alt="godaddy-control-panel"></p>
 <p>2) Click at your domain name settings and select the Manage DNS option.</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-godaddy-manage-dns.png" alt="godaddy-manage-dns"></p>
@@ -131,47 +134,47 @@
 <h3 id="testing">Testing</h3>
 <p>Due to cache, you need to wait some hours until this name server changing takes effect. While you wait, create a simple web page in a file named as index.html and upload it to your <strong>example.com</strong> bucket. When the cache is refreshed, you can see your webpage up and running typing your domain name.</p>
 <h2 id="front-end">Front-End</h2>
-<p>For our demo, we'll create just one file, named as index.html, with a simple button to retrieve the weather info. Nothing fancy. For a real-world website, you would upload all HTML/CSS/JavaScript and images to your S3 bucket and would consider on configuring an Amazon CloudFront instance to serve your files using a CDN (Content Delivery Network) to provide a low latency connection for users throughout the world.</p>
+<p>For our demo, we&#39;ll create just one file, named as index.html, with a simple button to retrieve the weather info. Nothing fancy. For a real-world website, you would upload all HTML/CSS/JavaScript and images to your S3 bucket and would consider on configuring an Amazon CloudFront instance to serve your files using a CDN (Content Delivery Network) to provide a low latency connection for users throughout the world.</p>
 <p><strong>index.html</strong> contents:</p>
-<pre><code class="lang-html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"container"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col-md-offset-5 col-md-2 text-center"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">h3</span>&gt;</span>Daily Weather<span class="hljs-tag">&lt;/<span class="hljs-title">h3</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"btn-show"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"button"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn btn-primary"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">'Show Current'</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col-md-offset-5 col-md-2"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Value: <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"weather-value"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"http://zanon.io/posts/building-serverless-websites-on-aws-tutorial"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>source<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<pre><code class="lang-html">&lt;div class=&quot;container&quot;&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-md-offset-5 col-md-2 text-center&quot;&gt;
+      &lt;h3&gt;Daily Weather&lt;/h3&gt;
+      &lt;input id=&quot;btn-show&quot; type=&quot;button&quot; class=&quot;btn btn-primary&quot; value=&#39;Show Current&#39;&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-md-offset-5 col-md-2&quot;&gt;
+      &lt;p&gt;Value: &lt;span id=&quot;weather-value&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+      &lt;a href=&quot;http://zanon.io/posts/building-serverless-websites-on-aws-tutorial&quot;&gt;&lt;p&gt;source&lt;/p&gt;&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
 <p>JavaScript code:</p>
-<pre><code class="lang-javascript hljs">$(<span class="hljs-built_in">document</span>).ready(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+<pre><code class="lang-javascript">$(document).ready(function() {
 
-  $(<span class="hljs-string">'#btn-show'</span>).on(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  $(&#39;#btn-show&#39;).on(&#39;click&#39;, function() {
 
       $.ajax({
-        url: <span class="hljs-string">"https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local/5"</span>,
-        success: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">json</span>) </span>{
-          $(<span class="hljs-string">"#weather-value"</span>).append(json.value + <span class="hljs-string">' ºC'</span>);
+        url: &quot;https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local/5&quot;,
+        success: function(json) {
+          $(&quot;#weather-value&quot;).append(json.value + &#39; ºC&#39;);
         }
       });
   });
 });
 </code></pre>
-<p>Our Ajax call is using "<a href="https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local/5">https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local/5</a>" as the URL parameter. This is the address that we'll get later, after deploying our app.</p>
+<p>Our Ajax call is using &quot;<a href="https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local/5">https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local/5</a>&quot; as the URL parameter. This is the address that we&#39;ll get later, after deploying our app.</p>
 <p>Result:</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-demo.png" alt="demo"></p>
 <h2 id="serverless-framework">Serverless Framework</h2>
-<p>The Serverless Framework is a tool that helps you managing and deploying projects with API Gateway and Lambda Functions. You can do everything manually using Amazon's console, but it'll be hard to manage in big projects.</p>
+<p>The Serverless Framework is a tool that helps you managing and deploying projects with API Gateway and Lambda Functions. You can do everything manually using Amazon&#39;s console, but it&#39;ll be hard to manage in big projects.</p>
 <p>The Serverless Framework is a Node.js module. So, install it using NPM:</p>
-<pre><code class="lang-xml hljs">&gt; npm install serverless -g
+<pre><code class="lang-xml">&gt; npm install serverless -g
 </code></pre>
 <h3 id="creating-an-iam-user">Creating an IAM User</h3>
-<p>Serverless needs an AWS user account to execute a CloudFormation script. Since it requires high privileges, you can't simply create an Admin key, with production access, and share it with every developer of your organization. For security measures, for production deployment, you need to generate the Serverless scripts using the flag <code>--noExeCf</code> and execute the output using the CloudFormation UI with a user with secure password (where just a few people have access) and a multi-factor authentication. Read more at the official <a href="http://docs.serverless.com/docs/best-practices#section-don-t-give-administratoraccess-to-aws-api-keys">best practices guide</a>.</p>
+<p>Serverless needs an AWS user account to execute a CloudFormation script. Since it requires high privileges, you can&#39;t simply create an Admin key, with production access, and share it with every developer of your organization. For security measures, for production deployment, you need to generate the Serverless scripts using the flag <code>--noExeCf</code> and execute the output using the CloudFormation UI with a user with secure password (where just a few people have access) and a multi-factor authentication. Read more at the official <a href="http://docs.serverless.com/docs/best-practices#section-don-t-give-administratoraccess-to-aws-api-keys">best practices guide</a>.</p>
 <p>However, for a development environment, you can create an Admin account to get it up and running quickly.</p>
 <p>To create an user, browse the <a href="https://console.aws.amazon.com/iam">IAM console</a> and create a group first:</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-iam-group.png" alt="iam-group"></p>
@@ -183,24 +186,24 @@
 <h3 id="configuring-the-serverless-user">Configuring the Serverless User</h3>
 <p>As Serverless uses the AWS Node.js SDK, it looks for a <strong>credentials</strong> file to load the access keys. It must be located at <strong>~/.aws/credentials</strong> on Mac/Linux or <strong>C:\Users\USERNAME\.aws\credentials</strong> on Windows.</p>
 <p>Contents:</p>
-<pre><code class="lang-xml hljs">[default]
+<pre><code class="lang-xml">[default]
 aws_access_key_id = your_access_key
 aws_secret_access_key = your_secret_key
 </code></pre>
 <p>Also, you can specify what is your default region with a <strong>config</strong> file created in the same folder.</p>
 <p>Contents:</p>
-<pre><code class="lang-xml hljs">[default]
+<pre><code class="lang-xml">[default]
 region = us-east-1
 </code></pre>
 <p><strong>Note:</strong> [default] means the profile name. It must exist, but you can create more profiles with different access keys for different applications.</p>
 <h3 id="creating-a-project">Creating a Project</h3>
 <p>Change to the directory where you want to create your project folder and execute:</p>
-<pre><code class="lang-xml hljs">&gt; serverless project create
+<pre><code class="lang-xml">&gt; serverless project create
 </code></pre>
-<p>It'll ask the following questions:</p>
+<p>It&#39;ll ask the following questions:</p>
 <ul>
-<li>Project Name: since they use CloudFormation for deployment and they tokenize resources with <code>-</code> (dashs), use camelCase to avoid issues. For example, I've named my project as serverlessDemo.</li>
-<li>Domain Name: an existing domain is not required. In fact, even if you provide a domain that you own, it'll not make any difference. This name is just what will be used to create a S3 bucket. In my demo, I've selected the name serverless-demo.zanon.io</li>
+<li>Project Name: since they use CloudFormation for deployment and they tokenize resources with <code>-</code> (dashs), use camelCase to avoid issues. For example, I&#39;ve named my project as serverlessDemo.</li>
+<li>Domain Name: an existing domain is not required. In fact, even if you provide a domain that you own, it&#39;ll not make any difference. This name is just what will be used to create a S3 bucket. In my demo, I&#39;ve selected the name serverless-demo.zanon.io</li>
 <li>E-mail: set the e-mail address where you want to receive CloudFormation alarms.</li>
 <li>Region: the region where your app will be deployed.</li>
 <li>Profile: this profile must exist at your <strong>credentials</strong> file.</li>
@@ -208,28 +211,28 @@ region = us-east-1
 <p>This stage creates a CloudFormation template and a S3 bucket (in my case, named as serverless.us-east-1.serverless-demo.zanon.io) to store the necessary files.</p>
 <h3 id="serverless-architecture">Serverless Architecture</h3>
 <p>With Serverless, you have the following:</p>
-<pre><code class="lang-xml hljs">Project
+<pre><code class="lang-xml">Project
   |__Component
        |__Module
             |__Function
 </code></pre>
 <ul>
-<li><p>A Component is an element that stores all Modules of a given runtime and code that can be shared between them. Since Lambda supports Node.js, Python and Java, you could create one component for each runtime. Since this example is based on Node.js-only, we'll create just one component named as <strong>nodejsComponent</strong>.</p>
+<li><p>A Component is an element that stores all Modules of a given runtime and code that can be shared between them. Since Lambda supports Node.js, Python and Java, you could create one component for each runtime. Since this example is based on Node.js-only, we&#39;ll create just one component named as <strong>nodejsComponent</strong>.</p>
 </li>
 <li><p>A Module has the purpose to create a logical <a href="http://martinfowler.com/articles/microservices.html">Microservice</a>. Every function for a given behavior must be grouped inside the same Module. In our example, it will be named as <strong>weather</strong>.</p>
 </li>
-<li><p>A Function is the element where you'll write your code to accomplish a very specific task. In this demo, it was named as <strong>local</strong> (to get the local weather with an localId).</p>
+<li><p>A Function is the element where you&#39;ll write your code to accomplish a very specific task. In this demo, it was named as <strong>local</strong> (to get the local weather with an localId).</p>
 </li>
 </ul>
 <h3 id="creating-a-component">Creating a Component</h3>
 <p>Before creating it, change the directory to your project folder:</p>
-<pre><code class="lang-xml hljs">&gt; cd serverlessDemo
+<pre><code class="lang-xml">&gt; cd serverlessDemo
 </code></pre>
-<p>When you execute the command to create a command, it'll ask you to create at least one Module and one Function.</p>
+<p>When you execute the command to create a command, it&#39;ll ask you to create at least one Module and one Function.</p>
 <p>Execute:</p>
-<pre><code class="lang-xml hljs">&gt; serverless component create
+<pre><code class="lang-xml">&gt; serverless component create
 </code></pre>
-<p>I've named my elements as:</p>
+<p>I&#39;ve named my elements as:</p>
 <ul>
 <li>Component: nodejsComponent</li>
 <li>Module: weather</li>
@@ -237,7 +240,7 @@ region = us-east-1
 </ul>
 <h3 id="implement-your-function">Implement your Function</h3>
 <p>To implement your code, open the files <strong>handler.js</strong> and <strong>s-function.json</strong> localized at:</p>
-<pre><code class="lang-xml hljs">Project
+<pre><code class="lang-xml">Project
   |__nodejsComponent
        |__weather (Module)
             |__local (Function)
@@ -245,92 +248,92 @@ region = us-east-1
                  |__s-function.json
 </code></pre>
 <p>In <strong>s-function.json</strong>, we have something like:</p>
-<pre><code class="lang-json hljs">{
-  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"local"</span></span>,
-  "<span class="hljs-attribute">handler</span>": <span class="hljs-value"><span class="hljs-string">"weather/local/handler.handler"</span></span>,
-  "<span class="hljs-attribute">runtime</span>": <span class="hljs-value"><span class="hljs-string">"nodejs"</span></span>,
+<pre><code class="lang-json">{
+  &quot;name&quot;: &quot;local&quot;,
+  &quot;handler&quot;: &quot;weather/local/handler.handler&quot;,
+  &quot;runtime&quot;: &quot;nodejs&quot;,
   (...),
-  "<span class="hljs-attribute">endpoints</span>": <span class="hljs-value">[
+  &quot;endpoints&quot;: [
     {
-      "<span class="hljs-attribute">path</span>": <span class="hljs-value"><span class="hljs-string">"weather/local/{id}"</span></span>,
-      "<span class="hljs-attribute">method</span>": <span class="hljs-value"><span class="hljs-string">"GET"</span></span>,
-      "<span class="hljs-attribute">authorizationType</span>": <span class="hljs-value"><span class="hljs-string">"none"</span></span>,
-      "<span class="hljs-attribute">apiKeyRequired</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-      "<span class="hljs-attribute">requestParameters</span>": <span class="hljs-value">{}</span>,
-      "<span class="hljs-attribute">requestTemplates</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">application/json</span>": <span class="hljs-value"><span class="hljs-string">"{\"id\": \"$input.params('id') \"}"</span>
-      </span>}
+      &quot;path&quot;: &quot;weather/local/{id}&quot;,
+      &quot;method&quot;: &quot;GET&quot;,
+      &quot;authorizationType&quot;: &quot;none&quot;,
+      &quot;apiKeyRequired&quot;: false,
+      &quot;requestParameters&quot;: {},
+      &quot;requestTemplates&quot;: {
+        &quot;application/json&quot;: &quot;{\&quot;id\&quot;: \&quot;$input.params(&#39;id&#39;) \&quot;}&quot;
+      }
       (...)
-    </span>}
+    }
   ]
-</span>}
-</code></pre>
-<p>Change the "path" to:</p>
-<pre><code class="lang-javascript hljs"><span class="hljs-string">"path"</span>: <span class="hljs-string">"weather/local/{id}"</span>
-</code></pre>
-<p>and the "requestTemplates" to:</p>
-<pre><code class="lang-javascript hljs"><span class="hljs-string">"requestTemplates"</span>: {
-  <span class="hljs-string">"application/json"</span>: <span class="hljs-string">"{\"id\": \"$input.params('id') \"}"</span>
 }
 </code></pre>
-<p>With this change, we'll be able to retrieve the "id" input parameter.</p>
+<p>Change the &quot;path&quot; to:</p>
+<pre><code class="lang-javascript">&quot;path&quot;: &quot;weather/local/{id}&quot;
+</code></pre>
+<p>and the &quot;requestTemplates&quot; to:</p>
+<pre><code class="lang-javascript">&quot;requestTemplates&quot;: {
+  &quot;application/json&quot;: &quot;{\&quot;id\&quot;: \&quot;$input.params(&#39;id&#39;) \&quot;}&quot;
+}
+</code></pre>
+<p>With this change, we&#39;ll be able to retrieve the &quot;id&quot; input parameter.</p>
 <p>In <strong>handler.js</strong>, we have by default:</p>
-<pre><code class="lang-javascript hljs"><span class="hljs-built_in">module</span>.exports.handler = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event, context</span>) </span>{
+<pre><code class="lang-javascript">module.exports.handler = function(event, context) {
 
-  lib.respond(event, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error, response</span>) </span>{
-    <span class="hljs-keyword">return</span> context.done(error, response);
+  lib.respond(event, function(error, response) {
+    return context.done(error, response);
   });
 };
 </code></pre>
 <p>Change it to:</p>
-<pre><code class="lang-javascript hljs"><span class="hljs-built_in">module</span>.exports.handler = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event, context</span>) </span>{
+<pre><code class="lang-javascript">module.exports.handler = function(event, context) {
 
-  <span class="hljs-keyword">var</span> result = getWeatherInfo(event);
+  var result = getWeatherInfo(event);
 
-  lib.respond(event, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error, response</span>) </span>{
-    <span class="hljs-keyword">return</span> context.done(error, result);
+  lib.respond(event, function(error, response) {
+    return context.done(error, result);
   });
 };
 
-<span class="hljs-comment">// that's where you place your Lambda code</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getWeatherInfo</span>(<span class="hljs-params">event</span>) </span>{
+// that&#39;s where you place your Lambda code
+function getWeatherInfo(event) {
 
-  <span class="hljs-keyword">return</span> {
-    value: <span class="hljs-string">"35"</span>,
-    event: event <span class="hljs-comment">// input data that I'm ignoring</span>
+  return {
+    value: &quot;35&quot;,
+    event: event // input data that I&#39;m ignoring
   }
 }
 </code></pre>
 <h3 id="enable-cross-origin-resource-sharing-cors-">Enable Cross-Origin Resource Sharing (CORS)</h3>
-<p>Since our API is deployed at the AWS domain and not inside our app domain, the browsers won't process AJAX requests due to security issues. To workaround this, you can use <a href="http://json-p.org/">JSONP</a> at the clients-side or <a href="http://enable-cors.org/">enable CORS</a> at Amazon's side. I prefer to enable CORS.</p>
+<p>Since our API is deployed at the AWS domain and not inside our app domain, the browsers won&#39;t process AJAX requests due to security issues. To workaround this, you can use <a href="http://json-p.org/">JSONP</a> at the clients-side or <a href="http://enable-cors.org/">enable CORS</a> at Amazon&#39;s side. I prefer to enable CORS.</p>
 <p>To enable, install the serverless-core-plugin:</p>
-<pre><code class="lang-xml hljs">&gt; npm install serverless-cors-plugin --save
+<pre><code class="lang-xml">&gt; npm install serverless-cors-plugin --save
 </code></pre>
-<p>In <strong>s-project.json</strong>, replace "plugins" by:</p>
-<pre><code class="lang-javascript hljs"><span class="hljs-string">"plugins"</span>: [
-  <span class="hljs-string">"serverless-cors-plugin"</span>
+<p>In <strong>s-project.json</strong>, replace &quot;plugins&quot; by:</p>
+<pre><code class="lang-javascript">&quot;plugins&quot;: [
+  &quot;serverless-cors-plugin&quot;
 ],
 </code></pre>
-<p>In <strong>s-function.json</strong>, add the cors property to "custom":</p>
-<pre><code class="lang-javascript hljs"><span class="hljs-string">"custom"</span>: {
-  <span class="hljs-string">"cors"</span>: {
-    <span class="hljs-string">"allowOrigin"</span>: <span class="hljs-string">"*"</span>,
-    <span class="hljs-string">"allowHeaders"</span>: [<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"X-Amz-Date"</span>, <span class="hljs-string">"Authorization"</span>, <span class="hljs-string">"X-Api-Key"</span>]
+<p>In <strong>s-function.json</strong>, add the cors property to &quot;custom&quot;:</p>
+<pre><code class="lang-javascript">&quot;custom&quot;: {
+  &quot;cors&quot;: {
+    &quot;allowOrigin&quot;: &quot;*&quot;,
+    &quot;allowHeaders&quot;: [&quot;Content-Type&quot;, &quot;X-Amz-Date&quot;, &quot;Authorization&quot;, &quot;X-Api-Key&quot;]
   }
 }
 </code></pre>
 <h3 id="deploy">Deploy</h3>
 <p>First, change the directory to your component.</p>
-<pre><code class="lang-xml hljs">&gt; cd nodejsComponent
+<pre><code class="lang-xml">&gt; cd nodejsComponent
 </code></pre>
 <p>Execute the <strong>dash deploy</strong> command:</p>
-<pre><code class="lang-xml hljs">&gt; serverless dash deploy
+<pre><code class="lang-xml">&gt; serverless dash deploy
 </code></pre>
 <p>It will show, like in a dashboard, all assets that you have (functions and endpoints). Choose all (pressing ENTER) and hit the <strong>deploy</strong> option.</p>
-<p>After deploying, you'll get a list of URLs where you functions were hosted. For example, mine is available at: <a href="https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local">https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local</a></p>
+<p>After deploying, you&#39;ll get a list of URLs where you functions were hosted. For example, mine is available at: <a href="https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local">https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local</a></p>
 <h2 id="simpledb">SimpleDB</h2>
 <h3 id="initialize-your-data">Initialize your Data</h3>
-<p>Since there is no AWS Console for SimpleDB, you need to create your model using third-party tools or the AWS SDK. For this demo, I'll simplify and use the <a href="https://aws.amazon.com/code/JavaScript/1137">Scratchpad</a> web app. To run, download, unzip and host the app in a web server like IIS or Apache Tomcat.</p>
+<p>Since there is no AWS Console for SimpleDB, you need to create your model using third-party tools or the AWS SDK. For this demo, I&#39;ll simplify and use the <a href="https://aws.amazon.com/code/JavaScript/1137">Scratchpad</a> web app. To run, download, unzip and host the app in a web server like IIS or Apache Tomcat.</p>
 <p>After adding the IAM credentials, call the CreatDomain method to create the equivalent of a table for the relational world and the PutAttributes to add a new record for your domain.</p>
 <p>Create Domain:
 <img src="http://zanon.io/images/posts/2016-01-31-simpledb-domain.png" alt="simpledb-domain"></p>
@@ -341,101 +344,102 @@ region = us-east-1
 <h3 id="retrieve-the-data-using-a-lambda-functions">Retrieve the Data using a Lambda functions</h3>
 <p>As we are using JavaScript, we need to add the Node aws-sdk to our app. Since the code to retrieve data from the database should be reused in many Lambda Functions, we are going to add the aws-sdk reference to our nodejsComponent.</p>
 <p>Change the cmd directory to your nodejsComponent folder and execute:</p>
-<pre><code class="lang-xml hljs">&gt; npm install aws-sdk --save
+<pre><code class="lang-xml">&gt; npm install aws-sdk --save
 </code></pre>
 <p>The module where every Lambda function has access is the Lib file. To modify it, browse the nodejsComponent/lib/index.js</p>
 <p>Add the following code:</p>
-<pre><code class="lang-javascript hljs"><span class="hljs-keyword">var</span> AWS = <span class="hljs-built_in">require</span>(<span class="hljs-string">'aws-sdk'</span>);
+<pre><code class="lang-javascript">var AWS = require(&#39;aws-sdk&#39;);
 
-<span class="hljs-built_in">module</span>.exports.queryData = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">query, cb</span>) </span>{
+module.exports.queryData = function(query, cb) {
 
-  <span class="hljs-keyword">var</span> simpledb = <span class="hljs-keyword">new</span> AWS.SimpleDB();
+  var simpledb = new AWS.SimpleDB();
 
-  <span class="hljs-keyword">var</span> params = {
+  var params = {
     SelectExpression: query,
-    ConsistentRead: <span class="hljs-literal">false</span>,
-    NextToken: <span class="hljs-string">''</span>
+    ConsistentRead: false,
+    NextToken: &#39;&#39;
   };
 
-  simpledb.select(params, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, data</span>) </span>{
-      <span class="hljs-keyword">return</span> cb(err, data);
+  simpledb.select(params, function(err, data) {
+      return cb(err, data);
   });
 };
 </code></pre>
 <p>Modify your handler.js with the following:</p>
-<pre><code class="lang-javascript hljs"><span class="hljs-built_in">module</span>.exports.handler = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event, context</span>) </span>{
+<pre><code class="lang-javascript">module.exports.handler = function(event, context) {
 
-  <span class="hljs-keyword">var</span> query = getWeatherQuery(event);
+  var query = getWeatherQuery(event);
 
-  lib.queryData(query, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error, response</span>) </span>{
+  lib.queryData(query, function(error, response) {
 
-    <span class="hljs-keyword">var</span> result = {
-      value: response.Items[<span class="hljs-number">0</span>].Attributes[<span class="hljs-number">0</span>].Value
+    var result = {
+      value: response.Items[0].Attributes[0].Value
     }
 
-    <span class="hljs-keyword">return</span> context.done(error, result);
+    return context.done(error, result);
   });
 };
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getWeatherQuery</span>(<span class="hljs-params">event</span>) </span>{
+function getWeatherQuery(event) {
 
-  <span class="hljs-comment">// I'm ignoring the event input since I want to simplify this demo</span>
-  <span class="hljs-comment">// and avoid the need of sanitizing the input to protect from sql injection</span>
+  // I&#39;m ignoring the event input since I want to simplify this demo
+  // and avoid the need of sanitizing the input to protect from sql injection
 
-  <span class="hljs-keyword">return</span> <span class="hljs-string">"select Value from Weather where ID = '5'"</span>;
+  return &quot;select Value from Weather where ID = &#39;5&#39;&quot;;
 }
 </code></pre>
 <h3 id="add-permissions-to-your-lambda-functions-to-read-simpledb-data">Add permissions to your Lambda functions to read SimpleDB data</h3>
 <p>The Lambda functions that you have just deployed will not have access to your AWS Resources. If you want them to have this access, you have to give them explicitly.</p>
 <p>Modify your <strong>s-project.json</strong> file with the following:</p>
-<pre><code class="lang-json hljs"><span class="hljs-string">"IamPolicyLambda"</span>: {
-  "<span class="hljs-attribute">Type</span>": <span class="hljs-value"><span class="hljs-string">"AWS::IAM::Policy"</span></span>,
-  "<span class="hljs-attribute">Properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">PolicyName</span>": <span class="hljs-value"><span class="hljs-string">"${stage}-${project}-lambda"</span></span>,
-    "<span class="hljs-attribute">PolicyDocument</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">Version</span>": <span class="hljs-value"><span class="hljs-string">"2012-10-17"</span></span>,
-      "<span class="hljs-attribute">Statement</span>": <span class="hljs-value">[
+<pre><code class="lang-json">&quot;IamPolicyLambda&quot;: {
+  &quot;Type&quot;: &quot;AWS::IAM::Policy&quot;,
+  &quot;Properties&quot;: {
+    &quot;PolicyName&quot;: &quot;${stage}-${project}-lambda&quot;,
+    &quot;PolicyDocument&quot;: {
+      &quot;Version&quot;: &quot;2012-10-17&quot;,
+      &quot;Statement&quot;: [
         {
-          "<span class="hljs-attribute">Effect</span>": <span class="hljs-value"><span class="hljs-string">"Allow"</span></span>,
-          "<span class="hljs-attribute">Action</span>": <span class="hljs-value">[
-            <span class="hljs-string">"logs:CreateLogGroup"</span>,
-            <span class="hljs-string">"logs:CreateLogStream"</span>,
-            <span class="hljs-string">"logs:PutLogEvents"</span>
-          ]</span>,
-          "<span class="hljs-attribute">Resource</span>": <span class="hljs-value"><span class="hljs-string">"arn:aws:logs:${region}:*:*"</span>
-        </span>},
+          &quot;Effect&quot;: &quot;Allow&quot;,
+          &quot;Action&quot;: [
+            &quot;logs:CreateLogGroup&quot;,
+            &quot;logs:CreateLogStream&quot;,
+            &quot;logs:PutLogEvents&quot;
+          ],
+          &quot;Resource&quot;: &quot;arn:aws:logs:${region}:*:*&quot;
+        },
 
         // ================
         // Added this block
         {
-          "<span class="hljs-attribute">Effect</span>": <span class="hljs-value"><span class="hljs-string">"Allow"</span></span>,
-          "<span class="hljs-attribute">Action</span>": <span class="hljs-value">[
-            <span class="hljs-string">"*"</span>
-          ]</span>,
-          "<span class="hljs-attribute">Resource</span>": <span class="hljs-value"><span class="hljs-string">"arn:aws:sdb:us-east-1:[ACCOUNT_ID]:domain/Weather"</span>          
-        </span>}
+          &quot;Effect&quot;: &quot;Allow&quot;,
+          &quot;Action&quot;: [
+            &quot;*&quot;
+          ],
+          &quot;Resource&quot;: &quot;arn:aws:sdb:us-east-1:[ACCOUNT_ID]:domain/Weather&quot;          
+        }
         // End
         // ================
 
       ]
-    </span>}</span>,
-    "<span class="hljs-attribute">Roles</span>": <span class="hljs-value">[
+    },
+    &quot;Roles&quot;: [
       {
-         "<span class="hljs-attribute">Ref</span>": <span class="hljs-value"><span class="hljs-string">"IamRoleLambda"</span>
-       </span>}
+         &quot;Ref&quot;: &quot;IamRoleLambda&quot;
+       }
     ]
-  </span>}
-</span>}
+  }
+}
 </code></pre>
 <p>To deploy the changes, run the command below at the project level:</p>
-<pre><code class="lang-xml hljs">&gt; serverless resources deploy
+<pre><code class="lang-xml">&gt; serverless resources deploy
 </code></pre>
-<p>And... that's it! The app is working at <a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a>, where the HTML/CSS/JS is hosted on S3, the back-end code is a service that runs only on demand at AWS Lambda and the data is stored in SimpleDB, which generate costs only while processing queries.</p>
+<p>And... that&#39;s it! The app is working at <a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a>, where the HTML/CSS/JS is hosted on S3, the back-end code is a service that runs only on demand at AWS Lambda and the data is stored in SimpleDB, which generate costs only while processing queries.</p>
 
     </div>
   </div>
 </div>
-<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app2" name="dsq-app2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; height: 0px !important; " width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=5e251367ffb39af07c2a292e9e45a454&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Fbuilding-serverless-websites-on-aws-tutorial&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default" horizontalscrolling="no" verticalscrolling="no"></iframe></div></dir-disqus></div>
+<dir-disqus></dir-disqus>
+        </div>
       </div>
     </div>
 
@@ -466,6 +470,5 @@ region = us-east-1
       ga('create', 'UA-63834414-1', 'auto');
       ga('send', 'pageview');
     </script>
-  
-
-</body></html>
+  </body>
+</html>

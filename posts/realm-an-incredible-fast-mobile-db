@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en" ng-app="zanonApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak-invalid,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+<!DOCTYPE html>
+<html lang="en" ng-app="zanonApp">
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +10,7 @@
 
     <title>zanon.io</title>
 
-    <script async="" src="//www.google-analytics.com/analytics.js"></script><script src="/js/ng-cloak.js"></script><style type="text/css">.ng-cloak-invalid { display: none !important; }</style> <!-- workaround to avoid flickering in prerendered content -->
+    <script src="/js/ng-cloak.js"></script> <!-- workaround to avoid flickering in prerendered content -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/monokai_sublime.min.css">
     <link rel="stylesheet" href="/css/site.css">
@@ -20,8 +22,8 @@
     <![endif]-->
 
     <base href="/">
-  <script type="text/javascript" async="" src="//zanon.disqus.com/embed.js"></script></head>
-  <body ng-controller="MainController" class="ng-scope">
+  </head>
+  <body ng-controller="MainController">
 
     <header>
       <div>
@@ -62,13 +64,13 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li ng-class="{ 'active': active.all }" class="active">    <a ng-click="filter('all');" href="/">All posts</a></li>
-              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');" href="/">Angular</a></li>
-              <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');" href="/">Node</a></li>
-              <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');" href="/">MongoDB</a></li>
-              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');" href="/">AWS</a></li>
-              <li ng-class="{ 'active': active.android }"><a ng-click="filter('android');" href="/">Android</a></li>
-              <li ng-class="{ 'active': active.ios }">	  <a ng-click="filter('ios');" href="/">iOS</a></li>
+              <li ng-class="{ 'active': active.all }">    <a ng-click="filter('all');"      href="/">All posts</a></li>
+              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');"  href="/">Angular</a></li>
+              <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');"     href="/">Node</a></li>
+              <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');"  href="/">MongoDB</a></li>
+              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');"      href="/">AWS</a></li>
+              <li ng-class="{ 'active': active.android }"><a ng-click="filter('android');"  href="/">Android</a></li>
+              <li ng-class="{ 'active': active.ios }">	  <a ng-click="filter('ios');"      href="/">iOS</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </nav>
@@ -77,8 +79,9 @@
 
     <div class="container">
       <div class="content">
-        <!-- ngView:  --><div class="ng-view-background ng-scope ng-cloak" autoscroll="true" ng-view="" highlight-code="">
-<div class="row ng-scope">
+        <div class="ng-view-background ng-cloak" autoscroll="true" ng-view highlight-code>
+          
+<div class="row">
   <div class="col-md-offset-1 col-md-10 post">
     <h1>Realm: an incredible fast mobile DB</h1>
     <p class="date">NOV 01, 2015</p>
@@ -86,7 +89,7 @@
 
 <h2 id="realm">Realm</h2>
 <p>Realm is a database designed for mobile platforms (Android and iOS). If you want to store just some user data and configurations, skip it. Instead, use simpler solutions like <a href="http://developer.android.com/guide/topics/data/data-storage.html#pref">Shared Preferences</a> (Android) or <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSUserDefaults_Class/index.html">NSUserDefaults</a> (iOS).</p>
-<p>However, if your app needs to constantly retrieve data from the internet, you can help the user to reduce its mobile data usage costs by caching some info. Also, with cache, the user can use your app even when he's not connected. That's where Realm comes in.</p>
+<p>However, if your app needs to constantly retrieve data from the internet, you can help the user to reduce its mobile data usage costs by caching some info. Also, with cache, the user can use your app even when he&#39;s not connected. That&#39;s where Realm comes in.</p>
 <p>Realm is not an ORM framework, but a database that have ORM support. If you need performance, forget SQLite or Code Data. Realm uses its own persistence engine to be blazing fast.</p>
 <p><a href="https://twitter.com/kandelvijaya/status/642203225970487296"><img src="http://zanon.io/images/posts/2015-11-01-twitter.png" alt="twitter"></a>
 <a href="http://www.slideshare.net/ChristianMelchior/realm-building-a-mobile-database#25"><img src="http://zanon.io/images/posts/2015-11-01-benchmark.png" alt="benchmark"></a></p>
@@ -94,18 +97,18 @@
 <p>Like any relational database, it supports primary and foreign keys, indexes, transactions and all CRUD operations. As any ORM framework, lazy queries, ignored properties and migrations are supported. Also, graph queries and encryption are nice features available.</p>
 <p>For a full list, you can take a look into the docs summary for <a href="https://realm.io/docs/java/latest/">Java</a>, <a href="https://realm.io/docs/swift/latest">Swift</a> or <a href="https://realm.io/docs/objc/latest/">Objective-C</a>.</p>
 <h2 id="limitations">Limitations</h2>
-<p>Realm is great. Really great. But this section highlights what are Realm's drawbacks and what features they are currently lacking.</p>
+<p>Realm is great. Really great. But this section highlights what are Realm&#39;s drawbacks and what features they are currently lacking.</p>
 <h3 id="support-to-null-values">Support to NULL values</h3>
 <p>Ok, <a href="https://realm.io/news/realm-objc-swift-0.96.0/">now</a> Realm have support for NULLs! It was released for iOS and is currently <a href="https://github.com/realm/realm-java/issues/478">in beta</a> for Android.</p>
-<p>A property that accepts NULLs is something very common and it was a bit sad to see that Realm didn't support it for a long time. Common solutions were to treat the default values as the same as a NULL or to add an additional boolean to point if its a NULL or not.</p>
+<p>A property that accepts NULLs is something very common and it was a bit sad to see that Realm didn&#39;t support it for a long time. Common solutions were to treat the default values as the same as a NULL or to add an additional boolean to point if its a NULL or not.</p>
 <h3 id="distinct">Distinct</h3>
-<p>Realm doesn't have a "group by" operator, but it have "aggregation" operators like <em>min</em>, <em>max</em>, <em>count</em>, <em>sum</em> and <em>avg</em>. However, as a group by is not available, you can't use distinct <a href="https://groups.google.com/forum/#!topic/realm-java/5KsLCxQTcd0">yet</a>. You need to do it <a href="http://stackoverflow.com/a/30246541/1476885">manually</a>.</p>
+<p>Realm doesn&#39;t have a &quot;group by&quot; operator, but it have &quot;aggregation&quot; operators like <em>min</em>, <em>max</em>, <em>count</em>, <em>sum</em> and <em>avg</em>. However, as a group by is not available, you can&#39;t use distinct <a href="https://groups.google.com/forum/#!topic/realm-java/5KsLCxQTcd0">yet</a>. You need to do it <a href="http://stackoverflow.com/a/30246541/1476885">manually</a>.</p>
 <h3 id="nested-transactions">Nested Transactions</h3>
-<p>Nested transactions are a "must-have" in some cases to ensure consistency. As Realm lacks support for this, you may end up writing a little more code and maybe <a href="http://stackoverflow.com/a/31708821/1476885">detaching objects</a> before being ready to commit.</p>
+<p>Nested transactions are a &quot;must-have&quot; in some cases to ensure consistency. As Realm lacks support for this, you may end up writing a little more code and maybe <a href="http://stackoverflow.com/a/31708821/1476885">detaching objects</a> before being ready to commit.</p>
 <h3 id="migrations">Migrations</h3>
-<p>I can't say that Realm doesn't have migrations. It has. However, I believe that its the hardest feature to learn and to use. As it is essential for the app life cycle, you may try this with a POC before adding Realm  to your project. <a href="https://medium.com/@rutvijshah/why-i-did-not-choose-realm-io-for-my-android-app-f44562af5fb0">Some may even give up</a> after trying to understand the documentation.</p>
+<p>I can&#39;t say that Realm doesn&#39;t have migrations. It has. However, I believe that its the hardest feature to learn and to use. As it is essential for the app life cycle, you may try this with a POC before adding Realm  to your project. <a href="https://medium.com/@rutvijshah/why-i-did-not-choose-realm-io-for-my-android-app-f44562af5fb0">Some may even give up</a> after trying to understand the documentation.</p>
 <h3 id="getters-and-setters-android-">Getters and Setters (Android)</h3>
-<p>After designing your model, you have to write the Getters and Setters for each property. The bad part is that you can't add any other method and if you add validations or checks to your Getters/Setters, you will lose them since Realm replaces them with proxies that will ignore what you've done.</p>
+<p>After designing your model, you have to write the Getters and Setters for each property. The bad part is that you can&#39;t add any other method and if you add validations or checks to your Getters/Setters, you will lose them since Realm replaces them with proxies that will ignore what you&#39;ve done.</p>
 <p>To workaround this, you may end up writing wrappers for each model class to be able to add business rules to ensure your constraints.</p>
 <h2 id="overall">Overall</h2>
 <p>Realm is a great mobile database. As it has not achieved a 1.0 version yet and there are many features under development, stay tuned to the <a href="https://realm.io/">official website</a> for updates!</p>
@@ -113,7 +116,8 @@
     </div>
   </div>
 </div>
-<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app2" name="dsq-app2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; height: 341px !important; " width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=5e251367ffb39af07c2a292e9e45a454&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Frealm-an-incredible-fast-mobile-db&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default" horizontalscrolling="no" verticalscrolling="no"></iframe></div></dir-disqus></div>
+<dir-disqus></dir-disqus>
+        </div>
       </div>
     </div>
 
@@ -144,6 +148,5 @@
       ga('create', 'UA-63834414-1', 'auto');
       ga('send', 'pageview');
     </script>
-  
-
-</body></html>
+  </body>
+</html>

@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en" ng-app="zanonApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak-invalid,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+<!DOCTYPE html>
+<html lang="en" ng-app="zanonApp">
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +10,7 @@
 
     <title>zanon.io</title>
 
-    <script async="" src="//www.google-analytics.com/analytics.js"></script><script src="/js/ng-cloak.js"></script><style type="text/css">.ng-cloak-invalid { display: none !important; }</style> <!-- workaround to avoid flickering in prerendered content -->
+    <script src="/js/ng-cloak.js"></script> <!-- workaround to avoid flickering in prerendered content -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/monokai_sublime.min.css">
     <link rel="stylesheet" href="/css/site.css">
@@ -20,8 +22,8 @@
     <![endif]-->
 
     <base href="/">
-  <script type="text/javascript" async="" src="//zanon.disqus.com/embed.js"></script></head>
-  <body ng-controller="MainController" class="ng-scope">
+  </head>
+  <body ng-controller="MainController">
 
     <header>
       <div>
@@ -62,13 +64,13 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li ng-class="{ 'active': active.all }" class="active">    <a ng-click="filter('all');" href="/">All posts</a></li>
-              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');" href="/">Angular</a></li>
-              <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');" href="/">Node</a></li>
-              <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');" href="/">MongoDB</a></li>
-              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');" href="/">AWS</a></li>
-              <li ng-class="{ 'active': active.android }"><a ng-click="filter('android');" href="/">Android</a></li>
-              <li ng-class="{ 'active': active.ios }">	  <a ng-click="filter('ios');" href="/">iOS</a></li>
+              <li ng-class="{ 'active': active.all }">    <a ng-click="filter('all');"      href="/">All posts</a></li>
+              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');"  href="/">Angular</a></li>
+              <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');"     href="/">Node</a></li>
+              <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');"  href="/">MongoDB</a></li>
+              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');"      href="/">AWS</a></li>
+              <li ng-class="{ 'active': active.android }"><a ng-click="filter('android');"  href="/">Android</a></li>
+              <li ng-class="{ 'active': active.ios }">	  <a ng-click="filter('ios');"      href="/">iOS</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </nav>
@@ -77,8 +79,9 @@
 
     <div class="container">
       <div class="content">
-        <!-- ngView:  --><div class="ng-view-background ng-scope ng-cloak" autoscroll="true" ng-view="" highlight-code="">
-<div class="row ng-scope">
+        <div class="ng-view-background ng-cloak" autoscroll="true" ng-view highlight-code>
+          
+<div class="row">
   <div class="col-md-offset-1 col-md-10 post">
     <h1>Serving gzipped files in Amazon S3 / CloudFront</h1>
     <p class="date">SEP 06, 2015</p>
@@ -87,20 +90,20 @@
 <p>If you are sharing your website static content using Amazon Web Services, you can gzip your content and save some bandwidth. The  size of your files will be reduced and your website will load faster for your users.</p>
 <p>If you have a static website in Amazon, you should really consider using CloudFront since it is very cheap and is a <a href="http://stackoverflow.com/q/2145277/1476885">CDN</a> service. However, this guide is not a tutorial of how to configure your website to use CloudFront (or S3) because there are already <a href="http://docs.aws.amazon.com/gettingstarted/latest/swh/getting-started-create-cfdist.html">many</a> <a href="http://www.michaelgallego.fr/blog/2013/08/27/static-website-on-s3-cloudfront-and-route-53-the-right-way/">good</a> <a href="http://blog.celingest.com/en/2013/07/19/tutorial-creating-cdn-wordpress-cloudfront-s3/">tutorials</a> for that.</p>
 <p>Since CloudFront uses an Origin Server to find your files and to distribute them among their servers, what I want to show here is that all you need to serve gzipped content in CloudFront is serving gzipped content at your Origin Server.</p>
-<p>In a Custom Origin Server, like an IIS or Apache server, this is very easy to accomplish because you have just to set some configurations and you're ready to serve gzipped content. However, if your Origin Server is Amazon S3, you need to manually gzip each content and I will show how this is done.</p>
+<p>In a Custom Origin Server, like an IIS or Apache server, this is very easy to accomplish because you have just to set some configurations and you&#39;re ready to serve gzipped content. However, if your Origin Server is Amazon S3, you need to manually gzip each content and I will show how this is done.</p>
 <h2 id="so-what-is-gzip-">So, what is gzip?</h2>
-<p><a href="http://www.gzip.org/">gzip</a> is a file format and a software application used for compression and decompression. It is also the web standard used by your browser to download static content like HTML/CSS/JS. You can read more about it in this <a href="http://betterexplained.com/articles/how-to-optimize-your-site-with-gzip-compression/">Better Explained</a> guide, but if you don't want, look those following extracted images that sums it up:</p>
+<p><a href="http://www.gzip.org/">gzip</a> is a file format and a software application used for compression and decompression. It is also the web standard used by your browser to download static content like HTML/CSS/JS. You can read more about it in this <a href="http://betterexplained.com/articles/how-to-optimize-your-site-with-gzip-compression/">Better Explained</a> guide, but if you don&#39;t want, look those following extracted images that sums it up:</p>
 <p><img src="http://zanon.io/images/posts/2015-09-06-http-request.png" alt="http-request">
 <img src="http://zanon.io/images/posts/2015-09-06-http-request-compressed.png" alt="http-request-compressed"></p>
 <h2 id="serving-gzipped-files">Serving gzipped files</h2>
 <p>There is a tricky part serving gzipped files in Amazon S3. Since gzip is commonly done by the web server that zips (and caches) the content, S3 will not do it for you to save their CPU time avoiding compressing content. So, what you need to do is to gzip it upfront and set the file <strong>Content-Encoding</strong> to <strong>gzip</strong>. The following guide shows how to do it.</p>
 <p>First, download a gzip program. You can use the <a href="http://www.gzip.org/">official</a> application or find another one that fits you better.</p>
 <p>You can execute the program using the command line typing: </p>
-<pre><code class="lang-xml hljs">&gt; gzip myscrypt.min.js
+<pre><code class="lang-xml">&gt; gzip myscrypt.min.js
 </code></pre>
 <p>The file <strong>myscrypt.min.js.gz</strong> will be created. The command <code>&gt; gzip -9 filename</code> will compress the file with the highest compression level. You can set up your deployment scripts to automate this process and execute the compression for all files (HTML/CSS/JS). However, do not gzip your images or other binaries contents. They are already highly compressed and the CPU cost to decompress them will not be worth it.</p>
 <p>The last step is to remove the <strong>gz</strong> part of the name and upload it to Amazon S3 setting the file <strong>Content-Encoding</strong> to <strong>gzip</strong>. </p>
-<p>Since you'll need to do the same action for many files for each deploy, I highly recommend that you automate this process using Amazon APIs to upload your content. However, if you are just testing, you can change the <strong>Content-Enconding</strong> using Amazon's S3 Console.</p>
+<p>Since you&#39;ll need to do the same action for many files for each deploy, I highly recommend that you automate this process using Amazon APIs to upload your content. However, if you are just testing, you can change the <strong>Content-Enconding</strong> using Amazon&#39;s S3 Console.</p>
 <p><img src="http://zanon.io/images/posts/2015-09-06-gzip-s3.png" alt="gzip-s3"></p>
 <p>To verify if your content is being gzipped, open your developer tool and check the <strong>Content-Enconding</strong> at the network tab.</p>
 <p><img src="http://zanon.io/images/posts/2015-09-06-dev-tools.png" alt="dev-tools"></p>
@@ -108,7 +111,8 @@
     </div>
   </div>
 </div>
-<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app2" name="dsq-app2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; height: 0px !important; " width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=5e251367ffb39af07c2a292e9e45a454&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Fserving-gzipped-files-in-amazon-s3-cloudfront&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default" horizontalscrolling="no" verticalscrolling="no"></iframe></div></dir-disqus></div>
+<dir-disqus></dir-disqus>
+        </div>
       </div>
     </div>
 
@@ -139,6 +143,5 @@
       ga('create', 'UA-63834414-1', 'auto');
       ga('send', 'pageview');
     </script>
-  
-
-</body></html>
+  </body>
+</html>

@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en" ng-app="zanonApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak-invalid,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+<!DOCTYPE html>
+<html lang="en" ng-app="zanonApp">
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +10,7 @@
 
     <title>zanon.io</title>
 
-    <script async="" src="//www.google-analytics.com/analytics.js"></script><script src="/js/ng-cloak.js"></script><style type="text/css">.ng-cloak-invalid { display: none !important; }</style> <!-- workaround to avoid flickering in prerendered content -->
+    <script src="/js/ng-cloak.js"></script> <!-- workaround to avoid flickering in prerendered content -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/monokai_sublime.min.css">
     <link rel="stylesheet" href="/css/site.css">
@@ -20,8 +22,8 @@
     <![endif]-->
 
     <base href="/">
-  <script type="text/javascript" async="" src="//zanon.disqus.com/embed.js"></script></head>
-  <body ng-controller="MainController" class="ng-scope">
+  </head>
+  <body ng-controller="MainController">
 
     <header>
       <div>
@@ -62,13 +64,13 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li ng-class="{ 'active': active.all }" class="active">    <a ng-click="filter('all');" href="/">All posts</a></li>
-              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');" href="/">Angular</a></li>
-              <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');" href="/">Node</a></li>
-              <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');" href="/">MongoDB</a></li>
-              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');" href="/">AWS</a></li>
-              <li ng-class="{ 'active': active.android }"><a ng-click="filter('android');" href="/">Android</a></li>
-              <li ng-class="{ 'active': active.ios }">	  <a ng-click="filter('ios');" href="/">iOS</a></li>
+              <li ng-class="{ 'active': active.all }">    <a ng-click="filter('all');"      href="/">All posts</a></li>
+              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');"  href="/">Angular</a></li>
+              <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');"     href="/">Node</a></li>
+              <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');"  href="/">MongoDB</a></li>
+              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');"      href="/">AWS</a></li>
+              <li ng-class="{ 'active': active.android }"><a ng-click="filter('android');"  href="/">Android</a></li>
+              <li ng-class="{ 'active': active.ios }">	  <a ng-click="filter('ios');"      href="/">iOS</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </nav>
@@ -77,27 +79,28 @@
 
     <div class="container">
       <div class="content">
-        <!-- ngView:  --><div class="ng-view-background ng-scope ng-cloak" autoscroll="true" ng-view="" highlight-code="">
-<div class="row ng-scope">
+        <div class="ng-view-background ng-cloak" autoscroll="true" ng-view highlight-code>
+          
+<div class="row">
   <div class="col-md-offset-1 col-md-10 post">
     <h1>How to distribute your enterprise mobile app?</h1>
     <p class="date">OCT 04, 2015</p>
     <div>
 
 <p>Publishing Android and iOS apps are quite easy if your app is designated to the general public. You just need to register in the store, Google Play or App Store, follow some steps and publish it. These stores also handle the distribution of new versions in the comfortable automatic update solution.</p>
-<p>However, if you are deploying a private enterprise app, for example, something the connects with the company database to input some info or show some reports, you don't want to make it public, neither Google or Apple. So, what are your options?</p>
+<p>However, if you are deploying a private enterprise app, for example, something the connects with the company database to input some info or show some reports, you don&#39;t want to make it public, neither Google or Apple. So, what are your options?</p>
 <h2 id="android">Android</h2>
 <h3 id="distributing-your-app-in-house">Distributing your app in-house</h3>
 <p>When you build an Android app, you get a file with the .apk extension. If you distribute this file to your employees, they can download it using their Android device and easily install the app using a file manager, like <a href="https://play.google.com/store/apps/details?id=com.estrongs.android.pop">ES File Explorer</a> or <a href="https://play.google.com/store/apps/details?id=com.metago.astro">Astro</a>.</p>
-<p>This distribution can be done in the company's intranet, Sharepoint, FTP or something similar. The tricky part is to handle app updates automatically. You'll need to implement, for each app, a listener or pooling mechanism to watch for updates. Otherwise, you'll need to send periodic e-mails requesting employees to grab and update their apps.</p>
-<p>As you can see, this approach looks like <em>free</em>, but actually is not. You'll waste many admins hours to develop/handle this kind of solution. So, usually, a paid solution may be better.</p>
+<p>This distribution can be done in the company&#39;s intranet, Sharepoint, FTP or something similar. The tricky part is to handle app updates automatically. You&#39;ll need to implement, for each app, a listener or pooling mechanism to watch for updates. Otherwise, you&#39;ll need to send periodic e-mails requesting employees to grab and update their apps.</p>
+<p>As you can see, this approach looks like <em>free</em>, but actually is not. You&#39;ll waste many admins hours to develop/handle this kind of solution. So, usually, a paid solution may be better.</p>
 <h3 id="google-play">Google Play</h3>
-<p>Google offers their store to be used privately by companies. Starting by <a href="https://www.google.com/intx/en/work/apps/business/pricing.html">$5 per user per month</a>, you can create a <a href="https://support.google.com/a/answer/2494992?hl=en">private channel</a> and add your employees accounts. To access the channel, they need to go to Play Store &gt; Apps &gt; Categories &gt; [your organization's name] on their Android device. Automatic updates is obviously supported.</p>
+<p>Google offers their store to be used privately by companies. Starting by <a href="https://www.google.com/intx/en/work/apps/business/pricing.html">$5 per user per month</a>, you can create a <a href="https://support.google.com/a/answer/2494992?hl=en">private channel</a> and add your employees accounts. To access the channel, they need to go to Play Store &gt; Apps &gt; Categories &gt; [your organization&#39;s name] on their Android device. Automatic updates is obviously supported.</p>
 <h2 id="ios">iOS</h2>
 <h3 id="distributing-your-app-in-house">Distributing your app in-house</h3>
-<p>As Apple doesn't follow Google's openness nature, you can't simple build and distribute your app. You need to pay to Apple a <a href="https://developer.apple.com/programs/enterprise/">$299 per year</a> fee to enroll for <a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/DistributingEnterpriseProgramApps/DistributingEnterpriseProgramApps.html">Apple Developer Enterprise Program</a>. Furthermore, you need use a MDM (Mobile Device Management) System to distribute your iOS apps (.ipa extension).</p>
+<p>As Apple doesn&#39;t follow Google&#39;s openness nature, you can&#39;t simple build and distribute your app. You need to pay to Apple a <a href="https://developer.apple.com/programs/enterprise/">$299 per year</a> fee to enroll for <a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/DistributingEnterpriseProgramApps/DistributingEnterpriseProgramApps.html">Apple Developer Enterprise Program</a>. Furthermore, you need use a MDM (Mobile Device Management) System to distribute your iOS apps (.ipa extension).</p>
 <h2 id="app-store">App Store</h2>
-<p>Unfortunately, you can't have a private channel at App Store. If you deploy your apps there, it'll be public and need to follow Apple's guideline. As it'll probably be of restricted access, it'll not be accepted.</p>
+<p>Unfortunately, you can&#39;t have a private channel at App Store. If you deploy your apps there, it&#39;ll be public and need to follow Apple&#39;s guideline. As it&#39;ll probably be of restricted access, it&#39;ll not be accepted.</p>
 <h2 id="other-options">Other Options</h2>
 <h3 id="mobile-device-management">Mobile Device Management</h3>
 <p>A MDM solution requires a server to be responsible for storing the apps deploys and a client to be installed in each device. A MDM is the best approach when security is a deep concern since the company can take control of the device and allow only selected programs to be installed. Usually, the device will have full disk encryption and the administrators will have the ability to remote wipe all data in case of loss or theft of the device. Jailbroken (iOS) and rooted (Android) devices can also be detected and their access to the companies services can be revoked since those poses a significant risk.</p>
@@ -105,12 +108,13 @@
 <h3 id="virtualization">Virtualization</h3>
 <p>Virtualization is a new kind of distribution that is growing in attention. It offers the worst user experience, since network latencies and connections problems affects the usage, but is used when the security concerns of data leak are too frightening.</p>
 <h3 id="web-based-apps">Web-Based Apps</h3>
-<p>Another option is to use web-based apps instead of native. This is a very hard decision and a never-ending debate with pros and cons, but in this case, since it doesn't need a online store for updates, "distributing" is much easier.</p>
+<p>Another option is to use web-based apps instead of native. This is a very hard decision and a never-ending debate with pros and cons, but in this case, since it doesn&#39;t need a online store for updates, &quot;distributing&quot; is much easier.</p>
 
     </div>
   </div>
 </div>
-<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app2" name="dsq-app2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; height: 0px !important; " width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=5e251367ffb39af07c2a292e9e45a454&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Fhow-to-distribute-your-enterprise-mobile-app&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default"></iframe></div><a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></dir-disqus></div>
+<dir-disqus></dir-disqus>
+        </div>
       </div>
     </div>
 
@@ -141,6 +145,5 @@
       ga('create', 'UA-63834414-1', 'auto');
       ga('send', 'pageview');
     </script>
-  
-
-</body></html>
+  </body>
+</html>

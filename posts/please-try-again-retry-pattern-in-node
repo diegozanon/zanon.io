@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en" ng-app="zanonApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak-invalid,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+<!DOCTYPE html>
+<html lang="en" ng-app="zanonApp">
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +10,7 @@
 
     <title>zanon.io</title>
 
-    <script async="" src="//www.google-analytics.com/analytics.js"></script><script src="/js/ng-cloak.js"></script><style type="text/css">.ng-cloak-invalid { display: none !important; }</style> <!-- workaround to avoid flickering in prerendered content -->
+    <script src="/js/ng-cloak.js"></script> <!-- workaround to avoid flickering in prerendered content -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/monokai_sublime.min.css">
     <link rel="stylesheet" href="/css/site.css">
@@ -20,8 +22,8 @@
     <![endif]-->
 
     <base href="/">
-  <script type="text/javascript" async="" src="//zanon.disqus.com/embed.js"></script></head>
-  <body ng-controller="MainController" class="ng-scope">
+  </head>
+  <body ng-controller="MainController">
 
     <header>
       <div>
@@ -62,13 +64,13 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li ng-class="{ 'active': active.all }" class="active">    <a ng-click="filter('all');" href="/">All posts</a></li>
-              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');" href="/">Angular</a></li>
-              <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');" href="/">Node</a></li>
-              <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');" href="/">MongoDB</a></li>
-              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');" href="/">AWS</a></li>
-              <li ng-class="{ 'active': active.android }"><a ng-click="filter('android');" href="/">Android</a></li>
-              <li ng-class="{ 'active': active.ios }">	  <a ng-click="filter('ios');" href="/">iOS</a></li>
+              <li ng-class="{ 'active': active.all }">    <a ng-click="filter('all');"      href="/">All posts</a></li>
+              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');"  href="/">Angular</a></li>
+              <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');"     href="/">Node</a></li>
+              <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');"  href="/">MongoDB</a></li>
+              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');"      href="/">AWS</a></li>
+              <li ng-class="{ 'active': active.android }"><a ng-click="filter('android');"  href="/">Android</a></li>
+              <li ng-class="{ 'active': active.ios }">	  <a ng-click="filter('ios');"      href="/">iOS</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </nav>
@@ -77,10 +79,11 @@
 
     <div class="container">
       <div class="content">
-        <!-- ngView:  --><div class="ng-view-background ng-scope ng-cloak" autoscroll="true" ng-view="" highlight-code="">
-<div class="row ng-scope">
+        <div class="ng-view-background ng-cloak" autoscroll="true" ng-view highlight-code>
+          
+<div class="row">
   <div class="col-md-offset-1 col-md-10 post">
-    <h1>"Please, try again..." (Retry Pattern in Node)</h1>
+    <h1>&quot;Please, try again...&quot; (Retry Pattern in Node)</h1>
     <p class="date">Apr 09, 2016</p>
     <div>
 
@@ -96,11 +99,11 @@
 <li>When the external service returns the HTTP 500 error code but we have a pretty good guess that it could be caused by a unhandled exception created by a transient problem: if the service relies on other services and may not be so fault-tolerant as ours.</li>
 <li>When the database or another backend resource reports timeouts or other known error type that suggests a transient failure.</li>
 </ul>
-<p>We shouldn't retry when:</p>
+<p>We shouldn&#39;t retry when:</p>
 <ul>
-<li>When the request was done by an user: simply return an error message like "An error has occurred, please try again later". We can avoid dead retries by asking for the user to decide what is the best way to handle the problem. Usually, the user will prefer to see a fast response saying that an error has occurred than having to wait a few minutes with the risk of seeing the same error message.</li>
-<li>When we don't have any idea about what caused the error: if the error is caused by a programming bug, you shouldn't try repeatedly.</li>
-<li>When the request is not <strong>idempotent*</strong>: if the request is "select something from tableX" or "update X to Y", we can try again without worrying about side effects. However, if the request is "delete the first report" or "insert a new order", we <strong>should not</strong> retry to avoid deleting wrong things or duplicating content.</li>
+<li>When the request was done by an user: simply return an error message like &quot;An error has occurred, please try again later&quot;. We can avoid dead retries by asking for the user to decide what is the best way to handle the problem. Usually, the user will prefer to see a fast response saying that an error has occurred than having to wait a few minutes with the risk of seeing the same error message.</li>
+<li>When we don&#39;t have any idea about what caused the error: if the error is caused by a programming bug, you shouldn&#39;t try repeatedly.</li>
+<li>When the request is not <strong>idempotent*</strong>: if the request is &quot;select something from tableX&quot; or &quot;update X to Y&quot;, we can try again without worrying about side effects. However, if the request is &quot;delete the first report&quot; or &quot;insert a new order&quot;, we <strong>should not</strong> retry to avoid deleting wrong things or duplicating content.</li>
 </ul>
 <p>* <strong>Idempotency</strong>: an idempotent method is the one that can be called many times without different outcomes. More <a href="http://restcookbook.com/HTTP%20Methods/idempotency/">here</a>.</p>
 <h3 id="issues-and-considerations">Issues and Considerations</h3>
@@ -115,69 +118,69 @@
 <h3 id="solution-how-can-i-retry-">Solution - how can I <em>Retry</em>?</h3>
 <p><a href="https://msdn.microsoft.com/en-us/library/dn589788.aspx"><img src="http://zanon.io/images/posts/2016-04-09-retry.png" alt="retry"></a></p>
 <p>The retry logic is quite simple: you just need to loop X times, waiting a few seconds between each loop and retry if you know that the error is transient. If you succeed or the limit is achieved, you abort the loop.</p>
-<pre><code class="lang-javascript hljs"><span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+<pre><code class="lang-javascript">while (true) {
 
-  <span class="hljs-keyword">try</span> {
+  try {
 
-    <span class="hljs-comment">// execute the task and break the loop if it succeeds</span>
+    // execute the task and break the loop if it succeeds
 
-  } <span class="hljs-keyword">catch</span> (e)  {
+  } catch (e)  {
 
-    <span class="hljs-comment">// if (e instanceof CommunicationError &amp;&amp; attempts &lt; limit)</span>
-    <span class="hljs-comment">// try again after a few seconds</span>
+    // if (e instanceof CommunicationError &amp;&amp; attempts &lt; limit)
+    // try again after a few seconds
   }
 }
 </code></pre>
-<p>However, implementing this in Node considering async operations is a little bit more complex. So, why don't we use a well tested module? I suggest <a href="https://www.npmjs.com/package/retry">retry</a> that is specialized in this task or the almighty <a href="https://www.npmjs.com/package/async">async</a> module that has also <a href="https://github.com/caolan/async#retry">a retry feature</a>.</p>
-<p>For this example, I'll pick the retry module.</p>
+<p>However, implementing this in Node considering async operations is a little bit more complex. So, why don&#39;t we use a well tested module? I suggest <a href="https://www.npmjs.com/package/retry">retry</a> that is specialized in this task or the almighty <a href="https://www.npmjs.com/package/async">async</a> module that has also <a href="https://github.com/caolan/async#retry">a retry feature</a>.</p>
+<p>For this example, I&#39;ll pick the retry module.</p>
 <h3 id="installation">Installation</h3>
-<pre><code class="lang-xml hljs">&gt; npm install retry
+<pre><code class="lang-xml">&gt; npm install retry
 </code></pre>
 <h3 id="testing">Testing</h3>
-<p>retry uses an <a href="http://dthain.blogspot.com.br/2009/02/exponential-backoff-in-distributed.html">exponential backoff</a> strategy to calculate how much time each retry attempt must wait. It's a very clever solution. You can read more about in the <a href="https://github.com/tim-kos/node-retry#retrytimeoutsoptions">official docs</a>.</p>
+<p>retry uses an <a href="http://dthain.blogspot.com.br/2009/02/exponential-backoff-in-distributed.html">exponential backoff</a> strategy to calculate how much time each retry attempt must wait. It&#39;s a very clever solution. You can read more about in the <a href="https://github.com/tim-kos/node-retry#retrytimeoutsoptions">official docs</a>.</p>
 <p>Below follows an example using this module:</p>
-<pre><code class="lang-javascript hljs"><span class="hljs-keyword">var</span> retry = <span class="hljs-built_in">require</span>(<span class="hljs-string">'retry'</span>);
+<pre><code class="lang-javascript">var retry = require(&#39;retry&#39;);
 
-<span class="hljs-comment">// configuration</span>
-<span class="hljs-keyword">var</span> operation = retry.operation({
-  retries: <span class="hljs-number">2</span>,            <span class="hljs-comment">// try 1 time and retry 2 times if needed, total = 3</span>
-  minTimeout: <span class="hljs-number">10</span> * <span class="hljs-number">1000</span>, <span class="hljs-comment">// the number of milliseconds before starting the first retry</span>
-  maxTimeout: <span class="hljs-number">30</span> * <span class="hljs-number">1000</span>  <span class="hljs-comment">// the maximum number of milliseconds between two retries</span>
+// configuration
+var operation = retry.operation({
+  retries: 2,            // try 1 time and retry 2 times if needed, total = 3
+  minTimeout: 10 * 1000, // the number of milliseconds before starting the first retry
+  maxTimeout: 30 * 1000  // the maximum number of milliseconds between two retries
 });
 
-<span class="hljs-comment">// define a custom error</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CommunicationError</span>(<span class="hljs-params"></span>) </span>{}
+// define a custom error
+function CommunicationError() {}
 
-<span class="hljs-comment">// define a function that represents our unreliable task</span>
-<span class="hljs-keyword">var</span> task = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">input, callback</span>) </span>{
+// define a function that represents our unreliable task
+var task = function(input, callback) {
 
-  <span class="hljs-built_in">Math</span>.random() &gt; <span class="hljs-number">0.7</span>
-    ? callback(<span class="hljs-literal">null</span>, <span class="hljs-string">'ok'</span>)                <span class="hljs-comment">// success in 30% of the cases</span>
-    : callback(<span class="hljs-keyword">new</span> CommunicationError()); <span class="hljs-comment">// error in 70% of the cases</span>
+  Math.random() &gt; 0.7
+    ? callback(null, &#39;ok&#39;)                // success in 30% of the cases
+    : callback(new CommunicationError()); // error in 70% of the cases
 }
 
-<span class="hljs-comment">// define a function that wraps our unreliable task into a fault tolerant task</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">faultTolerantTask</span>(<span class="hljs-params">input, callback</span>) </span>{
+// define a function that wraps our unreliable task into a fault tolerant task
+function faultTolerantTask(input, callback) {
 
-  operation.attempt(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">currentAttempt</span>) </span>{
+  operation.attempt(function(currentAttempt) {
 
-    task(input, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, result</span>) </span>{
+    task(input, function(err, result) {
 
-      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Current attempt: '</span> + currentAttempt);
+      console.log(&#39;Current attempt: &#39; + currentAttempt);
 
-      <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> CommunicationError <span class="hljs-comment">// test if is a transient error - optional</span>
-          &amp;&amp; operation.retry(err)) {        <span class="hljs-comment">// test if is retriable and retry if needed</span>
-          <span class="hljs-keyword">return</span>;
+      if (err instanceof CommunicationError // test if is a transient error - optional
+          &amp;&amp; operation.retry(err)) {        // test if is retriable and retry if needed
+          return;
       }
 
-      callback(err ? operation.mainError() : <span class="hljs-literal">null</span>, result);
+      callback(err ? operation.mainError() : null, result);
     });
   });
 }
 
-<span class="hljs-comment">// test</span>
-faultTolerantTask(<span class="hljs-string">'some input'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, result</span>) </span>{
-  <span class="hljs-built_in">console</span>.log(err, result);
+// test
+faultTolerantTask(&#39;some input&#39;, function(err, result) {
+  console.log(err, result);
 });
 </code></pre>
 <h3 id="read-more">Read more</h3>
@@ -186,7 +189,8 @@ faultTolerantTask(<span class="hljs-string">'some input'</span>, <span class="hl
     </div>
   </div>
 </div>
-<dir-disqus class="ng-scope ng-isolate-scope"><div id="disqus_thread"><iframe id="dsq-app2" name="dsq-app2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border-top-style: none !important; border-right-style: none !important; border-bottom-style: none !important; border-left-style: none !important; border-width: initial !important; border-color: initial !important; overflow-x: hidden !important; overflow-y: hidden !important; height: 0px !important; " width="100%" src="http://disqus.com/embed/comments/?base=default&amp;version=d074862f091cd9585b295f3979a4eb15&amp;f=zanon&amp;t_u=http%3A%2F%2Flocalhost%2Fposts%2Fplease-try-again-retry-pattern-in-node&amp;t_d=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zanon.io%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;s_o=default" horizontalscrolling="no" verticalscrolling="no"></iframe></div></dir-disqus></div>
+<dir-disqus></dir-disqus>
+        </div>
       </div>
     </div>
 
@@ -217,6 +221,5 @@ faultTolerantTask(<span class="hljs-string">'some input'</span>, <span class="hl
       ga('create', 'UA-63834414-1', 'auto');
       ga('send', 'pageview');
     </script>
-  
-
-</body></html>
+  </body>
+</html>
