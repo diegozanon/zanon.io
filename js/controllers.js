@@ -1,6 +1,6 @@
 var ctrls = angular.module('zanonControllers', []);
 
-ctrls.controller('MainController', function($scope) {
+ctrls.controller('MainController', ['$scope', function($scope) {
 
 	$scope.active = {
 		all: true,
@@ -19,7 +19,7 @@ ctrls.controller('MainController', function($scope) {
 
 		$scope.active[filter] = true;
 	};
-});
+}]);
 
 ctrls.controller('404Controller', function() {
 	initInvaders404();
