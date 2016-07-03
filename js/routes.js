@@ -5,46 +5,59 @@ angular.module('zanonApp').config(['$routeProvider', '$locationProvider',
       // partials
       .when('/', {
         templateUrl: '/partials/posts.html',
-        controller: 'PostsController'
+        controller: 'PostsController',
+        title: ''
       })
       .when('/404', {
         templateUrl: '/partials/404.html',
-        controller: '404Controller'
+        controller: '404Controller',
+        title: 'Page not Found'
       })
 
       // posts
       .when('/posts/please-try-again-retry-pattern-in-node', {
-        templateUrl: '/partials/2016-04-09-please-try-again-retry-pattern-in-node.html'
+        templateUrl: '/partials/2016-04-09-please-try-again-retry-pattern-in-node.html',
+        title: '"Please, try again..." (Retry Pattern in Node)'
       })
       .when('/posts/building-serverless-websites-on-aws-tutorial', {
-        templateUrl: '/partials/2016-01-31-building-serverless-websites-on-aws-tutorial.html'
+        templateUrl: '/partials/2016-01-31-building-serverless-websites-on-aws-tutorial.html',
+        title: 'Building Serverless Websites on AWS - Tutorial'
       })
       .when('/posts/building-serverless-websites-on-aws-intro', {
-        templateUrl: '/partials/2015-11-15-building-serverless-websites-on-aws-intro.html'
+        templateUrl: '/partials/2015-11-15-building-serverless-websites-on-aws-intro.html',
+        title: 'Building Serverless Websites on AWS - Intro'
       })
       .when('/posts/realm-an-incredible-fast-mobile-db', {
-        templateUrl: '/partials/2015-11-01-realm-an-incredible-fast-mobile-db.html'
+        templateUrl: '/partials/2015-11-01-realm-an-incredible-fast-mobile-db.html',
+        title: 'Realm: an incredible fast mobile DB'
       })
       .when('/posts/mongodb-storage-engine-mmap-or-wiredtiger', {
-        templateUrl: '/partials/2015-10-18-mongodb-storage-engine-mmap-or-wiredtiger.html'
+        templateUrl: '/partials/2015-10-18-mongodb-storage-engine-mmap-or-wiredtiger.html',
+        title: 'MongoDB storage engine: MMAP or WiredTiger?'
       })
       .when('/posts/how-to-distribute-your-enterprise-mobile-app', {
-        templateUrl: '/partials/2015-10-04-how-to-distribute-your-enterprise-mobile-app.html'
+        templateUrl: '/partials/2015-10-04-how-to-distribute-your-enterprise-mobile-app.html',
+        title: 'How to distribute your enterprise mobile app?'
       })
       .when('/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs', {
-        templateUrl: '/partials/2015-09-20-creating-desktop-apps-using-html-css-js-nodejs-with-nwjs.html'
+        templateUrl: '/partials/2015-09-20-creating-desktop-apps-using-html-css-js-nodejs-with-nwjs.html',
+        title: 'Creating Desktop Apps using HTML/CSS/JS + Node.js with NW.js'
       })
       .when('/posts/serving-gzipped-files-in-amazon-s3-cloudfront', {
-        templateUrl: '/partials/2015-09-06-serving-gzipped-files-in-amazon-s3-cloudfront.html'
+        templateUrl: '/partials/2015-09-06-serving-gzipped-files-in-amazon-s3-cloudfront.html',
+        title: 'Serving gzipped files in Amazon S3 / CloudFront'
       })
       .when('/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly', {
-        templateUrl: '/partials/2015-08-23-angularjs-how-to-create-a-spa-crawlable-and-seo-friendly.html'
+        templateUrl: '/partials/2015-08-23-angularjs-how-to-create-a-spa-crawlable-and-seo-friendly.html',
+        title: 'AngularJS: How to create a SPA crawlable and SEO friendly?'
       })
       .when('/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3', {
-        templateUrl: '/partials/2015-08-09-angularjs-with-pretty-urls-removing-the-in-amazon-s3.html'
+        templateUrl: '/partials/2015-08-09-angularjs-with-pretty-urls-removing-the-in-amazon-s3.html',
+        title: 'AngularJS with Pretty URLs: Removing the # in Amazon S3'
       })
       .when('/posts/getting-started', {
-        templateUrl: '/partials/2015-07-26-getting-started.html'
+        templateUrl: '/partials/2015-07-26-getting-started.html',
+        title: 'Getting Started!'
       })
 
       // 404

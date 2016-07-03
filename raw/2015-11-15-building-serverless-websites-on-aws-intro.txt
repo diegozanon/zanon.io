@@ -43,7 +43,7 @@ Lambda is a service where you can host your code and it will be executed when tr
 
 Lambda is a managed service. It means that AWS is responsible for allocating machines on demand to execute your code and is responsible for high availability and to scale following your needs.
 
-The code you run on AWS Lambda is called a "Lambda function". It needs to be stateless with no affinity to the underlying infrastructure. This prerequisite is what enables Amazon to rapidly launch many copies of the function to serve *infinite scalability*.
+The code you run on AWS Lambda is called a "Lambda function". It needs to be stateless with no affinity to the underlying infrastructure. This prerequisite is what enables Amazon to rapidly launch many copies of the function to serve *infinite scalability* (infinite and fast).
 
 As everything on AWS, Lambda also have a "Pay Per Use" model. You will only pay for the computer resources that you use, but in this case, its much better than EC2 because your EC2 machines will always have some computer resources that are allocated for you but not necessarily in use and this allocation is charged. Regarding Lambda, you will allocate resources only for the duration of your Lambda function execution. That's why its a much cheaper solution.
 

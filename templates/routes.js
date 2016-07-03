@@ -5,11 +5,13 @@ angular.module('zanonApp').config(['$routeProvider', '$locationProvider',
       // partials
       .when('/', {
         templateUrl: '/partials/posts.html',
-        controller: 'PostsController'
+        controller: 'PostsController',
+        title: ''
       })
       .when('/404', {
         templateUrl: '/partials/404.html',
-        controller: '404Controller'
+        controller: '404Controller',
+        title: 'Page not Found'
       })
 
       // posts

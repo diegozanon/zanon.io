@@ -8,7 +8,7 @@
     <meta name="author" content="Diego Zanon">
     <link rel="icon" href="http://zanon.io/favicon.ico" type="image/x-icon">
 
-    <title>zanon.io</title>
+    <title ng-bind="title + 'zanon.io'">zanon.io</title>
 
     <script src="/js/ng-cloak.js"></script> <!-- workaround to avoid flickering in prerendered content -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -110,7 +110,7 @@
 <p><img src="http://zanon.io/images/posts/2015-11-15-lambda.png" alt="lambda"></p>
 <p>Lambda is a service where you can host your code and it will be executed when triggered by events. Lambda supports, currently, code written in JavaScript (Node.js), Python or Java.</p>
 <p>Lambda is a managed service. It means that AWS is responsible for allocating machines on demand to execute your code and is responsible for high availability and to scale following your needs.</p>
-<p>The code you run on AWS Lambda is called a &quot;Lambda function&quot;. It needs to be stateless with no affinity to the underlying infrastructure. This prerequisite is what enables Amazon to rapidly launch many copies of the function to serve <em>infinite scalability</em>.</p>
+<p>The code you run on AWS Lambda is called a &quot;Lambda function&quot;. It needs to be stateless with no affinity to the underlying infrastructure. This prerequisite is what enables Amazon to rapidly launch many copies of the function to serve <em>infinite scalability</em> (infinite and fast).</p>
 <p>As everything on AWS, Lambda also have a &quot;Pay Per Use&quot; model. You will only pay for the computer resources that you use, but in this case, its much better than EC2 because your EC2 machines will always have some computer resources that are allocated for you but not necessarily in use and this allocation is charged. Regarding Lambda, you will allocate resources only for the duration of your Lambda function execution. That&#39;s why its a much cheaper solution.</p>
 <p>In Lambda, you pay for the number of requests and the amount of memory-time you allocate for your requests. Currently, it <a href="https://aws.amazon.com/lambda/pricing/">costs</a> US$ 0.0000002 per request (or US$ 0.20 per 1 million requests) and US$ 0.00001667 for every GB-second used (billing is metered in increments of 100 milliseconds). Also, the free tier includes 1M free requests and 400,000 GB-seconds of compute time per month and this bonus is given even if you have expired your 12 month AWS Free Tier term.</p>
 <p>For example, if you allocated 512 MB of memory for a function that was executed 10 million times in one month and it ran for 500 milliseconds each time, you would pay only US$ 36.81.</p>
