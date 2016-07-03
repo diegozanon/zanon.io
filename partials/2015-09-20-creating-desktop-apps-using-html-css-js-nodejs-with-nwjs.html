@@ -88,11 +88,11 @@
 <pre><code class="lang-html">&lt;script src=&quot;./js/jquery.min.js&quot;&gt;&lt;/script&gt;
 </code></pre>
 <p>For a demo, you can test with the following app.js file:</p>
-<pre><code class="lang-javascript">var request = require(&#39;request&#39;).defaults({ encoding: null });;
+<pre><code class="lang-javascript">var request = require(&#39;request&#39;).defaults({ encoding: null });
 
 request.get(&#39;http://nwjs.io/images/nw.png&#39;, function (err, response, body) {
 
-  if (!err &amp;&amp; response.statusCode == 200)
+  if (err || response.statusCode != 200)
     throw &#39;Error retrieving image&#39;;
 
   var base64Image = &quot;data:image/png;base64,&quot; + new Buffer(body).toString(&#39;base64&#39;);

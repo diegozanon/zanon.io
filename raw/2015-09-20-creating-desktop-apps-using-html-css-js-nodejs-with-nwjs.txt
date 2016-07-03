@@ -134,11 +134,11 @@ In the example below, I'm also using jQuery to handle the UI. However, for a lar
 
 For a demo, you can test with the following app.js file:
 ```javascript
-var request = require('request').defaults({ encoding: null });;
+var request = require('request').defaults({ encoding: null });
 
 request.get('http://nwjs.io/images/nw.png', function (err, response, body) {
 
-  if (!err && response.statusCode == 200)
+  if (err || response.statusCode != 200)
     throw 'Error retrieving image';
 
   var base64Image = "data:image/png;base64," + new Buffer(body).toString('base64');
