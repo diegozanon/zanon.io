@@ -5,8 +5,8 @@ var zanonApp = angular.module('zanonApp', [
   'dirDisqus'
 ]);
 
-zanonApp.run(function($rootScope) {
+zanonApp.run(['$rootScope', function($rootScope) {
     $rootScope.$on("$routeChangeSuccess", function(event, current, previous) {
         $rootScope.title = current.$$route.title ? current.$$route.title + ' - ' : '';
     });
-});
+}]);
