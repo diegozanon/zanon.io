@@ -1,5 +1,5 @@
 body {
-	background-color: #222;
+	background-color: #333;
 	font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
 }
 
@@ -16,11 +16,15 @@ body {
 }
 
 #nav {
-	background-color: #333;
+	background-color: #474747;
 }
 
 #nav .active>a {
 	background-color: #4472B9;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #b3b3b3;
 }
 
 /* Modal */
@@ -42,9 +46,7 @@ body {
 }
 
 .content {
-	background-color: #eee;
 	min-height: calc(100vh - 149px); /* 149px is title + nav + 30px of the bottom*/
-	padding: 0px 15px;
 	margin-bottom: 30px;
 }
 
@@ -59,6 +61,7 @@ body {
 article {
 	background-color: white;
 	padding: 40px;
+	margin: 0px 15px;
 	box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
@@ -94,13 +97,22 @@ article > p {
 
 /* Posts style */
 
+.post-list {
+	background-color: #eee;
+}
+
+.post-container {
+	background-color: white;
+  margin: 0px;
+}
+
 .post > h1 { /* post title */
 	padding-bottom: 20px;
 }
 
 .post { /* post content */
 	background-color: white;
-	padding: 30px;
+	padding: 0px;
 	font-size: 18px;
 	line-height: 1.7;
 	color: #333;
@@ -122,7 +134,7 @@ pre {
 }
 
 code {
-	background-color: #222;
+	background-color: #333;
 	color: white;
 }
 
@@ -131,32 +143,36 @@ pre code {
 }
 
 iframe {
-    border: 0px;
-    width: 100%;
+  border: 0px;
+  width: 100%;
 }
 
 blockquote {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #fff9e3;
-    border-left: 2px solid #ffeb8e;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #fff9e3;
+  border-left: 2px solid #ffeb8e;
 }
 
 img {
 	margin-left: auto;
-    margin-right: auto;
-    display: block;
-    max-width: 100%;
-    height: auto;
+  margin-right: auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 /* 404 page style */
 
-.game-ctn {
+.game-container {
+	background-color: white;
+}
+
+.game-content {
 	width: 60%;
 	position: relative;
 	display: block;
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
 #splash {
@@ -194,10 +210,21 @@ img {
 /* Disqus */
 
 #disqus_thread {
-	margin: 30px 5px 0px 5px;
+	margin: 0px 30px;
+}
+
+.disqus {
+	background-color: white;
+	padding-top: 10px;
 }
 
 /* media queries */
+
+@media all and (max-width: 329px) {
+  .header-img {
+  	display: none;
+  }
+}
 
 @media all and (max-width: 767px) {
   h1 {
@@ -213,11 +240,17 @@ img {
   }
 
   pre, .post > div, article > p {
-	font-size: 13px;
+		font-size: 13px;
   }
 
   article > p {
-	font-size: 13px;
+		font-size: 13px;
+  }
+}
+
+@media all and (max-width: 991px) {
+  .post-container {
+  	padding: 0px 15px;
   }
 }
 

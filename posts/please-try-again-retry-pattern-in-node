@@ -77,9 +77,9 @@
 
     <div class="container">
       <div class="content">
-        <div class="ng-view-background ng-cloak" autoscroll="true" ng-view highlight-code>
+        <div class="ng-cloak" autoscroll="true" ng-view highlight-code>
           
-<div class="row">
+<div class="row post-container">
   <div class="col-md-offset-1 col-md-10 post">
     <h1>&quot;Please, try again...&quot; (Retry Pattern in Node)</h1>
     <p class="date">Apr 09, 2016</p>
@@ -187,7 +187,9 @@ faultTolerantTask(&#39;some input&#39;, function(err, result) {
     </div>
   </div>
 </div>
-<dir-disqus></dir-disqus>
+<div class="disqus">
+  <dir-disqus></dir-disqus>
+</div>
         </div>
       </div>
     </div>

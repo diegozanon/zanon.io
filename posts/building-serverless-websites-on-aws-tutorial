@@ -77,9 +77,9 @@
 
     <div class="container">
       <div class="content">
-        <div class="ng-view-background ng-cloak" autoscroll="true" ng-view highlight-code>
+        <div class="ng-cloak" autoscroll="true" ng-view highlight-code>
           
-<div class="row">
+<div class="row post-container">
   <div class="col-md-offset-1 col-md-10 post">
     <h1>Building Serverless Websites on AWS - Tutorial</h1>
     <p class="date">Jan 31, 2016</p>
@@ -436,7 +436,9 @@ function getWeatherQuery(event) {
     </div>
   </div>
 </div>
-<dir-disqus></dir-disqus>
+<div class="disqus">
+  <dir-disqus></dir-disqus>
+</div>
         </div>
       </div>
     </div>

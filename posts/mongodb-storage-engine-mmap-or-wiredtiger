@@ -77,9 +77,9 @@
 
     <div class="container">
       <div class="content">
-        <div class="ng-view-background ng-cloak" autoscroll="true" ng-view highlight-code>
+        <div class="ng-cloak" autoscroll="true" ng-view highlight-code>
           
-<div class="row">
+<div class="row post-container">
   <div class="col-md-offset-1 col-md-10 post">
     <h1>MongoDB storage engine: MMAP or WiredTiger?</h1>
     <p class="date">OCT 18, 2015</p>
@@ -126,7 +126,9 @@
     </div>
   </div>
 </div>
-<dir-disqus></dir-disqus>
+<div class="disqus">
+  <dir-disqus></dir-disqus>
+</div>
         </div>
       </div>
     </div>

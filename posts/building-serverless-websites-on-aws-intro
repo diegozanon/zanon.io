@@ -77,9 +77,9 @@
 
     <div class="container">
       <div class="content">
-        <div class="ng-view-background ng-cloak" autoscroll="true" ng-view highlight-code>
+        <div class="ng-cloak" autoscroll="true" ng-view highlight-code>
           
-<div class="row">
+<div class="row post-container">
   <div class="col-md-offset-1 col-md-10 post">
     <h1>Building Serverless Websites on AWS - Intro</h1>
     <p class="date">Nov 15, 2015</p>
@@ -87,11 +87,11 @@
 
 <h2 id="serverless-websites">Serverless Websites</h2>
 <p>If you have a simple website (like a blog or portfolio), you don&#39;t need to necessarily pay for a server instance. You can host your HTML/CSS/JS files in some cloud service like Amazon S3 or Azure Blob Storage and configure your DNS to use them.</p>
-<p>This blog is a serverless website. It doesn&#39;t require server-side processing neither a database. This approach has two main benefits:</p>
+<p>This blog is a serverless website. It doesn&#39;t require server-side processing neither a database. This approach has three main benefits:</p>
 <ul>
 <li><strong>Infinite scalability</strong>: as you aren&#39;t managing a server instance, you don&#39;t need to worry about adding/removing new machines to your farm as your traffic grows/shrink. It will be smoothly handled by your Cloud Service and your content will always be served with the same low latency and high bandwidth.</li>
 <li><strong>High availability</strong>: as your Cloud Service is responsible to handle the availability of your static content, you can expect up to 99,99% over a given year.</li>
-<li><strong>Low costs</strong>: storage is much more cheap than CPU/RAM allocation. As an example, this blog costs only US$ 0.03 per month (the minimum of storage that is 1 GB). If I&#39;ve used a server machine to host it, I would be paying at least US$ 10 per month.</li>
+<li><strong>Low costs</strong>: storage is much more cheap than CPU/RAM allocation. As an example, this blog costs only US$ 0.03 per month (the minimum cost). If I&#39;ve used a server machine to host it, I would be paying at least US$ 7 per month.</li>
 </ul>
 <p>So, that&#39;s great for a static content. But what can we do for dynamic websites? If my site needs authentication, page routing, server-side business rules and a database, what options do we have? It will need to spend CPU time and you can&#39;t escape from that, but if you use AWS Lambda, you can significantly reduce your costs and achieve <em>infinite</em> scalability.</p>
 <p>As an interesting real case of building a serverless website, I recommend you to read this <a href="https://www.reddit.com/r/webdev/comments/3oiilb/our_company_did_a_collab_with_valve_for_some_new/">Reddit</a> post.</p>
@@ -148,7 +148,9 @@
     </div>
   </div>
 </div>
-<dir-disqus></dir-disqus>
+<div class="disqus">
+  <dir-disqus></dir-disqus>
+</div>
         </div>
       </div>
     </div>

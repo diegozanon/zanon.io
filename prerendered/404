@@ -77,18 +77,21 @@
 
     <div class="container">
       <div class="content">
-        <div class="ng-view-background ng-cloak" autoscroll="true" ng-view highlight-code>
-          <div class="game-ctn">
-  <canvas id="game-canvas" width="600px" height="400px">
-    404 Not Found (also, your browser do not support canvas)
-  </canvas>
-  <div id="splash">
-    <br>
-    <a href="/404" onclick="play();">Play again!</a>
-    <br>
-    <a href="https://github.com/pjnovas/invaders404" target="_blank">[source code]</a>
+        <div class="ng-cloak" autoscroll="true" ng-view highlight-code>
+          <div class="game-container">
+  <div class="game-content">
+    <canvas id="game-canvas" width="600px" height="400px">
+      404 Not Found (also, your browser do not support canvas)
+    </canvas>
+    <div id="splash">
+      <br>
+      <a href="/404" onclick="play();">Play again!</a>
+      <br>
+      <a href="https://github.com/pjnovas/invaders404" target="_blank">[source code]</a>
+    </div>
   </div>
 </div>
+
         </div>
       </div>
     </div>

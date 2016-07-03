@@ -77,9 +77,9 @@
 
     <div class="container">
       <div class="content">
-        <div class="ng-view-background ng-cloak" autoscroll="true" ng-view highlight-code>
+        <div class="ng-cloak" autoscroll="true" ng-view highlight-code>
           
-<div class="row">
+<div class="row post-container">
   <div class="col-md-offset-1 col-md-10 post">
     <h1>AngularJS: How to create a SPA crawlable and SEO friendly?</h1>
     <p class="date">AUG 23, 2015</p>
@@ -175,7 +175,9 @@ page.open(url, function (status) {
     </div>
   </div>
 </div>
-<dir-disqus></dir-disqus>
+<div class="disqus">
+  <dir-disqus></dir-disqus>
+</div>
         </div>
       </div>
     </div>

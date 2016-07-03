@@ -1,4 +1,4 @@
-div(ng-controller="PostsController")
+div(ng-controller="PostsController" class="post-list")
   each post in posts
     div(ng-show="active.all#{ post.showTags }" class="row")
       div(class="col-md-offset-1 col-md-10")

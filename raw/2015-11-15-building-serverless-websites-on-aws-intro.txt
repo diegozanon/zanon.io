@@ -8,11 +8,11 @@ URL: building-serverless-websites-on-aws-intro
 
 If you have a simple website (like a blog or portfolio), you don't need to necessarily pay for a server instance. You can host your HTML/CSS/JS files in some cloud service like Amazon S3 or Azure Blob Storage and configure your DNS to use them.
 
-This blog is a serverless website. It doesn't require server-side processing neither a database. This approach has two main benefits:
+This blog is a serverless website. It doesn't require server-side processing neither a database. This approach has three main benefits:
 
 - **Infinite scalability**: as you aren't managing a server instance, you don't need to worry about adding/removing new machines to your farm as your traffic grows/shrink. It will be smoothly handled by your Cloud Service and your content will always be served with the same low latency and high bandwidth.
 - **High availability**: as your Cloud Service is responsible to handle the availability of your static content, you can expect up to 99,99% over a given year.
-- **Low costs**: storage is much more cheap than CPU/RAM allocation. As an example, this blog costs only US$ 0.03 per month (the minimum of storage that is 1 GB). If I've used a server machine to host it, I would be paying at least US$ 10 per month.
+- **Low costs**: storage is much more cheap than CPU/RAM allocation. As an example, this blog costs only US$ 0.03 per month (the minimum cost). If I've used a server machine to host it, I would be paying at least US$ 7 per month.
 
 So, that's great for a static content. But what can we do for dynamic websites? If my site needs authentication, page routing, server-side business rules and a database, what options do we have? It will need to spend CPU time and you can't escape from that, but if you use AWS Lambda, you can significantly reduce your costs and achieve *infinite* scalability.
 
