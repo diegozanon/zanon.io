@@ -193,7 +193,7 @@ faultTolerantTask(&#39;some input&#39;, function(err, result) {
 </code></pre>
 <h3 id="read-more">Read more</h3>
 <p>This post was inspired by <a href="https://msdn.microsoft.com/en-us/library/dn589788.aspx">this</a> MSDN article (with C# examples).</p>
-
+<a share-twitter="share-twitter" data-text="&quot;&quot;Please, try again...&quot; (Retry Pattern in Node)&quot;" data-url="http://zanon.io/posts/please-try-again-retry-pattern-in-node" data-via="zanon_io" data-size="large"></a>
     </div>
   </div>
 </div>
@@ -222,6 +222,9 @@ faultTolerantTask(&#39;some input&#39;, function(err, result) {
     <script src="/js/assets/404game.min.js"></script>
     <script src="/js/assets/dir-disqus.min.js"></script>
 
+    <script src="http://platform.twitter.com/widgets.js"></script>
+
+    <!-- Google Analytics -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

@@ -42,7 +42,7 @@
 <p><strong>TL;DR</strong>: if your app is read-heavy, use MMAP. If its write-heavy, use WiredTiger.</p>
 <p>An interesting side note is that your solution may have a mixed replica set members where you can have one node configured with WiredTiger to receive a massive load of data and another node with MMAP to be used by analytical tools. As replication automatically migrates data between primary and secondary replica set members, independent of their underlying storage formats, you can avoid using complex ETL tools.</p>
 <p>Just one note: if your DB file was created with MMAP, you&#39;ll need to create a new database if you want the node to run with WiredTiger, since it can&#39;t open a MMAP DB file. The inverse is also true. Since they use different ways to store the data, you can&#39;t reuse the same files, but in a replica set, data is exchanged without problems.</p>
-
+<a share-twitter="share-twitter" data-text="&quot;MongoDB storage engine: MMAP or WiredTiger?&quot;" data-url="http://zanon.io/posts/mongodb-storage-engine-mmap-or-wiredtiger" data-via="zanon_io" data-size="large"></a>
     </div>
   </div>
 </div>

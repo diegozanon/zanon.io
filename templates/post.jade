@@ -6,5 +6,7 @@ div(class="row post-container")
           = '\n\n'
           != post.content
 
+          a(share-twitter data-text='"' + post.title + '"' data-url="http://zanon.io/posts/" + post.url data-via="zanon_io" data-size="large")
+
 div(class="disqus")
   dir-disqus

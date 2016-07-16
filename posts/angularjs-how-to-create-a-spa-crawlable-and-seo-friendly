@@ -181,7 +181,7 @@ page.open(url, function (status) {
 <blockquote>
 <p>Updated this post adding more info about Amazon S3 and the example with Phantomjs.</p>
 </blockquote>
-
+<a share-twitter="share-twitter" data-text="&quot;AngularJS: How to create a SPA crawlable and SEO friendly?&quot;" data-url="http://zanon.io/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly" data-via="zanon_io" data-size="large"></a>
     </div>
   </div>
 </div>
@@ -210,6 +210,9 @@ page.open(url, function (status) {
     <script src="/js/assets/404game.min.js"></script>
     <script src="/js/assets/dir-disqus.min.js"></script>
 
+    <script src="http://platform.twitter.com/widgets.js"></script>
+
+    <!-- Google Analytics -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

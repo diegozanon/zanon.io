@@ -288,7 +288,7 @@ nw.build().then(function () {
 <p>So, that was the basic. If you are interested, you can continue following the <a href="https://github.com/nwjs/nw.js/wiki">NW.js wiki</a> to learn many more important features. Or you can click in this <a href="https://github.com/zcbenz/nw-sample-apps">link</a> for nice sample apps or this <a href="https://github.com/szwacz/nw-boilerplate">link</a> to get a boilerplate app.</p>
 <p>Again, just to reinforce, the disadvantages is that your user need to download extra 60 MB to run your app and, if you need to protect your source code, your app will be 30% slower.</p>
 <p>However, I do believe that NW.js has a potential and can be useful to create nice multi-platform apps if you, or your team, is already used to work with Node.js and Web Development.</p>
-
+<a share-twitter="share-twitter" data-text="&quot;Creating Desktop Apps using HTML/CSS/JS + Node.js with NW.js&quot;" data-url="http://zanon.io/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs" data-via="zanon_io" data-size="large"></a>
     </div>
   </div>
 </div>
@@ -317,6 +317,9 @@ nw.build().then(function () {
     <script src="/js/assets/404game.min.js"></script>
     <script src="/js/assets/dir-disqus.min.js"></script>
 
+    <script src="http://platform.twitter.com/widgets.js"></script>
+
+    <!-- Google Analytics -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
