@@ -15,6 +15,10 @@ angular.module('zanonApp').config(['$routeProvider', '$locationProvider',
       })
 
       // posts
+      .when('/posts/nosql-injection-in-mongodb', {
+        templateUrl: '/partials/2016-07-17-nosql-injection-in-mongodb.html',
+        title: 'NoSQL Injection in MongoDB'
+      })
       .when('/posts/please-try-again-retry-pattern-in-node', {
         templateUrl: '/partials/2016-04-09-please-try-again-retry-pattern-in-node.html',
         title: '"Please, try again..." (Retry Pattern in Node)'
