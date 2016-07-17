@@ -1,13 +1,13 @@
 
 <div ng-controller="PostsController" class="post-list">
-  <div ng-show="active.all || active.mongodb || active.node" class="row">
+  <div ng-show="active.all || active.node || active.mongodb" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
         <div class="date">JUL 17, 2016</div>
         <h2><a href="/posts/nosql-injection-in-mongodb">NoSQL Injection in MongoDB</a></h2>
         <p>NoSQL databases can also be attacked with the equivalent of <em>SQL injection</em> for relational databases. This post shows how this is done and how to protect your application from this technique.</p>
-        <button ng-click="filter('mongodb');" type="button" class="btn tag pull-right">MongoDB</button>
         <button ng-click="filter('node');" type="button" class="btn tag pull-right">Node</button>
+        <button ng-click="filter('mongodb');" type="button" class="btn tag pull-right">MongoDB</button>
       </article>
     </div>
   </div>
@@ -21,36 +21,36 @@
       </article>
     </div>
   </div>
-  <div ng-show="active.all || active.aws || active.node" class="row">
+  <div ng-show="active.all || active.node || active.aws" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
         <div class="date">Jan 31, 2016</div>
         <h2><a href="/posts/building-serverless-websites-on-aws-tutorial">Building Serverless Websites on AWS - Tutorial</a></h2>
         <p>This tutorial uses AWS tools and Node to create a simple serverless application. The objective is to show how powerful this approach can be using minimal efforts.</p>
-        <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
         <button ng-click="filter('node');" type="button" class="btn tag pull-right">Node</button>
+        <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
       </article>
     </div>
   </div>
-  <div ng-show="active.all || active.aws || active.node" class="row">
+  <div ng-show="active.all || active.node || active.aws" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
         <div class="date">Nov 15, 2015</div>
         <h2><a href="/posts/building-serverless-websites-on-aws-intro">Building Serverless Websites on AWS - Intro</a></h2>
         <p>A serverless website is one that depends entirely on third-party managed services to avoid spinning up full-blown servers. This approach reduces the allocation of unused resources to minimize costs and relies on external services to achieve high availability and <em>infinite</em> scalability.</p>
-        <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
         <button ng-click="filter('node');" type="button" class="btn tag pull-right">Node</button>
+        <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
       </article>
     </div>
   </div>
-  <div ng-show="active.all || active.android || active.ios" class="row">
+  <div ng-show="active.all || active.ios || active.android" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
         <div class="date">NOV 01, 2015</div>
         <h2><a href="/posts/realm-an-incredible-fast-mobile-db">Realm: an incredible fast mobile DB</a></h2>
         <p>Realm is a really nice database created to run as a local storage for Android and iOS apps with an incredible speed. However, it has some limitations that you need to know before using it.</p>
-        <button ng-click="filter('android');" type="button" class="btn tag pull-right">Android</button>
         <button ng-click="filter('ios');" type="button" class="btn tag pull-right">iOS</button>
+        <button ng-click="filter('android');" type="button" class="btn tag pull-right">Android</button>
       </article>
     </div>
   </div>
@@ -64,14 +64,14 @@
       </article>
     </div>
   </div>
-  <div ng-show="active.all || active.android || active.ios" class="row">
+  <div ng-show="active.all || active.ios || active.android" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
         <div class="date">OCT 04, 2015</div>
         <h2><a href="/posts/how-to-distribute-your-enterprise-mobile-app">How to distribute your enterprise mobile app?</a></h2>
         <p>If you have developed an enterprise mobile app, for example, an app that connects with the company database and show some reports, how can you safely distribute it?</p>
-        <button ng-click="filter('android');" type="button" class="btn tag pull-right">Android</button>
         <button ng-click="filter('ios');" type="button" class="btn tag pull-right">iOS</button>
+        <button ng-click="filter('android');" type="button" class="btn tag pull-right">Android</button>
       </article>
     </div>
   </div>
@@ -95,25 +95,25 @@
       </article>
     </div>
   </div>
-  <div ng-show="active.all || active.aws || active.angular" class="row">
+  <div ng-show="active.all || active.angular || active.aws" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
         <div class="date">AUG 23, 2015</div>
         <h2><a href="/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly">AngularJS: How to create a SPA crawlable and SEO friendly?</a></h2>
         <p>If you're using Angular, probably you already know about ngRoute and the amazing benefit of avoiding full page reloads and requesting just what you need when you click to change to another page. If so, you need to be aware about how search engines will see your website and how you can help them to properly index your content.</p>
-        <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
         <button ng-click="filter('angular');" type="button" class="btn tag pull-right">Angular</button>
+        <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
       </article>
     </div>
   </div>
-  <div ng-show="active.all || active.aws || active.angular" class="row">
+  <div ng-show="active.all || active.angular || active.aws" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
         <div class="date">AUG 09, 2015</div>
         <h2><a href="/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3">AngularJS with Pretty URLs: Removing the # in Amazon S3</a></h2>
         <p>Angular uses the # (hashtag) by default when routing pages because it requires no server side configuration. If you want to get rid of it, you need to configure a server rewrite rule or pre-render your pages.</p>
-        <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
         <button ng-click="filter('angular');" type="button" class="btn tag pull-right">Angular</button>
+        <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
       </article>
     </div>
   </div>
