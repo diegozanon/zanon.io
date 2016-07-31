@@ -10,6 +10,10 @@
 <p>NW.js is an app runtime for writing <em>native</em> apps that uses Chromium to render your interface and allows you to run your Node.js modules desktop-side.</p>
 <p>There are many nice apps using it as you can see in <a href="https://github.com/nwjs/nw.js/wiki/List-of-apps-and-companies-using-nw.js">this link</a>. For example, this nice <a href="https://github.com/Aluxian/WhatsApp-Desktop">unofficial WhatsApp app for desktop</a>:</p>
 <p><img src="http://zanon.io/images/posts/2015-09-20-whatsapp.png" alt="whatsapp"></p>
+<h2 id="update-jul-31-2016">UPDATE: Jul 31, 2016</h2>
+<blockquote>
+<p>I haven&#39;t tried <a href="http://electron.atom.io/">Electron</a> yet, but some friends (and many people out there) prefer Electron than NW.js. I suggest you to read the pros and cons of each one before deciding to use NW.js and read this long tutorial.</p>
+</blockquote>
 <h2 id="setting-it-up">Setting it up</h2>
 <p>The first step is to download the executable built for your operating system from the <a href="https://github.com/nwjs/nw.js#user-content-downloads">project page</a>.</p>
 <p>When running NW.js, it will search for a package.json file to know what should be loaded and some extra configuration, like the default window size.</p>
@@ -123,48 +127,44 @@ request.get(&#39;http://nwjs.io/images/nw.png&#39;, function (err, response, bod
 <h3 id="menu-bar">Menu Bar</h3>
 <p><img src="http://zanon.io/images/posts/2015-09-20-menu.png" alt="menu"></p>
 <p>To get this result, just edit your app.js file to the following:</p>
-<pre><code class="lang-javascript">var gui = require(&#39;nw.gui&#39;);
-
-var menubar = new gui.Menu({
+<pre><code class="lang-javascript">var menubar = new nw.Menu({
   type: &#39;menubar&#39;
 });
 
-var fileMenu = new gui.Menu();
+var fileMenu = new nw.Menu();
 
-fileMenu.append(new gui.MenuItem({
+fileMenu.append(new nw.MenuItem({
   label: &#39;New File&#39;,
   click: function() {
     alert(&#39;Clicked to create a new file&#39;);
   }
 }));
 
-var openRecentMenu = new gui.Menu();
+var openRecentMenu = new nw.Menu();
 
-openRecentMenu.append(new gui.MenuItem({
+openRecentMenu.append(new nw.MenuItem({
   label: &#39;Recente File X&#39;,
   click: function() {
     alert(&#39;Clicked to open a recent file&#39;);
   }
 }));
 
-menubar.append(new gui.MenuItem({ label: &#39;File&#39;, submenu: fileMenu}));
-fileMenu.append(new gui.MenuItem({ label: &#39;Open Recent File&#39;, submenu: openRecentMenu}));
+menubar.append(new nw.MenuItem({ label: &#39;File&#39;, submenu: fileMenu}));
+fileMenu.append(new nw.MenuItem({ label: &#39;Open Recent File&#39;, submenu: openRecentMenu}));
 
-var win = gui.Window.get();
+var win = nw.Window.get();
 win.menu = menubar;
 </code></pre>
 <h3 id="tray-icons">Tray Icons</h3>
 <p><img src="http://zanon.io/images/posts/2015-09-20-tray.png" alt="tray"></p>
 <p>This simple tray was created with the following code:</p>
-<pre><code class="lang-javascript">var gui = require(&#39;nw.gui&#39;);
-
-var tray = new gui.Tray({
+<pre><code class="lang-javascript">var tray = new nw.Tray({
   icon : &#39;my-app-icon.png&#39;,
   title: &#39;My App Tray&#39;
 });
 
-var menu = new gui.Menu();
-menu.append(new gui.MenuItem({
+var menu = new nw.Menu();
+menu.append(new nw.MenuItem({
   label: &#39;Do something&#39;
 }));
 
@@ -198,6 +198,10 @@ nw.build().then(function () {
 <p>So, that was the basic. If you are interested, you can continue following the <a href="https://github.com/nwjs/nw.js/wiki">NW.js wiki</a> to learn many more important features. Or you can click in this <a href="https://github.com/zcbenz/nw-sample-apps">link</a> for nice sample apps or this <a href="https://github.com/szwacz/nw-boilerplate">link</a> to get a boilerplate app.</p>
 <p>Again, just to reinforce, the disadvantages is that your user need to download extra 60 MB to run your app and, if you need to protect your source code, your app will be 30% slower.</p>
 <p>However, I do believe that NW.js has a potential and can be useful to create nice multi-platform apps if you, or your team, is already used to work with Node.js and Web Development.</p>
+<h2 id="update-jul-31-2016">UPDATE: Jul 31, 2016</h2>
+<blockquote>
+<p>I&#39;ve updated this tutorial according to v0.16 (changes related with previous tutorial were related with how to get the Tray and Menu objects).</p>
+</blockquote>
 <a share-twitter="share-twitter" data-text="&quot;Creating Desktop Apps using HTML/CSS/JS + Node.js with NW.js&quot;" data-url="http://zanon.io/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs" data-via="zanon_io" data-size="large"></a>
     </div>
   </div>
