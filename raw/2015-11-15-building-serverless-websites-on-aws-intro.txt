@@ -6,9 +6,11 @@ URL: building-serverless-websites-on-aws-intro
 
 ## Serverless Websites
 
-If you have a simple website (like a blog or portfolio), you don't need to necessarily pay for a server instance. You can host your HTML/CSS/JS files in some cloud service like Amazon S3 or Azure Blob Storage and configure your DNS to use them.
+A serverless website is the one that doesn't require a server instance running all the time. When a request is made to this website, a third-party service starts a very small piece of code that runs, answers the request and shuts down. It only runs on-demand.
 
-This blog is a serverless website. It doesn't require server-side processing neither a database. This approach has three main benefits:
+The front-end code (HTML/CSS/JS) is hosted in a CDN or in a simpler storage service, like Amazon S3 or Azure Blob Storage, and your DNS is configured to redirect requests to those services. The back-end code is the tricky part and that will be explained later.
+
+As a simple example of the concept, this blog is a serverless website. It doesn't require server-side processing neither a database. This approach has three main benefits:
 
 - **Infinite scalability**: as you aren't managing a server instance, you don't need to worry about adding/removing new machines to your farm as your traffic grows/shrink. It will be smoothly handled by your Cloud Service and your content will always be served with the same low latency and high bandwidth.
 - **High availability**: as your Cloud Service is responsible to handle the availability of your static content, you can expect up to 99,99% over a given year.
@@ -85,6 +87,8 @@ DynamoDB solves the scalability difficulties that you would have using RDS and i
 
 SimpleDB have also a fixed cost of how much data you have stored, but the main cost is dependent on your usage. Your usage is measured in how many machine hours you spend to process your queries. Also, scalability is graciously handled by AWS and you can have bursts of increased usage without delays. If your app does not require complex queries and you have a very unpredictable usage, this solution may be best cost-effective.
 
+So far, I would suggest [Firebase](https://www.firebase.com/) as the best service for a serverless database. It's not an Amazon product, but is a Google one and it allows much more complex apps than SimpleDB.
+
 ## To sum up
 
 Below follows what we usually have in a dynamic website and what AWS feature we can use to build a serverless webapp.
@@ -93,7 +97,7 @@ Below follows what we usually have in a dynamic website and what AWS feature we 
 - **Routing**: API Gateway is responsible for receiving requests and to call the correspondent Lambda function.
 - **Authentication**: IAM, Incognito or OAuth 2.0.
 - **Server-Side Code**: Lambda functions handle each request.
-- **Database**: DynamoDB and SimpleDB are a pretty scalable NoSQL database, where SimpleDB can be more cost-effective for unpredictable usage.
+- **Database**: SimpleDB is a pretty scalable NoSQL database, but consider using Google's Firebase.
 
 ## UPDATE: Dec 27, 2015
 

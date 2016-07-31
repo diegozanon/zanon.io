@@ -102,7 +102,7 @@
 <p><img src="http://zanon.io/images/posts/2015-09-20-whatsapp.png" alt="whatsapp"></p>
 <h2 id="update-jul-31-2016">UPDATE: Jul 31, 2016</h2>
 <blockquote>
-<p>I haven&#39;t tried <a href="http://electron.atom.io/">Electron</a> yet, but some friends (and many people out there) prefer Electron than NW.js. I suggest you to read the pros and cons of each one before deciding to use NW.js and read this long tutorial.</p>
+<p>I haven&#39;t tried <a href="http://electron.atom.io/">Electron</a> yet, but some friends (and many people out there) prefer Electron than NW.js. I suggest you to read the pros and cons of each one before deciding to use NW.js and to read this long tutorial.</p>
 </blockquote>
 <h2 id="setting-it-up">Setting it up</h2>
 <p>The first step is to download the executable built for your operating system from the <a href="https://github.com/nwjs/nw.js#user-content-downloads">project page</a>.</p>
