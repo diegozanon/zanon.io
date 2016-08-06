@@ -100,7 +100,7 @@
 <p>The demo app is hosted at <a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a> and the source code is available at <a href="https://github.com/zanon-io/aws-serverless-demo">https://github.com/zanon-io/aws-serverless-demo</a></p>
 <p>This demo just shows a fake weather information when a button is clicked. To achieve this, we are using the following AWS tools:</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-lambda-web-apps.png" alt="lambda-web-apps"></p>
-<p>This image was extracted from <a href="https://aws.amazon.com/lambda/">here</a> and most Serverless demos uses DynamoDB as the database. However, for the sake of respecting the &quot;pay only for what you use&quot;, I&#39;ve decided to use the SimpleDB database. DynamoDB allows you to build more complex apps, but you need to provision capacity and you will pay for it even if no one is using your app. A true serverless aims for <em>infinite scalability</em>, <em>high availability</em> <strong>and</strong> <em>pay only for what you use</em>.</p>
+<p>This image was adapted from <a href="https://aws.amazon.com/lambda/">here</a>. Most Serverless demos uses DynamoDB as the database, but I&#39;ve used SimpleDB since that&#39;s the only serverless database offered by AWS. DynamoDB allows you to build more complex apps, but you need to provision capacity and you will pay for it even if no one is using your app. A true serverless app aims for <em>infinite scalability</em>, <em>high availability</em> <strong>and</strong> <em>pay only for what you use</em>, so DynamoDB lacks the last one.</p>
 <h2 id="summary">Summary</h2>
 <p>This tutorial tries to cover everything to build a serverless site, including how to configure your domain and host your data. If you want to skip this part, just jump for the section that you are interested.</p>
 <ol>
@@ -111,8 +111,7 @@
 </ol>
 <h2 id="host-your-website">Host your Website</h2>
 <h3 id="register-a-domain">Register a Domain</h3>
-<p>Buying a domain name is not required for this demo to work. If you browse the Serverless Framework official docs, they say that a domain name is required, but if you type a fake one, it will work the same way for your localhost testing app.</p>
-<p>If you want to go beyond testing to make something useful, the first step is to buy a domain with a nice name. As you can see, this is hard! The best ones are already taken.</p>
+<p>Buying a domain name is not required for this demo to work. If you want to go beyond testing to make something useful, the first step is to buy a domain with a nice name. As you can see, this is hard! The best ones are already taken.</p>
 <h3 id="create-amazon-s3-buckets">Create Amazon S3 buckets</h3>
 <p><a href="https://console.aws.amazon.com/s3">Amazon S3 buckets</a> is the service where you will manually host your front-end code (HTML/CSS/JavaScript and images) and also where the Serverless Framework will automatically host (in a different bucket) the back-end code.</p>
 <p>If you&#39;ve bought a domain named as <strong>example.com</strong>, you need to create a bucket with the same <strong>example.com</strong> name and configure it to enable website hosting.</p>
@@ -120,7 +119,7 @@
 <p>If you want to support old people that still like to type <strong>www</strong> for every site, you can also create a bucket with the name <strong>www.example.com</strong>. For that one, configure it to redirect all requests for the main address.</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-s3-www.png" alt="s3-www"></p>
 <h3 id="configure-amazon-route-53-hosted-zone">Configure Amazon Route 53 Hosted Zone</h3>
-<p>After buying your domain, you need to change the default Name Servers. The Name Servers are a set of server addresses (more than one for redundancy) that helps the DNS queries to translate the domain name to the correspondent address of the machine that is hosting your site. Since we want to host our app at Amazon, we need to give them this control. So, the name server will be changed from your domain registrar to Amazon&#39;s addresses. The Amazon service that is responsible for this kind of control is the Route 53.</p>
+<p>After buying your domain, you need to change the default Name Servers. The Name Servers are a set of server addresses (more than one for redundancy) that helps the DNS queries to translate the domain name to the correspondent address of the machine that is hosting your site. Since we want to host our app on Amazon, we need to give them this control. So, the name server will be changed from your domain registrar to Amazon&#39;s addresses. The Amazon service that is responsible for this kind of control is the Route 53.</p>
 <p>Go to <a href="https://console.aws.amazon.com/route53">Amazon Route 53</a> and click to create a Hosted Zone for your domain. After creating it, click at your hosted zone and write down the given Name Server (NS).</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-route53-nameservers.png" alt="route53-nameservers"></p>
 <h3 id="create-amazon-route-53-aliases">Create Amazon Route 53 Aliases</h3>
@@ -165,7 +164,7 @@
   $(&#39;#btn-show&#39;).on(&#39;click&#39;, function() {
 
       $.ajax({
-        url: &quot;https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local/5&quot;,
+        url: &quot;https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/5&quot;,
         success: function(json) {
           $(&quot;#weather-value&quot;).append(json.value + &#39; ºC&#39;);
         }
@@ -173,7 +172,7 @@
   });
 });
 </code></pre>
-<p>Our Ajax call is using &quot;<a href="https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local/5">https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local/5</a>&quot; as the URL parameter. This is the address that we&#39;ll get later, after deploying our app.</p>
+<p>Our Ajax call is using <a href="https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/5">https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/5</a> as the URL parameter. This is the address of out Lambda functions that we&#39;ll get later after deploying our app.</p>
 <p>Result:</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-demo.png" alt="demo"></p>
 <h2 id="serverless-framework">Serverless Framework</h2>
@@ -181,9 +180,10 @@
 <p>The Serverless Framework is a Node.js module. So, install it using NPM:</p>
 <pre><code class="lang-xml">&gt; npm install serverless -g
 </code></pre>
+<p>In this tutorial, I&#39;ve used v0.5.6. They are currently developing v1.0 with breaking changes, but v0.5 already is pretty good for production.</p>
 <h3 id="creating-an-iam-user">Creating an IAM User</h3>
-<p>Serverless needs an AWS user account to execute a CloudFormation script. Since it requires high privileges, you can&#39;t simply create an Admin key, with production access, and share it with every developer of your organization. For security measures, for production deployment, you need to generate the Serverless scripts using the flag <code>--noExeCf</code> and execute the output using the CloudFormation UI with a user with secure password (where just a few people have access) and a multi-factor authentication. Read more at the official <a href="http://docs.serverless.com/docs/best-practices#section-don-t-give-administratoraccess-to-aws-api-keys">best practices guide</a>.</p>
-<p>However, for a development environment, you can create an Admin account to get it up and running quickly.</p>
+<p>Serverless needs an AWS user account, but you can&#39;t simply create an Admin key with production access and share it with every developer of your organization. For security measures, if a developer need to deploy to production, it can generate the package using the flag <code>--noExeCf</code> (that means <em>don&#39;t execute Cloud Formation</em>) and give it to another person that will deploy with higher privileges and a multi-factor authentication. Read more at the official <a href="http://docs.serverless.com/docs/best-practices#section-don-t-give-administratoraccess-to-aws-api-keys">best practices guide</a>.</p>
+<p>However, if you are just learning, you can create an Admin account to get it up and running quickly.</p>
 <p>To create an user, browse the <a href="https://console.aws.amazon.com/iam">IAM console</a> and create a group first:</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-iam-group.png" alt="iam-group"></p>
 <p>Name it as <strong>serverless-group</strong> and attach the <strong>AdministratorAccess</strong> policy.</p>
@@ -210,66 +210,69 @@ region = us-east-1
 </code></pre>
 <p>It&#39;ll ask the following questions:</p>
 <ul>
-<li>Project Name: since they use CloudFormation for deployment and they tokenize resources with <code>-</code> (dashs), use camelCase to avoid issues. For example, I&#39;ve named my project as serverlessDemo.</li>
-<li>Domain Name: an existing domain is not required. In fact, even if you provide a domain that you own, it&#39;ll not make any difference. This name is just what will be used to create a S3 bucket. In my demo, I&#39;ve selected the name serverless-demo.zanon.io</li>
-<li>E-mail: set the e-mail address where you want to receive CloudFormation alarms.</li>
-<li>Region: the region where your app will be deployed.</li>
-<li>Profile: this profile must exist at your <strong>credentials</strong> file.</li>
+<li><strong>Project Name</strong>: since they use CloudFormation for deployment and it tokenizes resources with <code>-</code> (dashs), use camelCase to avoid issues. For example, I&#39;ve named my project as serverlessDemo.</li>
+<li><strong>Stage</strong>: start creating a <em>dev</em> stage. Later you can easily replicate your whole app for a <em>prod</em> environment.</li>
+<li><strong>Profile</strong>: you can select a profile that exists inside your <strong>credentials</strong> file or create a new one here giving the AWS keys.</li>
+<li><strong>Region</strong>: the region where your app will be deployed.</li>
 </ul>
-<p>This stage creates a CloudFormation template and a S3 bucket (in my case, named as serverless.us-east-1.serverless-demo.zanon.io) to store the necessary files.</p>
-<h3 id="serverless-architecture">Serverless Architecture</h3>
-<p>With Serverless, you have the following:</p>
-<pre><code class="lang-xml">Project
-  |__Component
-       |__Module
-            |__Function
-</code></pre>
-<ul>
-<li><p>A Component is an element that stores all Modules of a given runtime and code that can be shared between them. Since Lambda supports Node.js, Python and Java, you could create one component for each runtime. Since this example is based on Node.js-only, we&#39;ll create just one component named as <strong>nodejsComponent</strong>.</p>
-</li>
-<li><p>A Module has the purpose to create a logical <a href="http://martinfowler.com/articles/microservices.html">Microservice</a>. Every function for a given behavior must be grouped inside the same Module. In our example, it will be named as <strong>weather</strong>.</p>
-</li>
-<li><p>A Function is the element where you&#39;ll write your code to accomplish a very specific task. In this demo, it was named as <strong>local</strong> (to get the local weather with an localId).</p>
-</li>
-</ul>
-<h3 id="creating-a-component">Creating a Component</h3>
-<p>Before creating it, change the directory to your project folder:</p>
+<p>This stage creates a project template in your file system and CloudFormation templates in your AWS account.</p>
+<blockquote>
+<p><strong>Tip</strong>: instead of the command <em>serverless</em>, you can type <em>sls</em> (e.g.: sls project create) as a shortcut. However, as a tutorial, I&#39;ll continue to use <em>serverless</em>.</p>
+</blockquote>
+<p>After creating the project, change to its directory before executing further commands:</p>
 <pre><code class="lang-xml">&gt; cd serverlessDemo
 </code></pre>
-<p>When you execute the command to create a command, it&#39;ll ask you to create at least one Module and one Function.</p>
-<p>Execute:</p>
-<pre><code class="lang-xml">&gt; serverless component create
+<h3 id="serverless-architecture">Serverless Architecture</h3>
+<p>Serverless fits well in a <a href="http://martinfowler.com/articles/microservices.html">microservices architecture</a>. So, we&#39;ll create a microservice named <strong>weather</strong> that will contain the service <strong>current</strong> that is represented as a single function that returns the current local weather. We could also create another service named <strong>average</strong> that would be average of temperatures of the region. We could go further and create another microservice named <strong>users</strong> handled by <strong>createUser</strong> and <strong>deleteUser</strong>, but that&#39;s beyond this tutorial. Let&#39;s develop only the current weather.</p>
+<p>In this scenario, the architecture would be the following:</p>
+<pre><code class="lang-xml">serverlessDemo
+  |__microservices
+       |__weather
+            |__current
+                 |__handler.js
+                 |__s-function.json
+            |__average
+                 |__handler.js
+                 |__s-function.json
+       |__users
+            |__createUser
+                 |__handler.js
+                 |__s-function.json
+            |__deleteUser
+                 |__handler.js
+                 |__s-function.json
 </code></pre>
-<p>I&#39;ve named my elements as:</p>
-<ul>
-<li>Component: nodejsComponent</li>
-<li>Module: weather</li>
-<li>Function: local</li>
-</ul>
+<h3 id="creating-a-function">Creating a Function</h3>
+<p>Now, for the <strong>weather</strong> microservice, let&#39;s create the <strong>current</strong> function:</p>
+<pre><code class="lang-xml">&gt; serverless function create microservices/weather/current
+</code></pre>
+<p>It&#39;ll ask for the runtime (Node or Python) and if you want to create a related endpoint (yes). This endpoint will hold the REST commands that will trigger your function.</p>
+<p>The function is the element where you&#39;ll write your code to accomplish a very specific task. In this demo, it will retrieve the current local weather accepting a <strong>regionId</strong> as a parameter.</p>
 <h3 id="implement-your-function">Implement your Function</h3>
-<p>To implement your code, open the files <strong>handler.js</strong> and <strong>s-function.json</strong> localized at:</p>
-<pre><code class="lang-xml">Project
-  |__nodejsComponent
-       |__weather (Module)
-            |__local (Function)
+<p>To implement your code, open the files <strong>handler.js</strong> and <strong>s-function.json</strong> localized inside the <strong>current</strong> folder:</p>
+<pre><code class="lang-xml">serverlessDemo
+  |__microservices
+       |__weather
+            |__current (Function)
                  |__handler.js
                  |__s-function.json
 </code></pre>
 <p>In <strong>s-function.json</strong>, we have something like:</p>
 <pre><code class="lang-json">{
-  &quot;name&quot;: &quot;local&quot;,
-  &quot;handler&quot;: &quot;weather/local/handler.handler&quot;,
-  &quot;runtime&quot;: &quot;nodejs&quot;,
+  &quot;name&quot;: &quot;current&quot;,
+  &quot;runtime&quot;: &quot;nodejs4.3&quot;,
+  &quot;handler&quot;: &quot;handler.handler&quot;,
   (...),
   &quot;endpoints&quot;: [
     {
-      &quot;path&quot;: &quot;weather/local/{id}&quot;,
+      &quot;path&quot;: &quot;current&quot;,
       &quot;method&quot;: &quot;GET&quot;,
       &quot;authorizationType&quot;: &quot;none&quot;,
+      &quot;authorizerFunction&quot;: false,
       &quot;apiKeyRequired&quot;: false,
       &quot;requestParameters&quot;: {},
       &quot;requestTemplates&quot;: {
-        &quot;application/json&quot;: &quot;{\&quot;id\&quot;: \&quot;$input.params(&#39;id&#39;) \&quot;}&quot;
+        &quot;application/json&quot;: &quot;&quot;
       }
       (...)
     }
@@ -277,69 +280,63 @@ region = us-east-1
 }
 </code></pre>
 <p>Change the &quot;path&quot; to:</p>
-<pre><code class="lang-javascript">&quot;path&quot;: &quot;weather/local/{id}&quot;
+<pre><code class="lang-javascript">&quot;path&quot;: &quot;current/{regionId}&quot;
 </code></pre>
 <p>and the &quot;requestTemplates&quot; to:</p>
 <pre><code class="lang-javascript">&quot;requestTemplates&quot;: {
-  &quot;application/json&quot;: &quot;{\&quot;id\&quot;: \&quot;$input.params(&#39;id&#39;) \&quot;}&quot;
+  &quot;application/json&quot;: &quot;{\&quot;regionId\&quot;: \&quot;$input.params(&#39;regionId&#39;) \&quot;}&quot;
 }
 </code></pre>
-<p>With this change, we&#39;ll be able to retrieve the &quot;id&quot; input parameter.</p>
+<p>With those changes, we&#39;ll be able to use the <strong>regionId</strong> as an input parameter.</p>
 <p>In <strong>handler.js</strong>, we have by default:</p>
-<pre><code class="lang-javascript">module.exports.handler = function(event, context) {
-
-  lib.respond(event, function(error, response) {
-    return context.done(error, response);
+<pre><code class="lang-javascript">module.exports.handler = function(event, context, cb) {
+  return cb(null, {
+    message: &#39;Go Serverless! Your Lambda function executed successfully!&#39;
   });
 };
 </code></pre>
 <p>Change it to:</p>
-<pre><code class="lang-javascript">module.exports.handler = function(event, context) {
-
-  var result = getWeatherInfo(event);
-
-  lib.respond(event, function(error, response) {
-    return context.done(error, result);
+<pre><code class="lang-javascript">module.exports.handler = function(event, context, cb) {
+  return cb(null, {
+    message: &#39;Go Serverless! Input was: &#39; + event.regionId
   });
 };
-
-// that&#39;s where you place your Lambda code
-function getWeatherInfo(event) {
-
-  return {
-    value: &quot;35&quot;,
-    event: event // input data that I&#39;m ignoring
-  }
-}
 </code></pre>
+<h3 id="deploy">Deploy</h3>
+<p>Let&#39;s test this using the <strong>dash deploy</strong> command:</p>
+<pre><code class="lang-xml">&gt; serverless dash deploy
+</code></pre>
+<p>It will show, like in a dashboard, all assets that you have (functions and endpoints). Choose all (pressing ENTER) and hit the <strong>deploy</strong> option.</p>
+<p>After deploying, you&#39;ll get a list of URLs where you functions were hosted. For example, mine is available at: <a href="https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/{regionId}">https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/{regionId}</a></p>
+<p>Replaced the <code>{regionId}</code> by a number and it will work.
+E.g.: <a href="https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/5">https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/5</a></p>
 <h3 id="enable-cross-origin-resource-sharing-cors-">Enable Cross-Origin Resource Sharing (CORS)</h3>
 <p>Since our API is deployed at the AWS domain and not inside our app domain, the browsers won&#39;t process AJAX requests due to security issues. To workaround this, you can use <a href="http://json-p.org/">JSONP</a> at the clients-side or <a href="http://enable-cors.org/">enable CORS</a> at Amazon&#39;s side. I prefer to enable CORS.</p>
-<p>To enable, install the serverless-core-plugin:</p>
+<p>To enable, install the <a href="https://github.com/joostfarla/serverless-cors-plugin">serverless-cors-plugin</a>:</p>
 <pre><code class="lang-xml">&gt; npm install serverless-cors-plugin --save
 </code></pre>
-<p>In <strong>s-project.json</strong>, replace &quot;plugins&quot; by:</p>
+<p>In your project root, open the file <strong>s-project.json</strong> and replace &quot;plugins&quot; by:</p>
 <pre><code class="lang-javascript">&quot;plugins&quot;: [
   &quot;serverless-cors-plugin&quot;
-],
+]
 </code></pre>
-<p>In <strong>s-function.json</strong>, add the cors property to &quot;custom&quot;:</p>
+<p>In <strong>s-function.json</strong> (inside your function), replace</p>
+<pre><code class="lang-javascript">&quot;custom&quot;: {
+  &quot;excludePatterns&quot;: []
+},
+</code></pre>
+<p>by</p>
 <pre><code class="lang-javascript">&quot;custom&quot;: {
   &quot;cors&quot;: {
     &quot;allowOrigin&quot;: &quot;*&quot;,
     &quot;allowHeaders&quot;: [&quot;Content-Type&quot;, &quot;X-Amz-Date&quot;, &quot;Authorization&quot;, &quot;X-Api-Key&quot;]
-  }
-}
+  },
+  &quot;excludePatterns&quot;: []
+},
 </code></pre>
-<h3 id="deploy">Deploy</h3>
-<p>First, change the directory to your component.</p>
-<pre><code class="lang-xml">&gt; cd nodejsComponent
-</code></pre>
-<p>Execute the <strong>dash deploy</strong> command:</p>
-<pre><code class="lang-xml">&gt; serverless dash deploy
-</code></pre>
-<p>It will show, like in a dashboard, all assets that you have (functions and endpoints). Choose all (pressing ENTER) and hit the <strong>deploy</strong> option.</p>
-<p>After deploying, you&#39;ll get a list of URLs where you functions were hosted. For example, mine is available at: <a href="https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local">https://vo7lhdeful.execute-api.us-east-1.amazonaws.com/development/weather/local</a></p>
+<p>And that&#39;s it! You can test your front-end code now using the URL that you have deployed.</p>
 <h2 id="simpledb">SimpleDB</h2>
+<p>In this tutorial, we have already configured and deployed the front-end and back-end code. If that&#39;s enough for you, great! If not, I&#39;ll continue showing how to integrate the back-end code with SimpleDB that is a serverless database offered by AWS.</p>
 <h3 id="initialize-your-data">Initialize your Data</h3>
 <p>Since there is no AWS Console for SimpleDB, you need to create your model using third-party tools or the AWS SDK. For this demo, I&#39;ll simplify and use the <a href="https://aws.amazon.com/code/JavaScript/1137">Scratchpad</a> web app. To run, download, unzip and host the app in a web server like IIS or Apache Tomcat.</p>
 <p>After adding the IAM credentials, call the CreatDomain method to create the equivalent of a table for the relational world and the PutAttributes to add a new record for your domain.</p>
@@ -349,17 +346,14 @@ function getWeatherInfo(event) {
 <img src="http://zanon.io/images/posts/2016-01-31-simpledb-attr.png" alt="simpledb-attr"></p>
 <p>Test:
 <img src="http://zanon.io/images/posts/2016-01-31-simpledb-select.png" alt="simpledb-select"></p>
-<h3 id="retrieve-the-data-using-a-lambda-functions">Retrieve the Data using a Lambda functions</h3>
-<p>As we are using JavaScript, we need to add the Node aws-sdk to our app. Since the code to retrieve data from the database should be reused in many Lambda Functions, we are going to add the aws-sdk reference to our nodejsComponent.</p>
-<p>Change the cmd directory to your nodejsComponent folder and execute:</p>
+<h3 id="retrieve-the-data-using-a-lambda-function">Retrieve the Data using a Lambda function</h3>
+<p>To connect to your SimpleDB instance, install the AWS SDK:</p>
 <pre><code class="lang-xml">&gt; npm install aws-sdk --save
 </code></pre>
-<p>The module where every Lambda function has access is the Lib file. To modify it, browse the nodejsComponent/lib/index.js</p>
-<p>Add the following code:</p>
+<p>Let&#39;s go back to our handle.js function and rewrite it to the following:</p>
 <pre><code class="lang-javascript">var AWS = require(&#39;aws-sdk&#39;);
 
-module.exports.queryData = function(query, cb) {
-
+function queryData(query, cb) {
   var simpledb = new AWS.SimpleDB();
 
   var params = {
@@ -368,37 +362,24 @@ module.exports.queryData = function(query, cb) {
     NextToken: &#39;&#39;
   };
 
-  simpledb.select(params, function(err, data) {
-      return cb(err, data);
-  });
-};
-</code></pre>
-<p>Modify your handler.js with the following:</p>
-<pre><code class="lang-javascript">module.exports.handler = function(event, context) {
-
-  var query = getWeatherQuery(event);
-
-  lib.queryData(query, function(error, response) {
-
-    var result = {
-      value: response.Items[0].Attributes[0].Value
-    }
-
-    return context.done(error, result);
-  });
-};
-
-function getWeatherQuery(event) {
-
-  // I&#39;m ignoring the event input since I want to simplify this demo
-  // and avoid the need of sanitizing the input to protect from sql injection
-
-  return &quot;select Value from Weather where ID = &#39;5&#39;&quot;;
+  simpledb.select(params, cb);
 }
+
+module.exports.handler = function(event, context, cb) {
+  // sanitize the input confirming that it&#39;s a number
+  var regionId = Number(event.regionId);
+  var query = `select Value from Weather where ID = &#39;${regionId}&#39;`;
+
+  queryData(query, function(err, response) {
+    return cb(err, {
+      value: response.Items[0].Attributes[0].Value
+    });
+  });
+};
 </code></pre>
 <h3 id="add-permissions-to-your-lambda-functions-to-read-simpledb-data">Add permissions to your Lambda functions to read SimpleDB data</h3>
 <p>The Lambda functions that you have just deployed will not have access to your AWS Resources. If you want them to have this access, you have to give them explicitly.</p>
-<p>Modify your <strong>s-project.json</strong> file with the following:</p>
+<p>Modify your <strong>s-resources-cf.json</strong> file with the following:</p>
 <pre><code class="lang-json">&quot;IamPolicyLambda&quot;: {
   &quot;Type&quot;: &quot;AWS::IAM::Policy&quot;,
   &quot;Properties&quot;: {
@@ -423,7 +404,7 @@ function getWeatherQuery(event) {
           &quot;Action&quot;: [
             &quot;*&quot;
           ],
-          &quot;Resource&quot;: &quot;arn:aws:sdb:us-east-1:[ACCOUNT_ID]:domain/Weather&quot;          
+          &quot;Resource&quot;: &quot;arn:aws:sdb:${region}:[ACCOUNT_ID]:domain/Weather&quot;
         }
         // End
         // ================
@@ -438,10 +419,13 @@ function getWeatherQuery(event) {
   }
 }
 </code></pre>
-<p>To deploy the changes, run the command below at the project level:</p>
-<pre><code class="lang-xml">&gt; serverless resources deploy
+<p><code>${region}</code> is a variable that will be set with your region, so don&#39;t change this.
+<code>[ACCOUNT_ID]</code> is a placeholder. Change this to your account id.</p>
+<p>To deploy the changes, run <code>dash</code> for Lambda and <code>resources</code> for permissions.</p>
+<pre><code class="lang-xml">&gt; serverless dash deploy
+&gt; serverless resources deploy
 </code></pre>
-<p>And... that&#39;s it! The app is working at <a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a>, where the HTML/CSS/JS is hosted on S3, the back-end code is a service that runs only on demand at AWS Lambda and the data is stored in SimpleDB, which generate costs only while processing queries.</p>
+<p>And... that&#39;s it! The app is working at <a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a>, where the HTML/CSS/JS is hosted on S3, the back-end code is a service that runs only on demand with AWS Lambda and the data is stored in SimpleDB, which generate costs only while processing queries.</p>
 <a share-twitter="share-twitter" data-text="&quot;Building Serverless Websites on AWS - Tutorial&quot;" data-url="http://zanon.io/posts/building-serverless-websites-on-aws-tutorial" data-via="zanon_io" data-size="large"></a>
     </div>
   </div>
