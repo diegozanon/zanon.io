@@ -308,8 +308,7 @@ region = us-east-1
 </code></pre>
 <p>It will show, like in a dashboard, all assets that you have (functions and endpoints). Choose all (pressing ENTER) and hit the <strong>deploy</strong> option.</p>
 <p>After deploying, you&#39;ll get a list of URLs where you functions were hosted. For example, mine is available at: <a href="https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/{regionId}">https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/{regionId}</a></p>
-<p>Replaced the <code>{regionId}</code> by a number and it will work.
-E.g.: <a href="https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/5">https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/5</a></p>
+<p>Replaced the <code>{regionId}</code> by a number and it will work.<br>E.g.: <a href="https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/5">https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/5</a></p>
 <h3 id="enable-cross-origin-resource-sharing-cors-">Enable Cross-Origin Resource Sharing (CORS)</h3>
 <p>Since our API is deployed at the AWS domain and not inside our app domain, the browsers won&#39;t process AJAX requests due to security issues. To workaround this, you can use <a href="http://json-p.org/">JSONP</a> at the clients-side or <a href="http://enable-cors.org/">enable CORS</a> at Amazon&#39;s side. I prefer to enable CORS.</p>
 <p>To enable, install the <a href="https://github.com/joostfarla/serverless-cors-plugin">serverless-cors-plugin</a>:</p>
@@ -419,12 +418,19 @@ module.exports.handler = function(event, context, cb) {
   }
 }
 </code></pre>
-<p><code>${region}</code> is a variable that will be set with your region so don&#39;t change this.<br><code>[ACCOUNT_ID]</code> is a placeholder. Change this to your account id.</p>
+<ul>
+<li><code>${region}</code> is a variable that will be set with your region so don&#39;t change this.</li>
+<li><code>[ACCOUNT_ID]</code> is a placeholder. Change this to your account id.</li>
+</ul>
 <p>To deploy the changes, run <code>dash</code> for Lambda and <code>resources</code> for permissions.</p>
 <pre><code class="lang-xml">&gt; serverless dash deploy
 &gt; serverless resources deploy
 </code></pre>
 <p>And... that&#39;s it! The app is working at <a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a>, where the HTML/CSS/JS is hosted on S3, the back-end code is a service that runs only on demand with AWS Lambda and the data is stored in SimpleDB, which generate costs only while processing queries.</p>
+<h2 id="update-aug-06-2016">UPDATE: Aug 06, 2016</h2>
+<blockquote>
+<p>Updated the tutorial due to changes on the Serverless Framework (v0.2 =&gt; v0.5)</p>
+</blockquote>
 <a share-twitter="share-twitter" data-text="&quot;Building Serverless Websites on AWS - Tutorial&quot;" data-url="http://zanon.io/posts/building-serverless-websites-on-aws-tutorial" data-via="zanon_io" data-size="large"></a>
     </div>
   </div>

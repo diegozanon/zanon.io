@@ -329,7 +329,7 @@ It will show, like in a dashboard, all assets that you have (functions and endpo
 
 After deploying, you'll get a list of URLs where you functions were hosted. For example, mine is available at: https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/{regionId}
 
-Replaced the `{regionId}` by a number and it will work.
+Replaced the `{regionId}` by a number and it will work.  
 E.g.: https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/5
 
 ### Enable Cross-Origin Resource Sharing (CORS)
@@ -476,8 +476,8 @@ Modify your **s-resources-cf.json** file with the following:
 }
 ```
 
-`${region}` is a variable that will be set with your region so don't change this.  
-`[ACCOUNT_ID]` is a placeholder. Change this to your account id.
+- `${region}` is a variable that will be set with your region so don't change this.
+- `[ACCOUNT_ID]` is a placeholder. Change this to your account id.
 
 To deploy the changes, run `dash` for Lambda and `resources` for permissions.
 
@@ -487,3 +487,7 @@ To deploy the changes, run `dash` for Lambda and `resources` for permissions.
 ```
 
 And... that's it! The app is working at http://serverless-demo.zanon.io, where the HTML/CSS/JS is hosted on S3, the back-end code is a service that runs only on demand with AWS Lambda and the data is stored in SimpleDB, which generate costs only while processing queries.
+
+## UPDATE: Aug 06, 2016
+
+> Updated the tutorial due to changes on the Serverless Framework (v0.2 => v0.5)
