@@ -475,7 +475,8 @@ Modify your **s-resources-cf.json** file with the following:
   }
 }
 ```
-`${region}` is a variable that will be set with your region, so don't change this.
+
+`${region}` is a variable that will be set with your region so don't change this.  
 `[ACCOUNT_ID]` is a placeholder. Change this to your account id.
 
 To deploy the changes, run `dash` for Lambda and `resources` for permissions.

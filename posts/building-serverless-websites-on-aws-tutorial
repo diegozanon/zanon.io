@@ -419,8 +419,7 @@ module.exports.handler = function(event, context, cb) {
   }
 }
 </code></pre>
-<p><code>${region}</code> is a variable that will be set with your region, so don&#39;t change this.
-<code>[ACCOUNT_ID]</code> is a placeholder. Change this to your account id.</p>
+<p><code>${region}</code> is a variable that will be set with your region so don&#39;t change this.<br><code>[ACCOUNT_ID]</code> is a placeholder. Change this to your account id.</p>
 <p>To deploy the changes, run <code>dash</code> for Lambda and <code>resources</code> for permissions.</p>
 <pre><code class="lang-xml">&gt; serverless dash deploy
 &gt; serverless resources deploy
