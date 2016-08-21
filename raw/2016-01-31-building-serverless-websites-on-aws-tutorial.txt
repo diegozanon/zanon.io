@@ -1,7 +1,7 @@
 Title: Building Serverless Websites on AWS - Tutorial
 Summary: This tutorial uses AWS tools and Node to create a simple serverless application. The objective is to show how powerful this approach can be using minimal efforts.
 Tags: AWS, Node
-Date: Jan 31, 2016
+Date: JAN 31, 2016
 URL: building-serverless-websites-on-aws-tutorial
 
 ## Objective
@@ -329,7 +329,7 @@ It will show, like in a dashboard, all assets that you have (functions and endpo
 
 After deploying, you'll get a list of URLs where you functions were hosted. For example, mine is available at: https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/{regionId}
 
-Replaced the `{regionId}` by a number and it will work.  
+Replaced the `{regionId}` by a number and it will work.
 E.g.: https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/5
 
 ### Enable Cross-Origin Resource Sharing (CORS)

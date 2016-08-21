@@ -1,7 +1,7 @@
 Title: Building Serverless Websites on AWS - Intro
 Summary: A serverless website is one that depends entirely on third-party managed services to avoid spinning up full-blown servers. This approach reduces the allocation of unused resources to minimize costs and relies on external services to achieve high availability and <em>infinite</em> scalability.
 Tags: AWS, Node
-Date: Nov 15, 2015
+Date: NOV 15, 2015
 URL: building-serverless-websites-on-aws-intro
 
 ## Serverless Websites

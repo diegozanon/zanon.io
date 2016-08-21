@@ -2,7 +2,7 @@
 <div class="row post-container">
   <div class="col-md-offset-1 col-md-10 post">
     <h1>Building Serverless Websites on AWS - Tutorial</h1>
-    <p class="date">Jan 31, 2016</p>
+    <p class="date">JAN 31, 2016</p>
     <div>
 
 <h2 id="objective">Objective</h2>
@@ -218,7 +218,8 @@ region = us-east-1
 </code></pre>
 <p>It will show, like in a dashboard, all assets that you have (functions and endpoints). Choose all (pressing ENTER) and hit the <strong>deploy</strong> option.</p>
 <p>After deploying, you&#39;ll get a list of URLs where you functions were hosted. For example, mine is available at: <a href="https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/{regionId}">https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/{regionId}</a></p>
-<p>Replaced the <code>{regionId}</code> by a number and it will work.<br>E.g.: <a href="https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/5">https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/5</a></p>
+<p>Replaced the <code>{regionId}</code> by a number and it will work.
+E.g.: <a href="https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/5">https://9l4ab3ahik.execute-api.us-east-1.amazonaws.com/dev/current/5</a></p>
 <h3 id="enable-cross-origin-resource-sharing-cors-">Enable Cross-Origin Resource Sharing (CORS)</h3>
 <p>Since our API is deployed at the AWS domain and not inside our app domain, the browsers won&#39;t process AJAX requests due to security issues. To workaround this, you can use <a href="http://json-p.org/">JSONP</a> at the clients-side or <a href="http://enable-cors.org/">enable CORS</a> at Amazon&#39;s side. I prefer to enable CORS.</p>
 <p>To enable, install the <a href="https://github.com/joostfarla/serverless-cors-plugin">serverless-cors-plugin</a>:</p>

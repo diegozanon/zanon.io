@@ -1,7 +1,7 @@
 Title: "Please, try again..." (Retry Pattern in Node)
 Summary: When building a service, you should anticipate that some transient failures may occur due to network issues or query timeouts. In such cases, the Retry Pattern is very useful.
 Tags: Node
-Date: Apr 09, 2016
+Date: APR 09, 2016
 URL: please-try-again-retry-pattern-in-node
 
 ## Retry Pattern
