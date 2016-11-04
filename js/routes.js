@@ -31,10 +31,6 @@ angular.module('zanonApp').config(['$routeProvider', '$locationProvider',
         templateUrl: '/partials/2015-11-15-building-serverless-websites-on-aws-intro.html',
         title: 'Building Serverless Websites on AWS - Intro'
       })
-      .when('/posts/realm-an-incredible-fast-mobile-db', {
-        templateUrl: '/partials/2015-11-01-realm-an-incredible-fast-mobile-db.html',
-        title: 'Realm: an incredible fast mobile DB'
-      })
       .when('/posts/mongodb-storage-engine-mmap-or-wiredtiger', {
         templateUrl: '/partials/2015-10-18-mongodb-storage-engine-mmap-or-wiredtiger.html',
         title: 'MongoDB storage engine: MMAP or WiredTiger?'

@@ -8,7 +8,7 @@
     <meta name="author" content="Diego Zanon">
     <link rel="icon" href="http://zanon.io/favicon.ico" type="image/x-icon">
 
-    <title ng-bind="title + 'zanon.io'">Zanon</title>
+    <title ng-bind="title + 'Zanon'"></title>
 
     <script src="/js/ng-cloak.js"></script> <!-- workaround to avoid flickering in prerendered content -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -31,7 +31,7 @@
           <div class="row">
             <div class="col-xs-4 col-sm-2 col-md-2">
               <h1 class="site-name">
-                <a href="/">zanon.io</a>
+                <a href="/">Zanon</a>
               </h1>
             </div>
             <div class="hidden-xs col-sm-6 col-md-6">
