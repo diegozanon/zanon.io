@@ -1,14 +1,14 @@
 Title: Building Serverless Websites on AWS - Tutorial
-Summary: This tutorial uses AWS services and the Serverless Framework (1.0) to create a simple serverless application. The objective is to show how powerful this approach can be using minimal efforts.
+Summary: This tutorial uses AWS services and the Serverless Framework (1.1) to create a simple serverless application. The objective is to show how powerful this approach can be using minimal efforts.
 Tags: Serverless, AWS, Node
 Date: JAN 31, 2016
 URL: building-serverless-websites-on-aws-tutorial
 
 ## Objective
 
-This tutorial shows how to create a simple serverless application using the Serverless Framework 1.0. This tool supports code written in Node, Python and Java, but this tutorial uses only Node.js.
+This tutorial shows how to create a simple serverless application using the Serverless Framework 1.1. This tool supports code written in Node, Python and Java, but this tutorial uses only Node.js.
 
-If you don't know yet what is this concept of Serverless and its benefits, you can read my previous blog post [here](http://zanon.io/posts/building-serverless-websites-on-aws-intro). I also explain a little more about each technology that will be used in this example.
+If you don't know yet what is this concept of Serverless and its benefits, you can read my previous blog post [here](http://zanon.io/posts/building-serverless-websites-on-aws-intro).
 
 The demo app is hosted at http://serverless-demo.zanon.io and the source code is available at https://github.com/zanon-io/aws-serverless-demo
 
@@ -24,7 +24,7 @@ This tutorial tries to cover everything to build a serverless site, including ho
 
 1. [Serverless Framework](#serverless-framework) (Backend)
 2. [SimpleDB](#simpledb) (Database)
-3. [Host your Website](#host-your-website) (DNS)
+3. [Host your Website](#host-your-website) (DNS / S3)
 4. [Frontend](#frontend) (Frontend)
 
 ## Serverless Framework
@@ -43,7 +43,7 @@ In this tutorial, I've used v1.1
 
 The Serverless Framework needs an AWS user account to manage your AWS resources. For production usage, this user must be configured with restricted access to just allow the services that will be used. However, if you are just learning, you can create an Admin account to get it up and running quickly.
 
-To create an user, browse the [IAM console](https://console.aws.amazon.com/iam) and create a group first:
+To create a user, browse the [IAM console](https://console.aws.amazon.com/iam) and create a group first:
 
 ![iam-group](http://zanon.io/images/posts/2016-01-31-iam-group.png)
 
@@ -181,7 +181,7 @@ You can copy-paste your URL into your browser address to execute a GET request. 
 
 Did you miss the `locationId` property? As we are not passing parameters, `event.id` is undefined and the JSON object will omit the `locationId` property.
 
-However, even if we use querystring parameters (adding `?id=5`) to the end of the URL, we still won't see the `locationId` property. The reason is that the event object that the Lambda function receives is not exactly what we pass to API gateway. The querystring parameters will be available under the `querystring` property. 
+However, even if we use querystring parameters (adding `?id=5`) to the end of the URL, we still won't see the `locationId` property. The reason is that the event object that the Lambda function receives is not exactly what we pass to API gateway. The querystring parameters will be available under the `queryStringParameters` property. 
 
 See the following Lambda function. In this example, it will be able to access the input variables and access the `id` property from a `?id=5` querystring.
 
@@ -220,7 +220,7 @@ functions:
 
 Serverless fits well in a [microservices architecture](http://martinfowler.com/articles/microservices.html). In this architecture, each endpoint triggers just a single function that is responsible for a specific task. For example, if we added another function to retrieve the average temperature for a given interval, we would configure the **serverless.yml** as the following:
 
-``` yaml
+``` xml
 service: my-serverless-demo
 provider:
   name: aws
@@ -238,7 +238,7 @@ functions:
 
 In a Monolithic architecture, we would have just one big function that would handle all kind of requests.
 
-``` yaml
+``` xml
 service: my-serverless-demo
 provider:
   name: aws
@@ -255,7 +255,7 @@ You can read more about serverless architectures in [this post](https://serverle
 
 ### Enable Cross-Origin Resource Sharing (CORS)
 
-Since our API is deployed at the AWS domain and not inside our app domain, the browsers won't process AJAX requests due to security issues. To workaround this, you can use [JSONP](http://json-p.org/) at the clients-side or [enable CORS](http://enable-cors.org/) at Amazon's side. I prefer to enable CORS.
+Since our API is deployed at the AWS domain and not inside our app domain, the browsers won't process AJAX requests due to security issues. To workaround this, you can use [JSONP](http://json-p.org/) or [enable CORS](http://enable-cors.org/) at Amazon's side. I prefer to enable CORS.
 
 It's simple. You just need to set CORS headers inside your Lambda function.
 
@@ -287,15 +287,15 @@ Since there is no AWS Console for SimpleDB, you need to create your model using 
 
 To connect, you need to set your AWS credentials (restrict access to SimpleDB only) and select a Region.
 
-1. Click on "Add domain" and type "Weather" as the name. The domain is the equivalent of a table in the relational world.
+Click on "Add domain" and type "Weather" as the name. The domain is the equivalent of a table in the relational world.
 
 ![sdb-domain](http://zanon.io/images/posts/2016-01-31-sdb-domain.png)
 
-2. Click on "Add property" and add one property with the name "Value" and another with the name "ID".
+Click on "Add property" and add one property with the name "Value" and another with the name "ID".
 
 ![sdb-properties](http://zanon.io/images/posts/2016-01-31-sdb-properties.png)
 
-3. Now click on "Add record" to add a register with value 35 and ID 5.
+Now click on "Add record" to add a register with value 35 and ID 5.
 
 ![sdb-record](http://zanon.io/images/posts/2016-01-31-sdb-record.png)
 
@@ -436,7 +436,7 @@ Due to cache, you need to wait some hours until this name server changing takes 
 
 ## Frontend
 
-For our demo, we'll create just one file, named as index.html, with a simple button to retrieve the weather info. Nothing fancy. For a real-world website, you would upload all HTML/CSS/JavaScript and images to your S3 bucket and would consider on configuring an Amazon CloudFront instance to serve your files using a CDN (Content Delivery Network) to provide a low latency connection for users throughout the world.
+For our demo, we'll create just one file, named as **index.html**, with a simple button to retrieve the weather info. Nothing fancy. For a real-world website, you would upload all HTML/CSS/JavaScript and images to your S3 bucket.
 
 **index.html** contents:
 
@@ -477,7 +477,7 @@ Our Ajax call is using https://8w8ctjxkeh.execute-api.us-east-1.amazonaws.com/de
 
 Result:
 
-![demo](http://zanon.io/images/posts/2016-01-31-demo.png)
+[![demo](http://zanon.io/images/posts/2016-01-31-demo.png)](http://serverless-demo.zanon.io)
 
 And... that's it! The app is working at http://serverless-demo.zanon.io, where the HTML/CSS/JS is hosted on S3, the backend code is a service that runs only on demand with AWS Lambda and the data is stored in SimpleDB, which generate costs only while processing queries.
 

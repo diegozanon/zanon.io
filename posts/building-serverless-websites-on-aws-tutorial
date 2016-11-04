@@ -97,8 +97,8 @@
     <div>
 
 <h2 id="objective">Objective</h2>
-<p>This tutorial shows how to create a simple serverless application using the Serverless Framework 1.0. This tool supports code written in Node, Python and Java, but this tutorial uses only Node.js.</p>
-<p>If you don&#39;t know yet what is this concept of Serverless and its benefits, you can read my previous blog post <a href="http://zanon.io/posts/building-serverless-websites-on-aws-intro">here</a>. I also explain a little more about each technology that will be used in this example.</p>
+<p>This tutorial shows how to create a simple serverless application using the Serverless Framework 1.1. This tool supports code written in Node, Python and Java, but this tutorial uses only Node.js.</p>
+<p>If you don&#39;t know yet what is this concept of Serverless and its benefits, you can read my previous blog post <a href="http://zanon.io/posts/building-serverless-websites-on-aws-intro">here</a>.</p>
 <p>The demo app is hosted at <a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a> and the source code is available at <a href="https://github.com/zanon-io/aws-serverless-demo">https://github.com/zanon-io/aws-serverless-demo</a></p>
 <p>This demo just shows a fake weather information when a button is clicked. To achieve this, we are using the following architecture:</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-lambda-web-apps.png" alt="lambda-web-apps"></p>
@@ -108,7 +108,7 @@
 <ol>
 <li><a href="#serverless-framework">Serverless Framework</a> (Backend)</li>
 <li><a href="#simpledb">SimpleDB</a> (Database)</li>
-<li><a href="#host-your-website">Host your Website</a> (DNS)</li>
+<li><a href="#host-your-website">Host your Website</a> (DNS / S3)</li>
 <li><a href="#frontend">Frontend</a> (Frontend)</li>
 </ol>
 <h2 id="serverless-framework">Serverless Framework</h2>
@@ -119,7 +119,7 @@
 <p>In this tutorial, I&#39;ve used v1.1</p>
 <h3 id="configuring">Configuring</h3>
 <p>The Serverless Framework needs an AWS user account to manage your AWS resources. For production usage, this user must be configured with restricted access to just allow the services that will be used. However, if you are just learning, you can create an Admin account to get it up and running quickly.</p>
-<p>To create an user, browse the <a href="https://console.aws.amazon.com/iam">IAM console</a> and create a group first:</p>
+<p>To create a user, browse the <a href="https://console.aws.amazon.com/iam">IAM console</a> and create a group first:</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-iam-group.png" alt="iam-group"></p>
 <p>Name it as <strong>serverless-group</strong> and attach the <strong>AdministratorAccess</strong> policy.</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-iam-group-admin.png" alt="iam-group-admin"></p>
@@ -208,7 +208,7 @@ functions:
 }
 </code></pre>
 <p>Did you miss the <code>locationId</code> property? As we are not passing parameters, <code>event.id</code> is undefined and the JSON object will omit the <code>locationId</code> property.</p>
-<p>However, even if we use querystring parameters (adding <code>?id=5</code>) to the end of the URL, we still won&#39;t see the <code>locationId</code> property. The reason is that the event object that the Lambda function receives is not exactly what we pass to API gateway. The querystring parameters will be available under the <code>querystring</code> property. </p>
+<p>However, even if we use querystring parameters (adding <code>?id=5</code>) to the end of the URL, we still won&#39;t see the <code>locationId</code> property. The reason is that the event object that the Lambda function receives is not exactly what we pass to API gateway. The querystring parameters will be available under the <code>queryStringParameters</code> property. </p>
 <p>See the following Lambda function. In this example, it will be able to access the input variables and access the <code>id</code> property from a <code>?id=5</code> querystring.</p>
 <pre><code class="lang-javascript">module.exports.currentTemperature = (event, context, callback) =&gt; {
 
@@ -236,7 +236,7 @@ functions:
 </code></pre>
 <h3 id="serverless-architecture">Serverless Architecture</h3>
 <p>Serverless fits well in a <a href="http://martinfowler.com/articles/microservices.html">microservices architecture</a>. In this architecture, each endpoint triggers just a single function that is responsible for a specific task. For example, if we added another function to retrieve the average temperature for a given interval, we would configure the <strong>serverless.yml</strong> as the following:</p>
-<pre><code class="lang-yaml">service: my-serverless-demo
+<pre><code class="lang-xml">service: my-serverless-demo
 provider:
   name: aws
   runtime: nodejs4.3
@@ -251,7 +251,7 @@ functions:
       - http: GET weather/average
 </code></pre>
 <p>In a Monolithic architecture, we would have just one big function that would handle all kind of requests.</p>
-<pre><code class="lang-yaml">service: my-serverless-demo
+<pre><code class="lang-xml">service: my-serverless-demo
 provider:
   name: aws
   runtime: nodejs4.3
@@ -264,7 +264,7 @@ functions:
 </code></pre>
 <p>You can read more about serverless architectures in <a href="https://serverless.com/blog/serverless-architecture-code-patterns/">this post</a>.</p>
 <h3 id="enable-cross-origin-resource-sharing-cors-">Enable Cross-Origin Resource Sharing (CORS)</h3>
-<p>Since our API is deployed at the AWS domain and not inside our app domain, the browsers won&#39;t process AJAX requests due to security issues. To workaround this, you can use <a href="http://json-p.org/">JSONP</a> at the clients-side or <a href="http://enable-cors.org/">enable CORS</a> at Amazon&#39;s side. I prefer to enable CORS.</p>
+<p>Since our API is deployed at the AWS domain and not inside our app domain, the browsers won&#39;t process AJAX requests due to security issues. To workaround this, you can use <a href="http://json-p.org/">JSONP</a> or <a href="http://enable-cors.org/">enable CORS</a> at Amazon&#39;s side. I prefer to enable CORS.</p>
 <p>It&#39;s simple. You just need to set CORS headers inside your Lambda function.</p>
 <pre><code class="lang-javascript">module.exports.currentTemperature = (event, context, callback) =&gt; {
 
@@ -287,17 +287,11 @@ functions:
 <h3 id="initialize-your-data">Initialize your Data</h3>
 <p>Since there is no AWS Console for SimpleDB, you need to create your model using third-party tools or the AWS SDK. I like the SdbNavigator Chrome Extension. It&#39;s available <a href="https://chrome.google.com/webstore/detail/sdbnavigator/ddhigekdfabonefhiildaiccafacphgg">here</a>. </p>
 <p>To connect, you need to set your AWS credentials (restrict access to SimpleDB only) and select a Region.</p>
-<ol>
-<li>Click on &quot;Add domain&quot; and type &quot;Weather&quot; as the name. The domain is the equivalent of a table in the relational world.</li>
-</ol>
+<p>Click on &quot;Add domain&quot; and type &quot;Weather&quot; as the name. The domain is the equivalent of a table in the relational world.</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-sdb-domain.png" alt="sdb-domain"></p>
-<ol>
-<li>Click on &quot;Add property&quot; and add one property with the name &quot;Value&quot; and another with the name &quot;ID&quot;.</li>
-</ol>
+<p>Click on &quot;Add property&quot; and add one property with the name &quot;Value&quot; and another with the name &quot;ID&quot;.</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-sdb-properties.png" alt="sdb-properties"></p>
-<ol>
-<li>Now click on &quot;Add record&quot; to add a register with value 35 and ID 5.</li>
-</ol>
+<p>Now click on &quot;Add record&quot; to add a register with value 35 and ID 5.</p>
 <p><img src="http://zanon.io/images/posts/2016-01-31-sdb-record.png" alt="sdb-record"></p>
 <p>As you may note, SimpleDB accepts only string fields which means that it is not suitable for complex data or aggregations.</p>
 <h3 id="add-permissions-to-your-lambda-functions-to-read-simpledb-data">Add permissions to your Lambda functions to read SimpleDB data</h3>
@@ -393,7 +387,7 @@ module.exports.currentTemperature = (event, context, callback) =&gt; {
 <h3 id="testing">Testing</h3>
 <p>Due to cache, you need to wait some hours until this name server changing takes effect. While you wait, create a simple web page in a file named as index.html and upload it to your <strong>example.com</strong> bucket. When the cache is refreshed, you can see your webpage up and running typing your domain name.</p>
 <h2 id="frontend">Frontend</h2>
-<p>For our demo, we&#39;ll create just one file, named as index.html, with a simple button to retrieve the weather info. Nothing fancy. For a real-world website, you would upload all HTML/CSS/JavaScript and images to your S3 bucket and would consider on configuring an Amazon CloudFront instance to serve your files using a CDN (Content Delivery Network) to provide a low latency connection for users throughout the world.</p>
+<p>For our demo, we&#39;ll create just one file, named as <strong>index.html</strong>, with a simple button to retrieve the weather info. Nothing fancy. For a real-world website, you would upload all HTML/CSS/JavaScript and images to your S3 bucket.</p>
 <p><strong>index.html</strong> contents:</p>
 <pre><code class="lang-html">&lt;div class=&quot;container&quot;&gt;
   &lt;div class=&quot;row&quot;&gt;
@@ -426,7 +420,7 @@ module.exports.currentTemperature = (event, context, callback) =&gt; {
 </code></pre>
 <p>Our Ajax call is using <a href="https://8w8ctjxkeh.execute-api.us-east-1.amazonaws.com/dev/weather/temperature?id=5">https://8w8ctjxkeh.execute-api.us-east-1.amazonaws.com/dev/weather/temperature?id=5</a> as the URL parameter. This is the address of our Lambda function that we have deployed early.</p>
 <p>Result:</p>
-<p><img src="http://zanon.io/images/posts/2016-01-31-demo.png" alt="demo"></p>
+<p><a href="http://serverless-demo.zanon.io"><img src="http://zanon.io/images/posts/2016-01-31-demo.png" alt="demo"></a></p>
 <p>And... that&#39;s it! The app is working at <a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a>, where the HTML/CSS/JS is hosted on S3, the backend code is a service that runs only on demand with AWS Lambda and the data is stored in SimpleDB, which generate costs only while processing queries.</p>
 <h3 id="update-aug-06-2016">UPDATE: Aug 06, 2016</h3>
 <blockquote>
