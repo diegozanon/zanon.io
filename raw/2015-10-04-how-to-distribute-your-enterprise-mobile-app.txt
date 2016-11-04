@@ -16,11 +16,11 @@ When you build an Android app, you get a file with the .apk extension. If you di
 
 This distribution can be done in the company's intranet, Sharepoint, FTP or something similar. The tricky part is to handle app updates automatically. You'll need to implement, for each app, a listener or pooling mechanism to watch for updates. Otherwise, you'll need to send periodic e-mails requesting employees to grab and update their apps.
 
-As you can see, this approach looks like *free*, but actually is not. You'll waste many admins hours to develop/handle this kind of solution. So, usually, a paid solution may be better.
+As you can see, this approach looks like *free*, but actually is not. You'll waste many admin hours to develop/handle this kind of solution. So, usually, a paid solution may be better.
 
 ### Google Play
 
-Google offers their store to be used privately by companies. Starting by [$5 per user per month](https://www.google.com/intx/en/work/apps/business/pricing.html), you can create a [private channel](https://support.google.com/a/answer/2494992?hl=en) and add your employees accounts. To access the channel, they need to go to Play Store > Apps > Categories > [your organization's name] on their Android device. Automatic updates is obviously supported.
+Google offers their store to be used privately by companies. Starting by [$5 per user per month](https://www.google.com/intx/en/work/apps/business/pricing.html), you can create a [private channel](https://support.google.com/a/answer/2494992?hl=en) and add your employees accounts. To access the channel, they need to go to Play Store > Apps > Categories > [your organization's name] on their Android device. Automatic updates are obviously supported.
 
 ## iOS
 
@@ -36,7 +36,7 @@ Unfortunately, you can't have a private channel at App Store. If you deploy your
 
 ### Mobile Device Management
 
-A MDM solution requires a server to be responsible for storing the apps deploys and a client to be installed in each device. A MDM is the best approach when security is a deep concern since the company can take control of the device and allow only selected programs to be installed. Usually, the device will have full disk encryption and the administrators will have the ability to remote wipe all data in case of loss or theft of the device. Jailbroken (iOS) and rooted (Android) devices can also be detected and their access to the companies services can be revoked since those poses a significant risk.
+A MDM solution requires a server to be responsible for storing the apps deploys and a client to be installed in each device. A MDM is the best approach when security is a deep concern since the company can take control of the device and allow only selected programs to be installed. Usually, the device will have full disk encryption and the administrators will have the ability to remote wipe all data in case of loss or theft of the device. Jailbroken (iOS) and rooted (Android) devices can also be detected and their access to the companies' services can be revoked since those poses a significant risk.
 
 For examples of MDM solutions, you can read more about [AirWatch](http://www.air-watch.com/), [Symantec](http://www.symantec.com/mobility/implement.jsp), [Appearian](https://www.apperian.com/mam-blog/comparing-ios-android-mdm-protocol-design-philosophies/) and [MasS360](http://www.maas360.com/).
 

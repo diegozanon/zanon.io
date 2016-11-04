@@ -12,6 +12,8 @@ SPA stands for _Single-Page Application_. Its usage is growing in a fast pace si
 
 For example, this blog was created using the Angular ngRoute directive. If you try to change to another blog post, you can see that the header content will not flash and the post will load very fast.
 
+![spa](http://zanon.io/images/posts/2015-08-23-spa.png)
+
 However, this approach have some [drawbacks](http://stackoverflow.com/q/21862054/1476885), but all of them can be handled in some way. What I'm focusing in this post is how to help the search engines, like Google, to properly index your content and make it searchable.
 
 ## SEO and Crawlable Pages
@@ -134,7 +136,6 @@ To execute this test, execute the following:
 ```
 
 The output file will be ready for deployment.
-
 
 ## UPDATE: Sep 06, 2015
 

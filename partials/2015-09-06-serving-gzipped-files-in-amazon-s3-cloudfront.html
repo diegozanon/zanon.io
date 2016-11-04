@@ -5,7 +5,7 @@
     <p class="date">SEP 06, 2015</p>
     <div>
 
-<p>If you are sharing your website static content using Amazon Web Services, you can gzip your content and save some bandwidth. The  size of your files will be reduced and your website will load faster for your users.</p>
+<p>If you are sharing your website static content using Amazon Web Services, you can gzip your content and save some bandwidth. The size of your files will be reduced and your website will load faster for your users.</p>
 <p>If you have a static website in Amazon, you should really consider using CloudFront since it is very cheap and is a <a href="http://stackoverflow.com/q/2145277/1476885">CDN</a> service. However, this guide is not a tutorial of how to configure your website to use CloudFront (or S3) because there are already <a href="http://docs.aws.amazon.com/gettingstarted/latest/swh/getting-started-create-cfdist.html">many</a> <a href="http://www.michaelgallego.fr/blog/2013/08/27/static-website-on-s3-cloudfront-and-route-53-the-right-way/">good</a> <a href="http://blog.celingest.com/en/2013/07/19/tutorial-creating-cdn-wordpress-cloudfront-s3/">tutorials</a> for that.</p>
 <p>Since CloudFront uses an Origin Server to find your files and to distribute them among their servers, what I want to show here is that all you need to serve gzipped content in CloudFront is serving gzipped content at your Origin Server.</p>
 <p>In a Custom Origin Server, like an IIS or Apache server, this is very easy to accomplish because you have just to set some configurations and you&#39;re ready to serve gzipped content. However, if your Origin Server is Amazon S3, you need to manually gzip each content and I will show how this is done.</p>

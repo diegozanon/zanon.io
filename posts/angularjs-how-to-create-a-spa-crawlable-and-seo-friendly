@@ -8,11 +8,11 @@
     <meta name="author" content="Diego Zanon">
     <link rel="icon" href="http://zanon.io/favicon.ico" type="image/x-icon">
 
-    <title ng-bind="title + 'zanon.io'">zanon.io</title>
+    <title ng-bind="title + 'zanon.io'">Zanon</title>
 
     <script src="/js/ng-cloak.js"></script> <!-- workaround to avoid flickering in prerendered content -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/monokai_sublime.min.css">
+    <link rel="stylesheet" href="/css/assets/highlight.min.css">
     <link rel="stylesheet" href="/css/site.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -74,11 +74,12 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li ng-class="{ 'active': active.all }">    <a ng-click="filter('all');"      href="/">All posts</a></li>
-              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');"  href="/">Angular</a></li>
-              <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');"     href="/">Node</a></li>
-              <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');"  href="/">MongoDB</a></li>
-              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');"      href="/">AWS</a></li>
+              <li ng-class="{ 'active': active.all }"> <a ng-click="filter('all');" href="/">All posts</a></li>
+              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');" href="/">Angular</a></li>
+              <li ng-class="{ 'active': active.node }"> <a ng-click="filter('node');" href="/">Node</a></li>
+              <li ng-class="{ 'active': active.mongodb }"> <a ng-click="filter('mongodb');" href="/">MongoDB</a></li>
+              <li ng-class="{ 'active': active.aws }"> <a ng-click="filter('aws');" href="/">AWS</a></li>
+              <li ng-class="{ 'active': active.serverless }"> <a ng-click="filter('serverless');" href="/">Serverless</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </nav>
@@ -99,6 +100,7 @@
 <h2 id="what-is-spa-">What is SPA?</h2>
 <p>SPA stands for <em>Single-Page Application</em>. Its usage is growing in a fast pace since it enables the website to provide a more fluid user experience. When a page is loaded, you can browse other links and load new content without the need of a full page reload. Only one piece of the page is discarded and replaced by the content of the next page. With this, you will avoid requesting all JavaScript and CSS files again and rendering your header and footer HTML.</p>
 <p>For example, this blog was created using the Angular ngRoute directive. If you try to change to another blog post, you can see that the header content will not flash and the post will load very fast.</p>
+<p><img src="http://zanon.io/images/posts/2015-08-23-spa.png" alt="spa"></p>
 <p>However, this approach have some <a href="http://stackoverflow.com/q/21862054/1476885">drawbacks</a>, but all of them can be handled in some way. What I&#39;m focusing in this post is how to help the search engines, like Google, to properly index your content and make it searchable.</p>
 <h2 id="seo-and-crawlable-pages">SEO and Crawlable Pages</h2>
 <p>SEO stands for <em>Search Engine Optimization</em>. What we are trying to achieve here is a way to help search engines to render your page and understand your content.</p>
@@ -198,9 +200,7 @@ page.open(url, function (status) {
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>    
 
     <script src="/js/app.js"></script>
     <script src="/js/controllers.js"></script>
@@ -209,6 +209,7 @@ page.open(url, function (status) {
 
     <script src="/js/assets/404game.min.js"></script>
     <script src="/js/assets/dir-disqus.min.js"></script>
+    <script src="/js/assets/highlight.min.js"></script>
 
     <script src="http://platform.twitter.com/widgets.js"></script>
 

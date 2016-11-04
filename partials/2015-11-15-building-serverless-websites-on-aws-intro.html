@@ -6,27 +6,28 @@
     <div>
 
 <h2 id="serverless-websites">Serverless Websites</h2>
-<p>A serverless website is the one that doesn&#39;t require a server instance running all the time. When a request is made to this website, a third-party service starts a very small piece of code that runs, answers the request and shuts down. It only runs on-demand.</p>
-<p>The front-end code (HTML/CSS/JS) is hosted in a CDN or in a simpler storage service, like Amazon S3 or Azure Blob Storage, and your DNS is configured to redirect requests to those services. The back-end code is the tricky part and that will be explained later.</p>
-<p>As a simple example of the concept, this blog is a serverless website. It doesn&#39;t require server-side processing neither a database. This approach has three main benefits:</p>
+<p>Serverless is a concept of web applications which the developer doesn&#39;t need to worry about servers. The application is deployed to a cloud provider which is responsible to provide high availability, fast scalability and charges per request and not for 24/7. There is no dedicated server to host your application.</p>
+<p>The frontend code (HTML/CSS/JS) is hosted in a storage service, like Amazon S3, and the DNS is configured to redirect requests to this storage which will serve the static files.</p>
+<p>The backend code is broken into many small packages, so when a request is made, a third-party service loads the package responsible for the specific kind of request, executes the code, answers the request and unloads the package.</p>
+<p>This approach has three main benefits:</p>
 <ul>
-<li><strong>Infinite scalability</strong>: as you aren&#39;t managing a server instance, you don&#39;t need to worry about adding/removing new machines to your farm as your traffic grows/shrink. It will be smoothly handled by your Cloud Service and your content will always be served with the same low latency and high bandwidth.</li>
-<li><strong>High availability</strong>: as your Cloud Service is responsible to handle the availability of your static content, you can expect up to 99,99% over a given year.</li>
-<li><strong>Low costs</strong>: storage is much more cheap than CPU/RAM allocation. As an example, this blog costs only US$ 0.03 per month (the minimum cost). If I&#39;ve used a server machine to host it, I would be paying at least US$ 7 per month.</li>
+<li><strong>Infinite scalability</strong>: as you aren&#39;t managing a server instance, you don&#39;t need to worry about adding/removing new machines to your farm as your traffic grows/shrink. It will be smoothly handled by your cloud service and your site will always be served with the same low latency and high bandwidth.</li>
+<li><strong>High availability</strong>: as your cloud provider is responsible to handle the availability of your site, you can expect more than 99 % of uptime over a given month.</li>
+<li><strong>Cost efficiency</strong>: if you have an inconsistent traffic pattern, you would need to start and shutdown machines all the time to follow the usage and be efficient. Also, you would still need to pay for one machine even if no one is accessing to keep the site available. In serverless, you pay only per request which means that if no one is using, you pay nothing.</li>
 </ul>
-<p>So, that&#39;s great for a static content. But what can we do for dynamic websites? If my site needs authentication, page routing, server-side business rules and a database, what options do we have? It will need to spend CPU time and you can&#39;t escape from that, but if you use AWS Lambda, you can significantly reduce your costs and achieve <em>infinite</em> scalability.</p>
+<p>So, that&#39;s great. But does it work for every kind of website? At least, for most use cases. It&#39;s possible to handle authentication, page routing, server-side business rules, notifications and even database requests.</p>
 <p>As an interesting real case of building a serverless website, I recommend you to read this <a href="https://www.reddit.com/r/webdev/comments/3oiilb/our_company_did_a_collab_with_valve_for_some_new/">Reddit</a> post.</p>
-<p>Summary: an e-commerce website built with traditional tools/infra completely broke after being advertised by Valve in a blog post. After some rework using JAWS (later named as Serverless), AWS Lambda, S3 and DynamoDB, Valve advertised it again and they were able to handle 60k users requests in 2 hours with the cost of only US$ 0.07.</p>
+<p>Summary: an e-commerce website built with traditional tools/infra completely broke after being advertised by Valve in a blog post. After some rework using JAWS (later renamed as Serverless Framework), AWS Lambda, S3 and DynamoDB, Valve advertised it again and they were able to handle 60k users requests in 2 hours with the cost of only US$ 0.07.</p>
 <p>Quoting <a href="https://www.reddit.com/r/webdev/comments/3oiilb/our_company_did_a_collab_with_valve_for_some_new/cvyf5s5">one of the comments</a>:</p>
 <blockquote>
 <p>It&#39;s a cheap cheap setup when you&#39;re not doing anything, and it only gets expensive when you&#39;re making a lot of money. That&#39;s a great thing for a business.</p>
 </blockquote>
-<h2 id="serverless-framework-formely-jaws-">Serverless Framework (formely JAWS)</h2>
+<h2 id="serverless-framework">Serverless Framework</h2>
 <p><img src="http://zanon.io/images/posts/2015-11-15-serverless-logo.png" alt="serverless-logo"></p>
-<p>The <a href="https://github.com/serverless/serverless">Serverless Framework</a> (formely JAWS) is an open-source framework that was created to help developers to build serverless apps using AWS features, mainly AWS Lambda (for code execution) and Amazon API Gateway (for Routing).</p>
+<p>The <a href="https://github.com/serverless/serverless">Serverless Framework</a> is an open-source framework that was created to help developers to build serverless apps using AWS features, mainly AWS Lambda (for code execution) and Amazon API Gateway (for Routing).</p>
 <p>Instead of spinning up a full-blown server, the developer is invited to use a command line tool to deploy code-blocks to Amazon. Since each lambda function acts like a microservice and your app may end up with dozens of them distributed between multiple regions and managed by multi-developer teams in multi-stage environments, the Serverless Framework targets a better setup to avoid a messy solution.</p>
 <p>I&#39;ve created another <a href="http://zanon.io/posts/building-serverless-websites-on-aws-tutorial">blog post</a> to show a simple example of how to use Serverless, but first you need to know what AWS technologies are involved.</p>
-<p>The first thing that you need to be aware is that this solution is highly dependent on AWS. Usually, we would avoid being highly attached to a third-party solution. If AWS breaks forever, you will need some hours to adapt your code to be able to deploy it again at another host. However, AWS is so reliable and the benefits of serverless apps are so great that I would not be so worried about it.</p>
+<p>The first thing that you need to be aware is that this solution is highly dependent on AWS. Usually, we would avoid being highly attached to a third-party solution. If AWS breaks forever, you will need some days to adapt your code to be able to deploy it again at another host. However, AWS is so reliable and the benefits of serverless apps are so great that I would not be so worried about it.</p>
 <h2 id="aws-lambda-code-execution-">AWS Lambda (Code Execution)</h2>
 <p><img src="http://zanon.io/images/posts/2015-11-15-lambda.png" alt="lambda"></p>
 <p>Lambda is a service where you can host your code and it will be executed when triggered by events. Lambda supports, currently, code written in JavaScript (Node.js), Python or Java.</p>
@@ -52,7 +53,7 @@
 <p>The remaining options that we have are <a href="https://aws.amazon.com/dynamodb">DynamoDB</a> and <a href="https://aws.amazon.com/simpledb">SimpleDB</a>.</p>
 <p>DynamoDB solves the scalability difficulties that you would have using RDS and is a much more robust solution than SimpleDB. However, its pricing model also requires fixed costs to provision per-hour capacity. No usage means that you will still have some costs to handle.</p>
 <p>SimpleDB have also a fixed cost of how much data you have stored, but the main cost is dependent on your usage. Your usage is measured in how many machine hours you spend to process your queries. Also, scalability is graciously handled by AWS and you can have bursts of increased usage without delays. If your app does not require complex queries and you have a very unpredictable usage, this solution may be best cost-effective.</p>
-<p>So far, I would suggest <a href="https://www.firebase.com/">Firebase</a> as the best service for a serverless database. It&#39;s not an Amazon product, but is a Google one and it allows much more complex apps than SimpleDB.</p>
+<p>So far, I would suggest <a href="https://www.firebase.com/">Firebase</a> as the best serverless database. It&#39;s not an Amazon product, but is a Google one and it allows much more complex apps than SimpleDB.</p>
 <h2 id="to-sum-up">To sum up</h2>
 <p>Below follows what we usually have in a dynamic website and what AWS feature we can use to build a serverless webapp.</p>
 <ul>

@@ -21,36 +21,27 @@
       </article>
     </div>
   </div>
-  <div ng-show="active.all || active.node || active.aws" class="row">
+  <div ng-show="active.all || active.node || active.aws || active.serverless" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
         <div class="date">JAN 31, 2016</div>
         <h2><a href="/posts/building-serverless-websites-on-aws-tutorial">Building Serverless Websites on AWS - Tutorial</a></h2>
-        <p>This tutorial uses AWS tools and Node to create a simple serverless application. The objective is to show how powerful this approach can be using minimal efforts.</p>
+        <p>This tutorial uses AWS services and the Serverless Framework (1.0) to create a simple serverless application. The objective is to show how powerful this approach can be using minimal efforts.</p>
         <button ng-click="filter('node');" type="button" class="btn tag pull-right">Node</button>
         <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
+        <button ng-click="filter('serverless');" type="button" class="btn tag pull-right">Serverless</button>
       </article>
     </div>
   </div>
-  <div ng-show="active.all || active.node || active.aws" class="row">
+  <div ng-show="active.all || active.node || active.aws || active.serverless" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
         <div class="date">NOV 15, 2015</div>
         <h2><a href="/posts/building-serverless-websites-on-aws-intro">Building Serverless Websites on AWS - Intro</a></h2>
-        <p>A serverless website is one that depends entirely on third-party managed services to avoid spinning up full-blown servers. This approach reduces the allocation of unused resources to minimize costs and relies on external services to achieve high availability and <em>infinite</em> scalability.</p>
+        <p>A serverless website is the one which the developer doesn't need to worry about the servers that will host the website. A third-party managed service is responsible for handling requests on-demand, charging per request and not 24/7. This post explains about this concept.</p>
         <button ng-click="filter('node');" type="button" class="btn tag pull-right">Node</button>
         <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
-      </article>
-    </div>
-  </div>
-  <div ng-show="active.all || active.ios || active.android" class="row">
-    <div class="col-md-offset-1 col-md-10">
-      <article>
-        <div class="date">NOV 01, 2015</div>
-        <h2><a href="/posts/realm-an-incredible-fast-mobile-db">Realm: an incredible fast mobile DB</a></h2>
-        <p>Realm is a really nice database created to run as a local storage for Android and iOS apps with an incredible speed. However, it has some limitations that you need to know before using it.</p>
-        <button ng-click="filter('ios');" type="button" class="btn tag pull-right">iOS</button>
-        <button ng-click="filter('android');" type="button" class="btn tag pull-right">Android</button>
+        <button ng-click="filter('serverless');" type="button" class="btn tag pull-right">Serverless</button>
       </article>
     </div>
   </div>
