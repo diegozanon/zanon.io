@@ -226,6 +226,14 @@ img {
   }
 }
 
+@media all and (max-width: 419px) {
+  .tag {
+  	font-size: 10px;
+	width: 58px;
+	margin-left: 2px;
+  }
+}
+
 @media all and (max-width: 767px) {
   h1 {
   	font-size: 26px;
