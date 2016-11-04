@@ -179,7 +179,7 @@ You can copy-paste your URL into your browser address to execute a GET request. 
 }
 ```
 
-Did you miss the `locationId` property? As we are not passing parameters, `event.id` is undefined and the JSON object will ommit the `locationId` property.
+Did you miss the `locationId` property? As we are not passing parameters, `event.id` is undefined and the JSON object will omit the `locationId` property.
 
 However, even if we use querystring parameters (adding `?id=5`) to the end of the URL, we still won't see the `locationId` property. The reason is that the event object that the Lambda function receives is not exactly what we pass to API gateway. The querystring parameters will be available under the `querystring` property. 
 
@@ -303,7 +303,7 @@ As you may note, SimpleDB accepts only string fields which means that it is not 
 
 ### Add permissions to your Lambda functions to read SimpleDB data
 
-Lambda functions don't have access to AWS resources by default. You need to give explicity access through `iamRoleStatements` in the `serverless.yml` file.
+Lambda functions don't have access to AWS resources by default. You need to give explicitly  access through `iamRoleStatements` in the `serverless.yml` file.
 
 ```xml
 service: my-serverless-demo

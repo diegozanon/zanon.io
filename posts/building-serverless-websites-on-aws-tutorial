@@ -207,7 +207,7 @@ functions:
   &quot;temperature&quot;: 30
 }
 </code></pre>
-<p>Did you miss the <code>locationId</code> property? As we are not passing parameters, <code>event.id</code> is undefined and the JSON object will ommit the <code>locationId</code> property.</p>
+<p>Did you miss the <code>locationId</code> property? As we are not passing parameters, <code>event.id</code> is undefined and the JSON object will omit the <code>locationId</code> property.</p>
 <p>However, even if we use querystring parameters (adding <code>?id=5</code>) to the end of the URL, we still won&#39;t see the <code>locationId</code> property. The reason is that the event object that the Lambda function receives is not exactly what we pass to API gateway. The querystring parameters will be available under the <code>querystring</code> property. </p>
 <p>See the following Lambda function. In this example, it will be able to access the input variables and access the <code>id</code> property from a <code>?id=5</code> querystring.</p>
 <pre><code class="lang-javascript">module.exports.currentTemperature = (event, context, callback) =&gt; {
@@ -301,7 +301,7 @@ functions:
 <p><img src="http://zanon.io/images/posts/2016-01-31-sdb-record.png" alt="sdb-record"></p>
 <p>As you may note, SimpleDB accepts only string fields which means that it is not suitable for complex data or aggregations.</p>
 <h3 id="add-permissions-to-your-lambda-functions-to-read-simpledb-data">Add permissions to your Lambda functions to read SimpleDB data</h3>
-<p>Lambda functions don&#39;t have access to AWS resources by default. You need to give explicity access through <code>iamRoleStatements</code> in the <code>serverless.yml</code> file.</p>
+<p>Lambda functions don&#39;t have access to AWS resources by default. You need to give explicitly  access through <code>iamRoleStatements</code> in the <code>serverless.yml</code> file.</p>
 <pre><code class="lang-xml">service: my-serverless-demo
 provider:
   name: aws
