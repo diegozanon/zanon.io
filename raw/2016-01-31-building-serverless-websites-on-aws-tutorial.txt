@@ -487,4 +487,4 @@ And... that's it! The app is working at http://serverless-demo.zanon.io, where t
 
 ### UPDATE: Nov 04, 2016
 
-> Updating the Serverless Framework code (v0.5 => v1.0)
+> Updating the Serverless Framework code (v0.5 => v1.1)
