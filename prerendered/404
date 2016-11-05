@@ -89,7 +89,7 @@
     <div class="container">
       <div class="content">
         <div class="ng-cloak" autoscroll="true" ng-view highlight-code>
-          <div class="game-container">
+          ﻿<div class="game-container">
   <div class="game-content">
     <canvas id="game-canvas" width="600px" height="400px">
       404 Not Found (also, your browser do not support canvas)

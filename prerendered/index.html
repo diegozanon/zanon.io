@@ -91,6 +91,18 @@
         <div class="ng-cloak" autoscroll="true" ng-view highlight-code>
           
 <div ng-controller="PostsController" class="post-list">
+  <div ng-show="active.all || active.aws || active.node || active.serverless" class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <article>
+        <div class="date">NOV 05, 2016</div>
+        <h2><a href="/posts/serverless-notifications-on-aws">Serverless Notifications on AWS</a></h2>
+        <p>A tutorial to implement the Pub/Sub pattern using AWS IoT</p>
+        <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
+        <button ng-click="filter('node');" type="button" class="btn tag pull-right">Node</button>
+        <button ng-click="filter('serverless');" type="button" class="btn tag pull-right">Serverless</button>
+      </article>
+    </div>
+  </div>
   <div ng-show="active.all || active.node || active.mongodb" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>

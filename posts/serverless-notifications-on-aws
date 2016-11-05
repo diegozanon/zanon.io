@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zanonApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Angular, Node, MongoDB, AWS">
+    <meta name="author" content="Diego Zanon">
+    <link rel="icon" href="http://zanon.io/favicon.ico" type="image/x-icon">
+
+    <title ng-bind="title + 'Zanon'"></title>
+
+    <script src="/js/ng-cloak.js"></script> <!-- workaround to avoid flickering in prerendered content -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/assets/highlight.min.css">
+    <link rel="stylesheet" href="/css/site.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <base href="/">
+  </head>
+  <body ng-controller="MainController">
+
+    <header>
+      <div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-4 col-sm-2 col-md-2">
+              <h1 class="site-name">
+                <a href="/">Zanon</a>
+              </h1>
+            </div>
+            <div class="hidden-xs col-sm-6 col-md-6">
+              <!-- empty -->
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="https://twitter.com/zanon_io">
+                <img src="/images/twitter.png" alt="twitter" class="img-responsive">
+              </a>
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="https://github.com/zanon-io">
+                <img src="/images/github.png" alt="github" class="img-responsive">
+              </a>
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="http://diego.zanon.io">
+                <img src="/images/about.png" alt="about" class="img-responsive">
+              </a>
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="/feed.xml" target="_blank">
+                <img src="/images/rss.png" alt="rss" class="img-responsive">
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container">
+        <nav id="nav" class="navbar-inverse navbar-static-top">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li ng-class="{ 'active': active.all }"> <a ng-click="filter('all');" href="/">All posts</a></li>
+              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');" href="/">Angular</a></li>
+              <li ng-class="{ 'active': active.node }"> <a ng-click="filter('node');" href="/">Node</a></li>
+              <li ng-class="{ 'active': active.mongodb }"> <a ng-click="filter('mongodb');" href="/">MongoDB</a></li>
+              <li ng-class="{ 'active': active.aws }"> <a ng-click="filter('aws');" href="/">AWS</a></li>
+              <li ng-class="{ 'active': active.serverless }"> <a ng-click="filter('serverless');" href="/">Serverless</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="content">
+        <div class="ng-cloak" autoscroll="true" ng-view highlight-code>
+          
+<div class="row post-container">
+  <div class="col-md-offset-1 col-md-10 post">
+    <h1>Serverless Notifications on AWS</h1>
+    <p class="date">NOV 05, 2016</p>
+    <div>
+
+<h2 id="tl-dr">TL;DR</h2>
+<p>This post is a tutorial that uses the Serverless Framework and AWS IoT for Serverless Notifications.</p>
+<p>Demo: <a href="http://serverless-notifications.zanon.io">serverless-notifications.zanon.io</a>
+Code: <a href="https://github.com/zanon-io/serverless-notifications">GitHub</a></p>
+<p>Multiplayer Game: <a href="http://bombermon.zanon.io">demo</a> and <a href="https://github.com/zanon-io/serverless-multiplayer-game">code</a></p>
+<h2 id="serverless-notifications">Serverless Notifications</h2>
+<p>Implementing real-time notifications is an easy task when you use WebSockets and a dedicated server. You can make a permanent link between the user and the website and use the publish-subscribe pattern for efficiency. The browser will subscribe to automatically receive new messages without needing a polling mechanism to constantly check for updates.</p>
+<p>But if we are going serverless, we don&#39;t have a dedicated server. We need a cloud service that will solve this problem for us providing scalability, high availability and that charges per message and not per hour. </p>
+<p>In this tutorial, we are going to use AWS IoT. I know that &quot;Internet of Things&quot; sounds strange to be used in a website, but it supports WebSockets and is very easy to use. Besides, Amazon SNS (Simple Notification Service) has a better name, but doesn&#39;t support WebSockets.</p>
+<p>IoT is used due to its simple messaging system. You create a &quot;topic&quot; and make users to subscribe to them. A message sent to this topic will be automatically shared with all subscribed users. A common use case for this is a messaging system.</p>
+<p>If you want private messages, you just need to create private topics and restrict access. Only one user will be subscribed to this topic and you can make your system (Lambda functions) to send updates to this topic to trigger this specific user.</p>
+<h3 id="architecture">Architecture</h3>
+<p>In this tutorial, we are going to implement the following architecture.</p>
+<p><img src="http://zanon.io/images/posts/2016-11-05-architecture.png" alt="architecture"></p>
+<ol>
+<li><p>User makes a request to Route 53 that will is configured to reference a S3 bucket.</p>
+</li>
+<li><p>S3 bucket provides the frontend code (HTML / CSS / JavaScript / images) and the IoT client code.</p>
+</li>
+<li><p>After loading the frontend code, an Ajax request is done to the API Gateway to retrieve temporary keys.</p>
+</li>
+<li><p>The API Gateway redirects the request to a Lambda function to execute our backend code.</p>
+</li>
+<li><p>The Lambda function connects to IAM to assume a role and create temporary keys.</p>
+</li>
+<li><p>Frontend code subscribe to IoT events.</p>
+</li>
+</ol>
+<h3 id="frontend">Frontend</h3>
+<p>Configuring Route 53 and Amazon S3 to serve static files is a common use case. I&#39;ve already covered how to do this in another blog post. You can take a look <a href="http://zanon.io/posts/building-serverless-websites-on-aws-tutorial#host-your-website">here</a> if you want.</p>
+<p>In our frontend code, let&#39;s start creating the <strong>index.html</strong> and our layout.</p>
+<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;
+        &lt;title&gt;Serverless Notifications&lt;/title&gt;
+        &lt;link href=&quot;bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class=&quot;container&quot;&gt;
+            &lt;div class=&quot;row&quot;&gt;
+                &lt;h2&gt;Serverless Notifications&lt;/h2&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;row&quot;&gt;
+                &lt;input id=&quot;btn-keys&quot; type=&quot;button&quot; class=&quot;btn btn-primary&quot; value=&#39;Retrieve Keys&#39;&gt;
+                &lt;input id=&quot;btn-connect&quot; type=&quot;button&quot; class=&quot;btn btn-primary&quot; value=&#39;Connect&#39;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;row&quot;&gt;
+                &lt;input id=&quot;message&quot; type=&quot;text&quot;&gt;
+                &lt;input id=&quot;btn-send&quot; type=&quot;button&quot; class=&quot;btn btn-primary&quot; value=&#39;Send Message&#39;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;row&quot;&gt;
+                &lt;h3&gt;Log Messages&lt;/h3&gt;
+                &lt;ul id=&quot;log&quot;&gt;&lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;    
+        &lt;script src=&quot;jquery.min.js&quot;&gt;&lt;/script&gt;
+        &lt;script src=&quot;bundle.js&quot;&gt;&lt;/script&gt; &lt;!-- IoT --&gt;
+        &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt; &lt;!-- retrieve keys from Lambda --&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>Results in: </p>
+<p><a href="http://serverless-notifications.zanon.io"><img src="http://zanon.io/images/posts/2016-11-05-layout.png" alt="layout"></a></p>
+<p>In this demo, the user will click on &quot;Retrieve Keys&quot; to make an Ajax call to API Gateway / Lambda with the objective to retrieve temporary keys to connect with our IoT messaging system. With those keys, &quot;Connect&quot; will create a channel and subscribe to messages. The &quot;Send Message&quot; button will share messages with other users (open another browser tab to test).</p>
+<h4 id="app-js">app.js</h4>
+<p>The <strong>app.js</strong> file is responsible to make an Ajax call to retrieve the temporary keys. The URL will be created later when we deploy our Lambda function. I&#39;ve used the following address in my <strong>app.js</strong> file: <a href="https://j81qrc8un8.execute-api.us-east-1.amazonaws.com/dev/iot/keys">https://j81qrc8un8.execute-api.us-east-1.amazonaws.com/dev/iot/keys</a></p>
+<pre><code class="lang-javascript">$(document).ready(function() {
+
+    var iotKeys;
+
+    $(&#39;#btn-keys&#39;).on(&#39;click&#39;, function() {
+        $.ajax({
+            url: &quot;https://j81qrc8un8.execute-api.us-east-1.amazonaws.com/dev/iot/keys&quot;,
+            success: function(res) {
+                addLog(`Endpoint: ${res.endpoint}, 
+                        Region: ${res.region}, 
+                        AccessKey: ${res.accessKey}, 
+                        SecretKey: ${res.secretKey}, 
+                        SessionToken: ${res.sessionToken}`);
+
+                iotKeys = res; // save the keys
+            }
+        });
+    });
+});
+
+function addLog(msg) {
+    msg = &#39;[&#39; + (new Date()).toTimeString().slice(0, 8) + &#39;] &#39; + msg;
+    $(&quot;#log&quot;).prepend(&#39;&lt;li&gt;&#39; + msg + &#39;&lt;/li&gt;&#39;);
+}
+</code></pre>
+<h3 id="aws-iot">AWS IoT</h3>
+<p>To build our notification system, we need to use a Node module <a href="https://github.com/aws/aws-iot-device-sdk-js">aws-iot-device-sdk</a> and make a bundle to use in the browser.</p>
+<p>In this project, I&#39;ve created another folder named as <strong>iot</strong> to develop our IoT client. It has a <strong>package.json</strong>, so run <code>npm install</code> to install the <strong>aws-iot-device-sdk</strong> dependency.</p>
+<p>The IoT function was created as a closure where I&#39;ve implemented the functions <code>connect</code> and <code>send</code>. There are other functions like <code>onConnect</code> and <code>onMessage</code> that are empty on purpose. They will be redefined in <strong>app.js</strong>. </p>
+<pre><code class="lang-javascript">const awsIot = require(&#39;aws-iot-device-sdk&#39;);
+
+const IoT = (function() { 
+
+    var client, iotTopic;
+
+    return { 
+
+        connect: function(iotTopic, iotEndpoint, region, accessKey, secretKey, sessionToken) {
+
+            this.iotTopic = iotTopic;
+
+            this.client = awsIot.device({
+                region: region,
+                protocol: &#39;wss&#39;,
+                accessKeyId: accessKey,
+                secretKey: secretKey,
+                sessionToken: sessionToken,
+                port: 443,
+                host: iotEndpoint
+            });
+
+            this.client.on(&#39;connect&#39;, function() {
+                this.client.subscribe(this.iotTopic);
+                this.onConnect();
+            });
+
+            this.client.on(&#39;message&#39;, this.onMessage);            
+            this.client.on(&#39;close&#39;, this.onClose);     
+        },
+
+        onConnect: function(){},
+        onMessage: function(topic, message){},
+        onClose: function(){},
+
+        send: function(message) {
+            this.client.publish(this.iotTopic, message);
+        }
+    }
+})();
+</code></pre>
+<p>Now, let&#39;s create a bundle. I had issues using webpack to bundle this module, but Browserify worked fine. Install Browserify (<code>npm install -g browserify</code>) and uglifyjs (<code>npm install -g uglifyjs</code>). Bundle running <code>browserify index.js | uglifyjs &gt; bundle.js</code>.</p>
+<p>This <strong>bundle.js</strong> will be used in our frontend code and must be in the same folder. As we have developed the IoT client, we can use it inside <strong>app.js</strong>. Add the following:</p>
+<pre><code class="lang-javascript">$(&#39;#btn-send&#39;).on(&#39;click&#39;, function() {
+    var msg = $(&#39;#message&#39;).val();
+    IoT.send(msg);    
+});
+
+IoT.onMessage = function(topic, message) {
+    addLog(message);
+};
+
+IoT.onClose = function() {
+    addLog(&#39;Connection failed&#39;);
+};
+</code></pre>
+<h3 id="initializer">Initializer</h3>
+<h3 id="serverless-framework">Serverless Framework</h3>
+<h3 id="pricing">Pricing</h3>
+<h3 id="multiplayer-game">Multiplayer Game</h3>
+<h3 id="improving-this-demo">Improving this demo</h3>
+<p>This sample considers that there is only one topic. It&#39;s ok if everyone is subscribed to the same channel. However, if you want to send private notifications to a specific user, you need to create a new topic per user.</p>
+<p>To handle permissions, I suggest that you keep creating just one role with access to all topics (as we have done in the &quot;initializer&quot;) and use the <code>assumeRole</code> command (inside Lambda) to create keys with restricted access with a specific topic. This restriction is done passing a policy document as one of the assumeRole parameters (see <a href="http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/STS.html#assumeRole-property">docs</a>). </p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This demo solved the use case of real-time notifications for serverless applications. If you have any doubts, feel free to post in comments.</p>
+<a share-twitter="share-twitter" data-text="&quot;Serverless Notifications on AWS&quot;" data-url="http://zanon.io/posts/serverless-notifications-on-aws" data-via="zanon_io" data-size="large"></a>
+    </div>
+  </div>
+</div>
+<div class="disqus">
+  <dir-disqus></dir-disqus>
+</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>    
+
+    <script src="/js/app.js"></script>
+    <script src="/js/controllers.js"></script>
+    <script src="/js/directives.js"></script>
+    <script src="/js/routes.js"></script>
+
+    <script src="/js/assets/404game.min.js"></script>
+    <script src="/js/assets/dir-disqus.min.js"></script>
+    <script src="/js/assets/highlight.min.js"></script>
+
+    <script src="http://platform.twitter.com/widgets.js"></script>
+
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-63834414-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>

@@ -71,5 +71,11 @@
       <guid>http://zanon.io/posts/nosql-injection-in-mongodb</guid>
       <pubDate>Sun, 17 Jul 2016 00:00:00 +0000</pubDate>
     </item>
+    <item>
+      <title>Serverless Notifications on AWS</title>
+      <link>http://zanon.io/posts/serverless-notifications-on-aws</link>
+      <guid>http://zanon.io/posts/serverless-notifications-on-aws</guid>
+      <pubDate>Sat, 05 Nov 2016 00:00:00 +0000</pubDate>
+    </item>
   </channel>
 </rss>

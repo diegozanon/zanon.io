@@ -15,6 +15,10 @@ angular.module('zanonApp').config(['$routeProvider', '$locationProvider',
       })
 
       // posts
+      .when('/posts/serverless-notifications-on-aws', {
+        templateUrl: '/partials/2016-11-05-serverless-notifications-on-aws.html',
+        title: 'Serverless Notifications on AWS'
+      })
       .when('/posts/nosql-injection-in-mongodb', {
         templateUrl: '/partials/2016-07-17-nosql-injection-in-mongodb.html',
         title: 'NoSQL Injection in MongoDB'
