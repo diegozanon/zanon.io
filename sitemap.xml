@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://zanon.io</loc>
-    <lastmod>2016-07-17</lastmod>
+    <lastmod>2016-11-05</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -58,6 +58,11 @@
   <url>
     <loc>http://zanon.io/posts/nosql-injection-in-mongodb</loc>
     <lastmod>2016-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>http://zanon.io/posts/serverless-notifications-on-aws</loc>
+    <lastmod>2016-11-05</lastmod>
     <changefreq>monthly</changefreq>
   </url>
 </urlset>
