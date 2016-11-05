@@ -263,42 +263,50 @@ $(&#39;#btn-send&#39;).on(&#39;click&#39;, () =&gt; {
 <p>Create Role:</p>
 <pre><code class="lang-javascript">const AWS = require(&#39;aws-sdk&#39;);
 const iam = new AWS.IAM();
+const sts = new AWS.STS();
 const roleName = &#39;serverless-notifications&#39;;
 
-const createRoleParams = {
-  AssumeRolePolicyDocument: `{
-    &quot;Version&quot;:&quot;2012-10-17&quot;,
-    &quot;Statement&quot;:[{
-        &quot;Effect&quot;: &quot;Allow&quot;,
-        &quot;Principal&quot;: {
-          &quot;AWS&quot;: &quot;*&quot;
-        },
-        &quot;Action&quot;: &quot;sts:AssumeRole&quot;
-      }
-    ]
-  }`,
-  RoleName: roleName
-};
-
-iam.createRole(createRoleParams, (err, data) =&gt; {
+// get the account id
+sts.getCallerIdentity({}, (err, data) =&gt; {
   if (err) return console.log(err, err.stack);
 
-  const attachPolicyParams = {
-    PolicyDocument: `{
-      &quot;Version&quot;: &quot;2012-10-17&quot;,
-      &quot;Statement&quot;: [{
-        &quot;Action&quot;: [&quot;iot:Connect&quot;, &quot;iot:Subscribe&quot;, &quot;iot:Publish&quot;, &quot;iot:Receive&quot;],
-        &quot;Resource&quot;: &quot;*&quot;,
-        &quot;Effect&quot;: &quot;Allow&quot;
-      }]
+  const createRoleParams = {
+    AssumeRolePolicyDocument: `{
+      &quot;Version&quot;:&quot;2012-10-17&quot;,
+      &quot;Statement&quot;:[{
+          &quot;Effect&quot;: &quot;Allow&quot;,
+          &quot;Principal&quot;: {
+            &quot;AWS&quot;: &quot;arn:aws:iam::${data.Account}:root&quot;
+          },
+          &quot;Action&quot;: &quot;sts:AssumeRole&quot;
+        }
+      ]
     }`,
-    PolicyName: roleName,
     RoleName: roleName
   };
 
-  iam.putRolePolicy(attachPolicyParams, (err, data) =&gt; {
-    if (err) console.log(err, err.stack);
-    else     console.log(`Finished creating IoT Role: ${roleName}`);          
+  // create role
+  iam.createRole(createRoleParams, (err, data) =&gt; {
+    if (err) return console.log(err, err.stack);
+
+    const attachPolicyParams = {
+      PolicyDocument: `{
+        &quot;Version&quot;: &quot;2012-10-17&quot;,
+        &quot;Statement&quot;: [{
+          &quot;Action&quot;: [&quot;iot:Connect&quot;, &quot;iot:Subscribe&quot;, &quot;iot:Publish&quot;, &quot;iot:Receive&quot;],
+          &quot;Resource&quot;: &quot;*&quot;,
+          &quot;Effect&quot;: &quot;Allow&quot;
+        }]
+      }`,
+      PolicyName: roleName,
+      RoleName: roleName
+    };
+
+    // add iot policy
+    iam.putRolePolicy(attachPolicyParams, (err, data) =&gt; {
+      if (err) console.log(err, err.stack);
+      else     console.log(`Finished creating IoT Role: ${roleName}`);          
+    });
   });
 });
 </code></pre>
