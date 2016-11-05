@@ -119,11 +119,11 @@ article > p {
 }
 
 .post p, .post pre, .post li:last-child {
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 }
 
 .post h2, .post h3 {
-	margin: 30px 0px;
+	margin: 30px 0px 10px 0px;
 	font-weight: bold;
 }
 
