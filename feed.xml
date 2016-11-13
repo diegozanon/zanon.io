@@ -3,78 +3,78 @@
   <channel>
     <title>zanon.io</title>
     <description>Zanon's Blog</description>
-    <link>http://zanon.io</link>
-    <atom:link href="http://zanon.io/feed.xml" rel="self" type="application/rss+xml"></atom:link>
+    <link>https://zanon.io</link>
+    <atom:link href="https://zanon.io/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <item>
       <title>Getting Started!</title>
-      <link>http://zanon.io/posts/getting-started</link>
-      <guid>http://zanon.io/posts/getting-started</guid>
+      <link>https://zanon.io/posts/getting-started</link>
+      <guid>https://zanon.io/posts/getting-started</guid>
       <pubDate>Sun, 26 Jul 2015 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>AngularJS with Pretty URLs: Removing the # in Amazon S3</title>
-      <link>http://zanon.io/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3</link>
-      <guid>http://zanon.io/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3</guid>
+      <link>https://zanon.io/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3</link>
+      <guid>https://zanon.io/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3</guid>
       <pubDate>Sun, 09 Aug 2015 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>AngularJS: How to create a SPA crawlable and SEO friendly?</title>
-      <link>http://zanon.io/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly</link>
-      <guid>http://zanon.io/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly</guid>
+      <link>https://zanon.io/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly</link>
+      <guid>https://zanon.io/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly</guid>
       <pubDate>Sun, 23 Aug 2015 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Serving gzipped files in Amazon S3 / CloudFront</title>
-      <link>http://zanon.io/posts/serving-gzipped-files-in-amazon-s3-cloudfront</link>
-      <guid>http://zanon.io/posts/serving-gzipped-files-in-amazon-s3-cloudfront</guid>
+      <link>https://zanon.io/posts/serving-gzipped-files-in-amazon-s3-cloudfront</link>
+      <guid>https://zanon.io/posts/serving-gzipped-files-in-amazon-s3-cloudfront</guid>
       <pubDate>Sun, 06 Sep 2015 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Creating Desktop Apps using HTML/CSS/JS + Node.js with NW.js</title>
-      <link>http://zanon.io/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs</link>
-      <guid>http://zanon.io/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs</guid>
+      <link>https://zanon.io/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs</link>
+      <guid>https://zanon.io/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs</guid>
       <pubDate>Sun, 20 Sep 2015 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>How to distribute your enterprise mobile app?</title>
-      <link>http://zanon.io/posts/how-to-distribute-your-enterprise-mobile-app</link>
-      <guid>http://zanon.io/posts/how-to-distribute-your-enterprise-mobile-app</guid>
+      <link>https://zanon.io/posts/how-to-distribute-your-enterprise-mobile-app</link>
+      <guid>https://zanon.io/posts/how-to-distribute-your-enterprise-mobile-app</guid>
       <pubDate>Sun, 04 Oct 2015 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>MongoDB storage engine: MMAP or WiredTiger?</title>
-      <link>http://zanon.io/posts/mongodb-storage-engine-mmap-or-wiredtiger</link>
-      <guid>http://zanon.io/posts/mongodb-storage-engine-mmap-or-wiredtiger</guid>
+      <link>https://zanon.io/posts/mongodb-storage-engine-mmap-or-wiredtiger</link>
+      <guid>https://zanon.io/posts/mongodb-storage-engine-mmap-or-wiredtiger</guid>
       <pubDate>Sun, 18 Oct 2015 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Building Serverless Websites on AWS - Intro</title>
-      <link>http://zanon.io/posts/building-serverless-websites-on-aws-intro</link>
-      <guid>http://zanon.io/posts/building-serverless-websites-on-aws-intro</guid>
+      <link>https://zanon.io/posts/building-serverless-websites-on-aws-intro</link>
+      <guid>https://zanon.io/posts/building-serverless-websites-on-aws-intro</guid>
       <pubDate>Sun, 15 Nov 2015 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Building Serverless Websites on AWS - Tutorial</title>
-      <link>http://zanon.io/posts/building-serverless-websites-on-aws-tutorial</link>
-      <guid>http://zanon.io/posts/building-serverless-websites-on-aws-tutorial</guid>
+      <link>https://zanon.io/posts/building-serverless-websites-on-aws-tutorial</link>
+      <guid>https://zanon.io/posts/building-serverless-websites-on-aws-tutorial</guid>
       <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>&quot;Please, try again...&quot; (Retry Pattern in Node)</title>
-      <link>http://zanon.io/posts/please-try-again-retry-pattern-in-node</link>
-      <guid>http://zanon.io/posts/please-try-again-retry-pattern-in-node</guid>
+      <link>https://zanon.io/posts/please-try-again-retry-pattern-in-node</link>
+      <guid>https://zanon.io/posts/please-try-again-retry-pattern-in-node</guid>
       <pubDate>Sat, 09 Apr 2016 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>NoSQL Injection in MongoDB</title>
-      <link>http://zanon.io/posts/nosql-injection-in-mongodb</link>
-      <guid>http://zanon.io/posts/nosql-injection-in-mongodb</guid>
+      <link>https://zanon.io/posts/nosql-injection-in-mongodb</link>
+      <guid>https://zanon.io/posts/nosql-injection-in-mongodb</guid>
       <pubDate>Sun, 17 Jul 2016 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Serverless Notifications on AWS</title>
-      <link>http://zanon.io/posts/serverless-notifications-on-aws</link>
-      <guid>http://zanon.io/posts/serverless-notifications-on-aws</guid>
+      <link>https://zanon.io/posts/serverless-notifications-on-aws</link>
+      <guid>https://zanon.io/posts/serverless-notifications-on-aws</guid>
       <pubDate>Sat, 05 Nov 2016 00:00:00 +0000</pubDate>
     </item>
   </channel>

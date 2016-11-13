@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="Angular, Node, MongoDB, AWS">
     <meta name="author" content="Diego Zanon">
-    <link rel="icon" href="http://zanon.io/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://zanon.io/favicon.ico" type="image/x-icon">
 
     <title ng-bind="title + 'Zanon'"></title>
 
@@ -48,7 +48,7 @@
               </a>
             </div>
             <div class="col-xs-2 col-sm-1 col-md-1 header-img">
-              <a href="http://diego.zanon.io">
+              <a href="https://diego.zanon.io">
                 <img src="/images/about.png" alt="about" class="img-responsive">
               </a>
             </div>
@@ -147,7 +147,7 @@
 <p>To configure this, each server has its own guide. You can follow this <a href="https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions#how-to-configure-your-server-to-work-with-html5mode">link</a> to see how this is done for Apache, IIS and others. For Amazon S3, read below.</p>
 <h2 id="amazon-s3-url-rewrite">Amazon S3 URL Rewrite</h2>
 <p>First, open the AWS Management Console and browse to S3. Next, click on your website bucket in the left panel and see its properties in the right panel. Clicking on &quot;Static Website Hosting&quot; gives you the following options:</p>
-<p><img src="http://zanon.io/images/posts/2015-08-09-s3.png" alt="s3-configuration"></p>
+<p><img src="https://zanon.io/images/posts/2015-08-09-s3.png" alt="s3-configuration"></p>
 <p>You&#39;ll edit the redirection rules using the following XML:</p>
 <pre><code class="lang-xml">&lt;RoutingRules&gt;
   &lt;RoutingRule&gt;
@@ -165,9 +165,9 @@
 <p>In this configuration, you&#39;re telling AWS that when a user browses for an URL that does not exist (404 error), instead of showing the error, AWS will redirect the user to another page replacing the key prefix <code>/</code> with <code>#/</code>.  This means that if your user browses for <code>http://mywebsite.com/about</code>, Amazon will redirect to <code>http://mywebsite.com/#/about</code>, but since we have configured HTML5 push state, Angular will handle the request and rewrite again the URL to <code>http://mywebsite.com/about</code>.</p>
 <h2 id="update-sep-06-2015">UPDATE: Sep 06, 2015</h2>
 <blockquote>
-<p>This solution works pretty well, but configuring this S3 URL Rewrite is <strong>not</strong> SEO-friendly as I&#39;ve discovered later. You can read why in my Stack Overflow <a href="http://stackoverflow.com/q/32429488/1476885">question/answer</a>. If you want an application SEO-friendly and with pretty URLs in Amazon, you need to avoid this S3 rewrite rule and pre-render all of your pages before uploading them. You can read more about this in my blog post: <a href="http://zanon.io/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly">Angular: How to create a SPA crawlable and SEO friendly?</a></p>
+<p>This solution works pretty well, but configuring this S3 URL Rewrite is <strong>not</strong> SEO-friendly as I&#39;ve discovered later. You can read why in my Stack Overflow <a href="http://stackoverflow.com/q/32429488/1476885">question/answer</a>. If you want an application SEO-friendly and with pretty URLs in Amazon, you need to avoid this S3 rewrite rule and pre-render all of your pages before uploading them. You can read more about this in my blog post: <a href="https://zanon.io/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly">Angular: How to create a SPA crawlable and SEO friendly?</a></p>
 </blockquote>
-<a share-twitter="share-twitter" data-text="&quot;AngularJS with Pretty URLs: Removing the # in Amazon S3&quot;" data-url="http://zanon.io/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3" data-via="zanon_io" data-size="large"></a>
+<a share-twitter="share-twitter" data-text="&quot;AngularJS with Pretty URLs: Removing the # in Amazon S3&quot;" data-url="https://zanon.io/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3" data-via="zanon_io" data-size="large"></a>
     </div>
   </div>
 </div>
@@ -184,7 +184,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
 
     <script src="/js/app.js"></script>
     <script src="/js/controllers.js"></script>
@@ -195,7 +195,7 @@
     <script src="/js/assets/dir-disqus.min.js"></script>
     <script src="/js/assets/highlight.min.js"></script>
 
-    <script src="http://platform.twitter.com/widgets.js"></script>
+    <script src="https://platform.twitter.com/widgets.js"></script>
 
     <!-- Google Analytics -->
     <script>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="Angular, Node, MongoDB, AWS">
     <meta name="author" content="Diego Zanon">
-    <link rel="icon" href="http://zanon.io/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://zanon.io/favicon.ico" type="image/x-icon">
 
     <title ng-bind="title + 'Zanon'"></title>
 
@@ -48,7 +48,7 @@
               </a>
             </div>
             <div class="col-xs-2 col-sm-1 col-md-1 header-img">
-              <a href="http://diego.zanon.io">
+              <a href="https://diego.zanon.io">
                 <img src="/images/about.png" alt="about" class="img-responsive">
               </a>
             </div>
@@ -125,7 +125,7 @@
 <li>Log all retry actions. If it is frequently used, probably there is another hidden problem yet to me identified.</li>
 </ul>
 <h3 id="solution-how-can-i-retry-">Solution - how can I <em>Retry</em>?</h3>
-<p><a href="https://msdn.microsoft.com/en-us/library/dn589788.aspx"><img src="http://zanon.io/images/posts/2016-04-09-retry.png" alt="retry"></a></p>
+<p><a href="https://msdn.microsoft.com/en-us/library/dn589788.aspx"><img src="https://zanon.io/images/posts/2016-04-09-retry.png" alt="retry"></a></p>
 <p>The retry logic is quite simple: you just need to loop X times, waiting a few seconds between each loop and retry if you know that the error is transient. If you succeed or the limit is achieved, you abort the loop.</p>
 <pre><code class="lang-javascript">while (true) {
 
@@ -194,7 +194,7 @@ faultTolerantTask(&#39;some input&#39;, function(err, result) {
 </code></pre>
 <h3 id="read-more">Read more</h3>
 <p>This post was inspired by <a href="https://msdn.microsoft.com/en-us/library/dn589788.aspx">this</a> MSDN article (with C# examples).</p>
-<a share-twitter="share-twitter" data-text="&quot;&quot;Please, try again...&quot; (Retry Pattern in Node)&quot;" data-url="http://zanon.io/posts/please-try-again-retry-pattern-in-node" data-via="zanon_io" data-size="large"></a>
+<a share-twitter="share-twitter" data-text="&quot;&quot;Please, try again...&quot; (Retry Pattern in Node)&quot;" data-url="https://zanon.io/posts/please-try-again-retry-pattern-in-node" data-via="zanon_io" data-size="large"></a>
     </div>
   </div>
 </div>
@@ -211,7 +211,7 @@ faultTolerantTask(&#39;some input&#39;, function(err, result) {
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
 
     <script src="/js/app.js"></script>
     <script src="/js/controllers.js"></script>
@@ -222,7 +222,7 @@ faultTolerantTask(&#39;some input&#39;, function(err, result) {
     <script src="/js/assets/dir-disqus.min.js"></script>
     <script src="/js/assets/highlight.min.js"></script>
 
-    <script src="http://platform.twitter.com/widgets.js"></script>
+    <script src="https://platform.twitter.com/widgets.js"></script>
 
     <!-- Google Analytics -->
     <script>

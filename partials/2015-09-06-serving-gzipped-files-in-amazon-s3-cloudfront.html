@@ -11,21 +11,21 @@
 <p>In a Custom Origin Server, like an IIS or Apache server, this is very easy to accomplish because you have just to set some configurations and you&#39;re ready to serve gzipped content. However, if your Origin Server is Amazon S3, you need to manually gzip each content and I will show how this is done.</p>
 <h2 id="so-what-is-gzip-">So, what is gzip?</h2>
 <p><a href="http://www.gzip.org/">gzip</a> is a file format and a software application used for compression and decompression. It is also the web standard used by your browser to download static content like HTML/CSS/JS. You can read more about it in this <a href="http://betterexplained.com/articles/how-to-optimize-your-site-with-gzip-compression/">Better Explained</a> guide, but if you don&#39;t want, look those following extracted images that sums it up:</p>
-<p><img src="http://zanon.io/images/posts/2015-09-06-http-request.png" alt="http-request">
-<img src="http://zanon.io/images/posts/2015-09-06-http-request-compressed.png" alt="http-request-compressed"></p>
+<p><img src="https://zanon.io/images/posts/2015-09-06-http-request.png" alt="http-request">
+<img src="https://zanon.io/images/posts/2015-09-06-http-request-compressed.png" alt="http-request-compressed"></p>
 <h2 id="serving-gzipped-files">Serving gzipped files</h2>
 <p>There is a tricky part serving gzipped files in Amazon S3. Since gzip is commonly done by the web server that zips (and caches) the content, S3 will not do it for you to save their CPU time avoiding compressing content. So, what you need to do is to gzip it upfront and set the file <strong>Content-Encoding</strong> to <strong>gzip</strong>. The following guide shows how to do it.</p>
 <p>First, download a gzip program. You can use the <a href="http://www.gzip.org/">official</a> application or find another one that fits you better.</p>
-<p>You can execute the program using the command line typing: </p>
+<p>You can execute the program using the command line typing:</p>
 <pre><code class="lang-xml">&gt; gzip myscrypt.min.js
 </code></pre>
 <p>The file <strong>myscrypt.min.js.gz</strong> will be created. The command <code>&gt; gzip -9 filename</code> will compress the file with the highest compression level. You can set up your deployment scripts to automate this process and execute the compression for all files (HTML/CSS/JS). However, do not gzip your images or other binaries contents. They are already highly compressed and the CPU cost to decompress them will not be worth it.</p>
-<p>The last step is to remove the <strong>gz</strong> part of the name and upload it to Amazon S3 setting the file <strong>Content-Encoding</strong> to <strong>gzip</strong>. </p>
+<p>The last step is to remove the <strong>gz</strong> part of the name and upload it to Amazon S3 setting the file <strong>Content-Encoding</strong> to <strong>gzip</strong>.</p>
 <p>Since you&#39;ll need to do the same action for many files for each deploy, I highly recommend that you automate this process using Amazon APIs to upload your content. However, if you are just testing, you can change the <strong>Content-Enconding</strong> using Amazon&#39;s S3 Console.</p>
-<p><img src="http://zanon.io/images/posts/2015-09-06-gzip-s3.png" alt="gzip-s3"></p>
+<p><img src="https://zanon.io/images/posts/2015-09-06-gzip-s3.png" alt="gzip-s3"></p>
 <p>To verify if your content is being gzipped, open your developer tool and check the <strong>Content-Enconding</strong> at the network tab.</p>
-<p><img src="http://zanon.io/images/posts/2015-09-06-dev-tools.png" alt="dev-tools"></p>
-<a share-twitter="share-twitter" data-text="&quot;Serving gzipped files in Amazon S3 / CloudFront&quot;" data-url="http://zanon.io/posts/serving-gzipped-files-in-amazon-s3-cloudfront" data-via="zanon_io" data-size="large"></a>
+<p><img src="https://zanon.io/images/posts/2015-09-06-dev-tools.png" alt="dev-tools"></p>
+<a share-twitter="share-twitter" data-text="&quot;Serving gzipped files in Amazon S3 / CloudFront&quot;" data-url="https://zanon.io/posts/serving-gzipped-files-in-amazon-s3-cloudfront" data-via="zanon_io" data-size="large"></a>
     </div>
   </div>
 </div>

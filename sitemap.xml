@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://zanon.io</loc>
+    <loc>https://zanon.io</loc>
     <lastmod>2016-11-05</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>http://zanon.io/posts/getting-started</loc>
+    <loc>https://zanon.io/posts/getting-started</loc>
     <lastmod>2015-07-26</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>http://zanon.io/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3</loc>
+    <loc>https://zanon.io/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3</loc>
     <lastmod>2015-08-09</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>http://zanon.io/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly</loc>
+    <loc>https://zanon.io/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly</loc>
     <lastmod>2015-08-23</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>http://zanon.io/posts/serving-gzipped-files-in-amazon-s3-cloudfront</loc>
+    <loc>https://zanon.io/posts/serving-gzipped-files-in-amazon-s3-cloudfront</loc>
     <lastmod>2015-09-06</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>http://zanon.io/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs</loc>
+    <loc>https://zanon.io/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs</loc>
     <lastmod>2015-09-20</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>http://zanon.io/posts/how-to-distribute-your-enterprise-mobile-app</loc>
+    <loc>https://zanon.io/posts/how-to-distribute-your-enterprise-mobile-app</loc>
     <lastmod>2015-10-04</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>http://zanon.io/posts/mongodb-storage-engine-mmap-or-wiredtiger</loc>
+    <loc>https://zanon.io/posts/mongodb-storage-engine-mmap-or-wiredtiger</loc>
     <lastmod>2015-10-18</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>http://zanon.io/posts/building-serverless-websites-on-aws-intro</loc>
+    <loc>https://zanon.io/posts/building-serverless-websites-on-aws-intro</loc>
     <lastmod>2015-11-15</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>http://zanon.io/posts/building-serverless-websites-on-aws-tutorial</loc>
+    <loc>https://zanon.io/posts/building-serverless-websites-on-aws-tutorial</loc>
     <lastmod>2016-01-31</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>http://zanon.io/posts/please-try-again-retry-pattern-in-node</loc>
+    <loc>https://zanon.io/posts/please-try-again-retry-pattern-in-node</loc>
     <lastmod>2016-04-09</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>http://zanon.io/posts/nosql-injection-in-mongodb</loc>
+    <loc>https://zanon.io/posts/nosql-injection-in-mongodb</loc>
     <lastmod>2016-07-17</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>http://zanon.io/posts/serverless-notifications-on-aws</loc>
+    <loc>https://zanon.io/posts/serverless-notifications-on-aws</loc>
     <lastmod>2016-11-05</lastmod>
     <changefreq>monthly</changefreq>
   </url>

@@ -78,7 +78,7 @@ To configure this, each server has its own guide. You can follow this [link](htt
 
 First, open the AWS Management Console and browse to S3. Next, click on your website bucket in the left panel and see its properties in the right panel. Clicking on "Static Website Hosting" gives you the following options:
 
-![s3-configuration](http://zanon.io/images/posts/2015-08-09-s3.png)
+![s3-configuration](https://zanon.io/images/posts/2015-08-09-s3.png)
 
 You'll edit the redirection rules using the following XML:
 
@@ -102,4 +102,4 @@ In this configuration, you're telling AWS that when a user browses for an URL th
 
 ## UPDATE: Sep 06, 2015
 
-> This solution works pretty well, but configuring this S3 URL Rewrite is **not** SEO-friendly as I've discovered later. You can read why in my Stack Overflow [question/answer](http://stackoverflow.com/q/32429488/1476885). If you want an application SEO-friendly and with pretty URLs in Amazon, you need to avoid this S3 rewrite rule and pre-render all of your pages before uploading them. You can read more about this in my blog post: [Angular: How to create a SPA crawlable and SEO friendly?](http://zanon.io/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly)
+> This solution works pretty well, but configuring this S3 URL Rewrite is **not** SEO-friendly as I've discovered later. You can read why in my Stack Overflow [question/answer](http://stackoverflow.com/q/32429488/1476885). If you want an application SEO-friendly and with pretty URLs in Amazon, you need to avoid this S3 rewrite rule and pre-render all of your pages before uploading them. You can read more about this in my blog post: [Angular: How to create a SPA crawlable and SEO friendly?](https://zanon.io/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly)

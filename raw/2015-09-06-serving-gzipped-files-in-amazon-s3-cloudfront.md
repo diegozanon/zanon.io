@@ -12,18 +12,18 @@ Since CloudFront uses an Origin Server to find your files and to distribute them
 
 In a Custom Origin Server, like an IIS or Apache server, this is very easy to accomplish because you have just to set some configurations and you're ready to serve gzipped content. However, if your Origin Server is Amazon S3, you need to manually gzip each content and I will show how this is done.
 
-## So, what is gzip? 
+## So, what is gzip?
 [gzip](http://www.gzip.org/) is a file format and a software application used for compression and decompression. It is also the web standard used by your browser to download static content like HTML/CSS/JS. You can read more about it in this [Better Explained](http://betterexplained.com/articles/how-to-optimize-your-site-with-gzip-compression/) guide, but if you don't want, look those following extracted images that sums it up:
 
-![http-request](http://zanon.io/images/posts/2015-09-06-http-request.png)
-![http-request-compressed](http://zanon.io/images/posts/2015-09-06-http-request-compressed.png)
+![http-request](https://zanon.io/images/posts/2015-09-06-http-request.png)
+![http-request-compressed](https://zanon.io/images/posts/2015-09-06-http-request-compressed.png)
 
 ## Serving gzipped files
 There is a tricky part serving gzipped files in Amazon S3. Since gzip is commonly done by the web server that zips (and caches) the content, S3 will not do it for you to save their CPU time avoiding compressing content. So, what you need to do is to gzip it upfront and set the file **Content-Encoding** to **gzip**. The following guide shows how to do it.
 
 First, download a gzip program. You can use the [official](http://www.gzip.org/) application or find another one that fits you better.
 
-You can execute the program using the command line typing: 
+You can execute the program using the command line typing:
 
 ```xml
 > gzip myscrypt.min.js
@@ -31,13 +31,12 @@ You can execute the program using the command line typing:
 
 The file **myscrypt.min.js.gz** will be created. The command `> gzip -9 filename` will compress the file with the highest compression level. You can set up your deployment scripts to automate this process and execute the compression for all files (HTML/CSS/JS). However, do not gzip your images or other binaries contents. They are already highly compressed and the CPU cost to decompress them will not be worth it.
 
-The last step is to remove the **gz** part of the name and upload it to Amazon S3 setting the file **Content-Encoding** to **gzip**. 
+The last step is to remove the **gz** part of the name and upload it to Amazon S3 setting the file **Content-Encoding** to **gzip**.
 
 Since you'll need to do the same action for many files for each deploy, I highly recommend that you automate this process using Amazon APIs to upload your content. However, if you are just testing, you can change the **Content-Enconding** using Amazon's S3 Console.
 
-![gzip-s3](http://zanon.io/images/posts/2015-09-06-gzip-s3.png)
+![gzip-s3](https://zanon.io/images/posts/2015-09-06-gzip-s3.png)
 
 To verify if your content is being gzipped, open your developer tool and check the **Content-Enconding** at the network tab.
 
-![dev-tools](http://zanon.io/images/posts/2015-09-06-dev-tools.png)
-
+![dev-tools](https://zanon.io/images/posts/2015-09-06-dev-tools.png)

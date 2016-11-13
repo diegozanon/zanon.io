@@ -12,7 +12,7 @@ SPA stands for _Single-Page Application_. Its usage is growing in a fast pace si
 
 For example, this blog was created using the Angular ngRoute directive. If you try to change to another blog post, you can see that the header content will not flash and the post will load very fast.
 
-![spa](http://zanon.io/images/posts/2015-08-23-spa.png)
+![spa](https://zanon.io/images/posts/2015-08-23-spa.png)
 
 However, this approach have some [drawbacks](http://stackoverflow.com/q/21862054/1476885), but all of them can be handled in some way. What I'm focusing in this post is how to help the search engines, like Google, to properly index your content and make it searchable.
 
@@ -33,14 +33,14 @@ In this blog, I've added the following **sitemap.xml** file:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://zanon.io/</loc>
+    <loc>https://zanon.io/</loc>
     <lastmod>2015-08-23</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>http://zanon.io/posts/angular-how-to-create-a-spa-crawlable-and-seo-friendly</loc>
+    <loc>https://zanon.io/posts/angular-how-to-create-a-spa-crawlable-and-seo-friendly</loc>
     <lastmod>2015-08-23</lastmod>
     <changefreq>monthly</changefreq>
   </url>

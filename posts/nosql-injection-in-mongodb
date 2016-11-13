@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="Angular, Node, MongoDB, AWS">
     <meta name="author" content="Diego Zanon">
-    <link rel="icon" href="http://zanon.io/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://zanon.io/favicon.ico" type="image/x-icon">
 
     <title ng-bind="title + 'Zanon'"></title>
 
@@ -48,7 +48,7 @@
               </a>
             </div>
             <div class="col-xs-2 col-sm-1 col-md-1 header-img">
-              <a href="http://diego.zanon.io">
+              <a href="https://diego.zanon.io">
                 <img src="/images/about.png" alt="about" class="img-responsive">
               </a>
             </div>
@@ -198,7 +198,7 @@ db.collection(&#39;users&#39;).find(query).each(function(err, doc) {
 <h3 id="more">More</h3>
 <p>If you want to read more about this subject, I suggest <a href="http://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html">this blog post</a> that contains code examples and a GitHub project to reproduce the attacks.</p>
 <p>As a rule of thumb, always follow the <a href="https://en.wikipedia.org/wiki/Principle_of_least_privilege">principle of least privilege</a>: to minimize the potential damage that an attacker can make, do not assign full-access to your application. Run using only the permissions that you need.</p>
-<a share-twitter="share-twitter" data-text="&quot;NoSQL Injection in MongoDB&quot;" data-url="http://zanon.io/posts/nosql-injection-in-mongodb" data-via="zanon_io" data-size="large"></a>
+<a share-twitter="share-twitter" data-text="&quot;NoSQL Injection in MongoDB&quot;" data-url="https://zanon.io/posts/nosql-injection-in-mongodb" data-via="zanon_io" data-size="large"></a>
     </div>
   </div>
 </div>
@@ -215,7 +215,7 @@ db.collection(&#39;users&#39;).find(query).each(function(err, doc) {
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
 
     <script src="/js/app.js"></script>
     <script src="/js/controllers.js"></script>
@@ -226,7 +226,7 @@ db.collection(&#39;users&#39;).find(query).each(function(err, doc) {
     <script src="/js/assets/dir-disqus.min.js"></script>
     <script src="/js/assets/highlight.min.js"></script>
 
-    <script src="http://platform.twitter.com/widgets.js"></script>
+    <script src="https://platform.twitter.com/widgets.js"></script>
 
     <!-- Google Analytics -->
     <script>

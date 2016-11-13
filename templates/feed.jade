@@ -6,11 +6,11 @@ rss(version="2.0" xmlns:atom="http://www.w3.org/2005/Atom")
     description
       | Zanon's Blog
     link
-      | http://zanon.io
-    atom:link(href="http://zanon.io/feed.xml" rel="self" type="application/rss+xml")
+      | https://zanon.io
+    atom:link(href="https://zanon.io/feed.xml" rel="self" type="application/rss+xml")
     each post in posts
       item
         title= post.title
-        link= 'http://zanon.io/posts/' + post.url
-        guid= 'http://zanon.io/posts/' + post.url
+        link= 'https://zanon.io/posts/' + post.url
+        guid= 'https://zanon.io/posts/' + post.url
         pubDate= post.longDate

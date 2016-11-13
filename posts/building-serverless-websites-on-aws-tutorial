@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="Angular, Node, MongoDB, AWS">
     <meta name="author" content="Diego Zanon">
-    <link rel="icon" href="http://zanon.io/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://zanon.io/favicon.ico" type="image/x-icon">
 
     <title ng-bind="title + 'Zanon'"></title>
 
@@ -48,7 +48,7 @@
               </a>
             </div>
             <div class="col-xs-2 col-sm-1 col-md-1 header-img">
-              <a href="http://diego.zanon.io">
+              <a href="https://diego.zanon.io">
                 <img src="/images/about.png" alt="about" class="img-responsive">
               </a>
             </div>
@@ -98,10 +98,10 @@
 
 <h2 id="objective">Objective</h2>
 <p>This tutorial shows how to create a simple serverless application using the Serverless Framework 1.1. This tool supports code written in Node, Python and Java, but this tutorial uses only Node.js.</p>
-<p>If you don&#39;t know yet what is this concept of Serverless and its benefits, you can read my previous blog post <a href="http://zanon.io/posts/building-serverless-websites-on-aws-intro">here</a>.</p>
-<p>The demo app is hosted at <a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a> and the source code is available at <a href="https://github.com/zanon-io/aws-serverless-demo">https://github.com/zanon-io/aws-serverless-demo</a></p>
+<p>If you don&#39;t know yet what is this concept of Serverless and its benefits, you can read my previous blog post <a href="https://zanon.io/posts/building-serverless-websites-on-aws-intro">here</a>.</p>
+<p>The demo app is hosted at <a href="https://serverless-demo.zanon.io">https://serverless-demo.zanon.io</a> and the source code is available at <a href="https://github.com/zanon-io/aws-serverless-demo">https://github.com/zanon-io/aws-serverless-demo</a></p>
 <p>This demo just shows a fake weather information when a button is clicked. To achieve this, we are using the following architecture:</p>
-<p><img src="http://zanon.io/images/posts/2016-01-31-lambda-web-apps.png" alt="lambda-web-apps"></p>
+<p><img src="https://zanon.io/images/posts/2016-01-31-lambda-web-apps.png" alt="lambda-web-apps"></p>
 <p><strong>Note</strong>: this image was adapted from <a href="https://aws.amazon.com/lambda/">here</a>. AWS likes to associate Lambda with DynamoDB, but I&#39;ve used SimpleDB since that&#39;s the only serverless database offered by AWS. DynamoDB allows you to build more complex apps, but you need to provision capacity and you will pay for it even if no one is using your app. A true serverless app aims for <em>infinite scalability</em>, <em>high availability</em> <strong>and</strong> <em>pay only for what you use</em>, so DynamoDB lacks the last one.</p>
 <h2 id="summary">Summary</h2>
 <p>This tutorial tries to cover everything to build a serverless site, including how to configure your domain and host your frontend code.</p>
@@ -120,12 +120,12 @@
 <h3 id="configuring">Configuring</h3>
 <p>The Serverless Framework needs an AWS user account to manage your AWS resources. For production usage, this user must be configured with restricted access to just allow the services that will be used. However, if you are just learning, you can create an Admin account to get it up and running quickly.</p>
 <p>To create a user, browse the <a href="https://console.aws.amazon.com/iam">IAM console</a> and create a group first:</p>
-<p><img src="http://zanon.io/images/posts/2016-01-31-iam-group.png" alt="iam-group"></p>
+<p><img src="https://zanon.io/images/posts/2016-01-31-iam-group.png" alt="iam-group"></p>
 <p>Name it as <strong>serverless-group</strong> and attach the <strong>AdministratorAccess</strong> policy.</p>
-<p><img src="http://zanon.io/images/posts/2016-01-31-iam-group-admin.png" alt="iam-group-admin"></p>
+<p><img src="https://zanon.io/images/posts/2016-01-31-iam-group-admin.png" alt="iam-group-admin"></p>
 <p>After that, create a new user named as <strong>serverless-admin</strong>, write down its <strong>Access Key ID</strong> and <strong>Secret Access Key</strong>, and add the user to the group that you have created.</p>
-<p><img src="http://zanon.io/images/posts/2016-01-31-iam-user.png" alt="iam-user"></p>
-<p><img src="http://zanon.io/images/posts/2016-01-31-iam-user-group.png" alt="iam-user-group"></p>
+<p><img src="https://zanon.io/images/posts/2016-01-31-iam-user.png" alt="iam-user"></p>
+<p><img src="https://zanon.io/images/posts/2016-01-31-iam-user-group.png" alt="iam-user-group"></p>
 <p>As Serverless uses the AWS Node.js SDK, it looks for the user credentials in a <strong>credentials</strong> file located at <strong>~/.aws/credentials</strong> on Mac/Linux or <strong>C:\Users\USERNAME\.aws\credentials</strong> on Windows.</p>
 <p><strong>Note</strong>: on Windows, using the file explorer to create a file named <strong>.aws</strong> returns an error because it starts with a dot. You need to create it with the name <strong>.aws.</strong> and the file explorer will rename it to <strong>.aws</strong>.</p>
 <p>The file must have the following format: (replace with your access key and secret key)</p>
@@ -208,7 +208,7 @@ functions:
 }
 </code></pre>
 <p>Did you miss the <code>locationId</code> property? As we are not passing parameters, <code>event.id</code> is undefined and the JSON object will omit the <code>locationId</code> property.</p>
-<p>However, even if we use querystring parameters (adding <code>?id=5</code>) to the end of the URL, we still won&#39;t see the <code>locationId</code> property. The reason is that the event object that the Lambda function receives is not exactly what we pass to API gateway. The querystring parameters will be available under the <code>queryStringParameters</code> property. </p>
+<p>However, even if we use querystring parameters (adding <code>?id=5</code>) to the end of the URL, we still won&#39;t see the <code>locationId</code> property. The reason is that the event object that the Lambda function receives is not exactly what we pass to API gateway. The querystring parameters will be available under the <code>queryStringParameters</code> property.</p>
 <p>See the following Lambda function. In this example, it will be able to access the input variables and access the <code>id</code> property from a <code>?id=5</code> querystring.</p>
 <pre><code class="lang-javascript">module.exports.currentTemperature = (event, context, callback) =&gt; {
 
@@ -285,14 +285,14 @@ functions:
 <h2 id="simpledb">SimpleDB</h2>
 <p>We have already configured and deployed our backend code. Let&#39;s make it more useful integrating it with SimpleDB, which is a serverless database.</p>
 <h3 id="initialize-your-data">Initialize your Data</h3>
-<p>Since there is no AWS Console for SimpleDB, you need to create your model using third-party tools or the AWS SDK. I like the SdbNavigator Chrome Extension. It&#39;s available <a href="https://chrome.google.com/webstore/detail/sdbnavigator/ddhigekdfabonefhiildaiccafacphgg">here</a>. </p>
+<p>Since there is no AWS Console for SimpleDB, you need to create your model using third-party tools or the AWS SDK. I like the SdbNavigator Chrome Extension. It&#39;s available <a href="https://chrome.google.com/webstore/detail/sdbnavigator/ddhigekdfabonefhiildaiccafacphgg">here</a>.</p>
 <p>To connect, you need to set your AWS credentials (restrict access to SimpleDB only) and select a Region.</p>
 <p>Click on &quot;Add domain&quot; and type &quot;Weather&quot; as the name. The domain is the equivalent of a table in the relational world.</p>
-<p><img src="http://zanon.io/images/posts/2016-01-31-sdb-domain.png" alt="sdb-domain"></p>
+<p><img src="https://zanon.io/images/posts/2016-01-31-sdb-domain.png" alt="sdb-domain"></p>
 <p>Click on &quot;Add property&quot; and add one property with the name &quot;Value&quot; and another with the name &quot;ID&quot;.</p>
-<p><img src="http://zanon.io/images/posts/2016-01-31-sdb-properties.png" alt="sdb-properties"></p>
+<p><img src="https://zanon.io/images/posts/2016-01-31-sdb-properties.png" alt="sdb-properties"></p>
 <p>Now click on &quot;Add record&quot; to add a register with value 35 and ID 5.</p>
-<p><img src="http://zanon.io/images/posts/2016-01-31-sdb-record.png" alt="sdb-record"></p>
+<p><img src="https://zanon.io/images/posts/2016-01-31-sdb-record.png" alt="sdb-record"></p>
 <p>As you may note, SimpleDB accepts only string fields which means that it is not suitable for complex data or aggregations.</p>
 <h3 id="add-permissions-to-your-lambda-functions-to-read-simpledb-data">Add permissions to your Lambda functions to read SimpleDB data</h3>
 <p>Lambda functions don&#39;t have access to AWS resources by default. You need to give explicitly  access through <code>iamRoleStatements</code> in the <code>serverless.yml</code> file.</p>
@@ -361,29 +361,29 @@ module.exports.currentTemperature = (event, context, callback) =&gt; {
 <h3 id="create-amazon-s3-buckets">Create Amazon S3 buckets</h3>
 <p><a href="https://console.aws.amazon.com/s3">Amazon S3 buckets</a> is the service where you will manually host your frontend code (HTML/CSS/JavaScript and images) and also where the Serverless Framework will automatically host (in a different bucket) the backend code.</p>
 <p>If you&#39;ve bought a domain named as <strong>example.com</strong>, you need to create a bucket with the same <strong>example.com</strong> name and configure it to enable website hosting.</p>
-<p><img src="http://zanon.io/images/posts/2016-01-31-s3-hosting.png" alt="s3-hosting"></p>
+<p><img src="https://zanon.io/images/posts/2016-01-31-s3-hosting.png" alt="s3-hosting"></p>
 <p>If you want to support old people that still like to type <strong>www</strong> for every site, you can also create a bucket with the name <strong>www.example.com</strong>. For that one, configure it to redirect all requests for the main address.</p>
-<p><img src="http://zanon.io/images/posts/2016-01-31-s3-www.png" alt="s3-www"></p>
+<p><img src="https://zanon.io/images/posts/2016-01-31-s3-www.png" alt="s3-www"></p>
 <h3 id="configure-amazon-route-53-hosted-zone">Configure Amazon Route 53 Hosted Zone</h3>
 <p>After buying your domain, you need to change the default Name Servers. The Name Servers are a set of server addresses (more than one for redundancy) that helps the DNS queries to translate the domain name to the correspondent address of the machine that is hosting your site. Since we want to host our app on Amazon, we need to give them this control. So, the name server will be changed from your domain registrar to Amazon&#39;s addresses. The Amazon service that is responsible for this kind of control is the Route 53.</p>
 <p>Go to <a href="https://console.aws.amazon.com/route53">Amazon Route 53</a> and click to create a Hosted Zone for your domain. After creating it, click at your hosted zone and write down the given Name Server (NS).</p>
-<p><img src="http://zanon.io/images/posts/2016-01-31-route53-nameservers.png" alt="route53-nameservers"></p>
+<p><img src="https://zanon.io/images/posts/2016-01-31-route53-nameservers.png" alt="route53-nameservers"></p>
 <h3 id="create-amazon-route-53-aliases">Create Amazon Route 53 Aliases</h3>
 <p>You need to create some aliases to map the incoming Amazon Route 53 requests to your S3 buckets. These aliases are created clicking to Create a Record Set.</p>
 <p>You need to create a record set of the A-type for your <strong>example.com</strong> domain and CNAME-type for your <strong>www.example.com</strong> domain.</p>
 <p>For the A-type record set, just select the S3 bucket within the available options.</p>
-<p><img src="http://zanon.io/images/posts/2016-01-31-route53-a-recordset.png" alt="route53-a-recordset"></p>
+<p><img src="https://zanon.io/images/posts/2016-01-31-route53-a-recordset.png" alt="route53-a-recordset"></p>
 <p>Regarding the CNAME-type, you need to provide an address. It should be the bucket endpoint address available at the bucket properties tab.</p>
-<p><img src="http://zanon.io/images/posts/2016-01-31-route53-cname-recordset.png" alt="route53-cname-recordset"></p>
+<p><img src="https://zanon.io/images/posts/2016-01-31-route53-cname-recordset.png" alt="route53-cname-recordset"></p>
 <h3 id="changing-the-name-servers">Changing the Name Servers</h3>
 <p>After preparing your Amazon Host, you need to give them the domain control accessing your registrar website and changing the name servers configuration.</p>
 <p>I&#39;ve bought my zanon.io domain at GoDaddy.com, so this tutorial uses their control panel to show how to configure your domain. However, since all domain sellers let you change your name server values, the control panels are different, but you need to make the same configuration.</p>
 <p>1) Log into your domain registrar&#39;s control panel and click to manage your domains.</p>
-<p><img src="http://zanon.io/images/posts/2016-01-31-godaddy-control-panel.png" alt="godaddy-control-panel"></p>
+<p><img src="https://zanon.io/images/posts/2016-01-31-godaddy-control-panel.png" alt="godaddy-control-panel"></p>
 <p>2) Click at your domain name settings and select the Manage DNS option.</p>
-<p><img src="http://zanon.io/images/posts/2016-01-31-godaddy-manage-dns.png" alt="godaddy-manage-dns"></p>
+<p><img src="https://zanon.io/images/posts/2016-01-31-godaddy-manage-dns.png" alt="godaddy-manage-dns"></p>
 <p>3) View your configured name servers options and edit them with the addresses that are provided by AWS.</p>
-<p><img src="http://zanon.io/images/posts/2016-01-31-godaddy-nameservers.png" alt="godaddy-nameservers"></p>
+<p><img src="https://zanon.io/images/posts/2016-01-31-godaddy-nameservers.png" alt="godaddy-nameservers"></p>
 <h3 id="testing">Testing</h3>
 <p>Due to cache, you need to wait some hours until this name server changing takes effect. While you wait, create a simple web page in a file named as index.html and upload it to your <strong>example.com</strong> bucket. When the cache is refreshed, you can see your webpage up and running typing your domain name.</p>
 <h2 id="frontend">Frontend</h2>
@@ -399,7 +399,7 @@ module.exports.currentTemperature = (event, context, callback) =&gt; {
   &lt;div class=&quot;row&quot;&gt;
     &lt;div class=&quot;col-md-offset-5 col-md-2&quot;&gt;
       &lt;p&gt;Value: &lt;span id=&quot;weather-value&quot;&gt;&lt;/span&gt;&lt;/p&gt;
-      &lt;a href=&quot;http://zanon.io/posts/building-serverless-websites-on-aws-tutorial&quot;&gt;&lt;p&gt;source&lt;/p&gt;&lt;/a&gt;
+      &lt;a href=&quot;https://zanon.io/posts/building-serverless-websites-on-aws-tutorial&quot;&gt;&lt;p&gt;source&lt;/p&gt;&lt;/a&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -420,8 +420,8 @@ module.exports.currentTemperature = (event, context, callback) =&gt; {
 </code></pre>
 <p>Our Ajax call is using <a href="https://8w8ctjxkeh.execute-api.us-east-1.amazonaws.com/dev/weather/temperature?id=5">https://8w8ctjxkeh.execute-api.us-east-1.amazonaws.com/dev/weather/temperature?id=5</a> as the URL parameter. This is the address of our Lambda function that we have deployed early.</p>
 <p>Result:</p>
-<p><a href="http://serverless-demo.zanon.io"><img src="http://zanon.io/images/posts/2016-01-31-demo.png" alt="demo"></a></p>
-<p>And... that&#39;s it! The app is working at <a href="http://serverless-demo.zanon.io">http://serverless-demo.zanon.io</a>, where the HTML/CSS/JS is hosted on S3, the backend code is a service that runs only on demand with AWS Lambda and the data is stored in SimpleDB, which generate costs only while processing queries.</p>
+<p><a href="https://serverless-demo.zanon.io"><img src="https://zanon.io/images/posts/2016-01-31-demo.png" alt="demo"></a></p>
+<p>And... that&#39;s it! The app is working at <a href="https://serverless-demo.zanon.io">https://serverless-demo.zanon.io</a>, where the HTML/CSS/JS is hosted on S3, the backend code is a service that runs only on demand with AWS Lambda and the data is stored in SimpleDB, which generate costs only while processing queries.</p>
 <h3 id="update-aug-06-2016">UPDATE: Aug 06, 2016</h3>
 <blockquote>
 <p>Updated the tutorial due to changes on the Serverless Framework (v0.2 =&gt; v0.5)</p>
@@ -430,7 +430,7 @@ module.exports.currentTemperature = (event, context, callback) =&gt; {
 <blockquote>
 <p>Updating the Serverless Framework code (v0.5 =&gt; v1.1)</p>
 </blockquote>
-<a share-twitter="share-twitter" data-text="&quot;Building Serverless Websites on AWS - Tutorial&quot;" data-url="http://zanon.io/posts/building-serverless-websites-on-aws-tutorial" data-via="zanon_io" data-size="large"></a>
+<a share-twitter="share-twitter" data-text="&quot;Building Serverless Websites on AWS - Tutorial&quot;" data-url="https://zanon.io/posts/building-serverless-websites-on-aws-tutorial" data-via="zanon_io" data-size="large"></a>
     </div>
   </div>
 </div>
@@ -447,7 +447,7 @@ module.exports.currentTemperature = (event, context, callback) =&gt; {
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
 
     <script src="/js/app.js"></script>
     <script src="/js/controllers.js"></script>
@@ -458,7 +458,7 @@ module.exports.currentTemperature = (event, context, callback) =&gt; {
     <script src="/js/assets/dir-disqus.min.js"></script>
     <script src="/js/assets/highlight.min.js"></script>
 
-    <script src="http://platform.twitter.com/widgets.js"></script>
+    <script src="https://platform.twitter.com/widgets.js"></script>
 
     <!-- Google Analytics -->
     <script>

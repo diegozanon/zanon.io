@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="Angular, Node, MongoDB, AWS">
     <meta name="author" content="Diego Zanon">
-    <link rel="icon" href="http://zanon.io/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://zanon.io/favicon.ico" type="image/x-icon">
 
     <title ng-bind="title + 'Zanon'"></title>
 
@@ -48,7 +48,7 @@
               </a>
             </div>
             <div class="col-xs-2 col-sm-1 col-md-1 header-img">
-              <a href="http://diego.zanon.io">
+              <a href="https://diego.zanon.io">
                 <img src="/images/about.png" alt="about" class="img-responsive">
               </a>
             </div>
@@ -114,11 +114,11 @@
 </li>
 </ul>
 <h2 id="mmap">MMAP</h2>
-<p><img src="http://zanon.io/images/posts/2015-10-18-mmap.jpg" alt="mmap"></p>
+<p><img src="https://zanon.io/images/posts/2015-10-18-mmap.jpg" alt="mmap"></p>
 <p>MMAPv1 is named after the <code>mmap()</code> Linux command that maps files to the virtual memory and allows page optimization for some use cases. For example, when you have a large file but you need to read just specific parts of it, <code>mmap()</code> is much faster than a <code>read()</code> call that would bring the entire file to memory.</p>
 <p>MMAPv1 has <em>collection-level locking</em> but hasn&#39;t  <em>document-level locking</em>. The problem is that you can&#39;t have two write calls being processed in parallel for the same collection. So, one writer must wait for the other to finish. This <em>collection-locking</em> is necessary because one MMAP index can reference multiples documents and if those docs could be updated simultaneously, the index would be inconsistent.</p>
 <h2 id="wiredtiger">WiredTiger</h2>
-<p><img src="http://zanon.io/images/posts/2015-10-18-lsm.png" alt="lsm"></p>
+<p><img src="https://zanon.io/images/posts/2015-10-18-lsm.png" alt="lsm"></p>
 <p>MMAP uses B-trees to store indexes and WiredTiger uses B-trees by default but also supports <a href="https://en.wikipedia.org/wiki/Log-structured_merge-tree">LSM trees</a> (image above was adapted from <a href="http://www.slideshare.net/Couchbase/whats-new-in-couchbase-40-couchbase-connect-2015">here</a>).</p>
 <p>LSM trees provides an advantage when you need to write huge workloads of random inserts, when data is much larger then the cache and when background maintenance overhead is acceptable.</p>
 <p>In WiredTiger, there are no in-place updates. If an element of a document needs to be updated, a entire new document will be written to disk while the old document will be removed.</p>
@@ -126,14 +126,14 @@
 <p>Another characteristic is that WiredTiger offers compression of data and indexes in the file system. It supports Snappy and zLib algorithms where Snappy, the default, is less CPU-intensive but has a lower compression rate than zLib.</p>
 <h2 id="benchmarks">Benchmarks</h2>
 <p>When WiredTiger for MongoDB was launched, it was advertised as able to perform 7x-10x better in write operations and to compress up to 80% of the file system. Yeah, that&#39;s a huge gain. Bellow follows more benchmark data collected from <a href="https://www.mongodb.com/blog/post/performance-testing-mongodb-30-part-1-throughput-improvements-measured-ycsb">here</a>, <a href="https://github.com/wiredtiger/wiredtiger/wiki/Btree-vs-LSM">here</a> and <a href="https://dzone.com/articles/mongodb-30-first-look-faster">here</a>.</p>
-<p><img src="http://zanon.io/images/posts/2015-10-18-throughput.png" alt="throughput"></p>
-<p><img src="http://zanon.io/images/posts/2015-10-18-lsm-benchmark.png" alt="lsm-benchmark"></p>
-<p><img src="http://zanon.io/images/posts/2015-10-18-storage.jpg" alt="storage"></p>
+<p><img src="https://zanon.io/images/posts/2015-10-18-throughput.png" alt="throughput"></p>
+<p><img src="https://zanon.io/images/posts/2015-10-18-lsm-benchmark.png" alt="lsm-benchmark"></p>
+<p><img src="https://zanon.io/images/posts/2015-10-18-storage.jpg" alt="storage"></p>
 <h2 id="conclusion">Conclusion</h2>
 <p><strong>TL;DR</strong>: if your app is read-heavy, use MMAP. If it&#39;s write-heavy, use WiredTiger.</p>
 <p>An interesting side note is that your solution may have a mixed replica set members where you can have one node configured with WiredTiger to receive a massive load of data and another node with MMAP to be used by analytical tools. As replication automatically migrates data between primary and secondary replica set members, independent of their underlying storage formats, you can avoid using complex ETL tools.</p>
 <p>Just one note: if your DB file was created with MMAP, you&#39;ll need to create a new database if you want the node to run with WiredTiger, since it can&#39;t open a MMAP DB file. The inverse is also true. Since they use different ways to store the data, you can&#39;t reuse the same files, but in a replica set, data is exchanged without problems.</p>
-<a share-twitter="share-twitter" data-text="&quot;MongoDB storage engine: MMAP or WiredTiger?&quot;" data-url="http://zanon.io/posts/mongodb-storage-engine-mmap-or-wiredtiger" data-via="zanon_io" data-size="large"></a>
+<a share-twitter="share-twitter" data-text="&quot;MongoDB storage engine: MMAP or WiredTiger?&quot;" data-url="https://zanon.io/posts/mongodb-storage-engine-mmap-or-wiredtiger" data-via="zanon_io" data-size="large"></a>
     </div>
   </div>
 </div>
@@ -150,7 +150,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
 
     <script src="/js/app.js"></script>
     <script src="/js/controllers.js"></script>
@@ -161,7 +161,7 @@
     <script src="/js/assets/dir-disqus.min.js"></script>
     <script src="/js/assets/highlight.min.js"></script>
 
-    <script src="http://platform.twitter.com/widgets.js"></script>
+    <script src="https://platform.twitter.com/widgets.js"></script>
 
     <!-- Google Analytics -->
     <script>

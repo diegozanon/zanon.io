@@ -11,7 +11,7 @@ NW.js is an app runtime for writing *native* apps that uses Chromium to render y
 
 There are many nice apps using it as you can see in [this link](https://github.com/nwjs/nw.js/wiki/List-of-apps-and-companies-using-nw.js). For example, this nice [unofficial WhatsApp app for desktop](https://github.com/Aluxian/WhatsApp-Desktop):
 
-![whatsapp](http://zanon.io/images/posts/2015-09-20-whatsapp.png)
+![whatsapp](https://zanon.io/images/posts/2015-09-20-whatsapp.png)
 
 ## UPDATE: Jul 31, 2016
 
@@ -79,7 +79,7 @@ A better way to run is adding the NW command to PATH (Windows) or bash shell (OS
 
 If you run this hello world demo, you'll get the following:
 
-![nw-hello-world](http://zanon.io/images/posts/2015-09-20-nw-hello-world.png)
+![nw-hello-world](https://zanon.io/images/posts/2015-09-20-nw-hello-world.png)
 
 By default, for debugging purposes, NW.js shows the address bar, the developer tools button, navigation arrows and two (?!) refresh buttons. For production code, this toolbar can be easily hidden setting the window.toolbar property to false in the package.json file.
 
@@ -170,7 +170,7 @@ index.html
 
 With this demo, you'll get the following result:
 
-![nw-image](http://zanon.io/images/posts/2015-09-20-nw-image.png)
+![nw-image](https://zanon.io/images/posts/2015-09-20-nw-image.png)
 
 ### Native Features
 
@@ -180,7 +180,7 @@ The code for a tray icon is the same for all platforms. However, the menu bar ma
 
 ### Menu Bar
 
-![menu](http://zanon.io/images/posts/2015-09-20-menu.png)
+![menu](https://zanon.io/images/posts/2015-09-20-menu.png)
 
 To get this result, just edit your app.js file to the following:
 
@@ -216,7 +216,7 @@ win.menu = menubar;
 
 ### Tray Icons
 
-![tray](http://zanon.io/images/posts/2015-09-20-tray.png)
+![tray](https://zanon.io/images/posts/2015-09-20-tray.png)
 
 This simple tray was created with the following code:
 

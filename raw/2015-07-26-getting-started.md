@@ -6,7 +6,7 @@ URL: getting-started
 
 ## About Me
 
-Hello there! My name is Diego Zanon and I'm a computer engineer. If you want to know more about what I've done and what I like, you can visit my profile page at [diego.zanon.io](http://diego.zanon.io).
+Hello there! My name is Diego Zanon and I'm a computer engineer. If you want to know more about what I've done and what I like, you can visit my profile page at [diego.zanon.io](https://diego.zanon.io).
 
 ## What will I blog?
 
@@ -15,8 +15,8 @@ I'm a Full-Stack developer that loves JavaScript, MongoDB and AWS. That's where 
 I intend to follow 2 rules while blogging here:
 
  1. Never blog about something that is trivial or widely known, otherwise I'll not be contributing to add useful info.
- 2. Blog about things that I don't know so much and where I must pretend to be an expert. That's the best way to learn more! 
- 
+ 2. Blog about things that I don't know so much and where I must pretend to be an expert. That's the best way to learn more!
+
  Please, correct me in comments (Disqus) if you see something wrong and I'll be grateful.
 
 ## Why am I blogging?

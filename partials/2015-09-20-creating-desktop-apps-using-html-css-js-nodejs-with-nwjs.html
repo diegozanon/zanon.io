@@ -9,7 +9,7 @@
 <p>Maybe you&#39;ve already heard about node-webkit. It was <a href="https://groups.google.com/forum/#!msg/nwjs-general/V1FhvfaFIzQ/720xKVd0jNkJ">renamed to NW.js</a>, but keeps the same objective: bring your web development tools and skills to build multi-platform desktop apps.</p>
 <p>NW.js is an app runtime for writing <em>native</em> apps that uses Chromium to render your interface and allows you to run your Node.js modules desktop-side.</p>
 <p>There are many nice apps using it as you can see in <a href="https://github.com/nwjs/nw.js/wiki/List-of-apps-and-companies-using-nw.js">this link</a>. For example, this nice <a href="https://github.com/Aluxian/WhatsApp-Desktop">unofficial WhatsApp app for desktop</a>:</p>
-<p><img src="http://zanon.io/images/posts/2015-09-20-whatsapp.png" alt="whatsapp"></p>
+<p><img src="https://zanon.io/images/posts/2015-09-20-whatsapp.png" alt="whatsapp"></p>
 <h2 id="update-jul-31-2016">UPDATE: Jul 31, 2016</h2>
 <blockquote>
 <p>I haven&#39;t tried <a href="http://electron.atom.io/">Electron</a> yet, but some friends (and many people out there) prefer Electron than NW.js. I suggest you to read the pros and cons of each one before deciding to use NW.js and to read this long tutorial.</p>
@@ -52,7 +52,7 @@
 <h2 id="developing-apps">Developing Apps</h2>
 <h3 id="window-properties">Window Properties</h3>
 <p>If you run this hello world demo, you&#39;ll get the following:</p>
-<p><img src="http://zanon.io/images/posts/2015-09-20-nw-hello-world.png" alt="nw-hello-world"></p>
+<p><img src="https://zanon.io/images/posts/2015-09-20-nw-hello-world.png" alt="nw-hello-world"></p>
 <p>By default, for debugging purposes, NW.js shows the address bar, the developer tools button, navigation arrows and two (?!) refresh buttons. For production code, this toolbar can be easily hidden setting the window.toolbar property to false in the package.json file.</p>
 <pre><code class="lang-javascript">{
   &quot;name&quot;: &quot;nw-hello-world&quot;,
@@ -120,12 +120,12 @@ request.get(&#39;http://nwjs.io/images/nw.png&#39;, function (err, response, bod
 &lt;/html&gt;
 </code></pre>
 <p>With this demo, you&#39;ll get the following result:</p>
-<p><img src="http://zanon.io/images/posts/2015-09-20-nw-image.png" alt="nw-image"></p>
+<p><img src="https://zanon.io/images/posts/2015-09-20-nw-image.png" alt="nw-image"></p>
 <h3 id="native-features">Native Features</h3>
 <p>To make the app a truly desktop app, some features are necessary like a menu bar and a tray icon.</p>
 <p>The code for a tray icon is the same for all platforms. However, the menu bar may have a different behavior between platforms. That&#39;s because Windows and Linux allows one menu bar for each window that your app opens and OSX just allows one menu bar per application. So, best practice here is to set a menu bar only for your main window.</p>
 <h3 id="menu-bar">Menu Bar</h3>
-<p><img src="http://zanon.io/images/posts/2015-09-20-menu.png" alt="menu"></p>
+<p><img src="https://zanon.io/images/posts/2015-09-20-menu.png" alt="menu"></p>
 <p>To get this result, just edit your app.js file to the following:</p>
 <pre><code class="lang-javascript">var menubar = new nw.Menu({
   type: &#39;menubar&#39;
@@ -156,7 +156,7 @@ var win = nw.Window.get();
 win.menu = menubar;
 </code></pre>
 <h3 id="tray-icons">Tray Icons</h3>
-<p><img src="http://zanon.io/images/posts/2015-09-20-tray.png" alt="tray"></p>
+<p><img src="https://zanon.io/images/posts/2015-09-20-tray.png" alt="tray"></p>
 <p>This simple tray was created with the following code:</p>
 <pre><code class="lang-javascript">var tray = new nw.Tray({
   icon : &#39;my-app-icon.png&#39;,
@@ -202,7 +202,7 @@ nw.build().then(function () {
 <blockquote>
 <p>I&#39;ve updated this tutorial according to v0.16 (changes related with previous tutorial were related with how to get the Tray and Menu objects).</p>
 </blockquote>
-<a share-twitter="share-twitter" data-text="&quot;Creating Desktop Apps using HTML/CSS/JS + Node.js with NW.js&quot;" data-url="http://zanon.io/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs" data-via="zanon_io" data-size="large"></a>
+<a share-twitter="share-twitter" data-text="&quot;Creating Desktop Apps using HTML/CSS/JS + Node.js with NW.js&quot;" data-url="https://zanon.io/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs" data-via="zanon_io" data-size="large"></a>
     </div>
   </div>
 </div>

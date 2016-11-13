@@ -26,7 +26,7 @@ Besides those two, [there are many other engines](https://www.mongodb.com/blog/p
 
 ## MMAP
 
-![mmap](http://zanon.io/images/posts/2015-10-18-mmap.jpg)
+![mmap](https://zanon.io/images/posts/2015-10-18-mmap.jpg)
 
 MMAPv1 is named after the `mmap()` Linux command that maps files to the virtual memory and allows page optimization for some use cases. For example, when you have a large file but you need to read just specific parts of it, `mmap()` is much faster than a `read()` call that would bring the entire file to memory.
 
@@ -34,7 +34,7 @@ MMAPv1 has *collection-level locking* but hasn't  *document-level locking*. The 
 
 ## WiredTiger
 
-![lsm](http://zanon.io/images/posts/2015-10-18-lsm.png)
+![lsm](https://zanon.io/images/posts/2015-10-18-lsm.png)
 
 MMAP uses B-trees to store indexes and WiredTiger uses B-trees by default but also supports [LSM trees](https://en.wikipedia.org/wiki/Log-structured_merge-tree) (image above was adapted from [here](http://www.slideshare.net/Couchbase/whats-new-in-couchbase-40-couchbase-connect-2015)).
 
@@ -50,11 +50,11 @@ Another characteristic is that WiredTiger offers compression of data and indexes
 
 When WiredTiger for MongoDB was launched, it was advertised as able to perform 7x-10x better in write operations and to compress up to 80% of the file system. Yeah, that's a huge gain. Bellow follows more benchmark data collected from [here](https://www.mongodb.com/blog/post/performance-testing-mongodb-30-part-1-throughput-improvements-measured-ycsb), [here](https://github.com/wiredtiger/wiredtiger/wiki/Btree-vs-LSM) and [here](https://dzone.com/articles/mongodb-30-first-look-faster).
 
-![throughput](http://zanon.io/images/posts/2015-10-18-throughput.png)
+![throughput](https://zanon.io/images/posts/2015-10-18-throughput.png)
 
-![lsm-benchmark](http://zanon.io/images/posts/2015-10-18-lsm-benchmark.png)
+![lsm-benchmark](https://zanon.io/images/posts/2015-10-18-lsm-benchmark.png)
 
-![storage](http://zanon.io/images/posts/2015-10-18-storage.jpg)
+![storage](https://zanon.io/images/posts/2015-10-18-storage.jpg)
 
 ## Conclusion
 

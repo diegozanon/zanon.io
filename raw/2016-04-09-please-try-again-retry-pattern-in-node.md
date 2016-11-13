@@ -43,7 +43,7 @@ Other things to consider:
 
 ### Solution - how can I *Retry*?
 
-[![retry](http://zanon.io/images/posts/2016-04-09-retry.png)](https://msdn.microsoft.com/en-us/library/dn589788.aspx)
+[![retry](https://zanon.io/images/posts/2016-04-09-retry.png)](https://msdn.microsoft.com/en-us/library/dn589788.aspx)
 
 The retry logic is quite simple: you just need to loop X times, waiting a few seconds between each loop and retry if you know that the error is transient. If you succeed or the limit is achieved, you abort the loop.
 

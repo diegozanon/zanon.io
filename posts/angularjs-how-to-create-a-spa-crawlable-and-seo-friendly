@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="Angular, Node, MongoDB, AWS">
     <meta name="author" content="Diego Zanon">
-    <link rel="icon" href="http://zanon.io/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://zanon.io/favicon.ico" type="image/x-icon">
 
     <title ng-bind="title + 'Zanon'"></title>
 
@@ -48,7 +48,7 @@
               </a>
             </div>
             <div class="col-xs-2 col-sm-1 col-md-1 header-img">
-              <a href="http://diego.zanon.io">
+              <a href="https://diego.zanon.io">
                 <img src="/images/about.png" alt="about" class="img-responsive">
               </a>
             </div>
@@ -100,7 +100,7 @@
 <h2 id="what-is-spa-">What is SPA?</h2>
 <p>SPA stands for <em>Single-Page Application</em>. Its usage is growing in a fast pace since it enables the website to provide a more fluid user experience. When a page is loaded, you can browse other links and load new content without the need of a full page reload. Only one piece of the page is discarded and replaced by the content of the next page. With this, you will avoid requesting all JavaScript and CSS files again and rendering your header and footer HTML.</p>
 <p>For example, this blog was created using the Angular ngRoute directive. If you try to change to another blog post, you can see that the header content will not flash and the post will load very fast.</p>
-<p><img src="http://zanon.io/images/posts/2015-08-23-spa.png" alt="spa"></p>
+<p><img src="https://zanon.io/images/posts/2015-08-23-spa.png" alt="spa"></p>
 <p>However, this approach have some <a href="http://stackoverflow.com/q/21862054/1476885">drawbacks</a>, but all of them can be handled in some way. What I&#39;m focusing in this post is how to help the search engines, like Google, to properly index your content and make it searchable.</p>
 <h2 id="seo-and-crawlable-pages">SEO and Crawlable Pages</h2>
 <p>SEO stands for <em>Search Engine Optimization</em>. What we are trying to achieve here is a way to help search engines to render your page and understand your content.</p>
@@ -111,14 +111,14 @@
 Also, note that you can include &quot;invisible links&quot;, like the ones that just appears after you fill a form.</p>
 <p>In this blog, I&#39;ve added the following <strong>sitemap.xml</strong> file:</p>
 <pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;urlset xmlns=&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;&gt;
+&lt;urlset xmlns=&quot;https://www.sitemaps.org/schemas/sitemap/0.9&quot;&gt;
   &lt;url&gt;
-    &lt;loc&gt;http://zanon.io/&lt;/loc&gt;
+    &lt;loc&gt;https://zanon.io/&lt;/loc&gt;
     &lt;lastmod&gt;2015-08-23&lt;/lastmod&gt;
     &lt;changefreq&gt;weekly&lt;/changefreq&gt;
   &lt;/url&gt;
   &lt;url&gt;
-    &lt;loc&gt;http://zanon.io/posts/angular-how-to-create-a-spa-crawlable-and-seo-friendly&lt;/loc&gt;
+    &lt;loc&gt;https://zanon.io/posts/angular-how-to-create-a-spa-crawlable-and-seo-friendly&lt;/loc&gt;
     &lt;lastmod&gt;2015-08-23&lt;/lastmod&gt;
     &lt;changefreq&gt;monthly&lt;/changefreq&gt;
   &lt;/url&gt;
@@ -183,7 +183,7 @@ page.open(url, function (status) {
 <blockquote>
 <p>Updated this post adding more info about Amazon S3 and the example with Phantomjs.</p>
 </blockquote>
-<a share-twitter="share-twitter" data-text="&quot;AngularJS: How to create a SPA crawlable and SEO friendly?&quot;" data-url="http://zanon.io/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly" data-via="zanon_io" data-size="large"></a>
+<a share-twitter="share-twitter" data-text="&quot;AngularJS: How to create a SPA crawlable and SEO friendly?&quot;" data-url="https://zanon.io/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly" data-via="zanon_io" data-size="large"></a>
     </div>
   </div>
 </div>
@@ -200,7 +200,7 @@ page.open(url, function (status) {
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
 
     <script src="/js/app.js"></script>
     <script src="/js/controllers.js"></script>
@@ -211,7 +211,7 @@ page.open(url, function (status) {
     <script src="/js/assets/dir-disqus.min.js"></script>
     <script src="/js/assets/highlight.min.js"></script>
 
-    <script src="http://platform.twitter.com/widgets.js"></script>
+    <script src="https://platform.twitter.com/widgets.js"></script>
 
     <!-- Google Analytics -->
     <script>

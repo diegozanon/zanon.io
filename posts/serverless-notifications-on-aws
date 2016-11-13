@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="Angular, Node, MongoDB, AWS">
     <meta name="author" content="Diego Zanon">
-    <link rel="icon" href="http://zanon.io/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://zanon.io/favicon.ico" type="image/x-icon">
 
     <title ng-bind="title + 'Zanon'"></title>
 
@@ -48,7 +48,7 @@
               </a>
             </div>
             <div class="col-xs-2 col-sm-1 col-md-1 header-img">
-              <a href="http://diego.zanon.io">
+              <a href="https://diego.zanon.io">
                 <img src="/images/about.png" alt="about" class="img-responsive">
               </a>
             </div>
@@ -98,17 +98,17 @@
 
 <h2 id="tl-dr">TL;DR</h2>
 <p>This post is a tutorial that uses the Serverless Framework and AWS IoT for Serverless Notifications.</p>
-<p>Demo: <a href="http://serverless-notifications.zanon.io">serverless-notifications.zanon.io</a></p>
+<p>Demo: <a href="https://serverless-notifications.zanon.io">serverless-notifications.zanon.io</a></p>
 <p>Code: <a href="https://github.com/zanon-io/serverless-notifications">GitHub</a></p>
 <h2 id="serverless-notifications">Serverless Notifications</h2>
 <p>Implementing real-time notifications is an easy task when you use WebSockets and have a dedicated server. You can make a permanent link between the user and the website and use the publish-subscribe pattern for efficiency. The browser will subscribe to automatically receive new messages without needing a polling mechanism to constantly check for updates.</p>
-<p>But if we are going serverless, we don&#39;t have a dedicated server. We need a cloud service that will solve this problem for us providing scalability, high availability and that charges per messages and not per hour. </p>
+<p>But if we are going serverless, we don&#39;t have a dedicated server. We need a cloud service that will solve this problem for us providing scalability, high availability and that charges per messages and not per hour.</p>
 <p>In this tutorial, we are going to use AWS IoT. I know that &quot;Internet of Things&quot; sounds strange to be used in a website, but it supports WebSockets and is very easy to use. Besides, Amazon SNS (Simple Notification Service) has a better name, but doesn&#39;t support WebSockets.</p>
 <p>IoT is used due to its simple messaging system. You create a &quot;topic&quot; and make users to subscribe to them. A message sent to this topic will be automatically shared with all subscribed users. A common use case for this is a chat system.</p>
 <p>If you want private messages, you just need to create private topics and restrict access. Only one user will be subscribed to this topic and you can make your system (Lambda functions) to send updates to this topic to trigger this specific user.</p>
 <h3 id="architecture">Architecture</h3>
 <p>In this tutorial, we are going to implement the following architecture.</p>
-<p><img src="http://zanon.io/images/posts/2016-11-05-architecture.png" alt="architecture"></p>
+<p><img src="https://zanon.io/images/posts/2016-11-05-architecture.png" alt="architecture"></p>
 <ol>
 <li><p>User makes a request to Route 53 that is configured to reference a S3 bucket.</p>
 </li>
@@ -124,7 +124,7 @@
 </li>
 </ol>
 <h3 id="frontend">Frontend</h3>
-<p>Configuring Route 53 and Amazon S3 to serve static files is a common use case. I&#39;ve already covered how to do this in another blog post. You can take a look <a href="http://zanon.io/posts/building-serverless-websites-on-aws-tutorial#host-your-website">here</a> if you want.</p>
+<p>Configuring Route 53 and Amazon S3 to serve static files is a common use case. I&#39;ve already covered how to do this in another blog post. You can take a look <a href="https://zanon.io/posts/building-serverless-websites-on-aws-tutorial#host-your-website">here</a> if you want.</p>
 <p>In our frontend code, let&#39;s start creating the <strong>index.html</strong> for our layout.</p>
 <pre><code class="lang-html">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
@@ -160,12 +160,12 @@
 &lt;/html&gt;
 </code></pre>
 <p><strong>Note</strong>: I&#39;ve created a <code>window.lambdaEndpoint</code> variable. You need to change this value later with the output of the Serverless Framework. This address will be your function endpoint.</p>
-<p>This HTML results in: </p>
-<p><a href="http://serverless-notifications.zanon.io"><img src="http://zanon.io/images/posts/2016-11-05-layout.png" alt="layout"></a></p>
+<p>This HTML results in:</p>
+<p><a href="https://serverless-notifications.zanon.io"><img src="https://zanon.io/images/posts/2016-11-05-layout.png" alt="layout"></a></p>
 <p>In this demo, the user will click on &quot;Retrieve Keys&quot; to make an Ajax call to Lambda with the objective to retrieve temporary keys to connect with our IoT messaging system. With those keys, &quot;Connect&quot; will create a channel and subscribe to messages. The &quot;Send Message&quot; button will share messages with other users (open another browser tab to test).</p>
 <h3 id="request-keys-to-lambda">Request keys to Lambda</h3>
-<p>We need to make an Ajax call to a Lambda function to retrieve temporary AWS keys. </p>
-<p><strong>Note</strong>: I&#39;m using ES6 syntax because this file will be processed by Babel later when I bundle with the IoT client. </p>
+<p>We need to make an Ajax call to a Lambda function to retrieve temporary AWS keys.</p>
+<p><strong>Note</strong>: I&#39;m using ES6 syntax because this file will be processed by Babel later when I bundle with the IoT client.</p>
 <pre><code class="lang-javascript">$(document).ready(() =&gt; {
 
     let iotKeys;
@@ -174,10 +174,10 @@
         $.ajax({
             url: window.lambdaEndpoint,
             success: (res) =&gt; {
-                addLog(`Endpoint: ${res.iotEndpoint}, 
-                        Region: ${res.region}, 
-                        AccessKey: ${res.accessKey}, 
-                        SecretKey: ${res.secretKey}, 
+                addLog(`Endpoint: ${res.iotEndpoint},
+                        Region: ${res.region},
+                        AccessKey: ${res.accessKey},
+                        SecretKey: ${res.secretKey},
                         SessionToken: ${res.sessionToken}`);
 
                 iotKeys = res; // save the keys
@@ -194,11 +194,11 @@ const addLog = (msg) =&gt; {
 <h3 id="aws-iot">AWS IoT</h3>
 <p>To build our notification system, we need to use a Node module <a href="https://github.com/aws/aws-iot-device-sdk-js">aws-iot-device-sdk</a> and make a bundle to use in the browser.</p>
 <p>In this project, I&#39;ve created another folder named as <strong>iot</strong> to develop the IoT client. It has a <strong>package.json</strong>, so run <code>npm install</code> to install the <strong>aws-iot-device-sdk</strong> dependency.</p>
-<p>The IoT object has the functions <code>connect</code> and <code>send</code>. It also has dependencies to other functions like <code>onConnect</code> and <code>onMessage</code>. </p>
+<p>The IoT object has the functions <code>connect</code> and <code>send</code>. It also has dependencies to other functions like <code>onConnect</code> and <code>onMessage</code>.</p>
 <pre><code class="lang-javascript">const awsIot = require(&#39;aws-iot-device-sdk&#39;);
 
 let client, iotTopic;
-const IoT = { 
+const IoT = {
 
     connect: (topic, iotEndpoint, region, accessKey, secretKey, sessionToken) =&gt; {
 
@@ -222,7 +222,7 @@ const IoT = {
     send: (message) =&gt; {
         client.publish(iotTopic, message);
     }  
-}; 
+};
 
 const onConnect = () =&gt; {
     client.subscribe(iotTopic);
@@ -242,10 +242,10 @@ const onClose = () =&gt; {
     const iotTopic = &#39;/serverless/pubsub&#39;;        
 
     IoT.connect(iotTopic,
-                iotKeys.iotEndpoint, 
-                iotKeys.region, 
-                iotKeys.accessKey, 
-                iotKeys.secretKey, 
+                iotKeys.iotEndpoint,
+                iotKeys.region,
+                iotKeys.accessKey,
+                iotKeys.secretKey,
                 iotKeys.sessionToken);
 });    
 
@@ -311,7 +311,7 @@ sts.getCallerIdentity({}, (err, data) =&gt; {
 });
 </code></pre>
 <h3 id="serverless-framework">Serverless Framework</h3>
-<p>To finish, let&#39;s create a Lambda function that will generate temporary keys (valid for 1 hour) to connect to the IoT service. We are going to use the Serverless Framework to help here. If you don&#39;t know how to use it, you can take a look <a href="http://zanon.io/posts/building-serverless-websites-on-aws-tutorial">here</a> for another tutorial that I&#39;ve created. </p>
+<p>To finish, let&#39;s create a Lambda function that will generate temporary keys (valid for 1 hour) to connect to the IoT service. We are going to use the Serverless Framework to help here. If you don&#39;t know how to use it, you can take a look <a href="https://zanon.io/posts/building-serverless-websites-on-aws-tutorial">here</a> for another tutorial that I&#39;ve created.</p>
 <p>The <strong>serverless.yml</strong> must add Lambda permissions for <code>iot:DescribeEndpoint</code> (find your account endpoint) and <code>sts:AssumeRole</code> (create temporary keys). I&#39;m using simple IAM credentials, but you could modify the code to create credentials using Cognito or OpenID.</p>
 <pre><code class="lang-xml">service: serverless-notifications
 
@@ -375,10 +375,10 @@ module.exports.auth = (event, context, callback) =&gt; {
             sts.assumeRole(params, (err, data) =&gt; {
                 if (err) return callback(err);
 
-                const res = buildResponseObject(iotEndpoint, 
-                                                region, 
-                                                data.Credentials.AccessKeyId, 
-                                                data.Credentials.SecretAccessKey, 
+                const res = buildResponseObject(iotEndpoint,
+                                                region,
+                                                data.Credentials.AccessKeyId,
+                                                data.Credentials.SecretAccessKey,
                                                 data.Credentials.SessionToken);
                 callback(null, res);
             });
@@ -404,7 +404,7 @@ const buildResponseObject = (iotEndpoint, region, accessKey, secretKey, sessionT
 
 const getRegion = (iotEndpoint) =&gt; {
     const partial = iotEndpoint.replace(&#39;.amazonaws.com&#39;, &#39;&#39;);
-    const iotIndex = iotEndpoint.indexOf(&#39;iot&#39;); 
+    const iotIndex = iotEndpoint.indexOf(&#39;iot&#39;);
     return partial.substring(iotIndex + 4);
 };
 
@@ -414,7 +414,7 @@ const getRandomInt = () =&gt; {
 };
 </code></pre>
 <h3 id="testing">Testing</h3>
-<p><a href="http://serverless-notifications.zanon.io"><img src="http://zanon.io/images/posts/2016-11-05-test.png" alt="test"></a></p>
+<p><a href="https://serverless-notifications.zanon.io"><img src="https://zanon.io/images/posts/2016-11-05-test.png" alt="test"></a></p>
 <h3 id="pricing">Pricing</h3>
 <p>How much it costs? Only $5 per million messages (USA). It can be pretty cheap depending on your scale and traffic because you don&#39;t need to pay for a dedicated server.</p>
 <p>Official pricing page for IoT: <a href="https://aws.amazon.com/iot/pricing/">https://aws.amazon.com/iot/pricing/</a></p>
@@ -424,10 +424,10 @@ const getRandomInt = () =&gt; {
 <p>Regarding the temporary AWS keys, you may also need to use Cognito or OpenID credentials. Default expiration time is 1 hour, but you can modify this as well.</p>
 <h3 id="what-more-">What more?</h3>
 <p>I&#39;ve tried another experiment with this and created a serverless multiplayer game sample. If you want to develop an HTML5 game in a serverless architecture, you can use IoT to change messages between players and implement a cheap multiplayer game. The performance is good enough for dynamic games.</p>
-<p>Multiplayer Game: <a href="http://bombermon.zanon.io">demo</a> and <a href="https://github.com/zanon-io/serverless-multiplayer-game">code</a></p>
+<p>Multiplayer Game: <a href="https://bombermon.zanon.io">demo</a> and <a href="https://github.com/zanon-io/serverless-multiplayer-game">code</a></p>
 <h3 id="conclusion">Conclusion</h3>
 <p>This demo solved the use case of real-time notifications for serverless applications. If you have any doubts, feel free to post in comments.</p>
-<a share-twitter="share-twitter" data-text="&quot;Serverless Notifications on AWS&quot;" data-url="http://zanon.io/posts/serverless-notifications-on-aws" data-via="zanon_io" data-size="large"></a>
+<a share-twitter="share-twitter" data-text="&quot;Serverless Notifications on AWS&quot;" data-url="https://zanon.io/posts/serverless-notifications-on-aws" data-via="zanon_io" data-size="large"></a>
     </div>
   </div>
 </div>
@@ -444,7 +444,7 @@ const getRandomInt = () =&gt; {
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
 
     <script src="/js/app.js"></script>
     <script src="/js/controllers.js"></script>
@@ -455,7 +455,7 @@ const getRandomInt = () =&gt; {
     <script src="/js/assets/dir-disqus.min.js"></script>
     <script src="/js/assets/highlight.min.js"></script>
 
-    <script src="http://platform.twitter.com/widgets.js"></script>
+    <script src="https://platform.twitter.com/widgets.js"></script>
 
     <!-- Google Analytics -->
     <script>

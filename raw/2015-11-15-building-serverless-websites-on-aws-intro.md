@@ -29,19 +29,19 @@ Quoting [one of the comments](https://www.reddit.com/r/webdev/comments/3oiilb/ou
 
 ## Serverless Framework
 
-![serverless-logo](http://zanon.io/images/posts/2015-11-15-serverless-logo.png)
+![serverless-logo](https://zanon.io/images/posts/2015-11-15-serverless-logo.png)
 
 The [Serverless Framework](https://github.com/serverless/serverless) is an open-source framework that was created to help developers to build serverless apps using AWS features, mainly AWS Lambda (for code execution) and Amazon API Gateway (for Routing).
 
 Instead of spinning up a full-blown server, the developer is invited to use a command line tool to deploy code-blocks to Amazon. Since each lambda function acts like a microservice and your app may end up with dozens of them distributed between multiple regions and managed by multi-developer teams in multi-stage environments, the Serverless Framework targets a better setup to avoid a messy solution.
 
-I've created another [blog post](http://zanon.io/posts/building-serverless-websites-on-aws-tutorial) to show a simple example of how to use Serverless, but first you need to know what AWS technologies are involved.
+I've created another [blog post](https://zanon.io/posts/building-serverless-websites-on-aws-tutorial) to show a simple example of how to use Serverless, but first you need to know what AWS technologies are involved.
 
 The first thing that you need to be aware is that this solution is highly dependent on AWS. Usually, we would avoid being highly attached to a third-party solution. If AWS breaks forever, you will need some days to adapt your code to be able to deploy it again at another host. However, AWS is so reliable and the benefits of serverless apps are so great that I would not be so worried about it.
 
 ## AWS Lambda (Code Execution)
 
-![lambda](http://zanon.io/images/posts/2015-11-15-lambda.png)
+![lambda](https://zanon.io/images/posts/2015-11-15-lambda.png)
 
 Lambda is a service where you can host your code and it will be executed when triggered by events. Lambda supports, currently, code written in JavaScript (Node.js), Python or Java.
 
@@ -59,13 +59,13 @@ How many server-side requests your user makes to access your site per visit? I w
 
 ## Amazon API Gateway (Routing)
 
-![api-gateway](http://zanon.io/images/posts/2015-11-15-api-gateway.png)
+![api-gateway](https://zanon.io/images/posts/2015-11-15-api-gateway.png)
 
 API Gateway is a service that lets you build RESTful APIs that acts like the "front door" of your application. It's the service that will receive all incoming requests, check authorization and route them to the underlying system that is responsible to handle it. In our case, it'll be AWS Lambda. API Gateway is also fully managed by AWS what means again high availability and scalability.
 
 The following image shows an example of website that is fully serverless. The static content (HTML/CSS/JS) are hosted in S3, an user browses the page and click to see its local weather information, the API Gateway receives the request and triggers a Lambda function that will process it calling a DynamoDB database.
 
-[![lambda-web-apps](http://zanon.io/images/posts/2015-11-15-lambda-web-apps.png)](https://aws.amazon.com/lambda/)
+[![lambda-web-apps](https://zanon.io/images/posts/2015-11-15-lambda-web-apps.png)](https://aws.amazon.com/lambda/)
 
 The pricing model is also "Pay Per Use". It currently [costs](https://aws.amazon.com/api-gateway/pricing/) US$ 3.50 per million API calls received plus US$ 0.09 per GB of data transferred.
 
