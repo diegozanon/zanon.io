@@ -14,15 +14,17 @@ Code: [GitHub](https://github.com/zanon-io/serverless-notifications)
 
 ## Serverless Notifications
 
-Implementing real-time notifications is an easy task when you use WebSockets and have a dedicated server. You can make a permanent link between the user and the website and use the publish-subscribe pattern for efficiency. The browser will subscribe to automatically receive new messages without needing a polling mechanism to constantly check for updates.
+Real-time notifications are an important use case for modern apps. For example, you may need to notify your user that there is another post available in his social feed or that someone else added a comment in one of his photos.
 
-But if we are going serverless, we don't have a dedicated server. We need a cloud service that will solve this problem for us providing scalability, high availability and that charges per messages and not per hour.
+Implementing notifications is an easy task when you use WebSockets and have a dedicated server. You can make a permanent link between the user and the server and use the publish-subscribe pattern to share messages. The browser will subscribe to automatically receive new messages without needing a polling mechanism to constantly check for updates.
 
-In this tutorial, we are going to use AWS IoT. I know that "Internet of Things" sounds strange to be used in a website, but it supports WebSockets and is very easy to use. Besides, Amazon SNS (Simple Notification Service) has a better name, but doesn't support WebSockets.
+But if we are going serverless, we don't have a dedicated server. Instead, we need a cloud service that will solve this problem for us providing scalability, high availability and charging per messages and not per hour.
 
-IoT is used due to its simple messaging system. You create a "topic" and make users to subscribe to them. A message sent to this topic will be automatically shared with all subscribed users. A common use case for this is a chat system.
+In this post, I'm going to describe how I've implemented a notification system for unauthenticated users using the Serverless Framework and the AWS IoT for *browsers*. I know that "Internet of Things" sounds strange to be used in a website, but it supports WebSockets and is very easy to use. Besides, Amazon SNS (Simple Notification Service) has a better name, but doesn't support WebSockets.
 
-If you want private messages, you just need to create private topics and restrict access. Only one user will be subscribed to this topic and you can make your system (Lambda functions) to send updates to this topic to trigger this specific user.
+IoT is used due to its simple messaging system. You create a "topic" and make users to subscribe to it. A message sent to this topic will be automatically shared with all subscribed users. A common use case for this is a chat system.
+
+If you want private messages, you just need to create private topics and restrict the access. Only one user will be subscribed to this topic and you can make your system (Lambda functions) to send updates to this topic to notify this specific user.
 
 ### Architecture
 
@@ -36,11 +38,11 @@ In this tutorial, we are going to implement the following architecture.
 
 3. After loading the frontend code, an Ajax request is done to the API Gateway to retrieve temporary keys.
 
-4. The API Gateway redirects the request to a Lambda function that will handle the request.
+4. The API Gateway redirects the request to be handled by a Lambda function.
 
 5. The Lambda function connects to IAM to assume a role and create temporary AWS keys.
 
-6. Frontend code subscribe to IoT events.
+6. Frontend code subscribe to IoT events using the temporary keys.
 
 > **Note**: instead of using API Gateway and Lambda to retrieve IAM credentials, you can use Cognito. More on that in the end of this post. 
 
@@ -128,11 +130,11 @@ const addLog = (msg) => {
 
 ### AWS IoT
 
-To build our notification system, we need to use a Node module [aws-iot-device-sdk](https://github.com/aws/aws-iot-device-sdk-js) and make a bundle to use in the browser.
+To build our notification system, we need to use a Node module [AWS IoT SDK](https://github.com/aws/aws-iot-device-sdk-js) and make a bundle to use in the browser.
 
 In this project, I've created another folder named as **iot** to develop the IoT client. It has a **package.json**, so run `npm install` to install the **aws-iot-device-sdk** dependency.
 
-The IoT object has the functions `connect` and `send`. It also has dependencies to other functions like `onConnect` and `onMessage`.
+The IoT object has the functions `connect` and `send`. It also offers handlers to other functions like `onConnect` and `onMessage`.
 
 ``` javascript
 const awsIot = require('aws-iot-device-sdk');
@@ -267,7 +269,7 @@ sts.getCallerIdentity({}, (err, data) => {
 
 To finish, let's create a Lambda function that will generate temporary keys (valid for 1 hour) to connect to the IoT service. We are going to use the Serverless Framework to help here. If you don't know how to use it, you can take a look [here](https://zanon.io/posts/building-serverless-websites-on-aws-tutorial) for another tutorial that I've created.
 
-The **serverless.yml** must add Lambda permissions for `iot:DescribeEndpoint` (find your account endpoint) and `sts:AssumeRole` (create temporary keys). I'm using simple IAM credentials, but you could modify the code to create credentials using Cognito.
+The **serverless.yml** must add Lambda permissions for `iot:DescribeEndpoint` (find your account endpoint) and `sts:AssumeRole` (create temporary keys).
 
 ``` xml
 service: serverless-notifications
@@ -379,7 +381,7 @@ const getRandomInt = () => {
 
 ### Pricing
 
-How much it costs? Only $5 per million messages (USA). It can be pretty cheap depending on your scale and traffic because you don't need to pay for a dedicated server.
+How much does it cost? Only $5 per million messages (USA). It can be pretty cheap depending on your scale and traffic because you don't need to pay for a dedicated server.
 
 Official pricing page for IoT: https://aws.amazon.com/iot/pricing/
 
@@ -395,7 +397,8 @@ For authenticated users, I suggest that you use Cognito credentials.
 
 I've tried another experiment with this and created a serverless multiplayer game sample. If you want to develop an HTML5 game in a serverless architecture, you can use IoT to change messages between players and implement a cheap multiplayer game. The performance is good enough for dynamic games.
 
-Multiplayer Game: [demo](https://bombermon.zanon.io) and [code](https://github.com/zanon-io/serverless-multiplayer-game)
+Multiplayer Game: [demo](https://bombermon.zanon.io) and [code](https://github.com/zanon-io/serverless-multiplayer-game)  
+(you can use your desktop and phone to test the multiplayer feature)
 
 ### Conclusion
 
