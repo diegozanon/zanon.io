@@ -161,7 +161,7 @@
   &lt;/RoutingRule&gt;
 &lt;/RoutingRules&gt;
 </code></pre>
-<p>Note: after saving, you may need up to 5 minutes to see the configuration taking effect.</p>
+<p><strong>Note</strong>: after saving, you may need up to 5 minutes to see the configuration taking effect.</p>
 <p>In this configuration, you&#39;re telling AWS that when a user browses for an URL that does not exist (404 error), instead of showing the error, AWS will redirect the user to another page replacing the key prefix <code>/</code> with <code>#/</code>.  This means that if your user browses for <code>http://mywebsite.com/about</code>, Amazon will redirect to <code>http://mywebsite.com/#/about</code>, but since we have configured HTML5 push state, Angular will handle the request and rewrite again the URL to <code>http://mywebsite.com/about</code>.</p>
 <h2 id="update-sep-06-2015">UPDATE: Sep 06, 2015</h2>
 <blockquote>

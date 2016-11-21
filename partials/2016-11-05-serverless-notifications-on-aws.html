@@ -32,6 +32,9 @@
 <li><p>Frontend code subscribe to IoT events.</p>
 </li>
 </ol>
+<blockquote>
+<p><strong>Note</strong>: instead of using API Gateway and Lambda to retrieve IAM credentials, you can use Cognito. More on that in the end of this post. </p>
+</blockquote>
 <h3 id="frontend">Frontend</h3>
 <p>Configuring Route 53 and Amazon S3 to serve static files is a common use case. I&#39;ve already covered how to do this in another blog post. You can take a look <a href="https://zanon.io/posts/building-serverless-websites-on-aws-tutorial#host-your-website">here</a> if you want.</p>
 <p>In our frontend code, let&#39;s start creating the <strong>index.html</strong> for our layout.</p>
@@ -221,7 +224,7 @@ sts.getCallerIdentity({}, (err, data) =&gt; {
 </code></pre>
 <h3 id="serverless-framework">Serverless Framework</h3>
 <p>To finish, let&#39;s create a Lambda function that will generate temporary keys (valid for 1 hour) to connect to the IoT service. We are going to use the Serverless Framework to help here. If you don&#39;t know how to use it, you can take a look <a href="https://zanon.io/posts/building-serverless-websites-on-aws-tutorial">here</a> for another tutorial that I&#39;ve created.</p>
-<p>The <strong>serverless.yml</strong> must add Lambda permissions for <code>iot:DescribeEndpoint</code> (find your account endpoint) and <code>sts:AssumeRole</code> (create temporary keys). I&#39;m using simple IAM credentials, but you could modify the code to create credentials using Cognito or OpenID.</p>
+<p>The <strong>serverless.yml</strong> must add Lambda permissions for <code>iot:DescribeEndpoint</code> (find your account endpoint) and <code>sts:AssumeRole</code> (create temporary keys). I&#39;m using simple IAM credentials, but you could modify the code to create credentials using Cognito.</p>
 <pre><code class="lang-xml">service: serverless-notifications
 
 provider:
@@ -330,12 +333,86 @@ const getRandomInt = () =&gt; {
 <h3 id="improving-this-demo">Improving this demo</h3>
 <p>This sample considers that there is only one topic. It&#39;s ok if everyone is subscribed to the same channel. However, if you want to send private notifications to a specific user, you need to create a new topic per user.</p>
 <p>To handle permissions, I suggest that you keep creating just one role with access to all topics (as we have done in the <strong>create-role</strong> project) and use the <code>assumeRole</code> command (inside Lambda) to create keys with restricted access with a specific topic. This restriction is done passing a policy document as one of the assumeRole parameters (see <a href="http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/STS.html#assumeRole-property">docs</a>).</p>
-<p>Regarding the temporary AWS keys, you may also need to use Cognito or OpenID credentials. Default expiration time is 1 hour, but you can modify this as well.</p>
+<p>For authenticated users, I suggest that you use Cognito credentials.</p>
 <h3 id="what-more-">What more?</h3>
 <p>I&#39;ve tried another experiment with this and created a serverless multiplayer game sample. If you want to develop an HTML5 game in a serverless architecture, you can use IoT to change messages between players and implement a cheap multiplayer game. The performance is good enough for dynamic games.</p>
 <p>Multiplayer Game: <a href="https://bombermon.zanon.io">demo</a> and <a href="https://github.com/zanon-io/serverless-multiplayer-game">code</a></p>
 <h3 id="conclusion">Conclusion</h3>
 <p>This demo solved the use case of real-time notifications for serverless applications. If you have any doubts, feel free to post in comments.</p>
+<h3 id="update-nov-21-2016">UPDATE: Nov 21, 2016</h3>
+<blockquote>
+<p><a href="https://twitter.com/ben11kehoe">Ben Kehoe</a> suggests that Cognito can be easier than using IAM (with APIG + Lambda, like in this example). I&#39;ve tried and found it to be similar in complexity when dealing with unauthenticated access. However, Cognito is <strong>much</strong> more powerful for <em>authenticated</em> access. If you need to support authenticated users, use Cognito.</p>
+</blockquote>
+<p>Below follows how to use Cognito for <em>unauthenticated</em> access.</p>
+<p>1) Create an Identity Pool</p>
+<pre><code class="lang-javascript">const AWS = require(&#39;aws-sdk&#39;);
+const cognitoidentity = new AWS.CognitoIdentity();
+
+const params = {
+  AllowUnauthenticatedIdentities: true,
+  IdentityPoolName: &#39;serverless-notifications&#39;  
+};
+
+cognitoidentity.createIdentityPool(params, (err, data) =&gt; {
+  if (err) console.log(err, err.stack);
+  else     console.log(data.IdentityPoolId); // save the IdentityPoolId
+});
+</code></pre>
+<p>2) Create a Role for this Identity Pool like we&#39;ve done before. However, for the <code>AssumeRolePolicyDocument</code>, use the following JSON (set the IdentityPoolId with the value returned in the previous function).</p>
+<pre><code class="lang-javascript">`{
+  &quot;Version&quot;: &quot;2012-10-17&quot;,
+  &quot;Statement&quot;: [
+    {
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Principal&quot;: {
+        &quot;Federated&quot;: &quot;cognito-identity.amazonaws.com&quot;
+      },
+      &quot;Action&quot;: &quot;sts:AssumeRoleWithWebIdentity&quot;,
+      &quot;Condition&quot;: {
+        &quot;StringEquals&quot;: {
+          &quot;cognito-identity.amazonaws.com:aud&quot;: ${IdentityPoolId}
+        },
+        &quot;ForAnyValue:StringLike&quot;: {
+          &quot;cognito-identity.amazonaws.com:amr&quot;: &quot;unauthenticated&quot;
+        }
+      }
+    }
+  ]
+}`
+</code></pre>
+<p>3) Set the Identity Pool with the new Role</p>
+<pre><code class="lang-javascript">const AWS = require(&#39;aws-sdk&#39;);
+const cognitoidentity = new AWS.CognitoIdentity();
+
+const params = {
+  IdentityPoolId: &#39;IDENTITY_POOL_ID&#39;,
+  Roles: { 
+    unauthenticated: &#39;ROLE_ARN&#39;,
+    authenticated: &#39;ROLE_ARN&#39;
+  }
+};
+
+cognitoidentity.setIdentityPoolRoles(params, (err, data) =&gt; {
+  if (err) console.log(err, err.stack);
+  else     console.log(data); // successful response returns an empty object
+});
+</code></pre>
+<p>4) In the browser, request the Cognito credentials</p>
+<pre><code class="lang-javascript">const AWS = require(&#39;aws-sdk&#39;);
+
+AWS.config.region = &#39;YOUR_COGNITO_REGION&#39;;
+AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+    IdentityPoolId: &#39;IDENTITY_POOL_ID&#39;,
+});
+
+AWS.config.credentials.get(() =&gt; {
+
+    // Use these credentials with IoT
+    const accessKeyId = AWS.config.credentials.accessKeyId;
+    const secretAccessKey = AWS.config.credentials.secretAccessKey;
+    const sessionToken = AWS.config.credentials.sessionToken;
+});
+</code></pre>
 <a share-twitter="share-twitter" data-text="&quot;Serverless Notifications on AWS&quot;" data-url="https://zanon.io/posts/serverless-notifications-on-aws" data-via="zanon_io" data-size="large"></a>
     </div>
   </div>
