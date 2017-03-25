@@ -430,6 +430,8 @@ module.exports.currentTemperature = (event, context, callback) =&gt; {
 <blockquote>
 <p>Updating the Serverless Framework code (v0.5 =&gt; v1.1)</p>
 </blockquote>
+<h3 id="update-mar-25-2017">UPDATE: Mar 25, 2017</h3>
+<p>If you want to know more, I&#39;ve found a nice website that may help you to go deeper in this subject: <a href="http://serverless-stack.com">http://serverless-stack.com</a>. It offers a detailed guide and a nice <a href="https://demo.serverless-stack.com/">demo</a> using Lambda, API Gateway, Cognito and DynamoDB.</p>
 <a share-twitter="share-twitter" data-text="&quot;Building Serverless Websites on AWS - Tutorial&quot;" data-url="https://zanon.io/posts/building-serverless-websites-on-aws-tutorial" data-via="zanon_io" data-size="large"></a>
     </div>
   </div>
