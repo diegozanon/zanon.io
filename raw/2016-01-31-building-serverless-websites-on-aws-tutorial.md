@@ -491,4 +491,4 @@ And... that's it! The app is working at https://serverless-demo.zanon.io, where 
 
 ### UPDATE: Mar 25, 2017
 
-If you want to know more, I've found a nice website that may help you to go deeper in this subject: http://serverless-stack.com. It offers a detailed guide and a nice [demo](https://demo.serverless-stack.com/) using Lambda, API Gateway, Cognito and DynamoDB.  
+If you want to know more, I've found a nice website that may help you to go deeper into this subject: http://serverless-stack.com. It offers a detailed guide and a nice [demo](https://demo.serverless-stack.com/) using Lambda, API Gateway, Cognito and DynamoDB.  
