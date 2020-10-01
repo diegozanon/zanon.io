@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zanonApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Angular, Node, MongoDB, AWS">
+    <meta name="author" content="Diego Zanon">
+    <link rel="icon" href="https://zanon.io/favicon.ico" type="image/x-icon">
+
+    <title ng-bind="title + 'Zanon'" class="ng-binding">Building Serverless Websites on AWS - Intro - Zanon</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/assets/highlight.min.css">
+    <link rel="stylesheet" href="/css/site.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <base href="/">
+  <body ng-controller="MainController" class="ng-scope">
+
+    <header>
+      <div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-4 col-sm-2 col-md-2">
+              <h1 class="site-name">
+                <a href="/">Zanon</a>
+              </h1>
+            </div>
+            <div class="hidden-xs col-sm-6 col-md-6">
+              <!-- empty -->
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="https://twitter.com/zanon_io">
+                <img src="/images/twitter.png" alt="twitter" class="img-responsive">
+              </a>
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="https://github.com/zanon-io">
+                <img src="/images/github.png" alt="github" class="img-responsive">
+              </a>
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="https://diego.zanon.io">
+                <img src="/images/about.png" alt="about" class="img-responsive">
+              </a>
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="/feed.xml" target="_blank">
+                <img src="/images/rss.png" alt="rss" class="img-responsive">
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container">
+        <nav id="nav" class="navbar-inverse navbar-static-top">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li ng-class="{ 'active': active.all }" class="active"> <a ng-click="filter('all');" href="/">All posts</a></li>
+              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');" href="/">Angular</a></li>
+              <li ng-class="{ 'active': active.node }"> <a ng-click="filter('node');" href="/">Node</a></li>
+              <li ng-class="{ 'active': active.mongodb }"> <a ng-click="filter('mongodb');" href="/">MongoDB</a></li>
+              <li ng-class="{ 'active': active.aws }"> <a ng-click="filter('aws');" href="/">AWS</a></li>
+              <li ng-class="{ 'active': active.serverless }"> <a ng-click="filter('serverless');" href="/">Serverless</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="content">
+        <!-- ngView:  --><div class="ng-scope" autoscroll="true" ng-view="" highlight-code="">
+<div class="row post-container ng-scope">
+  <div class="col-md-offset-1 col-md-10 post">
+    <h1>Building Serverless Websites on AWS - Intro</h1>
+    <p class="date">NOV 15, 2015</p>
+    <div>
+
+<h2 id="serverless-websites">Serverless Websites</h2>
+<p>Serverless is a concept of web applications which the developer doesn't need to worry about servers. The application is deployed to a cloud provider which is responsible to provide high availability, fast scalability and charges per request and not for 24/7. There is no dedicated server to host your application.</p>
+<p>The frontend code (HTML/CSS/JS) is hosted in a storage service, like Amazon S3, and the DNS is configured to redirect requests to this storage which will serve the static files.</p>
+<p>The backend code is broken into many small packages, so when a request is made, a third-party service loads the package responsible for the specific kind of request, executes the code, answers the request and unloads the package.</p>
+<p>This approach has three main benefits:</p>
+<ul>
+<li><strong>Infinite scalability</strong>: as you aren't managing a server instance, you don't need to worry about adding/removing new machines to your farm as your traffic grows/shrink. It will be smoothly handled by your cloud service and your site will always be served with the same low latency and high bandwidth.</li>
+<li><strong>High availability</strong>: as your cloud provider is responsible to handle the availability of your site, you can expect more than 99 % of uptime over a given month.</li>
+<li><strong>Cost efficiency</strong>: if you have an inconsistent traffic pattern, you would need to start and shutdown machines all the time to follow the usage and be efficient. Also, you would still need to pay for one machine even if no one is accessing to keep the site available. In serverless, you pay only per request which means that if no one is using, you pay nothing.</li>
+</ul>
+<p>So, that's great. But does it work for every kind of website? At least, for most use cases. It's possible to handle authentication, page routing, server-side business rules, notifications and even database requests.</p>
+<p>As an interesting real case of building a serverless website, I recommend you to read this <a href="https://www.reddit.com/r/webdev/comments/3oiilb/our_company_did_a_collab_with_valve_for_some_new/">Reddit</a> post.</p>
+<p>Summary: an e-commerce website built with traditional tools/infra completely broke after being advertised by Valve in a blog post. After some rework using JAWS (later renamed as Serverless Framework), AWS Lambda, S3 and DynamoDB, Valve advertised it again and they were able to handle 60k users requests in 2 hours with the cost of only US$ 0.07.</p>
+<p>Quoting <a href="https://www.reddit.com/r/webdev/comments/3oiilb/our_company_did_a_collab_with_valve_for_some_new/cvyf5s5">one of the comments</a>:</p>
+<blockquote>
+<p>It's a cheap cheap setup when you're not doing anything, and it only gets expensive when you're making a lot of money. That's a great thing for a business.</p>
+</blockquote>
+<h2 id="serverless-framework">Serverless Framework</h2>
+<p><img src="https://zanon.io/images/posts/2015-11-15-serverless-logo.png" alt="serverless-logo"></p>
+<p>The <a href="https://github.com/serverless/serverless">Serverless Framework</a> is an open-source framework that was created to help developers to build serverless apps using AWS features, mainly AWS Lambda (for code execution) and Amazon API Gateway (for Routing).</p>
+<p>Instead of spinning up a full-blown server, the developer is invited to use a command line tool to deploy code-blocks to Amazon. Since each lambda function acts like a microservice and your app may end up with dozens of them distributed between multiple regions and managed by multi-developer teams in multi-stage environments, the Serverless Framework targets a better setup to avoid a messy solution.</p>
+<p>I've created another <a href="https://zanon.io/posts/building-serverless-websites-on-aws-tutorial">blog post</a> to show a simple example of how to use Serverless, but first you need to know what AWS technologies are involved.</p>
+<p>The first thing that you need to be aware is that this solution is highly dependent on AWS. Usually, we would avoid being highly attached to a third-party solution. If AWS breaks forever, you will need some days to adapt your code to be able to deploy it again at another host. However, AWS is so reliable and the benefits of serverless apps are so great that I would not be so worried about it.</p>
+<h2 id="aws-lambda-code-execution-">AWS Lambda (Code Execution)</h2>
+<p><img src="https://zanon.io/images/posts/2015-11-15-lambda.png" alt="lambda"></p>
+<p>Lambda is a service where you can host your code and it will be executed when triggered by events. Lambda supports, currently, code written in JavaScript (Node.js), Python or Java.</p>
+<p>Lambda is a managed service. It means that AWS is responsible for allocating machines on demand to execute your code and is responsible for high availability and to scale following your needs.</p>
+<p>The code you run on AWS Lambda is called a "Lambda function". It needs to be stateless with no affinity to the underlying infrastructure. This prerequisite is what enables Amazon to rapidly launch many copies of the function to serve <em>infinite scalability</em> (infinite and fast).</p>
+<p>As everything on AWS, Lambda also have a "Pay Per Use" model. You will only pay for the computer resources that you use, but in this case, its much better than EC2 because your EC2 machines will always have some computer resources that are allocated for you but not necessarily in use and this allocation is charged. Regarding Lambda, you will allocate resources only for the duration of your Lambda function execution. That's why its a much cheaper solution.</p>
+<p>In Lambda, you pay for the number of requests and the amount of memory-time you allocate for your requests. Currently, it <a href="https://aws.amazon.com/lambda/pricing/">costs</a> US$ 0.0000002 per request (or US$ 0.20 per 1 million requests) and US$ 0.00001667 for every GB-second used (billing is metered in increments of 100 milliseconds). Also, the free tier includes 1M free requests and 400,000 GB-seconds of compute time per month and this bonus is given even if you have expired your 12 month AWS Free Tier term.</p>
+<p>For example, if you allocated 512 MB of memory for a function that was executed 10 million times in one month and it ran for 500 milliseconds each time, you would pay only US$ 36.81.</p>
+<p>How many server-side requests your user makes to access your site per visit? I would guess something like 100 requests. It means that US$ 36.81 served 100,000 users and each user has cost only US$ 0.0004 (not including data transfer costs).</p>
+<h2 id="amazon-api-gateway-routing-">Amazon API Gateway (Routing)</h2>
+<p><img src="https://zanon.io/images/posts/2015-11-15-api-gateway.png" alt="api-gateway"></p>
+<p>API Gateway is a service that lets you build RESTful APIs that acts like the "front door" of your application. It's the service that will receive all incoming requests, check authorization and route them to the underlying system that is responsible to handle it. In our case, it'll be AWS Lambda. API Gateway is also fully managed by AWS what means again high availability and scalability.</p>
+<p>The following image shows an example of website that is fully serverless. The static content (HTML/CSS/JS) are hosted in S3, an user browses the page and click to see its local weather information, the API Gateway receives the request and triggers a Lambda function that will process it calling a DynamoDB database.</p>
+<p><a href="https://aws.amazon.com/lambda/"><img src="https://zanon.io/images/posts/2015-11-15-lambda-web-apps.png" alt="lambda-web-apps"></a></p>
+<p>The pricing model is also "Pay Per Use". It currently <a href="https://aws.amazon.com/api-gateway/pricing/">costs</a> US$ 3.50 per million API calls received plus US$ 0.09 per GB of data transferred.</p>
+<h2 id="authentication">Authentication</h2>
+<p>Amazon API Gateway has three options to handle authentication: <a href="https://aws.amazon.com/cognito">Amazon Cognito</a>, <a href="https://aws.amazon.com/iam">AWS Identity and Access Management (IAM)</a> or <a href="http://oauth.net/">OAuth 2.0</a>.</p>
+<p>Amazon Cognito is a service that allows you to safely store user credentials and these can be used in API Gateway as a token based authentication system.</p>
+<p>IAM is the authentication system that is used for all AWS services. What API Gateway offers is a way to easily create API Keys, with fine-grained access permissions, to be distributed to third-party developers or simply to generate keys that will be used by your client devices (website or mobile app) to consume your API methods.</p>
+<p>OAuth 2.0 is an authorization framework that enables your application to authenticate your users based on credentials controlled by third-party applications, like Facebook, Twitter or GitHub.</p>
+<h2 id="serverless-databases">Serverless Databases</h2>
+<p>Amazon offers a service called <a href="https://aws.amazon.com/rds">RDS</a>. It's fully managed and you don't need to worry about availability. However, it does not satisfy our objective to "Pay Per Use" and is not so easy to scale. As you have to allocate a database to run it, you'll pay per hour even if nobody is using your app.</p>
+<p>The remaining options that we have are <a href="https://aws.amazon.com/dynamodb">DynamoDB</a> and <a href="https://aws.amazon.com/simpledb">SimpleDB</a>.</p>
+<p>DynamoDB solves the scalability difficulties that you would have using RDS and is a much more robust solution than SimpleDB. However, its pricing model also requires fixed costs to provision per-hour capacity. No usage means that you will still have some costs to handle.</p>
+<p>SimpleDB have also a fixed cost of how much data you have stored, but the main cost is dependent on your usage. Your usage is measured in how many machine hours you spend to process your queries. Also, scalability is graciously handled by AWS and you can have bursts of increased usage without delays. If your app does not require complex queries and you have a very unpredictable usage, this solution may be best cost-effective.</p>
+<p>So far, I would suggest <a href="https://www.firebase.com/">Firebase</a> as the best serverless database. It's not an Amazon product, but is a Google one and it allows much more complex apps than SimpleDB.</p>
+<h2 id="to-sum-up">To sum up</h2>
+<p>Below follows what we usually have in a dynamic website and what AWS feature we can use to build a serverless webapp.</p>
+<ul>
+<li><strong>Static Content</strong>: the HTML / CSS / JavaScript code that runs at the client-side can be hosted in S3.</li>
+<li><strong>Routing</strong>: API Gateway is responsible for receiving requests and to call the correspondent Lambda function.</li>
+<li><strong>Authentication</strong>: IAM, Incognito or OAuth 2.0.</li>
+<li><strong>Server-Side Code</strong>: Lambda functions handle each request.</li>
+<li><strong>Database</strong>: SimpleDB is a pretty scalable NoSQL database, but consider using Google's Firebase.</li>
+</ul>
+<h2 id="update-dec-27-2015">UPDATE: Dec 27, 2015</h2>
+<blockquote>
+<p>Replaced the JAWS reference to Serverless since it was rebranded.</p>
+</blockquote>
+    </div>
+  </div>
+</div>
+</div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/controllers.js"></script>
+    <script src="/js/directives.js"></script>
+    <script src="/js/routes.js"></script>
+
+    <script src="/js/assets/404game.min.js"></script>
+    <script src="/js/assets/highlight.min.js"></script>
+  
+
+</body></html>

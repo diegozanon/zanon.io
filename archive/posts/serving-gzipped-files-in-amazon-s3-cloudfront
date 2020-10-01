@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zanonApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Angular, Node, MongoDB, AWS">
+    <meta name="author" content="Diego Zanon">
+    <link rel="icon" href="https://zanon.io/favicon.ico" type="image/x-icon">
+
+    <title ng-bind="title + 'Zanon'" class="ng-binding">Serving gzipped files in Amazon S3 / CloudFront - Zanon</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/assets/highlight.min.css">
+    <link rel="stylesheet" href="/css/site.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <base href="/">
+  <body ng-controller="MainController" class="ng-scope">
+
+    <header>
+      <div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-4 col-sm-2 col-md-2">
+              <h1 class="site-name">
+                <a href="/">Zanon</a>
+              </h1>
+            </div>
+            <div class="hidden-xs col-sm-6 col-md-6">
+              <!-- empty -->
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="https://twitter.com/zanon_io">
+                <img src="/images/twitter.png" alt="twitter" class="img-responsive">
+              </a>
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="https://github.com/zanon-io">
+                <img src="/images/github.png" alt="github" class="img-responsive">
+              </a>
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="https://diego.zanon.io">
+                <img src="/images/about.png" alt="about" class="img-responsive">
+              </a>
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="/feed.xml" target="_blank">
+                <img src="/images/rss.png" alt="rss" class="img-responsive">
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container">
+        <nav id="nav" class="navbar-inverse navbar-static-top">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li ng-class="{ 'active': active.all }" class="active"> <a ng-click="filter('all');" href="/">All posts</a></li>
+              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');" href="/">Angular</a></li>
+              <li ng-class="{ 'active': active.node }"> <a ng-click="filter('node');" href="/">Node</a></li>
+              <li ng-class="{ 'active': active.mongodb }"> <a ng-click="filter('mongodb');" href="/">MongoDB</a></li>
+              <li ng-class="{ 'active': active.aws }"> <a ng-click="filter('aws');" href="/">AWS</a></li>
+              <li ng-class="{ 'active': active.serverless }"> <a ng-click="filter('serverless');" href="/">Serverless</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="content">
+        <!-- ngView:  --><div class="ng-scope" autoscroll="true" ng-view="" highlight-code="">
+<div class="row post-container ng-scope">
+  <div class="col-md-offset-1 col-md-10 post">
+    <h1>Serving gzipped files in Amazon S3 / CloudFront</h1>
+    <p class="date">SEP 06, 2015</p>
+    <div>
+
+<p>If you are sharing your website static content using Amazon Web Services, you can gzip your content and save some bandwidth. The size of your files will be reduced and your website will load faster for your users.</p>
+<p>If you have a static website in Amazon, you should really consider using CloudFront since it is very cheap and is a <a href="http://stackoverflow.com/q/2145277/1476885">CDN</a> service. However, this guide is not a tutorial of how to configure your website to use CloudFront (or S3) because there are already <a href="http://docs.aws.amazon.com/gettingstarted/latest/swh/getting-started-create-cfdist.html">many</a> <a href="http://www.michaelgallego.fr/blog/2013/08/27/static-website-on-s3-cloudfront-and-route-53-the-right-way/">good</a> <a href="http://blog.celingest.com/en/2013/07/19/tutorial-creating-cdn-wordpress-cloudfront-s3/">tutorials</a> for that.</p>
+<p>Since CloudFront uses an Origin Server to find your files and to distribute them among their servers, what I want to show here is that all you need to serve gzipped content in CloudFront is serving gzipped content at your Origin Server.</p>
+<p>In a Custom Origin Server, like an IIS or Apache server, this is very easy to accomplish because you have just to set some configurations and you're ready to serve gzipped content. However, if your Origin Server is Amazon S3, you need to manually gzip each content and I will show how this is done.</p>
+<h2 id="so-what-is-gzip-">So, what is gzip?</h2>
+<p><a href="http://www.gzip.org/">gzip</a> is a file format and a software application used for compression and decompression. It is also the web standard used by your browser to download static content like HTML/CSS/JS. You can read more about it in this <a href="http://betterexplained.com/articles/how-to-optimize-your-site-with-gzip-compression/">Better Explained</a> guide, but if you don't want, look those following extracted images that sums it up:</p>
+<p><img src="https://zanon.io/images/posts/2015-09-06-http-request.png" alt="http-request">
+<img src="https://zanon.io/images/posts/2015-09-06-http-request-compressed.png" alt="http-request-compressed"></p>
+<h2 id="serving-gzipped-files">Serving gzipped files</h2>
+<p>There is a tricky part serving gzipped files in Amazon S3. Since gzip is commonly done by the web server that zips (and caches) the content, S3 will not do it for you to save their CPU time avoiding compressing content. So, what you need to do is to gzip it upfront and set the file <strong>Content-Encoding</strong> to <strong>gzip</strong>. The following guide shows how to do it.</p>
+<p>First, download a gzip program. You can use the <a href="http://www.gzip.org/">official</a> application or find another one that fits you better.</p>
+<p>You can execute the program using the command line typing:</p>
+<pre><code class="lang-xml hljs">&gt; gzip myscrypt.min.js
+</code></pre>
+<p>The file <strong>myscrypt.min.js.gz</strong> will be created. The command <code>&gt; gzip -9 filename</code> will compress the file with the highest compression level. You can set up your deployment scripts to automate this process and execute the compression for all files (HTML/CSS/JS). However, do not gzip your images or other binaries contents. They are already highly compressed and the CPU cost to decompress them will not be worth it.</p>
+<p>The last step is to remove the <strong>gz</strong> part of the name and upload it to Amazon S3 setting the file <strong>Content-Encoding</strong> to <strong>gzip</strong>.</p>
+<p>Since you'll need to do the same action for many files for each deploy, I highly recommend that you automate this process using Amazon APIs to upload your content. However, if you are just testing, you can change the <strong>Content-Enconding</strong> using Amazon's S3 Console.</p>
+<p><img src="https://zanon.io/images/posts/2015-09-06-gzip-s3.png" alt="gzip-s3"></p>
+<p>To verify if your content is being gzipped, open your developer tool and check the <strong>Content-Enconding</strong> at the network tab.</p>
+<p><img src="https://zanon.io/images/posts/2015-09-06-dev-tools.png" alt="dev-tools"></p>
+    </div>
+  </div>
+</div>
+</div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/controllers.js"></script>
+    <script src="/js/directives.js"></script>
+    <script src="/js/routes.js"></script>
+
+    <script src="/js/assets/404game.min.js"></script>
+    <script src="/js/assets/highlight.min.js"></script>
+  
+
+</body></html>

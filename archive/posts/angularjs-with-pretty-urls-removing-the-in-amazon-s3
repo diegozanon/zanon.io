@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zanonApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Angular, Node, MongoDB, AWS">
+    <meta name="author" content="Diego Zanon">
+    <link rel="icon" href="https://zanon.io/favicon.ico" type="image/x-icon">
+
+    <title ng-bind="title + 'Zanon'" class="ng-binding">AngularJS with Pretty URLs: Removing the # in Amazon S3 - Zanon</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/assets/highlight.min.css">
+    <link rel="stylesheet" href="/css/site.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <base href="/">
+  <body ng-controller="MainController" class="ng-scope">
+
+    <header>
+      <div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-4 col-sm-2 col-md-2">
+              <h1 class="site-name">
+                <a href="/">Zanon</a>
+              </h1>
+            </div>
+            <div class="hidden-xs col-sm-6 col-md-6">
+              <!-- empty -->
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="https://twitter.com/zanon_io">
+                <img src="/images/twitter.png" alt="twitter" class="img-responsive">
+              </a>
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="https://github.com/zanon-io">
+                <img src="/images/github.png" alt="github" class="img-responsive">
+              </a>
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="https://diego.zanon.io">
+                <img src="/images/about.png" alt="about" class="img-responsive">
+              </a>
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="/feed.xml" target="_blank">
+                <img src="/images/rss.png" alt="rss" class="img-responsive">
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container">
+        <nav id="nav" class="navbar-inverse navbar-static-top">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li ng-class="{ 'active': active.all }" class="active"> <a ng-click="filter('all');" href="/">All posts</a></li>
+              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');" href="/">Angular</a></li>
+              <li ng-class="{ 'active': active.node }"> <a ng-click="filter('node');" href="/">Node</a></li>
+              <li ng-class="{ 'active': active.mongodb }"> <a ng-click="filter('mongodb');" href="/">MongoDB</a></li>
+              <li ng-class="{ 'active': active.aws }"> <a ng-click="filter('aws');" href="/">AWS</a></li>
+              <li ng-class="{ 'active': active.serverless }"> <a ng-click="filter('serverless');" href="/">Serverless</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="content">
+        <!-- ngView:  --><div class="ng-scope" autoscroll="true" ng-view="" highlight-code="">
+<div class="row post-container ng-scope">
+  <div class="col-md-offset-1 col-md-10 post">
+    <h1>AngularJS with Pretty URLs: Removing the # in Amazon S3</h1>
+    <p class="date">AUG 09, 2015</p>
+    <div>
+
+<h2 id="angular-urls">Angular URLs</h2>
+<p>Angular ngRoute uses the # (hashtag) by default when routing pages. For example, if you have an "about" page, your URL will look like <code>http://mywebsite.com/#/about</code>. With this, the # looks misplaced since we are used to see URLs like <code>http://mywebsite.com/about</code>.</p>
+<p>The reason for this ugly character to be used is to avoid the need of a server-side rewrite rule. With this, learning and using ngRoute is easier.</p>
+<p>To prettify your URLs, the first step is to prepare your Angular app:</p>
+<ol>
+<li>Add a <code>base</code> URL</li>
+<li>Configure the <code>$locationProvider</code></li>
+<li>Fix your application links</li>
+</ol>
+<h2 id="add-a-base-url">Add a base URL</h2>
+<p>The base URL is not mandatory, but it's better to add it to <a href="https://docs.angularjs.org/error/$location/nobase">avoid some extra configurations and to add support for old browsers</a>.</p>
+<p>To add this, just place the <code>base</code> element inside your page's <code>head</code>.</p>
+<pre><code class="lang-html hljs xml"><span class="hljs-meta">&lt;!doctype html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>My Page<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">base</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/"</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  (...)
+</code></pre>
+<p>Note: some websites hosts more than one application. If that's your case, the root of your app may be something like <code>http://mywebsite.com/myapp</code>. In this example, your base will be:</p>
+<pre><code class="lang-html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">base</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/myapp/"</span>&gt;</span>
+</code></pre>
+<h2 id="configure-the-location-provider">Configure the Location Provider</h2>
+<p>When configuring your ngRoute rules, just inject the <code>$locationProvider</code> and configure it with <code>$locationProvider.html5Mode(true)</code>. With this, you're telling your Angular app to use <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history">HTML5 history.pushState()</a> feature to control routing and to change URLs without refreshing the pages.</p>
+<pre><code class="lang-javascript hljs">angular
+  .module(<span class="hljs-string">'myApp'</span>)
+  .config([
+    <span class="hljs-string">'$routeProvider'</span>,
+    <span class="hljs-string">'$locationProvider'</span>,
+    <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">$routeProvider, $locationProvider</span>) </span>{
+      $routeProvider
+      .when(<span class="hljs-string">'/'</span>, {
+        <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'home.html'</span>
+      })
+      .when(<span class="hljs-string">'/about'</span>, {
+        <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'about.html'</span>
+      });
+
+      <span class="hljs-comment">// Add HTML5 History API support</span>
+      $locationProvider.html5Mode(<span class="hljs-literal">true</span>);
+  }
+]);
+</code></pre>
+<h2 id="fix-your-application-links">Fix your application links</h2>
+<p>If your application was working with #, probably you have many links starting with <code>#/</code> and you need to remove them now. Search through all files to locate things like <code>&lt;a href="#/"&gt;About&lt;/a&gt;</code> and change to <code>&lt;a href="/"&gt;About&lt;/a&gt;</code>.</p>
+<h2 id="server-url-rewrite">Server URL Rewrite</h2>
+<p>You have adjusted the client-side. Now you need to adjust the server-side. Otherwise, when you browse for <code>http://mywebsite.com/about</code>, the server will try to locate a file named "about" at your root level and will return a 404 error. You don't want to create a "about" file. What you want is to redirect to the main file where your Angular app is defined (usually index.html) and retrieve the "about" information maintaining the URL with <code>/about</code>.</p>
+<p>To configure this, each server has its own guide. You can follow this <a href="https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions#how-to-configure-your-server-to-work-with-html5mode">link</a> to see how this is done for Apache, IIS and others. For Amazon S3, read below.</p>
+<h2 id="amazon-s3-url-rewrite">Amazon S3 URL Rewrite</h2>
+<p>First, open the AWS Management Console and browse to S3. Next, click on your website bucket in the left panel and see its properties in the right panel. Clicking on "Static Website Hosting" gives you the following options:</p>
+<p><img src="https://zanon.io/images/posts/2015-08-09-s3.png" alt="s3-configuration"></p>
+<p>You'll edit the redirection rules using the following XML:</p>
+<pre><code class="lang-xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">RoutingRules</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">RoutingRule</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Condition</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">HttpErrorCodeReturnedEquals</span>&gt;</span>404<span class="hljs-tag">&lt;/<span class="hljs-name">HttpErrorCodeReturnedEquals</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Condition</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Redirect</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">HostName</span>&gt;</span>zanon.io<span class="hljs-tag">&lt;/<span class="hljs-name">HostName</span>&gt;</span> <span class="hljs-comment">&lt;!-- add your domain name here --&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">ReplaceKeyPrefixWith</span>&gt;</span>#/<span class="hljs-tag">&lt;/<span class="hljs-name">ReplaceKeyPrefixWith</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Redirect</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">RoutingRule</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">RoutingRules</span>&gt;</span>
+</code></pre>
+<p><strong>Note</strong>: after saving, you may need up to 5 minutes to see the configuration taking effect.</p>
+<p>In this configuration, you're telling AWS that when a user browses for an URL that does not exist (404 error), instead of showing the error, AWS will redirect the user to another page replacing the key prefix <code>/</code> with <code>#/</code>.  This means that if your user browses for <code>http://mywebsite.com/about</code>, Amazon will redirect to <code>http://mywebsite.com/#/about</code>, but since we have configured HTML5 push state, Angular will handle the request and rewrite again the URL to <code>http://mywebsite.com/about</code>.</p>
+<h2 id="update-sep-06-2015">UPDATE: Sep 06, 2015</h2>
+<blockquote>
+<p>This solution works pretty well, but configuring this S3 URL Rewrite is <strong>not</strong> SEO-friendly as I've discovered later. You can read why in my Stack Overflow <a href="http://stackoverflow.com/q/32429488/1476885">question/answer</a>. If you want an application SEO-friendly and with pretty URLs in Amazon, you need to avoid this S3 rewrite rule and pre-render all of your pages before uploading them. You can read more about this in my blog post: <a href="https://zanon.io/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly">Angular: How to create a SPA crawlable and SEO friendly?</a></p>
+</blockquote>
+    </div>
+  </div>
+</div>
+</div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/controllers.js"></script>
+    <script src="/js/directives.js"></script>
+    <script src="/js/routes.js"></script>
+
+    <script src="/js/assets/404game.min.js"></script>
+    <script src="/js/assets/highlight.min.js"></script>
+  
+
+</body></html>

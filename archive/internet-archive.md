@@ -1,0 +1,10 @@
+https://web.archive.org/web/20200930214234/https://zanon.io/
+https://web.archive.org/web/20200930220520/https://zanon.io/posts/serverless-notifications-on-aws
+https://web.archive.org/web/20200930214531/https://zanon.io/posts/nosql-injection-in-mongodb
+https://web.archive.org/web/20200930214711/https://zanon.io/posts/please-try-again-retry-pattern-in-node
+https://web.archive.org/web/20200930214823/https://zanon.io/posts/building-serverless-websites-on-aws-tutorial
+https://web.archive.org/web/20200930214912/https://zanon.io/posts/building-serverless-websites-on-aws-intro
+https://web.archive.org/web/20200930215014/https://zanon.io/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs
+https://web.archive.org/web/20200930215112/https://zanon.io/posts/serving-gzipped-files-in-amazon-s3-cloudfront
+https://web.archive.org/web/20200930215246/https://zanon.io/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly
+https://web.archive.org/web/20200930215324/https://zanon.io/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3

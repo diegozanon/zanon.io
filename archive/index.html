@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zanonApp" class="ng-scope">
+
+<head>
+    <style type="text/css">
+        .ng-animate.item:not(.left):not(.right) {
+            -webkit-transition: 0s ease-in-out left;
+            transition: 0s ease-in-out left
+        }
+    </style>
+    <style type="text/css">
+        .ng-hide:not(.ng-hide-animate) {
+            display: none !important;
+        }
+
+        ng\:form {
+            display: block;
+        }
+
+        .ng-animate-shim {
+            visibility: hidden;
+        }
+
+        .ng-anchor {
+            position: absolute;
+        }
+    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Angular, Node, MongoDB, AWS">
+    <meta name="author" content="Diego Zanon">
+    <link rel="icon" href="https://zanon.io/favicon.ico" type="image/x-icon">
+
+    <title ng-bind="title + 'Zanon'" class="ng-binding">Zanon</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/assets/highlight.min.css">
+    <link rel="stylesheet" href="/css/site.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <base href="/">
+</head>
+
+<body ng-controller="MainController" class="ng-scope">
+
+    <header>
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-2 col-md-2">
+                        <h1 class="site-name">
+                            <a href="/">Zanon</a>
+                        </h1>
+                    </div>
+                    <div class="hidden-xs col-sm-6 col-md-6">
+                        <!-- empty -->
+                    </div>
+                    <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+                        <a href="https://twitter.com/zanon_io">
+                            <img src="/images/twitter.png" alt="twitter" class="img-responsive">
+                        </a>
+                    </div>
+                    <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+                        <a href="https://github.com/zanon-io">
+                            <img src="/images/github.png" alt="github" class="img-responsive">
+                        </a>
+                    </div>
+                    <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+                        <a href="https://diego.zanon.io">
+                            <img src="/images/about.png" alt="about" class="img-responsive">
+                        </a>
+                    </div>
+                    <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+                        <a href="/feed.xml" target="_blank">
+                            <img src="/images/rss.png" alt="rss" class="img-responsive">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container">
+            <nav id="nav" class="navbar-inverse navbar-static-top">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li ng-class="{ 'active': active.all }" class="active"> <a ng-click="filter('all');"
+                                href="/">All posts</a></li>
+                        <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');"
+                                href="/">Angular</a></li>
+                        <li ng-class="{ 'active': active.node }"> <a ng-click="filter('node');" href="/">Node</a></li>
+                        <li ng-class="{ 'active': active.mongodb }"> <a ng-click="filter('mongodb');"
+                                href="/">MongoDB</a></li>
+                        <li ng-class="{ 'active': active.aws }"> <a ng-click="filter('aws');" href="/">AWS</a></li>
+                        <li ng-class="{ 'active': active.serverless }"> <a ng-click="filter('serverless');"
+                                href="/">Serverless</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <!-- ngView:  -->
+            <div class="ng-scope" autoscroll="true" ng-view="" highlight-code="">
+                <div ng-controller="PostsController" class="post-list ng-scope">
+                    <div ng-show="active.all || active.node || active.aws || active.serverless" class="row">
+                        <div class="col-md-offset-1 col-md-10">
+                            <article>
+                                <div class="date">NOV 05, 2016</div>
+                                <h2><a href="/posts/serverless-notifications-on-aws">Serverless Notifications on AWS</a>
+                                </h2>
+                                <p>A tutorial to implement the Pub/Sub pattern using AWS IoT.</p>
+                                <button ng-click="filter('node');" type="button"
+                                    class="btn tag pull-right">Node</button>
+                                <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
+                                <button ng-click="filter('serverless');" type="button"
+                                    class="btn tag pull-right">Serverless</button>
+                            </article>
+                        </div>
+                    </div>
+                    <div ng-show="active.all || active.node || active.mongodb" class="row">
+                        <div class="col-md-offset-1 col-md-10">
+                            <article>
+                                <div class="date">JUL 17, 2016</div>
+                                <h2><a href="/posts/nosql-injection-in-mongodb">NoSQL Injection in MongoDB</a></h2>
+                                <p>NoSQL databases can also be attacked with the equivalent of <em>SQL injection</em>
+                                    for relational databases. This post shows how this is done and how to protect your
+                                    application from this technique.</p>
+                                <button ng-click="filter('node');" type="button"
+                                    class="btn tag pull-right">Node</button>
+                                <button ng-click="filter('mongodb');" type="button"
+                                    class="btn tag pull-right">MongoDB</button>
+                            </article>
+                        </div>
+                    </div>
+                    <div ng-show="active.all || active.node" class="row">
+                        <div class="col-md-offset-1 col-md-10">
+                            <article>
+                                <div class="date">APR 09, 2016</div>
+                                <h2><a href="/posts/please-try-again-retry-pattern-in-node">"Please, try again..."
+                                        (Retry Pattern in Node)</a></h2>
+                                <p>When building a service, you should anticipate that some transient failures may occur
+                                    due to network issues or query timeouts. In such cases, the Retry Pattern is very
+                                    useful.</p>
+                                <button ng-click="filter('node');" type="button"
+                                    class="btn tag pull-right">Node</button>
+                            </article>
+                        </div>
+                    </div>
+                    <div ng-show="active.all || active.node || active.aws || active.serverless" class="row">
+                        <div class="col-md-offset-1 col-md-10">
+                            <article>
+                                <div class="date">JAN 31, 2016</div>
+                                <h2><a href="/posts/building-serverless-websites-on-aws-tutorial">Building Serverless
+                                        Websites on AWS - Tutorial</a></h2>
+                                <p>This tutorial uses AWS services and the Serverless Framework (1.1) to create a simple
+                                    serverless application. The objective is to show how powerful this approach can be
+                                    using minimal efforts.</p>
+                                <button ng-click="filter('node');" type="button"
+                                    class="btn tag pull-right">Node</button>
+                                <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
+                                <button ng-click="filter('serverless');" type="button"
+                                    class="btn tag pull-right">Serverless</button>
+                            </article>
+                        </div>
+                    </div>
+                    <div ng-show="active.all || active.node || active.aws || active.serverless" class="row">
+                        <div class="col-md-offset-1 col-md-10">
+                            <article>
+                                <div class="date">NOV 15, 2015</div>
+                                <h2><a href="/posts/building-serverless-websites-on-aws-intro">Building Serverless
+                                        Websites on AWS - Intro</a></h2>
+                                <p>A serverless website is the one which the developer doesn't need to worry about the
+                                    servers that will host the website. A third-party managed service is responsible for
+                                    handling requests on-demand, charging per request and not 24/7. This post explains
+                                    about this concept.</p>
+                                <button ng-click="filter('node');" type="button"
+                                    class="btn tag pull-right">Node</button>
+                                <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
+                                <button ng-click="filter('serverless');" type="button"
+                                    class="btn tag pull-right">Serverless</button>
+                            </article>
+                        </div>
+                    </div>
+                    <div ng-show="active.all || active.node" class="row">
+                        <div class="col-md-offset-1 col-md-10">
+                            <article>
+                                <div class="date">SEP 20, 2015</div>
+                                <h2><a href="/posts/creating-desktop-apps-using-html-css-js-nodejs-with-nwjs">Creating
+                                        Desktop Apps using HTML/CSS/JS + Node.js with NW.js</a></h2>
+                                <p>If you like web development and need to build a desktop app, why don't you try NW.js
+                                    (former node-webkit)? It runs on Node.js and you will freely use HTML/CSS/JS +
+                                    Node.js to build multi-platform apps.</p>
+                                <button ng-click="filter('node');" type="button"
+                                    class="btn tag pull-right">Node</button>
+                            </article>
+                        </div>
+                    </div>
+                    <div ng-show="active.all || active.aws" class="row">
+                        <div class="col-md-offset-1 col-md-10">
+                            <article>
+                                <div class="date">SEP 06, 2015</div>
+                                <h2><a href="/posts/serving-gzipped-files-in-amazon-s3-cloudfront">Serving gzipped files
+                                        in Amazon S3 / CloudFront</a></h2>
+                                <p>If you want to serve web content in the cloud, you need to gzip it first to reduce
+                                    the download size and get a faster website. This guide shows how you can do it using
+                                    AWS.</p>
+                                <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
+                            </article>
+                        </div>
+                    </div>
+                    <div ng-show="active.all || active.angular || active.aws" class="row">
+                        <div class="col-md-offset-1 col-md-10">
+                            <article>
+                                <div class="date">AUG 23, 2015</div>
+                                <h2><a href="/posts/angularjs-how-to-create-a-spa-crawlable-and-seo-friendly">AngularJS:
+                                        How to create a SPA crawlable and SEO friendly?</a></h2>
+                                <p>If you're using Angular, probably you already know about ngRoute and the amazing
+                                    benefit of avoiding full page reloads and requesting just what you need when you
+                                    click to change to another page. If so, you need to be aware about how search
+                                    engines will see your website and how you can help them to properly index your
+                                    content.</p>
+                                <button ng-click="filter('angular');" type="button"
+                                    class="btn tag pull-right">Angular</button>
+                                <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
+                            </article>
+                        </div>
+                    </div>
+                    <div ng-show="active.all || active.angular || active.aws" class="row">
+                        <div class="col-md-offset-1 col-md-10">
+                            <article>
+                                <div class="date">AUG 09, 2015</div>
+                                <h2><a href="/posts/angularjs-with-pretty-urls-removing-the-in-amazon-s3">AngularJS with
+                                        Pretty URLs: Removing the # in Amazon S3</a></h2>
+                                <p>Angular uses the # (hashtag) by default when routing pages because it requires no
+                                    server side configuration. If you want to get rid of it, you need to configure a
+                                    server rewrite rule or pre-render your pages.</p>
+                                <button ng-click="filter('angular');" type="button"
+                                    class="btn tag pull-right">Angular</button>
+                                <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="row"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/controllers.js"></script>
+    <script src="/js/directives.js"></script>
+    <script src="/js/routes.js"></script>
+
+    <script src="/js/assets/404game.min.js"></script>
+    <script src="/js/assets/highlight.min.js"></script>
+</body>
+
+</html>

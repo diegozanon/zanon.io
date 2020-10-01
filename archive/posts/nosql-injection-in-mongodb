@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zanonApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Angular, Node, MongoDB, AWS">
+    <meta name="author" content="Diego Zanon">
+    <link rel="icon" href="https://zanon.io/favicon.ico" type="image/x-icon">
+
+    <title ng-bind="title + 'Zanon'" class="ng-binding">NoSQL Injection in MongoDB - Zanon</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/assets/highlight.min.css">
+    <link rel="stylesheet" href="/css/site.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <base href="/">
+  <body ng-controller="MainController" class="ng-scope">
+
+    <header>
+      <div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-4 col-sm-2 col-md-2">
+              <h1 class="site-name">
+                <a href="/">Zanon</a>
+              </h1>
+            </div>
+            <div class="hidden-xs col-sm-6 col-md-6">
+              <!-- empty -->
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="https://twitter.com/zanon_io">
+                <img src="/images/twitter.png" alt="twitter" class="img-responsive">
+              </a>
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="https://github.com/zanon-io">
+                <img src="/images/github.png" alt="github" class="img-responsive">
+              </a>
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="https://diego.zanon.io">
+                <img src="/images/about.png" alt="about" class="img-responsive">
+              </a>
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="/feed.xml" target="_blank">
+                <img src="/images/rss.png" alt="rss" class="img-responsive">
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container">
+        <nav id="nav" class="navbar-inverse navbar-static-top">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li ng-class="{ 'active': active.all }" class="active"> <a ng-click="filter('all');" href="/">All posts</a></li>
+              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');" href="/">Angular</a></li>
+              <li ng-class="{ 'active': active.node }"> <a ng-click="filter('node');" href="/">Node</a></li>
+              <li ng-class="{ 'active': active.mongodb }"> <a ng-click="filter('mongodb');" href="/">MongoDB</a></li>
+              <li ng-class="{ 'active': active.aws }"> <a ng-click="filter('aws');" href="/">AWS</a></li>
+              <li ng-class="{ 'active': active.serverless }"> <a ng-click="filter('serverless');" href="/">Serverless</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="content">
+        <!-- ngView:  --><div class="ng-scope" autoscroll="true" ng-view="" highlight-code="">
+<div class="row post-container ng-scope">
+  <div class="col-md-offset-1 col-md-10 post">
+    <h1>NoSQL Injection in MongoDB</h1>
+    <p class="date">JUL 17, 2016</p>
+    <div>
+
+<h2 id="tl-dr">TL;DR</h2>
+<p>The solution is to design your application to accept only strings from your users (never allow objects by design) and sanitize the inputs before using them (<a href="https:
+//github.com/vkarpov15/mongo-sanitize">mongo-sanitize</a> is a good module for this).</p>
+<h2 id="sql-injection">SQL Injection</h2>
+<p>In relational databases, SQL Injection is a widely known attack where the malicious user may fill a web form with SQL statements in order to change existing data or to obtain more info than it's allowed to. If an application builds its queries concatenating a base statement with a variable whose value is set through a input field, this application can be susceptible to this kind of attack.</p>
+<p>For example:</p>
+<pre><code class="lang-javascript hljs"><span class="hljs-keyword">var</span> query = <span class="hljs-string">"SELECT * FROM Users WHERE name = '"</span> + userName + <span class="hljs-string">"';"</span>;
+</code></pre>
+<p>If the userName variable is set with <code>John Doe'; DROP TABLE Users; --</code>, the result would be:</p>
+<pre><code class="lang-sql hljs"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">Users</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">name</span> = <span class="hljs-string">'John Doe'</span>; <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">Users</span>; <span class="hljs-comment">--';</span>
+</code></pre>
+<p>As a <em>Users</em> table is a pretty common table name for most websites, the attacker could guess that a table with this name would exist without knowing for sure. He would also need luck that no foreign key would prevent the <em>drop table</em> command, but the idea is that he'll <em>try</em> and we need to <em>prevent</em> those attacks. Another example is to use <code>' OR '' = '</code> to retrieve all data instead of just one record.</p>
+<p>In the relational world, this attack can be prevented using <a href="https://en.wikipedia.org/wiki/Prepared_statement">prepared statements</a>, where you use placeholders for each parameter and the database engine will not execute random SQL statements.</p>
+<h2 id="nosql-injection">NoSQL Injection</h2>
+<p>NoSQL Injection is the equivalent for the NoSQL world. The attack tries to inject code when the inputs are not sanitized and the solution is simply to sanitize them before using.</p>
+<p>For example, using Node.js and MongoDB:</p>
+<pre><code class="lang-javascript hljs">app.post(<span class="hljs-string">'/user'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) </span>{
+
+    <span class="hljs-keyword">var</span> query = {
+        <span class="hljs-attr">username</span>: req.body.username,
+        <span class="hljs-attr">password</span>: req.body.password
+    }
+
+    db.collection(<span class="hljs-string">'users'</span>).findOne(query, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, user</span>) </span>{
+        <span class="hljs-built_in">console</span>.log(user);
+    });
+});
+</code></pre>
+<p>Suppose that we receive the following request:</p>
+<pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">http://www.example.com/user</span> HTTP/1.1
+<span class="hljs-attribute">Content-Type</span>: application/json
+
+<span class="json">{
+    <span class="hljs-attr">"username"</span>: {<span class="hljs-attr">"$ne"</span>: <span class="hljs-literal">null</span>},
+    <span class="hljs-attr">"password"</span>: {<span class="hljs-attr">"$ne"</span>: <span class="hljs-literal">null</span>}
+}
+</span></code></pre><p>As <code>$ne</code> is the <em>not equal</em> operator, this request would return the first user (possibly an admin) without knowing its name or password.</p>
+<p>The solution in this case is to sanitize the input before using them. A good options is <a href="https://github.com/vkarpov15/mongo-sanitize">mongo-sanitize</a>:</p>
+<blockquote>
+<p>It will strip out any keys that start with '$' in the input, so you can pass it to MongoDB without worrying about malicious users overwriting.</p>
+</blockquote>
+<p><strong>Safe</strong>:</p>
+<pre><code class="lang-javascript hljs"><span class="hljs-keyword">var</span> sanitize = <span class="hljs-built_in">require</span>(<span class="hljs-string">'mongo-sanitize'</span>);
+
+app.post(<span class="hljs-string">'/user'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) </span>{
+
+    <span class="hljs-keyword">var</span> query = {
+        <span class="hljs-attr">username</span>: sanitize(req.body.username),
+        <span class="hljs-attr">password</span>: sanitize(req.body.password)
+    }
+
+    db.collection(<span class="hljs-string">'users'</span>).findOne(query, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, user</span>) </span>{
+        <span class="hljs-built_in">console</span>.log(user);
+    });
+});
+</code></pre>
+<h3 id="mongoose">Mongoose</h3>
+<p>If you are using Mongoose, you don't need to sanitize the inputs. In this case, you just need to set the properties to be typed as string. If someone passes an object like <code>{ $ne: null }</code>, Mongoose will convert it to a string and no harm will be done.</p>
+<h3 id="the-where-operator-attack">The $where operator attack</h3>
+<p>The <code>$where</code> operator has a very dangerous feature: it allows you to pass a string that will be evaluated inside your server.</p>
+<p>To reproduce the problem, suppose that you have an online store and want to find out which users have more than X canceled orders. You could query as the following:</p>
+<pre><code class="lang-javascript hljs"><span class="hljs-keyword">var</span> query = {
+    <span class="hljs-attr">$where</span>: <span class="hljs-string">"this.canceledOrders &gt; "</span> + req.body.canceledOrders
+}
+
+db.collection(<span class="hljs-string">'users'</span>).find(query).each(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, doc</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(doc);
+})
+</code></pre>
+<p>In this case, mongo-sanitize will not help you if the input string is <code>'0; return true'</code>. Your where clause will be evaluated as <code>this.canceledOrders &gt; 0; return true</code> and <strong>all</strong> users would be returned.</p>
+<p>Or you could receive <code>'0; while(true){}'</code> as input and suffer a DoS attack.</p>
+<p>It also works for string inputs, like:</p>
+<pre><code class="lang-javascript hljs"><span class="hljs-keyword">var</span> query = {
+    <span class="hljs-attr">$where</span>: <span class="hljs-string">"this.name === '"</span> + req.body.name + <span class="hljs-string">"'"</span>
+}
+</code></pre>
+<p>The attack could be the string <code>'\'; return \'\' == \''</code> and the where clause would be evaluated to <code>this.name === ''; return '' == ''</code>, that results in returning all users instead of only those who matches the clause.</p>
+<p>The solution here is to <strong>never</strong> use the <code>$where</code> operator. Why? I list it here:</p>
+<ol>
+<li><p><strong>Performance</strong>: since you can run arbitrary JavaScript code, the <code>$where</code> operator is not optimized. That means: indexes will be ignored.</p>
+</li>
+<li><p><strong>Scope is not accessible</strong>: the solution to avoid the code injection would be to add the where clause inside a function, like the following:</p>
+<pre><code class="lang-javascript hljs"><span class="hljs-keyword">var</span> query = {
+   <span class="hljs-attr">$where</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+       <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.canceledOrders &gt; threshold
+   }
+}
+</code></pre>
+<p>However, it <strong>won't</strong> work. The local variable value is not passed to Mongo and it returns the following error if executed in shell: (thanks to <a href="http://stackoverflow.com/a/15615226/1476885">@Utaal</a>)</p>
+<pre><code class="lang-javascript hljs"><span class="hljs-built_in">Error</span>: error: {
+ <span class="hljs-string">"$err"</span> : <span class="hljs-string">"ReferenceError: threshold is not defined\n    at _funcs2 (_funcs2:1:45) near 's.canceledOrders &gt; threshold }' "</span>,
+ <span class="hljs-string">"code"</span> : <span class="hljs-number">16722</span>
+}
+</code></pre>
+<p>Also, the Node.js Mongo driver version 2.1 has a bug. If you pass a function to your <code>$where</code> clause it will be completely ignored and <code>{}</code> will be used instead (which returns <em>everything</em>).</p>
+</li>
+<li><p>There is always a better solution. In this case, you could use the operators <code>$eq</code> or <code>$gt</code>.</p>
+</li>
+</ol>
+<h3 id="more">More</h3>
+<p>If you want to read more about this subject, I suggest <a href="http://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html">this blog post</a> that contains code examples and a GitHub project to reproduce the attacks.</p>
+<p>As a rule of thumb, always follow the <a href="https://en.wikipedia.org/wiki/Principle_of_least_privilege">principle of least privilege</a>: to minimize the potential damage that an attacker can make, do not assign full-access to your application. Run using only the permissions that you need.</p>
+    </div>
+  </div>
+</div>
+</div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/controllers.js"></script>
+    <script src="/js/directives.js"></script>
+    <script src="/js/routes.js"></script>
+
+   <script src="/js/assets/404game.min.js"></script>
+    <script src="/js/assets/highlight.min.js"></script>
+  
+
+</body></html>

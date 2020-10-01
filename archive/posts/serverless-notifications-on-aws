@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zanonApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Angular, Node, MongoDB, AWS">
+    <meta name="author" content="Diego Zanon">
+    <link rel="icon" href="https://zanon.io/favicon.ico" type="image/x-icon">
+
+    <title ng-bind="title + 'Zanon'" class="ng-binding">Serverless Notifications on AWS - Zanon</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/assets/highlight.min.css">
+    <link rel="stylesheet" href="/css/site.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <base href="/">
+  <body ng-controller="MainController" class="ng-scope">
+
+    <header>
+      <div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-4 col-sm-2 col-md-2">
+              <h1 class="site-name">
+                <a href="/">Zanon</a>
+              </h1>
+            </div>
+            <div class="hidden-xs col-sm-6 col-md-6">
+              <!-- empty -->
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="https://twitter.com/zanon_io">
+                <img src="/images/twitter.png" alt="twitter" class="img-responsive">
+              </a>
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="https://github.com/zanon-io">
+                <img src="/images/github.png" alt="github" class="img-responsive">
+              </a>
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="https://diego.zanon.io">
+                <img src="/images/about.png" alt="about" class="img-responsive">
+              </a>
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 header-img">
+              <a href="/feed.xml" target="_blank">
+                <img src="/images/rss.png" alt="rss" class="img-responsive">
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container">
+        <nav id="nav" class="navbar-inverse navbar-static-top">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li ng-class="{ 'active': active.all }" class="active"> <a ng-click="filter('all');" href="/">All posts</a></li>
+              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');" href="/">Angular</a></li>
+              <li ng-class="{ 'active': active.node }"> <a ng-click="filter('node');" href="/">Node</a></li>
+              <li ng-class="{ 'active': active.mongodb }"> <a ng-click="filter('mongodb');" href="/">MongoDB</a></li>
+              <li ng-class="{ 'active': active.aws }"> <a ng-click="filter('aws');" href="/">AWS</a></li>
+              <li ng-class="{ 'active': active.serverless }"> <a ng-click="filter('serverless');" href="/">Serverless</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="content">
+        <!-- ngView:  --><div class="ng-scope" autoscroll="true" ng-view="" highlight-code="">
+<div class="row post-container ng-scope">
+  <div class="col-md-offset-1 col-md-10 post">
+    <h1>Serverless Notifications on AWS</h1>
+    <p class="date">NOV 05, 2016</p>
+    <div>
+
+<h2 id="tl-dr">TL;DR</h2>
+<p>This post is a tutorial that uses the Serverless Framework and AWS IoT for Serverless Notifications.</p>
+<p>Demo: <a href="https://serverless-notifications.zanon.io">serverless-notifications.zanon.io</a></p>
+<p>Code: <a href="https://github.com/zanon-io/serverless-notifications">GitHub</a></p>
+<h2 id="serverless-notifications">Serverless Notifications</h2>
+<p>Real-time notifications are an important use case for modern apps. For example, you may need to notify your user that there is another post available in his social feed or that someone else added a comment in one of his photos.</p>
+<p>Implementing notifications is an easy task when you use WebSockets and have a dedicated server. You can make a permanent link between the user and the server and use the publish-subscribe pattern to share messages. The browser will subscribe to automatically receive new messages without needing a polling mechanism to constantly check for updates.</p>
+<p>But if we are going serverless, we don't have a dedicated server. Instead, we need a cloud service that will solve this problem for us providing scalability, high availability and charging per messages and not per hour.</p>
+<p>In this post, I'm going to describe how I've implemented a notification system for unauthenticated users using the Serverless Framework and the AWS IoT for <em>browsers</em>. I know that "Internet of Things" sounds strange to be used in a website, but it supports WebSockets and is very easy to use. Besides, Amazon SNS (Simple Notification Service) has a better name, but doesn't support WebSockets.</p>
+<p>IoT is used due to its simple messaging system. You create a "topic" and make users to subscribe to it. A message sent to this topic will be automatically shared with all subscribed users. A common use case for this is a chat system.</p>
+<p>If you want private messages, you just need to create private topics and restrict the access. Only one user will be subscribed to this topic and you can make your system (Lambda functions) to send updates to this topic to notify this specific user.</p>
+<h3 id="architecture">Architecture</h3>
+<p>In this tutorial, we are going to implement the following architecture.</p>
+<p><img src="https://zanon.io/images/posts/2016-11-05-architecture.png" alt="architecture"></p>
+<ol>
+<li><p>User makes a request to Route 53 that is configured to reference a S3 bucket.</p>
+</li>
+<li><p>S3 bucket provides the frontend code (HTML / CSS / JavaScript / images) and the IoT client code.</p>
+</li>
+<li><p>After loading the frontend code, an Ajax request is done to the API Gateway to retrieve temporary keys.</p>
+</li>
+<li><p>The API Gateway redirects the request to be handled by a Lambda function.</p>
+</li>
+<li><p>The Lambda function connects to IAM to assume a role and create temporary AWS keys.</p>
+</li>
+<li><p>Frontend code subscribe to IoT events using the temporary keys.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Note</strong>: instead of using API Gateway and Lambda to retrieve IAM credentials, you can use Cognito. More on that in the end of this post. </p>
+</blockquote>
+<h3 id="frontend">Frontend</h3>
+<p>Configuring Route 53 and Amazon S3 to serve static files is a common use case. I've already covered how to do this in another blog post. You can take a look <a href="https://zanon.io/posts/building-serverless-websites-on-aws-tutorial#host-your-website">here</a> if you want.</p>
+<p>In our frontend code, let's start creating the <strong>index.html</strong> for our layout.</p>
+<pre><code class="lang-html hljs xml"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Serverless Notifications<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"bootstrap.min.css"</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Serverless Notifications<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"btn-keys"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn btn-primary"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">'Retrieve Keys'</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"btn-connect"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn btn-primary"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">'Connect'</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"message"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"btn-send"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn btn-primary"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">'Send Message'</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Log Messages<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"log"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>    
+        <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span>&gt;</span><span class="javascript">
+            <span class="hljs-built_in">window</span>.lambdaEndpoint = <span class="hljs-string">'https://abcdefghij.execute-api.us-east-1.amazonaws.com/dev/iot/keys'</span>;
+        </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"bundle.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span> <span class="hljs-comment">&lt;!-- IoT --&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<p><strong>Note</strong>: I've created a <code>window.lambdaEndpoint</code> variable. You need to change this value later with the output of the Serverless Framework. This address will be your function endpoint.</p>
+<p>This HTML results in:</p>
+<p><a href="https://serverless-notifications.zanon.io"><img src="https://zanon.io/images/posts/2016-11-05-layout.png" alt="layout"></a></p>
+<p>In this demo, the user will click on "Retrieve Keys" to make an Ajax call to Lambda with the objective to retrieve temporary keys to connect with our IoT messaging system. With those keys, "Connect" will create a channel and subscribe to messages. The "Send Message" button will share messages with other users (open another browser tab to test).</p>
+<h3 id="request-keys-to-lambda">Request keys to Lambda</h3>
+<p>We need to make an Ajax call to a Lambda function to retrieve temporary AWS keys.</p>
+<p><strong>Note</strong>: I'm using ES6 syntax because this file will be processed by Babel later when I bundle with the IoT client.</p>
+<pre><code class="lang-javascript hljs">$(<span class="hljs-built_in">document</span>).ready(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+
+    <span class="hljs-keyword">let</span> iotKeys;
+
+    $(<span class="hljs-string">'#btn-keys'</span>).on(<span class="hljs-string">'click'</span>, () =&gt; {
+        $.ajax({
+            <span class="hljs-attr">url</span>: <span class="hljs-built_in">window</span>.lambdaEndpoint,
+            <span class="hljs-attr">success</span>: <span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {
+                addLog(<span class="hljs-string">`Endpoint: <span class="hljs-subst">${res.iotEndpoint}</span>,
+                        Region: <span class="hljs-subst">${res.region}</span>,
+                        AccessKey: <span class="hljs-subst">${res.accessKey}</span>,
+                        SecretKey: <span class="hljs-subst">${res.secretKey}</span>,
+                        SessionToken: <span class="hljs-subst">${res.sessionToken}</span>`</span>);
+
+                iotKeys = res; <span class="hljs-comment">// save the keys</span>
+            }
+        });
+    });     
+});
+
+<span class="hljs-keyword">const</span> addLog = <span class="hljs-function">(<span class="hljs-params">msg</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> date = (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>()).toTimeString().slice(<span class="hljs-number">0</span>, <span class="hljs-number">8</span>);
+    $(<span class="hljs-string">"#log"</span>).prepend(<span class="hljs-string">`&lt;li&gt;[<span class="hljs-subst">${date}</span>] <span class="hljs-subst">${msg}</span>&lt;/li&gt;`</span>);
+}
+</code></pre>
+<h3 id="aws-iot">AWS IoT</h3>
+<p>To build our notification system, we need to use a Node module <a href="https://github.com/aws/aws-iot-device-sdk-js">AWS IoT SDK</a> and make a bundle to use in the browser.</p>
+<p>In this project, I've created another folder named as <strong>iot</strong> to develop the IoT client. It has a <strong>package.json</strong>, so run <code>npm install</code> to install the <strong>aws-iot-device-sdk</strong> dependency.</p>
+<p>The IoT object has the functions <code>connect</code> and <code>send</code>. It also offers handlers to other functions like <code>onConnect</code> and <code>onMessage</code>.</p>
+<pre><code class="lang-javascript hljs"><span class="hljs-keyword">const</span> awsIot = <span class="hljs-built_in">require</span>(<span class="hljs-string">'aws-iot-device-sdk'</span>);
+
+<span class="hljs-keyword">let</span> client, iotTopic;
+<span class="hljs-keyword">const</span> IoT = {
+
+    <span class="hljs-attr">connect</span>: <span class="hljs-function">(<span class="hljs-params">topic, iotEndpoint, region, accessKey, secretKey, sessionToken</span>) =&gt;</span> {
+
+        iotTopic = topic;
+
+        client = awsIot.device({
+            <span class="hljs-attr">region</span>: region,
+            <span class="hljs-attr">protocol</span>: <span class="hljs-string">'wss'</span>,
+            <span class="hljs-attr">accessKeyId</span>: accessKey,
+            <span class="hljs-attr">secretKey</span>: secretKey,
+            <span class="hljs-attr">sessionToken</span>: sessionToken,
+            <span class="hljs-attr">port</span>: <span class="hljs-number">443</span>,
+            <span class="hljs-attr">host</span>: iotEndpoint
+        });
+
+        client.on(<span class="hljs-string">'connect'</span>, onConnect);
+        client.on(<span class="hljs-string">'message'</span>, onMessage);            
+        client.on(<span class="hljs-string">'close'</span>, onClose);     
+    },
+
+    <span class="hljs-attr">send</span>: <span class="hljs-function">(<span class="hljs-params">message</span>) =&gt;</span> {
+        client.publish(iotTopic, message);
+    }  
+};
+
+<span class="hljs-keyword">const</span> onConnect = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    client.subscribe(iotTopic);
+    addLog(<span class="hljs-string">'Connected'</span>);
+};
+
+<span class="hljs-keyword">const</span> onMessage = <span class="hljs-function">(<span class="hljs-params">topic, message</span>) =&gt;</span> {
+    addLog(message);
+};
+
+<span class="hljs-keyword">const</span> onClose = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    addLog(<span class="hljs-string">'Connection failed'</span>);
+};
+</code></pre>
+<p>As we have developed the IoT client, we can now finish the JavaScript browser code. Add the following:</p>
+<pre><code class="lang-javascript hljs">$(<span class="hljs-string">'#btn-connect'</span>).on(<span class="hljs-string">'click'</span>, () =&gt; {
+    <span class="hljs-keyword">const</span> iotTopic = <span class="hljs-string">'/serverless/pubsub'</span>;        
+
+    IoT.connect(iotTopic,
+                iotKeys.iotEndpoint,
+                iotKeys.region,
+                iotKeys.accessKey,
+                iotKeys.secretKey,
+                iotKeys.sessionToken);
+});    
+
+$(<span class="hljs-string">'#btn-send'</span>).on(<span class="hljs-string">'click'</span>, () =&gt; {
+    <span class="hljs-keyword">const</span> msg = $(<span class="hljs-string">'#message'</span>).val();
+    IoT.send(msg);    
+});
+</code></pre>
+<p>Now, let's create a bundle. It seems that currently this module can't be bundled with webpack, but with Browserify it worked fine. I've created a file named <strong>make-bundle.js</strong> that helps with this. You can take a look in this file <a href="https://github.com/zanon-io/serverless-notifications/blob/master/iot/make-bundle.js">here</a>.</p>
+<p>Just run <code>npm install</code> inside this folder and run <code>node make-bundle</code> to create an updated version. This <strong>bundle.js</strong> will be used in our frontend code and must be in the same folder of the <strong>index.html</strong> file.</p>
+<h3 id="create-an-iot-role">Create an IoT Role</h3>
+<p>Our Lambda function will be responsible by creating temporary AWS keys. However, it needs a role to define what access those keys will provide.</p>
+<p>You can create this role using the IAM console or execute the <strong>index.js</strong> file that is inside the <strong>create-role</strong> folder to create one for you. This package uses the AWS SDK and requires a <code>npm install</code> before using.</p>
+<p>I've used the role name <strong>serverless-notifications</strong>. If you want, you can change this name here, but you will also need to change the name inside the Lambda function.</p>
+<p>Create Role:</p>
+<pre><code class="lang-javascript hljs"><span class="hljs-keyword">const</span> AWS = <span class="hljs-built_in">require</span>(<span class="hljs-string">'aws-sdk'</span>);
+<span class="hljs-keyword">const</span> iam = <span class="hljs-keyword">new</span> AWS.IAM();
+<span class="hljs-keyword">const</span> sts = <span class="hljs-keyword">new</span> AWS.STS();
+<span class="hljs-keyword">const</span> roleName = <span class="hljs-string">'serverless-notifications'</span>;
+
+<span class="hljs-comment">// get the account id</span>
+sts.getCallerIdentity({}, (err, data) =&gt; {
+  <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(err, err.stack);
+
+  <span class="hljs-keyword">const</span> createRoleParams = {
+    <span class="hljs-attr">AssumeRolePolicyDocument</span>: <span class="hljs-string">`{
+      "Version":"2012-10-17",
+      "Statement":[{
+          "Effect": "Allow",
+          "Principal": {
+            "AWS": "arn:aws:iam::<span class="hljs-subst">${data.Account}</span>:root"
+          },
+          "Action": "sts:AssumeRole"
+        }
+      ]
+    }`</span>,
+    <span class="hljs-attr">RoleName</span>: roleName
+  };
+
+  <span class="hljs-comment">// create role</span>
+  iam.createRole(createRoleParams, (err, data) =&gt; {
+    <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(err, err.stack);
+
+    <span class="hljs-keyword">const</span> attachPolicyParams = {
+      <span class="hljs-attr">PolicyDocument</span>: <span class="hljs-string">`{
+        "Version": "2012-10-17",
+        "Statement": [{
+          "Action": ["iot:Connect", "iot:Subscribe", "iot:Publish", "iot:Receive"],
+          "Resource": "*",
+          "Effect": "Allow"
+        }]
+      }`</span>,
+      <span class="hljs-attr">PolicyName</span>: roleName,
+      <span class="hljs-attr">RoleName</span>: roleName
+    };
+
+    <span class="hljs-comment">// add iot policy</span>
+    iam.putRolePolicy(attachPolicyParams, (err, data) =&gt; {
+      <span class="hljs-keyword">if</span> (err) <span class="hljs-built_in">console</span>.log(err, err.stack);
+      <span class="hljs-keyword">else</span>     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Finished creating IoT Role: <span class="hljs-subst">${roleName}</span>`</span>);          
+    });
+  });
+});
+</code></pre>
+<h3 id="serverless-framework">Serverless Framework</h3>
+<p>To finish, let's create a Lambda function that will generate temporary keys (valid for 1 hour) to connect to the IoT service. We are going to use the Serverless Framework to help here. If you don't know how to use it, you can take a look <a href="https://zanon.io/posts/building-serverless-websites-on-aws-tutorial">here</a> for another tutorial that I've created.</p>
+<p>The <strong>serverless.yml</strong> must add Lambda permissions for <code>iot:DescribeEndpoint</code> (find your account endpoint) and <code>sts:AssumeRole</code> (create temporary keys).</p>
+<pre><code class="lang-xml hljs">service: serverless-notifications
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  stage: dev
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - 'iot:DescribeEndpoint'
+      Resource: "*"
+    - Effect: "Allow"
+      Action:
+        - 'sts:AssumeRole'
+      Resource: "*"
+
+functions:
+  auth:
+    handler: handler.auth
+    events:
+      - http: GET iot/keys
+    memorySize: 128
+    timeout: 10
+
+package:
+  exclude:
+    - .git/**
+    - create-role/**
+    - frontend/**
+    - iot/**
+</code></pre>
+<p>Lambda function:</p>
+<pre><code class="lang-javascript hljs"><span class="hljs-meta">'use strict'</span>;
+
+<span class="hljs-keyword">const</span> AWS = <span class="hljs-built_in">require</span>(<span class="hljs-string">'aws-sdk'</span>);
+<span class="hljs-keyword">const</span> iot = <span class="hljs-keyword">new</span> AWS.Iot();
+<span class="hljs-keyword">const</span> sts = <span class="hljs-keyword">new</span> AWS.STS();
+<span class="hljs-keyword">const</span> roleName = <span class="hljs-string">'serverless-notifications'</span>;
+
+<span class="hljs-built_in">module</span>.exports.auth = <span class="hljs-function">(<span class="hljs-params">event, context, callback</span>) =&gt;</span> {
+
+    <span class="hljs-comment">// get the endpoint address</span>
+    iot.describeEndpoint({}, (err, data) =&gt; {
+        <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> callback(err);
+
+        <span class="hljs-keyword">const</span> iotEndpoint = data.endpointAddress;
+        <span class="hljs-keyword">const</span> region = getRegion(iotEndpoint);
+
+        <span class="hljs-comment">// get the account id which will be used to assume a role</span>
+        sts.getCallerIdentity({}, (err, data) =&gt; {
+            <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> callback(err);
+
+            <span class="hljs-keyword">const</span> params = {
+                <span class="hljs-attr">RoleArn</span>: <span class="hljs-string">`arn:aws:iam::<span class="hljs-subst">${data.Account}</span>:role/<span class="hljs-subst">${roleName}</span>`</span>,
+                <span class="hljs-attr">RoleSessionName</span>: getRandomInt().toString()
+            };
+
+            <span class="hljs-comment">// assume role returns temporary keys</span>
+            sts.assumeRole(params, (err, data) =&gt; {
+                <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> callback(err);
+
+                <span class="hljs-keyword">const</span> res = buildResponseObject(iotEndpoint,
+                                                region,
+                                                data.Credentials.AccessKeyId,
+                                                data.Credentials.SecretAccessKey,
+                                                data.Credentials.SessionToken);
+                callback(<span class="hljs-literal">null</span>, res);
+            });
+        });
+    });
+};
+
+<span class="hljs-keyword">const</span> buildResponseObject = <span class="hljs-function">(<span class="hljs-params">iotEndpoint, region, accessKey, secretKey, sessionToken</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">statusCode</span>: <span class="hljs-number">200</span>,
+        <span class="hljs-attr">headers</span>: {
+            <span class="hljs-string">'Access-Control-Allow-Origin'</span>: <span class="hljs-string">'*'</span>
+        },  
+        <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify({
+            <span class="hljs-attr">iotEndpoint</span>: iotEndpoint,
+            <span class="hljs-attr">region</span>: region,
+            <span class="hljs-attr">accessKey</span>: accessKey,
+            <span class="hljs-attr">secretKey</span>: secretKey,
+            <span class="hljs-attr">sessionToken</span>: sessionToken
+        })
+    };
+};
+
+<span class="hljs-keyword">const</span> getRegion = <span class="hljs-function">(<span class="hljs-params">iotEndpoint</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> partial = iotEndpoint.replace(<span class="hljs-string">'.amazonaws.com'</span>, <span class="hljs-string">''</span>);
+    <span class="hljs-keyword">const</span> iotIndex = iotEndpoint.indexOf(<span class="hljs-string">'iot'</span>);
+    <span class="hljs-keyword">return</span> partial.substring(iotIndex + <span class="hljs-number">4</span>);
+};
+
+<span class="hljs-comment">// Get random Int</span>
+<span class="hljs-keyword">const</span> getRandomInt = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * <span class="hljs-built_in">Number</span>.MAX_SAFE_INTEGER);
+};
+</code></pre>
+<h3 id="testing">Testing</h3>
+<p><a href="https://serverless-notifications.zanon.io"><img src="https://zanon.io/images/posts/2016-11-05-test.png" alt="test"></a></p>
+<h3 id="pricing">Pricing</h3>
+<p>How much does it cost? Only $5 per million messages (USA). It can be pretty cheap depending on your scale and traffic because you don't need to pay for a dedicated server.</p>
+<p>Official pricing page for IoT: <a href="https://aws.amazon.com/iot/pricing/">https://aws.amazon.com/iot/pricing/</a></p>
+<h3 id="improving-this-demo">Improving this demo</h3>
+<p>This sample considers that there is only one topic. It's ok if everyone is subscribed to the same channel. However, if you want to send private notifications to a specific user, you need to create a new topic per user.</p>
+<p>To handle permissions, I suggest that you keep creating just one role with access to all topics (as we have done in the <strong>create-role</strong> project) and use the <code>assumeRole</code> command (inside Lambda) to create keys with restricted access with a specific topic. This restriction is done passing a policy document as one of the assumeRole parameters (see <a href="http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/STS.html#assumeRole-property">docs</a>).</p>
+<p>For authenticated users, I suggest that you use Cognito credentials.</p>
+<h3 id="what-more-">What more?</h3>
+<p>I've tried another experiment with this and created a serverless multiplayer game sample. If you want to develop an HTML5 game in a serverless architecture, you can use IoT to change messages between players and implement a cheap multiplayer game. The performance is good enough for dynamic games.</p>
+<p>Multiplayer Game: <a href="https://bombermon.zanon.io">demo</a> and <a href="https://github.com/zanon-io/serverless-multiplayer-game">code</a><br>(you can use your desktop and phone to test the multiplayer feature)</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This demo solved the use case of real-time notifications for serverless applications. If you have any doubts, feel free to post in comments.</p>
+<h3 id="update-nov-21-2016">UPDATE: Nov 21, 2016</h3>
+<blockquote>
+<p><a href="https://twitter.com/ben11kehoe">Ben Kehoe</a> suggests that Cognito can be easier than using IAM (with APIG + Lambda, like in this example). I've tried and found it to be similar in complexity when dealing with unauthenticated access. However, Cognito is <strong>much</strong> more powerful for <em>authenticated</em> access. If you need to support authenticated users, use Cognito.</p>
+</blockquote>
+<p>Below follows how to use Cognito for <em>unauthenticated</em> access.</p>
+<p>1) Create an Identity Pool</p>
+<pre><code class="lang-javascript hljs"><span class="hljs-keyword">const</span> AWS = <span class="hljs-built_in">require</span>(<span class="hljs-string">'aws-sdk'</span>);
+<span class="hljs-keyword">const</span> cognitoidentity = <span class="hljs-keyword">new</span> AWS.CognitoIdentity();
+
+<span class="hljs-keyword">const</span> params = {
+  <span class="hljs-attr">AllowUnauthenticatedIdentities</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">IdentityPoolName</span>: <span class="hljs-string">'serverless-notifications'</span>  
+};
+
+cognitoidentity.createIdentityPool(params, (err, data) =&gt; {
+  <span class="hljs-keyword">if</span> (err) <span class="hljs-built_in">console</span>.log(err, err.stack);
+  <span class="hljs-keyword">else</span>     <span class="hljs-built_in">console</span>.log(data.IdentityPoolId); <span class="hljs-comment">// save the IdentityPoolId</span>
+});
+</code></pre>
+<p>2) Create a Role for this Identity Pool like we've done before. However, for the <code>AssumeRolePolicyDocument</code>, use the following JSON (set the IdentityPoolId with the value returned in the previous function).</p>
+<pre><code class="lang-javascript hljs"><span class="hljs-string">`{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "cognito-identity.amazonaws.com"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "cognito-identity.amazonaws.com:aud": <span class="hljs-subst">${IdentityPoolId}</span>
+        },
+        "ForAnyValue:StringLike": {
+          "cognito-identity.amazonaws.com:amr": "unauthenticated"
+        }
+      }
+    }
+  ]
+}`</span>
+</code></pre>
+<p>3) Set the Identity Pool with the new Role</p>
+<pre><code class="lang-javascript hljs"><span class="hljs-keyword">const</span> AWS = <span class="hljs-built_in">require</span>(<span class="hljs-string">'aws-sdk'</span>);
+<span class="hljs-keyword">const</span> cognitoidentity = <span class="hljs-keyword">new</span> AWS.CognitoIdentity();
+
+<span class="hljs-keyword">const</span> params = {
+  <span class="hljs-attr">IdentityPoolId</span>: <span class="hljs-string">'IDENTITY_POOL_ID'</span>,
+  <span class="hljs-attr">Roles</span>: { 
+    <span class="hljs-attr">unauthenticated</span>: <span class="hljs-string">'ROLE_ARN'</span>,
+    <span class="hljs-attr">authenticated</span>: <span class="hljs-string">'ROLE_ARN'</span>
+  }
+};
+
+cognitoidentity.setIdentityPoolRoles(params, (err, data) =&gt; {
+  <span class="hljs-keyword">if</span> (err) <span class="hljs-built_in">console</span>.log(err, err.stack);
+  <span class="hljs-keyword">else</span>     <span class="hljs-built_in">console</span>.log(data); <span class="hljs-comment">// successful response returns an empty object</span>
+});
+</code></pre>
+<p>4) In the browser, request the Cognito credentials</p>
+<pre><code class="lang-javascript hljs"><span class="hljs-keyword">const</span> AWS = <span class="hljs-built_in">require</span>(<span class="hljs-string">'aws-sdk'</span>);
+
+AWS.config.region = <span class="hljs-string">'YOUR_COGNITO_REGION'</span>;
+AWS.config.credentials = <span class="hljs-keyword">new</span> AWS.CognitoIdentityCredentials({
+    <span class="hljs-attr">IdentityPoolId</span>: <span class="hljs-string">'IDENTITY_POOL_ID'</span>,
+});
+
+AWS.config.credentials.get(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+
+    <span class="hljs-comment">// Use these credentials with IoT</span>
+    <span class="hljs-keyword">const</span> accessKeyId = AWS.config.credentials.accessKeyId;
+    <span class="hljs-keyword">const</span> secretAccessKey = AWS.config.credentials.secretAccessKey;
+    <span class="hljs-keyword">const</span> sessionToken = AWS.config.credentials.sessionToken;
+});
+</code></pre>
+    </div>
+  </div>
+</div>
+</div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/controllers.js"></script>
+    <script src="/js/directives.js"></script>
+    <script src="/js/routes.js"></script>
+
+    <script src="/js/assets/404game.min.js"></script>
+    <script src="/js/assets/highlight.min.js"></script>
+  
+
+</body></html>
