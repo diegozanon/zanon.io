@@ -1,5 +1,8 @@
 # zanon.io
-This repository was created to store my blog data, zanon.io, which was discontinued and shut down. Internet Archive links:
+
+This repository was created to store my blog data from zanon.io, which was discontinued and shut down around 2018. However, since then, a company has purchased the domain and reuploaded the old content, but with a few crypto-spam links added. I no longer own the hostname.  
+
+Internet Archive links for original posts:  
 
 [Homepage](https://web.archive.org/web/20200930214234/https://zanon.io/)  
 [Serverless Notifications on AWS](https://web.archive.org/web/20200930220520/https://zanon.io/posts/serverless-notifications-on-aws) (Nov 5th 2016)    
